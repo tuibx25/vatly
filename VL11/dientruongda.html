@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đáp án Bài 17: Khái niệm điện trường</title>
+    <!-- Load MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+        
+        .answer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+        
+        .answer-item {
+            padding: 12px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .answer-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .answer-number {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 18px;
+        }
+        
+        .answer-value {
+            font-weight: bold;
+            font-size: 22px;
+            color: #27ae60;
+            margin-top: 5px;
+        }
+        
+        .explanation {
+            margin-top: 40px;
+            padding: 25px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .explanation h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        
+        .explanation-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .explanation-list li {
+            margin-bottom: 8px;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .answer-grid {
+                grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+            }
+            
+            .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+        
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                padding: 10px;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ĐÁP ÁN TRẮC NGHIỆM VẬT LÝ 11</h1>
+            <div class="subtitle">Bài 17: KHÁI NIỆM ĐIỆN TRƯỜNG</div>
+        </header>
+        
+        <div class="controls no-print">
+            <button class="btn btn-primary" id="printBtn">
+                In đáp án (PDF)
+            </button>
+            <a href="dientruong.html" class="btn btn-primary">
+                Quay lại đề thi
+            </a>
+        </div>
+        
+        <div class="answer-grid" id="answersGrid">
+            <!-- Đáp án sẽ được thêm bằng JavaScript -->
+        </div>
+        
+        <div class="explanation">
+            <h3>GIẢI THÍCH MỘT SỐ CÂU QUAN TRỌNG</h3>
+            <ul class="explanation-list">
+                <li><strong>Câu 3:</strong> Cường độ điện trường được xác định bằng công thức E = F/q, trong đó F là lực điện tác dụng lên điện tích thử q.</li>
+                <li><strong>Câu 6:</strong> Công thức tính cường độ điện trường do điện tích điểm Q gây ra tại khoảng cách r: E = k|Q|/r², với k = 9×10⁹ N.m²/C².</li>
+                <li><strong>Câu 20:</strong> Tại trung điểm của hai điện tích trái dấu, cùng độ lớn, điện trường tổng hợp hướng từ điện tích âm sang điện tích dương.</li>
+                <li><strong>Câu 25:</strong> Điện trường bên ngoài quả cầu tích điện đều tương đương với điện trường của điện tích điểm đặt tại tâm: E = kQ/r².</li>
+                <li><strong>Câu 30:</strong> Tại tâm tam giác đều với ba điện tích giống nhau, điện trường tổng hợp bằng 0 do tính đối xứng.</li>
+                <li><strong>Câu 33:</strong> Sử dụng định lý động năng: qU = ½mv², với electron q = e = 1,6×10⁻¹⁹ C.</li>
+            </ul>
+        </div>
+        
+        <div class="footer no-print">
+            <p>Nguồn: Sách Vật lý 11 - Kết nối tri thức với cuộc sống</p>
+            <p>Chương III: ĐIỆN TRƯỜNG - Bài 17: Khái niệm điện trường</p>
+        </div>
+    </div>
+
+    <script>
+        // Đáp án
+        const answers = [
+            "B", "D", "A", "C", "A", "B", "A", "C", "A", "B",
+            "A", "B", "A", "A", "C", "C", "A", "B", "B", "B",
+            "B", "C", "B", "B", "B", "A", "B", "A", "C", "A",
+            "C", "B", "B", "C", "A", "C", "B", "B", "B", "C",
+            "C", "D", "A", "C", "B"
+        ];
+
+        // Hiển thị đáp án
+        const answersGrid = document.getElementById('answersGrid');
+        
+        answers.forEach((answer, index) => {
+            const answerItem = document.createElement('div');
+            answerItem.className = 'answer-item';
+            answerItem.innerHTML = `
+                <div class="answer-number">Câu ${index + 1}</div>
+                <div class="answer-value">${answer}</div>
+            `;
+            answersGrid.appendChild(answerItem);
+        });
+
+        // Xử lý sự kiện nút in
+        document.getElementById('printBtn').addEventListener('click', function() {
+            window.print();
+        });
+        
+        // Cấu hình MathJax
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            }
+        };
+    </script>
+</body>
+</html>
