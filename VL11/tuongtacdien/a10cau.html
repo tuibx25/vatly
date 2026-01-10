@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trắc Nghiệm Vật Lý 11 - Bài 16 (10 Câu)</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            padding: 20px 25px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+        
+        .timer {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 50px;
+            display: inline-block;
+            font-weight: bold;
+            margin-top: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 25px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #eee;
+            flex-wrap: wrap;
+        }
+        
+        .info-item {
+            text-align: center;
+            flex: 1;
+            min-width: 100px;
+        }
+        
+        .info-label {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .info-value {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .questions-container {
+            padding: 20px 25px;
+        }
+        
+        .question {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 18px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .question-number:before {
+            content: "Câu";
+            margin-right: 6px;
+        }
+        
+        .question-number span {
+            background-color: #3498db;
+            color: white;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .question-text {
+            margin-bottom: 15px;
+            font-weight: 500;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        .options {
+            padding-left: 5px;
+        }
+        
+        .option {
+            margin-bottom: 10px;
+            padding: 10px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        
+        .option:hover {
+            background-color: #e8f4fc;
+            border-color: #b3d7f5;
+        }
+        
+        .option input {
+            margin-right: 10px;
+            transform: scale(1.1);
+        }
+        
+        .option.selected {
+            background-color: #e1f0ff;
+            border-color: #3498db;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            padding: 18px 25px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #eee;
+        }
+        
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .btn-prev {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        .btn-prev:hover {
+            background-color: #5a6268;
+        }
+        
+        .btn-next {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .btn-next:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-submit {
+            background-color: #27ae60;
+            color: white;
+        }
+        
+        .btn-submit:hover {
+            background-color: #219653;
+        }
+        
+        .btn-restart {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .btn-restart:hover {
+            background-color: #c0392b;
+        }
+        
+        .btn-disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+        
+        .btn-disabled:hover {
+            background-color: #bdc3c7;
+        }
+        
+        .progress-container {
+            padding: 0 25px 15px;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background-color: #e0e0e0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 6px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .results-container {
+            padding: 25px;
+            text-align: center;
+            display: none;
+        }
+        
+        .results-title {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .score-circle {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            margin: 0 auto 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .score-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        
+        .score-label {
+            font-size: 1rem;
+        }
+        
+        .results-details {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        .result-item {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 8px;
+            min-width: 120px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .result-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .result-label {
+            color: #666;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .result-correct {
+            border-top: 4px solid #27ae60;
+        }
+        
+        .result-incorrect {
+            border-top: 4px solid #e74c3c;
+        }
+        
+        .result-time {
+            border-top: 4px solid #3498db;
+        }
+        
+        .question-review {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 25px;
+            text-align: left;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        
+        .review-title {
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+        
+        .review-item {
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            border-left: 4px solid #3498db;
+            font-size: 0.9rem;
+        }
+        
+        .review-question {
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+        
+        .review-answer {
+            color: #27ae60;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        
+        .review-user-answer {
+            color: #e74c3c;
+            font-size: 0.85rem;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 15px;
+            color: #7f8c8d;
+            font-size: 0.8rem;
+            border-top: 1px solid #eee;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 0;
+            }
+            
+            .controls {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            button {
+                width: 100%;
+            }
+            
+            .quiz-info {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .info-item {
+                min-width: 100%;
+            }
+            
+            .results-details {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .result-item {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>TRẮC NGHIỆM VẬT LÝ 11 - BÀI 16</h1>
+            <p class="subtitle">Lực hút và lực đẩy giữa các điện tích</p>
+            <p class="subtitle">10 câu hỏi - Thời gian: 15 phút</p>
+            <div class="timer" id="timer">Thời gian: 00:00</div>
+        </header>
+        
+        <div class="quiz-info">
+            <div class="info-item">
+                <div class="info-label">Câu hỏi</div>
+                <div class="info-value" id="current-question">1/10</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Đã trả lời</div>
+                <div class="info-value" id="answered-count">0/10</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Thời gian</div>
+                <div class="info-value" id="time-elapsed">00:00</div>
+            </div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div class="progress-text">
+                <span>Bắt đầu</span>
+                <span>Hoàn thành</span>
+            </div>
+        </div>
+        
+        <div class="questions-container" id="questions-container">
+            <!-- Câu hỏi sẽ được tạo bằng JavaScript -->
+        </div>
+        
+        <div class="controls">
+            <button class="btn-prev" id="prev-btn">Câu trước</button>
+            <button class="btn-next" id="next-btn">Câu tiếp theo</button>
+            <button class="btn-submit" id="submit-btn" style="display: none;">Nộp bài</button>
+        </div>
+        
+        <div class="results-container" id="results-container">
+            <h2 class="results-title">KẾT QUẢ BÀI LÀM</h2>
+            
+            <div class="score-circle">
+                <div class="score-value" id="score-value">0</div>
+                <div class="score-label">điểm</div>
+            </div>
+            
+            <div class="results-details">
+                <div class="result-item result-correct">
+                    <div class="result-value" id="correct-count">0</div>
+                    <div class="result-label">Câu đúng</div>
+                </div>
+                <div class="result-item result-incorrect">
+                    <div class="result-value" id="incorrect-count">0</div>
+                    <div class="result-label">Câu sai</div>
+                </div>
+                <div class="result-item result-time">
+                    <div class="result-value" id="final-time">00:00</div>
+                    <div class="result-label">Thời gian</div>
+                </div>
+            </div>
+            
+            <div class="question-review" id="question-review">
+                <!-- Xem lại câu hỏi sẽ được thêm ở đây -->
+            </div>
+            
+            <button class="btn-restart" id="restart-btn" style="margin-top: 20px;">Làm lại bài trắc nghiệm</button>
+        </div>
+        
+        <div class="footer">
+            <p>Trắc nghiệm Vật Lý 11 - Bài 16: Lực hút và lực đẩy giữa các điện tích</p>
+            <p>Phiên bản 10 câu hỏi - Thời gian làm bài: 15 phút</p>
+            <p>© 2023 - Tài liệu học tập Vật Lý 11</p>
+        </div>
+    </div>
+
+    <script>
+        // Dữ liệu câu hỏi và đáp án (10 câu)
+        const quizData = [
+            {
+                question: "Hiện tượng nào sau đây là biểu hiện của tương tác điện?",
+                options: [
+                    "A. Nam châm hút đinh sắt.",
+                    "B. Thanh thủy tinh cọ xát vào lụa hút các vụn giấy.",
+                    "C. Trái Đất hút các vật về phía nó.",
+                    "D. Lò xo bị nén sinh ra lực đẩy."
+                ],
+                correct: 1
+            },
+            {
+                question: "Có mấy loại điện tích tồn tại trong tự nhiên?",
+                options: [
+                    "A. 1",
+                    "B. 2",
+                    "C. 3",
+                    "D. 4"
+                ],
+                correct: 1
+            },
+            {
+                question: "Phát biểu nào sau đây về sự tương tác điện là đúng?",
+                options: [
+                    "A. Các điện tích cùng dấu thì đẩy nhau.",
+                    "B. Các điện tích khác dấu thì đẩy nhau.",
+                    "C. Các điện tích luôn hút nhau.",
+                    "D. Các điện tích không tương tác khi ở xa nhau."
+                ],
+                correct: 0
+            },
+            {
+                question: "Định luật Coulomb chỉ áp dụng được cho trường hợp",
+                options: [
+                    "A. các điện tích điểm.",
+                    "B. các điện tích dịch chuyển.",
+                    "C. các vật tích điện có kích thước lớn.",
+                    "D. các vật nhiễm điện do cọ xát."
+                ],
+                correct: 0
+            },
+            {
+                question: "Khi khoảng cách giữa hai điện tích điểm tăng lên gấp đôi trong chân không, độ lớn lực tương tác tĩnh điện giữa chúng sẽ",
+                options: [
+                    "A. tăng 4 lần.",
+                    "B. giảm 4 lần.",
+                    "C. tăng 2 lần.",
+                    "D. giảm 2 lần."
+                ],
+                correct: 1
+            },
+            {
+                question: "Nếu độ lớn của hai điện tích điểm cùng dấu tăng lên gấp đôi, đồng thời khoảng cách giữa chúng cũng tăng gấp đôi (trong cùng môi trường), thì lực tương tác giữa chúng so với ban đầu sẽ",
+                options: [
+                    "A. không đổi.",
+                    "B. tăng 2 lần.",
+                    "C. giảm 2 lần.",
+                    "D. giảm 4 lần."
+                ],
+                correct: 0
+            },
+            {
+                question: "Hằng số điện môi của một chất cho biết",
+                options: [
+                    "A. lực tương tác giữa các điện tích trong chất đó lớn hơn trong chân không bao nhiêu lần.",
+                    "B. lực tương tác giữa các điện tích trong chất đó nhỏ hơn trong chân không bao nhiêu lần.",
+                    "C. khả năng dẫn điện của chất đó.",
+                    "D. khả năng tích điện của chất đó."
+                ],
+                correct: 1
+            },
+            {
+                question: "Hai quả cầu nhỏ tích điện đặt trong không khí cách nhau một khoảng r. Đưa chúng vào trong dầu hỏa có hằng số điện môi ε = 2 và giữ nguyên khoảng cách r. Lực tương tác điện giữa chúng sẽ",
+                options: [
+                    "A. tăng 2 lần.",
+                    "B. giảm 2 lần.",
+                    "C. tăng 4 lần.",
+                    "D. không thay đổi."
+                ],
+                correct: 1
+            },
+            {
+                question: "Lực tương tác tĩnh điện Coulomb và lực hấp dẫn Newton giữa hai electron (đặt trong chân không) đều",
+                options: [
+                    "A. là lực đẩy.",
+                    "B. là lực hút.",
+                    "C. tỉ lệ nghịch với bình phương khoảng cách.",
+                    "D. có cùng độ lớn."
+                ],
+                correct: 2
+            },
+            {
+                question: "Hai điện tích điểm q₁ và q₂ đẩy nhau. Khẳng định nào sau đây là đúng?",
+                options: [
+                    "A. q₁ > 0 và q₂ > 0.",
+                    "B. q₁ < 0 và q₂ < 0.",
+                    "C. q₁.q₂ > 0.",
+                    "D. Cả A, B và C đều có thể đúng."
+                ],
+                correct: 3
+            }
+        ];
+
+        // Biến lưu trữ trạng thái bài trắc nghiệm
+        let currentQuestion = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
+        let score = 0;
+        let startTime;
+        let timerInterval;
+        let timeElapsed = 0;
+
+        // Khởi tạo trang
+        document.addEventListener('DOMContentLoaded', function() {
+            initQuiz();
+            startTimer();
+            
+            // Gán sự kiện cho các nút
+            document.getElementById('prev-btn').addEventListener('click', prevQuestion);
+            document.getElementById('next-btn').addEventListener('click', nextQuestion);
+            document.getElementById('submit-btn').addEventListener('click', submitQuiz);
+            document.getElementById('restart-btn').addEventListener('click', restartQuiz);
+        });
+
+        function initQuiz() {
+            // Hiển thị câu hỏi đầu tiên
+            showQuestion();
+            
+            // Cập nhật số câu đã trả lời
+            updateAnsweredCount();
+            
+            // Cập nhật thanh tiến trình
+            updateProgressBar();
+            
+            // Ẩn nút "Câu trước" cho câu đầu tiên
+            document.getElementById('prev-btn').classList.add('btn-disabled');
+            
+            // Hiển thị nút "Nộp bài" nếu đã đến câu cuối
+            if (currentQuestion === quizData.length - 1) {
+                document.getElementById('next-btn').style.display = 'none';
+                document.getElementById('submit-btn').style.display = 'block';
+            } else {
+                document.getElementById('next-btn').style.display = 'block';
+                document.getElementById('submit-btn').style.display = 'none';
+            }
+        }
+
+        function showQuestion() {
+            const container = document.getElementById('questions-container');
+            container.innerHTML = '';
+            
+            const questionData = quizData[currentQuestion];
+            
+            const questionElement = document.createElement('div');
+            questionElement.className = 'question';
+            
+            let optionsHTML = '';
+            questionData.options.forEach((option, index) => {
+                const isSelected = userAnswers[currentQuestion] === index;
+                const optionClass = isSelected ? 'option selected' : 'option';
+                
+                optionsHTML += `
+                    <div class="${optionClass}" onclick="selectOption(${index})">
+                        <input type="radio" name="option" id="option${index}" ${isSelected ? 'checked' : ''}>
+                        <label for="option${index}">${option}</label>
+                    </div>
+                `;
+            });
+            
+            questionElement.innerHTML = `
+                <div class="question-number"><span>${currentQuestion + 1}</span> ${questionData.question}</div>
+                <div class="options">${optionsHTML}</div>
+            `;
+            
+            container.appendChild(questionElement);
+            
+            // Cập nhật thông tin câu hỏi hiện tại
+            document.getElementById('current-question').textContent = `${currentQuestion + 1}/${quizData.length}`;
+        }
+
+        function selectOption(optionIndex) {
+            // Lưu câu trả lời của người dùng
+            userAnswers[currentQuestion] = optionIndex;
+            
+            // Cập nhật giao diện
+            showQuestion();
+            
+            // Cập nhật số câu đã trả lời
+            updateAnsweredCount();
+            
+            // Cập nhật thanh tiến trình
+            updateProgressBar();
+        }
+
+        function updateAnsweredCount() {
+            const answered = userAnswers.filter(answer => answer !== null).length;
+            document.getElementById('answered-count').textContent = `${answered}/${quizData.length}`;
+        }
+
+        function updateProgressBar() {
+            const progress = ((currentQuestion + 1) / quizData.length) * 100;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                showQuestion();
+                updateProgressBar();
+                
+                // Hiển thị nút "Câu trước"
+                document.getElementById('prev-btn').classList.remove('btn-disabled');
+                
+                // Ẩn nút "Nộp bài" nếu chưa phải câu cuối
+                if (currentQuestion !== quizData.length - 1) {
+                    document.getElementById('submit-btn').style.display = 'none';
+                    document.getElementById('next-btn').style.display = 'block';
+                } else {
+                    // Hiển thị nút "Nộp bài" cho câu cuối
+                    document.getElementById('next-btn').style.display = 'none';
+                    document.getElementById('submit-btn').style.display = 'block';
+                }
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+                updateProgressBar();
+                
+                // Ẩn nút "Câu trước" nếu đang ở câu đầu
+                if (currentQuestion === 0) {
+                    document.getElementById('prev-btn').classList.add('btn-disabled');
+                }
+                
+                // Hiển thị nút "Câu tiếp theo" và ẩn nút "Nộp bài"
+                document.getElementById('next-btn').style.display = 'block';
+                document.getElementById('submit-btn').style.display = 'none';
+            }
+        }
+
+        function startTimer() {
+            startTime = new Date();
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        function updateTimer() {
+            const now = new Date();
+            timeElapsed = Math.floor((now - startTime) / 1000);
+            
+            const minutes = Math.floor(timeElapsed / 60);
+            const seconds = timeElapsed % 60;
+            
+            const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            document.getElementById('timer').textContent = `Thời gian: ${timeString}`;
+            document.getElementById('time-elapsed').textContent = timeString;
+        }
+
+        function submitQuiz() {
+            // Dừng đồng hồ
+            clearInterval(timerInterval);
+            
+            // Tính điểm
+            calculateScore();
+            
+            // Hiển thị kết quả
+            showResults();
+        }
+
+        function calculateScore() {
+            let correctCount = 0;
+            
+            for (let i = 0; i < quizData.length; i++) {
+                if (userAnswers[i] === quizData[i].correct) {
+                    correctCount++;
+                }
+            }
+            
+            score = Math.round((correctCount / quizData.length) * 100);
+            
+            // Cập nhật kết quả
+            document.getElementById('score-value').textContent = score;
+            document.getElementById('correct-count').textContent = correctCount;
+            document.getElementById('incorrect-count').textContent = quizData.length - correctCount;
+            
+            const minutes = Math.floor(timeElapsed / 60);
+            const seconds = timeElapsed % 60;
+            const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('final-time').textContent = timeString;
+            
+            // Hiển thị xem lại câu hỏi
+            showQuestionReview(correctCount);
+        }
+
+        function showQuestionReview(correctCount) {
+            const reviewContainer = document.getElementById('question-review');
+            reviewContainer.innerHTML = `<h3 class="review-title">Chi tiết bài làm (${correctCount}/${quizData.length} câu đúng)</h3>`;
+            
+            for (let i = 0; i < quizData.length; i++) {
+                const questionData = quizData[i];
+                const userAnswer = userAnswers[i];
+                const correctAnswer = questionData.correct;
+                
+                const reviewItem = document.createElement('div');
+                reviewItem.className = 'review-item';
+                
+                let answerStatus = '';
+                if (userAnswer === correctAnswer) {
+                    answerStatus = '<span class="review-answer">✓ ĐÚNG</span>';
+                } else {
+                    answerStatus = `
+                        <div><span class="review-user-answer">✗ Bạn chọn: ${questionData.options[userAnswer] || "Không trả lời"}</span></div>
+                        <div><span class="review-answer">✓ Đáp án đúng: ${questionData.options[correctAnswer]}</span></div>
+                    `;
+                }
+                
+                reviewItem.innerHTML = `
+                    <div class="review-question"><strong>Câu ${i + 1}:</strong> ${questionData.question}</div>
+                    <div>${answerStatus}</div>
+                `;
+                
+                reviewContainer.appendChild(reviewItem);
+            }
+        }
+
+        function showResults() {
+            // Ẩn phần câu hỏi và điều khiển
+            document.getElementById('questions-container').style.display = 'none';
+            document.querySelector('.progress-container').style.display = 'none';
+            document.querySelector('.controls').style.display = 'none';
+            document.querySelector('.quiz-info').style.display = 'none';
+            
+            // Hiển thị kết quả
+            document.getElementById('results-container').style.display = 'block';
+        }
+
+        function restartQuiz() {
+            // Đặt lại tất cả biến
+            currentQuestion = 0;
+            userAnswers = new Array(quizData.length).fill(null);
+            score = 0;
+            timeElapsed = 0;
+            
+            // Đặt lại giao diện
+            document.getElementById('questions-container').style.display = 'block';
+            document.querySelector('.progress-container').style.display = 'block';
+            document.querySelector('.controls').style.display = 'flex';
+            document.querySelector('.quiz-info').style.display = 'flex';
+            document.getElementById('results-container').style.display = 'none';
+            
+            // Đặt lại đồng hồ
+            clearInterval(timerInterval);
+            startTimer();
+            
+            // Khởi tạo lại bài trắc nghiệm
+            initQuiz();
+            
+            // Cuộn lên đầu trang
+            window.scrollTo(0, 0);
+        }
+
+        // Gán các hàm vào global scope để có thể gọi từ HTML
+        window.selectOption = selectOption;
+        window.nextQuestion = nextQuestion;
+        window.prevQuestion = prevQuestion;
+        window.submitQuiz = submitQuiz;
+        window.restartQuiz = restartQuiz;
+    </script>
+</body>
+</html>
