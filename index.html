@@ -55,6 +55,56 @@
             line-height: 1.6;
         }
         
+        /* Sitemap Styles */
+        .sitemap {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 15px 25px;
+            margin-bottom: 30px;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sitemap-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .sitemap-link {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(106, 17, 203, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .sitemap-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 12px rgba(106, 17, 203, 0.4);
+        }
+        
+        .sitemap-link.active {
+            background: linear-gradient(to right, #2575fc, #6a11cb);
+            box-shadow: 0 3px 8px rgba(37, 117, 252, 0.4);
+        }
+        
+        .sitemap-separator {
+            color: #666;
+            display: flex;
+            align-items: center;
+            padding: 0 5px;
+            font-weight: bold;
+        }
+        
         .links-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -256,6 +306,22 @@
             .special-card {
                 max-width: 100%;
             }
+            
+            .sitemap-links {
+                flex-direction: column;
+                gap: 8px;
+                align-items: center;
+            }
+            
+            .sitemap-separator {
+                display: none;
+            }
+            
+            .sitemap-link {
+                justify-content: center;
+                text-align: center;
+                width: 90%;
+            }
         }
         
         @media (max-width: 480px) {
@@ -270,6 +336,10 @@
             .container {
                 padding: 10px;
             }
+            
+            .sitemap {
+                padding: 12px 15px;
+            }
         }
     </style>
 </head>
@@ -280,44 +350,69 @@
             <p class="subtitle">Trang web cung cấp các liên kết đến tài liệu và bài tập Vật Lý từ lớp 10 đến lớp 12, cùng với công cụ hỗ trợ học tập.</p>
         </header>
         
+        <!-- Sitemap Section -->
+        <div class="sitemap">
+            <div class="sitemap-links">
+                <a href="./" class="sitemap-link active">
+                    <i class="fas fa-home"></i> Trang chủ
+                </a>
+                <div class="sitemap-separator">|</div>
+                <a href="vl10" class="sitemap-link">
+                    <i class="fas fa-atom"></i> Vật Lý 10
+                </a>
+                <div class="sitemap-separator">|</div>
+                <a href="vl11" class="sitemap-link">
+                    <i class="fas fa-magnet"></i> Vật Lý 11
+                </a>
+                <div class="sitemap-separator">|</div>
+                <a href="vl12" class="sitemap-link">
+                    <i class="fas fa-lightbulb"></i> Vật Lý 12
+                </a>
+                <div class="sitemap-separator">|</div>
+                <a href="tui" class="sitemap-link">
+                    <i class="fas fa-toolbox"></i> Túi Tài Liệu
+                </a>
+            </div>
+        </div>
+        
         <div class="links-container">
-            <div class="link-card" onclick="window.open('https://tuibx25.github.io/bx/vl10', '_blank');">
+            <div class="link-card" onclick="window.location.href='vl10';">
                 <div class="link-icon">
                     <i class="fas fa-atom"></i>
                 </div>
                 <h2 class="link-title">Vật Lý 10</h2>
                 <p class="link-desc">Tài liệu, bài tập và công thức Vật Lý lớp 10. Bao gồm các chủ đề: Động học, Động lực học, Các định luật bảo toàn, Nhiệt học.</p>
-                <a href="https://tuibx25.github.io/bx/vl10" target="_blank" class="btn">Truy cập <i class="fas fa-external-link-alt"></i></a>
+                <a href="vl10" class="btn">Truy cập <i class="fas fa-arrow-right"></i></a>
             </div>
             
-            <div class="link-card" onclick="window.open('https://tuibx25.github.io/bx/vl11', '_blank');">
+            <div class="link-card" onclick="window.location.href='vl11';">
                 <div class="link-icon">
                     <i class="fas fa-magnet"></i>
                 </div>
                 <h2 class="link-title">Vật Lý 11</h2>
                 <p class="link-desc">Tài liệu, bài tập và công thức Vật Lý lớp 11. Bao gồm các chủ đề: Điện tích - Điện trường, Dòng điện không đổi, Từ trường, Khúc xạ ánh sáng.</p>
-                <a href="https://tuibx25.github.io/bx/vl11" target="_blank" class="btn">Truy cập <i class="fas fa-external-link-alt"></i></a>
+                <a href="vl11" class="btn">Truy cập <i class="fas fa-arrow-right"></i></a>
             </div>
             
-            <div class="link-card" onclick="window.open('https://tuibx25.github.io/bx/vl12', '_blank');">
+            <div class="link-card" onclick="window.location.href='vl12';">
                 <div class="link-icon">
                     <i class="fas fa-lightbulb"></i>
                 </div>
                 <h2 class="link-title">Vật Lý 12</h2>
                 <p class="link-desc">Tài liệu, bài tập và công thức Vật Lý lớp 12. Bao gồm các chủ đề: Dao động cơ, Sóng cơ, Điện xoay chiều, Lượng tử ánh sáng, Hạt nhân nguyên tử.</p>
-                <a href="https://tuibx25.github.io/bx/vl12" target="_blank" class="btn">Truy cập <i class="fas fa-external-link-alt"></i></a>
+                <a href="vl12" class="btn">Truy cập <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
         
         <!-- Container riêng cho thẻ Túi Tài Liệu ở giữa -->
         <div class="center-container">
-            <div class="link-card special-card" onclick="window.open('https://tuibx25.github.io/bx/tui', '_blank');">
+            <div class="link-card special-card" onclick="window.location.href='tui';">
                 <div class="link-icon">
                     <i class="fas fa-toolbox"></i>
                 </div>
                 <h2 class="link-title">Túi Tài Liệu</h2>
                 <p class="link-desc">Bộ sưu tập các công cụ, tài nguyên hỗ trợ học tập và ôn thi. Cung cấp các tiện ích giúp việc học Vật Lý hiệu quả hơn. Đây là công cụ tổng hợp hỗ trợ cho cả 3 lớp học.</p>
-                <a href="https://tuibx25.github.io/bx/tui" target="_blank" class="btn">Truy cập <i class="fas fa-external-link-alt"></i></a>
+                <a href="tui" class="btn">Truy cập <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
         
@@ -332,6 +427,17 @@
     <script>
         // Thêm hiệu ứng cho các thẻ khi tải trang
         document.addEventListener('DOMContentLoaded', function() {
+            // Hiệu ứng cho sitemap
+            const sitemap = document.querySelector('.sitemap');
+            sitemap.style.opacity = '0';
+            sitemap.style.transform = 'translateY(-20px)';
+            
+            setTimeout(() => {
+                sitemap.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                sitemap.style.opacity = '1';
+                sitemap.style.transform = 'translateY(0)';
+            }, 300);
+            
             // Hiệu ứng cho 3 thẻ đầu tiên
             const cards = document.querySelectorAll('.links-container .link-card');
             cards.forEach((card, index) => {
@@ -342,7 +448,7 @@
                     card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
                     card.style.opacity = '1';
                     card.style.transform = 'translateY(0)';
-                }, index * 200);
+                }, index * 200 + 500);
             });
             
             // Hiệu ứng đặc biệt cho thẻ Túi Tài Liệu
@@ -410,6 +516,37 @@
                     }
                 });
             });
+            
+            // Thêm hiệu ứng cho các liên kết sitemap
+            const sitemapLinks = document.querySelectorAll('.sitemap-link');
+            sitemapLinks.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Ngăn chặn sự kiện click lan ra khi click vào nút bên trong thẻ
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            });
+        });
+        
+        // Đánh dấu trang hiện tại trong sitemap
+        const currentPage = window.location.href;
+        const sitemapLinks = document.querySelectorAll('.sitemap-link');
+        
+        sitemapLinks.forEach(link => {
+            if (link.href === currentPage) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
         });
     </script>
 </body>
