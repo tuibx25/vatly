@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ Tài Liệu Vật Lý</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            border-radius: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+        }
+        
+        h1 {
+            color: #2575fc;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .subtitle {
+            color: #555;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .links-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+            width: 100%;
+        }
+        
+        .link-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .link-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+        }
+        
+        .link-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+        }
+        
+        .link-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #2575fc;
+            height: 80px;
+            width: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(37, 117, 252, 0.1);
+        }
+        
+        .link-title {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .link-desc {
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(106, 17, 203, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(106, 17, 203, 0.4);
+        }
+        
+        .btn i {
+            margin-left: 8px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: white;
+            width: 100%;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .footer-text {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .instructions {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        .instructions h2 {
+            color: #2575fc;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .instructions p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .instructions ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        
+        /* Container cho thẻ Túi Tài Liệu */
+        .center-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            margin-bottom: 40px;
+            width: 100%;
+        }
+        
+        /* Thẻ Túi Tài Liệu đặc biệt */
+        .special-card {
+            width: 100%;
+            max-width: 700px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border: 3px solid #2575fc;
+        }
+        
+        .special-card .link-title {
+            color: #2575fc;
+        }
+        
+        .special-card .link-icon {
+            background-color: rgba(37, 117, 252, 0.2);
+            color: #6a11cb;
+        }
+        
+        /* Hiệu ứng đặc biệt cho thẻ Túi Tài Liệu */
+        .special-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(37, 117, 252, 0.3);
+        }
+        
+        @media (max-width: 992px) {
+            .links-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .special-card {
+                max-width: 600px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .links-container {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .link-card {
+                padding: 25px 20px;
+            }
+            
+            .special-card {
+                max-width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .link-title {
+                font-size: 1.5rem;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-book-open"></i> Tài Liệu Vật Lý</h1>
+            <p class="subtitle">Trang web cung cấp các liên kết đến tài liệu và bài tập Vật Lý từ lớp 10 đến lớp 12, cùng với công cụ hỗ trợ học tập.</p>
+        </header>
+        
+        <div class="links-container">
+            <div class="link-card" onclick="window.open('https://tuibx25.github.io/bx/vl10', '_blank');">
+                <div class="link-icon">
+                    <i class="fas fa-atom"></i>
+                </div>
+                <h2 class="link-title">Vật Lý 10</h2>
+                <p class="link-desc">Tài liệu, bài tập và công thức Vật Lý lớp 10. Bao gồm các chủ đề: Động học, Động lực học, Các định luật bảo toàn, Nhiệt học.</p>
+                <a href="https://tuibx25.github.io/bx/vl10" target="_blank" class="btn">Truy cập <i class="fas fa-external-link-alt"></i></a>
+            </div>
+            
+            <div class="link-card" onclick="window.open('https://tuibx25.github.io/bx/vl11', '_blank');">
+                <div class="link-icon">
+                    <i class="fas fa-magnet"></i>
+                </div>
+                <h2 class="link-title">Vật Lý 11</h2>
+                <p class="link-desc">Tài liệu, bài tập và công thức Vật Lý lớp 11. Bao gồm các chủ đề: Điện tích - Điện trường, Dòng điện không đổi, Từ trường, Khúc xạ ánh sáng.</p>
+                <a href="https://tuibx25.github.io/bx/vl11" target="_blank" class="btn">Truy cập <i class="fas fa-external-link-alt"></i></a>
+            </div>
+            
+            <div class="link-card" onclick="window.open('https://tuibx25.github.io/bx/vl12', '_blank');">
+                <div class="link-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h2 class="link-title">Vật Lý 12</h2>
+                <p class="link-desc">Tài liệu, bài tập và công thức Vật Lý lớp 12. Bao gồm các chủ đề: Dao động cơ, Sóng cơ, Điện xoay chiều, Lượng tử ánh sáng, Hạt nhân nguyên tử.</p>
+                <a href="https://tuibx25.github.io/bx/vl12" target="_blank" class="btn">Truy cập <i class="fas fa-external-link-alt"></i></a>
+            </div>
+        </div>
+        
+        <!-- Container riêng cho thẻ Túi Tài Liệu ở giữa -->
+        <div class="center-container">
+            <div class="link-card special-card" onclick="window.open('https://tuibx25.github.io/bx/tui', '_blank');">
+                <div class="link-icon">
+                    <i class="fas fa-toolbox"></i>
+                </div>
+                <h2 class="link-title">Túi Tài Liệu</h2>
+                <p class="link-desc">Bộ sưu tập các công cụ, tài nguyên hỗ trợ học tập và ôn thi. Cung cấp các tiện ích giúp việc học Vật Lý hiệu quả hơn. Đây là công cụ tổng hợp hỗ trợ cho cả 3 lớp học.</p>
+                <a href="https://tuibx25.github.io/bx/tui" target="_blank" class="btn">Truy cập <i class="fas fa-external-link-alt"></i></a>
+            </div>
+        </div>
+        
+        <footer>
+            <div class="footer-text">
+                <p><i class="fas fa-copyright"></i> 2025 Trang Tài Liệu Vật Lý | Tất cả các liên kết được cung cấp bởi tuibx25.github.io</p>
+                <p>Trang web này hoạt động như một cổng thông tin đến các tài nguyên học tập Vật Lý trực tuyến.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Thêm hiệu ứng cho các thẻ khi tải trang
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hiệu ứng cho 3 thẻ đầu tiên
+            const cards = document.querySelectorAll('.links-container .link-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+            
+            // Hiệu ứng đặc biệt cho thẻ Túi Tài Liệu
+            const specialCard = document.querySelector('.special-card');
+            setTimeout(() => {
+                specialCard.style.opacity = '0';
+                specialCard.style.transform = 'translateY(30px) scale(0.9)';
+                
+                setTimeout(() => {
+                    specialCard.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                    specialCard.style.opacity = '1';
+                    specialCard.style.transform = 'translateY(0) scale(1)';
+                    
+                    // Hiệu ứng nhấp nháy cho thẻ đặc biệt
+                    let pulseCount = 0;
+                    const pulseInterval = setInterval(() => {
+                        if (pulseCount < 3) {
+                            specialCard.style.boxShadow = '0 0 40px rgba(37, 117, 252, 0.7)';
+                            setTimeout(() => {
+                                specialCard.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.25)';
+                            }, 400);
+                            pulseCount++;
+                        } else {
+                            clearInterval(pulseInterval);
+                        }
+                    }, 1000);
+                }, 800);
+            }, 600);
+            
+            // Thêm hiệu ứng cho tiêu đề
+            const title = document.querySelector('h1');
+            title.style.opacity = '0';
+            title.style.transform = 'translateY(-20px)';
+            
+            setTimeout(() => {
+                title.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                title.style.opacity = '1';
+                title.style.transform = 'translateY(0)';
+            }, 100);
+            
+            // Thêm hiệu ứng khi di chuột qua các nút
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.05)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+            
+            // Thêm hiệu ứng khi di chuột qua các thẻ
+            const allCards = document.querySelectorAll('.link-card');
+            allCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('special-card')) {
+                        this.style.transform = 'translateY(-10px)';
+                    }
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('special-card')) {
+                        this.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
