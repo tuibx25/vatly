@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lực Tương Tác Điện & Định Luật Coulomb</title>
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f7ff;
+            color: #222;
+            line-height: 1.7;
+            padding-bottom: 40px;
+            font-size: 22px; /* Tăng kích thước font chung */
+        }
+        
+        .container {
+            max-width: 1400px; /* Tăng chiều rộng tối đa */
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a237e, #283593);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 50px;
+        }
+        
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem; /* Tăng kích thước tiêu đề */
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.5px;
+        }
+        
+        header p {
+            font-size: 1.6rem; /* Tăng kích thước */
+            opacity: 0.95;
+            max-width: 1000px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+        
+        .chapter-info {
+            background-color: #e8f4fd;
+            border-left: 8px solid #2196f3; /* Dày hơn */
+            padding: 30px;
+            margin-bottom: 40px;
+            border-radius: 0 15px 15px 0;
+        }
+        
+        .chapter-info h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #0d47a1;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 2.4rem; /* Tăng kích thước */
+            font-weight: 700;
+        }
+        
+        .chapter-info h2 i {
+            color: #2196f3;
+            font-size: 2.5rem;
+        }
+        
+        .chapter-info p {
+            font-size: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .content-section {
+            background-color: white;
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .content-section:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #e3f2fd; /* Dày hơn */
+        }
+        
+        .section-icon {
+            width: 80px; /* Lớn hơn */
+            height: 80px;
+            background: linear-gradient(135deg, #bbdefb, #90caf9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 25px;
+            color: #1565c0;
+            font-size: 2.5rem; /* Lớn hơn */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            color: #1a237e;
+            font-size: 2.8rem; /* Lớn hơn */
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .section-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            color: #5c6bc0;
+            font-size: 1.8rem; /* Lớn hơn */
+            margin-top: 8px;
+            font-weight: 500;
+        }
+        
+        .content-body {
+            padding-left: 15px;
+        }
+        
+        .content-body h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #0d47a1;
+            margin: 30px 0 15px;
+            padding-left: 15px;
+            border-left: 6px solid #64b5f6; /* Dày hơn */
+            font-size: 2.2rem; /* Lớn hơn */
+            font-weight: 600;
+        }
+        
+        .content-body p {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            font-size: 1.5rem; /* Lớn hơn */
+            line-height: 1.8;
+        }
+        
+        .content-body ul, .content-body ol {
+            margin-left: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .content-body li {
+            margin-bottom: 12px;
+            padding-left: 10px;
+            font-size: 1.5rem; /* Lớn hơn */
+            line-height: 1.8;
+        }
+        
+        .highlight-box {
+            background-color: #f1f8e9;
+            border-left: 6px solid #7cb342; /* Dày hơn */
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 0 12px 12px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .highlight-box h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #33691e;
+            font-size: 1.9rem; /* Lớn hơn */
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .formula-box {
+            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+            border: 3px dashed #616161;
+            padding: 30px;
+            margin: 35px 0;
+            text-align: center;
+            border-radius: 15px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .formula-box h3 {
+            font-size: 2.2rem; /* Lớn hơn */
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .formula {
+            font-size: 3rem; /* Lớn hơn */
+            color: #d32f2f;
+            margin: 15px 0;
+            font-weight: 800;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .formula-legend {
+            font-size: 1.4rem; /* Lớn hơn */
+            color: #555;
+            margin-top: 20px;
+            text-align: left;
+            padding-left: 30px;
+        }
+        
+        .formula-legend p {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .example-box {
+            background-color: #e8eaf6;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 35px 0;
+            border: 2px solid #c5cae9;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .example-title {
+            color: #303f9f;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.9rem; /* Lớn hơn */
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .example-box p {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .interaction-demo {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .charge-item {
+            text-align: center;
+            padding: 25px;
+            border-radius: 15px;
+            width: 250px; /* Rộng hơn */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+            transition: all 0.3s ease;
+        }
+        
+        .positive {
+            background: linear-gradient(135deg, #ffebee, #ffcdd2);
+            border: 3px solid #f44336;
+        }
+        
+        .negative {
+            background: linear-gradient(135deg, #e8eaf6, #c5cae9);
+            border: 3px solid #3f51b5;
+        }
+        
+        .charge-icon {
+            font-size: 4rem; /* Lớn hơn */
+            margin-bottom: 15px;
+        }
+        
+        .positive .charge-icon {
+            color: #f44336;
+        }
+        
+        .negative .charge-icon {
+            color: #3f51b5;
+        }
+        
+        .charge-item h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.9rem; /* Lớn hơn */
+            margin-bottom: 10px;
+        }
+        
+        .charge-item p {
+            font-size: 1.4rem;
+        }
+        
+        .interaction-result {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem; /* Lớn hơn */
+            font-weight: 700;
+            color: #ff9800;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 15px 25px;
+            background-color: #fff8e1;
+            border-radius: 10px;
+            border: 2px dashed #ffb300;
+        }
+        
+        .applications {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .app-card {
+            flex: 1;
+            min-width: 300px; /* Rộng hơn */
+            background-color: #f9f9f9;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .app-card h4 {
+            font-family: 'Montserrat', sans-serif;
+            color: #388e3c;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.9rem; /* Lớn hơn */
+            font-weight: 600;
+        }
+        
+        .app-card p {
+            font-size: 1.4rem;
+            line-height: 1.7;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 2px solid #ccc;
+            color: #666;
+            font-size: 1.4rem;
+        }
+        
+        footer p {
+            margin-bottom: 10px;
+        }
+        
+        footer strong {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: #444;
+        }
+        
+        .summary-box {
+            background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 50px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border: 2px solid #d1c4e9;
+        }
+        
+        .summary-title {
+            text-align: center;
+            color: #6a1b9a;
+            font-size: 2.8rem; /* Lớn hơn */
+            margin-bottom: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .summary-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Rộng hơn */
+            gap: 30px;
+        }
+        
+        .summary-item {
+            background-color: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e1bee7;
+            transition: transform 0.3s ease;
+        }
+        
+        .summary-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .summary-item h4 {
+            font-family: 'Montserrat', sans-serif;
+            color: #4a148c;
+            margin-bottom: 15px;
+            font-size: 1.8rem; /* Lớn hơn */
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .summary-item p {
+            font-size: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        /* Media queries cho TV và màn hình lớn */
+        @media (min-width: 1920px) {
+            body {
+                font-size: 24px;
+            }
+            
+            header h1 {
+                font-size: 4rem;
+            }
+            
+            .section-title {
+                font-size: 3.2rem;
+            }
+            
+            .formula {
+                font-size: 3.5rem;
+            }
+            
+            .container {
+                max-width: 1600px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                font-size: 20px;
+            }
+            
+            header h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .formula {
+                font-size: 2.2rem;
+            }
+            
+            .interaction-demo {
+                flex-direction: column;
+            }
+            
+            .summary-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 0 20px;
+            }
+        }
+        
+        /* Tối ưu cho trình chiếu - tăng độ tương phản */
+        strong {
+            color: #0d47a1;
+            font-weight: 700;
+        }
+        
+        .key-point {
+            background-color: #fff9c4;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ffd600;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-bolt"></i> Lực Tương Tác Điện & Định Luật Coulomb</h1>
+            <p>Tóm tắt kiến thức Vật Lý lớp 11 - Chương III: Điện trường</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="chapter-info">
+            <h2><i class="fas fa-book-open"></i> CHƯƠNG III - ĐIỆN TRƯỜNG</h2>
+            <p>Nội dung bài học về lực tương tác giữa các điện tích, định luật Coulomb và các ứng dụng thực tế.</p>
+        </div>
+        
+        <section class="content-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-magnet"></i>
+                </div>
+                <div>
+                    <h2 class="section-title">I. Lực Hút Và Đẩy Giữa Các Điện Tích</h2>
+                    <div class="section-subtitle">Hai loại điện tích và quy tắc tương tác</div>
+                </div>
+            </div>
+            
+            <div class="content-body">
+                <h3><i class="fas fa-vial"></i> Thí nghiệm nhận biết</h3>
+                <p>Khi cọ xát thanh nhựa với len/vải, thanh nhựa tích điện âm. Khi cọ xát thanh thủy tinh với lụa, thanh thủy tinh tích điện dương.</p>
+                
+                <div class="key-point">
+                    <strong>Quy ước:</strong> Điện tích trên thanh thủy tinh cọ xát với lụa là điện tích dương (+), điện tích trên thanh nhựa cọ xát với len là điện tích âm (-).
+                </div>
+                
+                <div class="interaction-demo">
+                    <div class="charge-item positive">
+                        <div class="charge-icon">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                        <h3>Điện tích dương (+)</h3>
+                        <p>Thanh thủy tinh cọ xát với lụa</p>
+                    </div>
+                    
+                    <div class="interaction-result">
+                        <i class="fas fa-arrows-alt-h"></i> CÙNG DẤU ĐẨY NHAU
+                    </div>
+                    
+                    <div class="charge-item positive">
+                        <div class="charge-icon">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                        <h3>Điện tích dương (+)</h3>
+                        <p>Thanh thủy tinh cọ xát với lụa</p>
+                    </div>
+                </div>
+                
+                <div class="interaction-demo">
+                    <div class="charge-item positive">
+                        <div class="charge-icon">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                        <h3>Điện tích dương (+)</h3>
+                        <p>Thanh thủy tinh</p>
+                    </div>
+                    
+                    <div class="interaction-result">
+                        <i class="fas fa-heart"></i> KHÁC DẤU HÚT NHAU
+                    </div>
+                    
+                    <div class="charge-item negative">
+                        <div class="charge-icon">
+                            <i class="fas fa-minus-circle"></i>
+                        </div>
+                        <h3>Điện tích âm (-)</h3>
+                        <p>Thanh nhựa</p>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-check-circle"></i> Kết luận từ thí nghiệm</h3>
+                <ul>
+                    <li>Có <strong>hai loại điện tích</strong>: điện tích dương (+) và điện tích âm (-)</li>
+                    <li><strong>Các điện tích cùng dấu đẩy nhau</strong> (++ đẩy, -- đẩy)</li>
+                    <li><strong>Các điện tích khác dấu hút nhau</strong> (+- hút)</li>
+                    <li>Lực hút hoặc đẩy giữa các điện tích gọi là <strong>lực điện</strong> (lực tương tác điện)</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <div>
+                    <h2 class="section-title">II. Định Luật Coulomb</h2>
+                    <div class="section-subtitle">Charles Coulomb (1736-1806) - Nhà vật lý người Pháp</div>
+                </div>
+            </div>
+            
+            <div class="content-body">
+                <h3><i class="fas fa-info-circle"></i> Khái niệm điện tích điểm</h3>
+                <p>Điện tích điểm là vật tích điện có kích thước rất nhỏ so với khoảng cách đến điểm ta xét.</p>
+                
+                <div class="highlight-box">
+                    <h3><i class="fas fa-lightbulb"></i> Nội dung định luật:</h3>
+                    <p>Lực tương tác giữa hai điện tích điểm có:</p>
+                    <ul>
+                        <li><strong>Phương</strong>: trùng với đường thẳng nối hai điện tích</li>
+                        <li><strong>Chiều</strong>: hướng ra xa nhau nếu cùng dấu, hướng vào nhau nếu trái dấu</li>
+                        <li><strong>Độ lớn</strong>: tỉ lệ thuận với tích độ lớn hai điện tích và tỉ lệ nghịch với bình phương khoảng cách giữa chúng</li>
+                    </ul>
+                </div>
+                
+                <div class="formula-box">
+                    <h3><i class="fas fa-square-root-alt"></i> Công thức định luật Coulomb</h3>
+                    <div class="formula">
+                        F = k × |q₁q₂| / r²
+                    </div>
+                    <div class="formula-legend">
+                        <p><strong>Trong đó:</strong></p>
+                        <ul>
+                            <li><strong>F</strong>: lực tương tác điện (N - Newton)</li>
+                            <li><strong>q₁, q₂</strong>: độ lớn các điện tích (C - Coulomb)</li>
+                            <li><strong>r</strong>: khoảng cách giữa hai điện tích (m)</li>
+                            <li><strong>k</strong>: hệ số tỉ lệ, trong chân không và không khí khô:</li>
+                        </ul>
+                    </div>
+                    <div class="formula">
+                        k = 9 × 10⁹ N·m²/C²
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-exclamation-triangle"></i> Lưu ý quan trọng</h3>
+                <ul>
+                    <li>Công thức áp dụng cho <strong>điện tích điểm</strong> trong <strong>chân không hoặc không khí khô</strong></li>
+                    <li>Nếu khoảng cách <strong>tăng 2 lần</strong> → lực điện <strong>giảm 4 lần</strong></li>
+                    <li>Nếu một điện tích <strong>tăng 3 lần</strong> → lực điện <strong>tăng 3 lần</strong> (nếu điện tích kia không đổi)</li>
+                </ul>
+                
+                <div class="example-box">
+                    <div class="example-title">
+                        <i class="fas fa-question-circle"></i> Bài tập ví dụ
+                    </div>
+                    <p>Hai quả cầu kim loại nhỏ tích điện cùng dấu, cùng độ lớn 9,45×10⁻⁷ C, đặt cách nhau 10 cm trong không khí. Tính lực điện tương tác giữa chúng.</p>
+                    <p><strong>Giải:</strong> Áp dụng công thức:</p>
+                    <div class="formula" style="font-size: 2.5rem;">
+                        F = 9×10⁹ × (9,45×10⁻⁷)² / (0,1)² ≈ 0,8 N
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div>
+                    <h2 class="section-title">III. Ứng Dụng Thực Tế</h2>
+                    <div class="section-subtitle">Lực điện trong đời sống và công nghiệp</div>
+                </div>
+            </div>
+            
+            <div class="content-body">
+                <div class="applications">
+                    <div class="app-card">
+                        <h4><i class="fas fa-spray-can"></i> Sơn tĩnh điện</h4>
+                        <p>Hạt sơn tích điện dương bị hút bởi vật cần sơn tích điện âm, giúp sơn bám đều, tiết kiệm và bền màu.</p>
+                    </div>
+                    
+                    <div class="app-card">
+                        <h4><i class="fas fa-wind"></i> Máy lọc không khí</h4>
+                        <p>Sử dụng lưới tích điện để hút các hạt bụi mang điện tích trái dấu, làm sạch không khí hiệu quả.</p>
+                    </div>
+                    
+                    <div class="app-card">
+                        <h4><i class="fas fa-book"></i> Tách trang sách</h4>
+                        <p>Dùng lực tĩnh điện để tách các trang sách dính vào nhau mà không làm rách giấy.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <div>
+                    <h2 class="section-title">IV. Bài Tập Cần Nhớ</h2>
+                    <div class="section-subtitle">Các dạng bài tập quan trọng</div>
+                </div>
+            </div>
+            
+            <div class="content-body">
+                <h3><i class="fas fa-pencil-alt"></i> Các dạng bài tập chính:</h3>
+                <ol>
+                    <li><strong>Tính lực tương tác</strong> giữa hai điện tích điểm cho trước</li>
+                    <li><strong>Xác định sự thay đổi của lực</strong> khi thay đổi khoảng cách hoặc điện tích</li>
+                    <li><strong>Tìm vị trí đặt điện tích thứ ba</strong> để hệ cân bằng</li>
+                    <li><strong>Bài toán thực tế</strong>: lực tương tác trong nguyên tử, ứng dụng kỹ thuật</li>
+                </ol>
+                
+                <div class="example-box">
+                    <div class="example-title">
+                        <i class="fas fa-brain"></i> Bài tập vận dụng
+                    </div>
+                    <p><strong>Bài 1:</strong> Hai điện tích điểm q₁ = 15μC, q₂ = -6μC đặt cách nhau 0,2m trong không khí. Phải đặt điện tích q₃ ở đâu để lực điện tác dụng lên nó bằng 0?</p>
+                    <p><strong>Bài 2:</strong> Tính lực điện giữa electron và proton trong nguyên tử hydrogen, biết khoảng cách 5×10⁻¹¹ m và điện tích mỗi hạt là 1,6×10⁻¹⁹ C.</p>
+                </div>
+            </div>
+        </section>
+        
+        <div class="summary-box">
+            <h3 class="summary-title"><i class="fas fa-graduation-cap"></i> Tóm Tắt Kiến Thức Trọng Tâm</h3>
+            <div class="summary-list">
+                <div class="summary-item">
+                    <h4><i class="fas fa-bolt"></i> Hai loại điện tích</h4>
+                    <p>Điện tích dương (+) và điện tích âm (-)</p>
+                </div>
+                
+                <div class="summary-item">
+                    <h4><i class="fas fa-magnet"></i> Tương tác điện</h4>
+                    <p>Cùng dấu → đẩy nhau<br>Khác dấu → hút nhau</p>
+                </div>
+                
+                <div class="summary-item">
+                    <h4><i class="fas fa-ruler"></i> Định luật Coulomb</h4>
+                    <p>F = k|q₁q₂|/r²<br>k = 9×10⁹ N·m²/C²</p>
+                </div>
+                
+                <div class="summary-item">
+                    <h4><i class="fas fa-cube"></i> Điện tích điểm</h4>
+                    <p>Vật tích điện có kích thước rất nhỏ so với khoảng cách xét</p>
+                </div>
+                
+                <div class="summary-item">
+                    <h4><i class="fas fa-tools"></i> Ứng dụng</h4>
+                    <p>Sơn tĩnh điện, máy lọc không khí, tách trang sách</p>
+                </div>
+                
+                <div class="summary-item">
+                    <h4><i class="fas fa-calculator"></i> Mối quan hệ</h4>
+                    <p>F ∼ |q₁q₂| (tỉ lệ thuận)<br>F ∼ 1/r² (tỉ lệ nghịch)</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p><strong>Vật Lý 11 - Chương III: Điện Trường</strong></p>
+            <p>© 2025 - Tóm tắt bài "Lực tương tác giữa hai điện tích"</p>
+        </footer>
+    </div>
+
+    <script>
+        // Thêm hiệu ứng tương tác cho các hộp điện tích
+        document.addEventListener('DOMContentLoaded', function() {
+            const chargeItems = document.querySelectorAll('.charge-item');
+            
+            chargeItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.08)';
+                    this.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.2)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                    this.style.boxShadow = '0 6px 15px rgba(0, 0, 0, 0.12)';
+                });
+            });
+            
+            // Hiệu ứng cho các công thức
+            const formulas = document.querySelectorAll('.formula');
+            formulas.forEach(formula => {
+                formula.addEventListener('click', function() {
+                    this.style.color = '#1a237e';
+                    this.style.transition = 'color 0.5s';
+                    
+                    setTimeout(() => {
+                        this.style.color = '#d32f2f';
+                    }, 500);
+                });
+            });
+            
+            // Hiển thị thông báo khi click vào tiêu đề
+            const sectionTitles = document.querySelectorAll('.section-title');
+            sectionTitles.forEach(title => {
+                title.addEventListener('click', function() {
+                    const sectionName = this.textContent;
+                    alert(`Bạn đang xem nội dung: ${sectionName}`);
+                });
+            });
+            
+            // Tự động cuộn mượt đến các phần
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 20,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
