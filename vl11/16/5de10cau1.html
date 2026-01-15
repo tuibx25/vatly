@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trắc Nghiệm Định Luật Coulomb</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #2c3e50, #4a6491);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 25px;
+        }
+        
+        .test-selector {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .test-btn {
+            padding: 12px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .test-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .test-btn.active {
+            background-color: #2c3e50;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .test-info {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 5px solid #3498db;
+        }
+        
+        .question {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .question-number span {
+            background-color: #3498db;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+        }
+        
+        .question-text {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            padding: 12px 15px;
+            background-color: white;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:hover {
+            background-color: #f0f7ff;
+            border-color: #3498db;
+        }
+        
+        .option.selected {
+            background-color: #e3f2fd;
+            border-color: #3498db;
+            font-weight: 600;
+        }
+        
+        .option input {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn {
+            background-color: #27ae60;
+            color: white;
+        }
+        
+        .submit-btn:hover {
+            background-color: #219653;
+        }
+        
+        .reset-btn {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .reset-btn:hover {
+            background-color: #c0392b;
+        }
+        
+        .result {
+            display: none;
+            background-color: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 30px;
+            text-align: center;
+            border-top: 5px solid #27ae60;
+        }
+        
+        .result h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+        
+        .score {
+            font-size: 48px;
+            font-weight: bold;
+            color: #27ae60;
+            margin: 15px 0;
+        }
+        
+        .score-detail {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .correct-answer {
+            color: #27ae60;
+            font-weight: 600;
+        }
+        
+        .wrong-answer {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+        
+        .explanation {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 10px;
+            font-size: 14px;
+            text-align: left;
+            padding: 10px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .test-selector {
+                flex-direction: column;
+            }
+            
+            .test-btn {
+                width: 100%;
+            }
+            
+            .actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>TRẮC NGHIỆM ĐỊNH LUẬT COULOMB</h1>
+            <p class="subtitle">Chương III: Điện trường - Lực tương tác giữa hai điện tích</p>
+        </header>
+        
+        <div class="content">
+            <div class="test-selector">
+                <button class="test-btn active" data-test="1">Đề 1</button>
+                <button class="test-btn" data-test="2">Đề 2</button>
+                <button class="test-btn" data-test="3">Đề 3</button>
+                <button class="test-btn" data-test="4">Đề 4</button>
+                <button class="test-btn" data-test="5">Đề 5</button>
+            </div>
+            
+            <div class="test-info">
+                <p><strong>Hướng dẫn:</strong> Chọn đề trắc nghiệm từ các nút trên. Mỗi đề gồm 10 câu hỏi từ dễ đến trung bình về lực tương tác giữa hai điện tích và định luật Coulomb. Chọn đáp án đúng cho mỗi câu hỏi, sau đó nhấn nút "Nộp bài" để xem kết quả.</p>
+            </div>
+            
+            <div id="test-container">
+                <!-- Nội dung đề trắc nghiệm sẽ được tạo bằng JavaScript -->
+            </div>
+            
+            <div class="actions">
+                <button class="btn reset-btn" id="reset-btn">Làm lại</button>
+                <button class="btn submit-btn" id="submit-btn">Nộp bài</button>
+            </div>
+            
+            <div class="result" id="result">
+                <h3>KẾT QUẢ BÀI LÀM</h3>
+                <div class="score" id="score">0/10</div>
+                <div class="score-detail" id="score-detail">Bạn đã trả lời đúng 0 trên 10 câu hỏi</div>
+                <div id="result-details"></div>
+                <p style="margin-top: 20px;">Chọn một đề khác để tiếp tục luyện tập!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dữ liệu câu hỏi cho 5 đề
+        const tests = {
+            1: [
+                {
+                    question: "Có mấy loại điện tích?",
+                    options: ["1", "2", "3", "4"],
+                    correct: 1,
+                    explanation: "Có hai loại điện tích: điện tích dương và điện tích âm."
+                },
+                {
+                    question: "Các điện tích cùng dấu thì:",
+                    options: ["Hút nhau", "Đẩy nhau", "Không tương tác", "Lúc hút, lúc đẩy"],
+                    correct: 1,
+                    explanation: "Các điện tích cùng dấu đẩy nhau, khác dấu hút nhau."
+                },
+                {
+                    question: "Đơn vị của điện tích trong hệ SI là:",
+                    options: ["Newton (N)", "Coulomb (C)", "Volt (V)", "Ampe (A)"],
+                    correct: 1,
+                    explanation: "Trong hệ SI, đơn vị đo điện tích là Coulomb (C), lấy theo tên nhà vật lí Charles Coulomb."
+                },
+                {
+                    question: "Theo định luật Coulomb, lực tương tác giữa hai điện tích điểm có:",
+                    options: [
+                        "Phương trùng với đường thẳng nối hai điện tích",
+                        "Độ lớn tỉ lệ thuận với tích độ lớn hai điện tích",
+                        "Độ lớn tỉ lệ nghịch với bình phương khoảng cách",
+                        "Cả ba đáp án trên đều đúng"
+                    ],
+                    correct: 3,
+                    explanation: "Định luật Coulomb: Lực tương tác giữa hai điện tích điểm có phương trùng với đường thẳng nối hai điện tích điểm, có độ lớn tỉ lệ thuận với tích giá trị của hai điện tích điểm và tỉ lệ nghịch với bình phương khoảng cách giữa chúng."
+                },
+                {
+                    question: "Hằng số k trong định luật Coulomb có giá trị trong chân không là:",
+                    options: ["9.10^9 Nm²/C²", "9.10^9 C²/Nm²", "8,85.10^-12 Nm²/C²", "8,85.10^-12 C²/Nm²"],
+                    correct: 0,
+                    explanation: "Hằng số Coulomb k = 9.10^9 Nm²/C² trong chân không và không khí khô."
+                },
+                {
+                    question: "Nếu khoảng cách giữa hai điện tích điểm tăng lên 2 lần thì lực tương tác giữa chúng:",
+                    options: ["Tăng 2 lần", "Giảm 2 lần", "Tăng 4 lần", "Giảm 4 lần"],
+                    correct: 3,
+                    explanation: "Lực tương tác tỉ lệ nghịch với bình phương khoảng cách: F ∝ 1/r². Khi r tăng 2 lần thì F giảm 4 lần."
+                },
+                {
+                    question: "Hai điện tích điểm cùng độ lớn 10^-6 C, đặt trong chân không cách nhau 1 m thì lực tương tác giữa chúng có độ lớn là (lấy k=9.10^9 Nm²/C²):",
+                    options: ["9.10^9 N", "9.10^3 N", "9.10^-3 N", "9.10^-9 N"],
+                    correct: 2,
+                    explanation: "F = k.|q1.q2|/r² = 9.10^9 × (10^-6)² / 1² = 9.10^9 × 10^-12 = 9.10^-3 N"
+                },
+                {
+                    question: "Nếu tăng khoảng cách giữa hai điện tích lên 3 lần thì lực tương tác giữa chúng:",
+                    options: ["Giảm 9 lần", "Tăng 9 lần", "Giảm 3 lần", "Tăng 3 lần"],
+                    correct: 0,
+                    explanation: "F ∝ 1/r². Khi r tăng 3 lần thì F giảm 3² = 9 lần."
+                },
+                {
+                    question: "Sơn tĩnh điện là ứng dụng của:",
+                    options: ["Lực hấp dẫn", "Lực điện", "Lực từ", "Lực ma sát"],
+                    correct: 1,
+                    explanation: "Sơn tĩnh điện ứng dụng lực điện: các hạt sơn mang điện dương bị vật mang điện âm hút vào."
+                },
+                {
+                    question: "Hai quả cầu kim loại nhỏ tích điện cùng dấu, độ lớn 9,45.10^-7 C, đặt cách nhau 10 cm trong không khí. Lực tương tác giữa chúng là (lấy k=9.10^9 Nm²/C²):",
+                    options: ["0,8 N", "0,08 N", "0,008 N", "8 N"],
+                    correct: 0,
+                    explanation: "Theo bài tập ví dụ trong tài liệu, F ≈ 0,8 N."
+                }
+            ],
+            2: [
+                {
+                    question: "Điện tích của thanh thủy tinh khi cọ xát với lụa là:",
+                    options: ["Điện tích dương", "Điện tích âm", "Không mang điện", "Có thể dương hoặc âm"],
+                    correct: 0,
+                    explanation: "Theo quy ước, thanh thủy tinh khi cọ xát với lụa mang điện tích dương."
+                },
+                {
+                    question: "Các điện tích khác dấu thì:",
+                    options: ["Hút nhau", "Đẩy nhau", "Không tương tác", "Lúc hút, lúc đẩy"],
+                    correct: 0,
+                    explanation: "Các điện tích cùng dấu đẩy nhau, khác dấu hút nhau."
+                },
+                {
+                    question: "Điện tích điểm là:",
+                    options: [
+                        "Điểm không có kích thước",
+                        "Vật tích điện có kích thước nhỏ so với khoảng cách tới điểm xét",
+                        "Điểm có điện tích rất nhỏ",
+                        "Điểm tại đó điện tích bằng 0"
+                    ],
+                    correct: 1,
+                    explanation: "Điện tích điểm là vật tích điện có kích thước nhỏ so với khoảng cách tới điểm mà ta xét."
+                },
+                {
+                    question: "Biểu thức định luật Coulomb cho hai điện tích điểm trong chân không là:",
+                    options: [
+                        "F = |q1.q2|/r",
+                        "F = |q1.q2|/r²",
+                        "F = k.|q1.q2|/r²",
+                        "Cả B và C đều đúng (với k là hằng số)"
+                    ],
+                    correct: 3,
+                    explanation: "Định luật Coulomb: F = k.|q1.q2|/r² với k = 9.10^9 Nm²/C² trong chân không."
+                },
+                {
+                    question: "Hằng số điện môi ε0 có giá trị xấp xỉ:",
+                    options: ["8,85.10^-12 C²/Nm²", "9.10^9 Nm²/C²", "1,6.10^-19 C", "6,67.10^-11 Nm²/kg²"],
+                    correct: 0,
+                    explanation: "Hằng số điện ε0 = 8,85.10^-12 C²/Nm²."
+                },
+                {
+                    question: "Nếu độ lớn của mỗi điện tích điểm tăng lên 2 lần và khoảng cách giữa chúng cũng tăng 2 lần thì lực tương tác giữa chúng:",
+                    options: ["Không đổi", "Tăng 2 lần", "Giảm 2 lần", "Giảm 4 lần"],
+                    correct: 0,
+                    explanation: "F ∝ |q1.q2|/r². Khi q1, q2 tăng 2 lần (tích tăng 4 lần) và r tăng 2 lần (r² tăng 4 lần) thì F không đổi."
+                },
+                {
+                    question: "Hai điện tích điểm q1=2.10^-6 C, q2=-2.10^-6 C đặt cách nhau 0,1 m trong không khí. Lực tương tác giữa chúng là:",
+                    options: ["3,6 N, hút nhau", "3,6 N, đẩy nhau", "1,8 N, hút nhau", "1,8 N, đẩy nhau"],
+                    correct: 0,
+                    explanation: "F = k.|q1.q2|/r² = 9.10^9 × |2.10^-6 × (-2.10^-6)| / (0,1)² = 9.10^9 × 4.10^-12 / 0,01 = 3,6 N. Vì khác dấu nên hút nhau."
+                },
+                {
+                    question: "Nếu giảm khoảng cách giữa hai điện tích xuống 2 lần thì lực tương tác giữa chúng:",
+                    options: ["Tăng 4 lần", "Giảm 4 lần", "Tăng 2 lần", "Giảm 2 lần"],
+                    correct: 0,
+                    explanation: "F ∝ 1/r². Khi r giảm 2 lần thì F tăng 2² = 4 lần."
+                },
+                {
+                    question: "Trong máy lọc bụi không khí, lưới lọc tĩnh điện hoạt động dựa trên:",
+                    options: [
+                        "Lực hút giữa các điện tích cùng dấu",
+                        "Lực hút giữa các điện tích khác dấu",
+                        "Lực đẩy giữa các điện tích cùng dấu",
+                        "Lực ma sát"
+                    ],
+                    correct: 1,
+                    explanation: "Lưới lọc tĩnh điện tạo điện tích để hút các hạt bụi mang điện tích trái dấu."
+                },
+                {
+                    question: "Nếu khoảng cách giữa hai quả cầu tích điện tăng từ 10 cm lên 20 cm thì lực tương tác sẽ:",
+                    options: ["Giảm 4 lần", "Tăng 4 lần", "Giảm 2 lần", "Tăng 2 lần"],
+                    correct: 0,
+                    explanation: "Lực điện tỉ lệ nghịch với bình phương khoảng cách. Khoảng cách tăng 2 lần thì lực giảm 4 lần."
+                }
+            ],
+            3: [
+                {
+                    question: "Điện tích của thanh nhựa khi cọ xát với len là:",
+                    options: ["Điện tích dương", "Điện tích âm", "Không mang điện", "Có thể dương hoặc âm"],
+                    correct: 1,
+                    explanation: "Theo quy ước, thanh nhựa khi cọ xát với len mang điện tích âm."
+                },
+                {
+                    question: "Lực tương tác giữa hai điện tích còn được gọi là:",
+                    options: ["Lực hấp dẫn", "Lực điện từ", "Lực điện", "Lực ma sát"],
+                    correct: 2,
+                    explanation: "Lực hút, đẩy giữa các điện tích được gọi chung là lực tương tác giữa các điện tích (thường gọi tắt là lực điện)."
+                },
+                {
+                    question: "Nhà vật lí nào đã tìm ra định luật về lực tương tác giữa các điện tích?",
+                    options: ["Newton", "Coulomb", "Ohm", "Faraday"],
+                    correct: 1,
+                    explanation: "Charles Coulomb (1736-1806), nhà vật lí người Pháp, đã tìm ra định luật về lực tương tác giữa các điện tích."
+                },
+                {
+                    question: "Trong công thức F = k.|q1.q2|/r², r là:",
+                    options: [
+                        "Khoảng cách giữa hai điện tích",
+                        "Bán kính của điện tích",
+                        "Đường kính của điện tích",
+                        "Khoảng cách từ điện tích đến điểm quan sát"
+                    ],
+                    correct: 0,
+                    explanation: "r là khoảng cách giữa hai điện tích điểm."
+                },
+                {
+                    question: "Định luật Coulomb áp dụng được cho trường hợp nào?",
+                    options: [
+                        "Hai điện tích điểm",
+                        "Hai quả cầu tích điện kích thước nhỏ so với khoảng cách giữa chúng",
+                        "Cả A và B",
+                        "Chỉ cho điện tích dương"
+                    ],
+                    correct: 2,
+                    explanation: "Định luật Coulomb áp dụng cho hai điện tích điểm hoặc hai quả cầu tích điện có kích thước nhỏ so với khoảng cách giữa chúng."
+                },
+                {
+                    question: "Trong nguyên tử hydrogen, electron và proton cách nhau 5.10^-11 m. Điện tích của chúng cùng độ lớn 1,6.10^-19 C. Lực tương tác điện giữa chúng là:",
+                    options: ["9,2.10^-8 N", "9,2.10^-10 N", "9,2.10^-12 N", "9,2.10^-14 N"],
+                    correct: 0,
+                    explanation: "F = k.|q1.q2|/r² = 9.10^9 × (1,6.10^-19)² / (5.10^-11)² ≈ 9,2.10^-8 N"
+                },
+                {
+                    question: "Hai điện tích điểm q1 và q2 đặt cách nhau một khoảng r. Nếu giảm điện tích q1 đi 2 lần và tăng điện tích q2 lên 4 lần, đồng thời tăng khoảng cách lên 2 lần thì lực tương tác sẽ:",
+                    options: ["Không đổi", "Tăng 2 lần", "Giảm 2 lần", "Tăng 4 lần"],
+                    correct: 2,
+                    explanation: "F ∝ |q1.q2|/r². Sau khi thay đổi: F' ∝ (q1/2 × 4q2)/(2r)² = (2q1q2)/(4r²) = (1/2)(q1q2/r²) = F/2. Vậy lực giảm 2 lần."
+                },
+                {
+                    question: "Trong thí nghiệm Coulomb, khi hai quả cầu tích điện cùng dấu, chúng sẽ:",
+                    options: ["Hút nhau", "Đẩy nhau", "Không tương tác", "Dao động"],
+                    correct: 1,
+                    explanation: "Các điện tích cùng dấu đẩy nhau."
+                },
+                {
+                    question: "Nếu đưa hai quả cầu tích điện về khoảng cách 10 cm và giảm điện tích một quả cầu đi một nửa thì lực tương tác sẽ:",
+                    options: ["Giảm 2 lần", "Tăng 2 lần", "Giảm 4 lần", "Tăng 4 lần"],
+                    correct: 0,
+                    explanation: "Lực điện tỉ lệ thuận với tích của q1 và q2. Khi một điện tích giảm một nửa thì lực cũng giảm một nửa."
+                },
+                {
+                    question: "Điện tích điểm q1=15 μC, q2=-6 μC đặt cách nhau 0,2 m trong không khí. Độ lớn lực tương tác giữa chúng là (1 μC=10^-6 C):",
+                    options: ["20,25 N", "2,025 N", "202,5 N", "0,2025 N"],
+                    correct: 0,
+                    explanation: "F = k.|q1.q2|/r² = 9.10^9 × |15×10^-6 × (-6×10^-6)| / (0,2)² = 9.10^9 × 90×10^-12 / 0,04 = 20,25 N"
+                }
+            ],
+            4: [
+                {
+                    question: "Có mấy loại điện tích?",
+                    options: ["1", "2", "3", "4"],
+                    correct: 1,
+                    explanation: "Có hai loại điện tích: điện tích dương và điện tích âm."
+                },
+                {
+                    question: "Dụng cụ Coulomb dùng để đo lực tương tác điện là:",
+                    options: ["Cân xoắn", "Lực kế", "Điện kế", "Vôn kế"],
+                    correct: 0,
+                    explanation: "Coulomb dùng cân xoắn để xác định mối liên hệ giữa độ lớn lực tương tác giữa hai quả cầu tích điện với điện tích và khoảng cách giữa chúng."
+                },
+                {
+                    question: "Trong môi trường nào sau đây, lực tương tác giữa hai điện tích là lớn nhất?",
+                    options: ["Chân không", "Không khí khô", "Nước tinh khiết", "Dầu hỏa"],
+                    correct: 0,
+                    explanation: "Lực tương tác trong chân không là lớn nhất. Không khí khô có tính chất điện gần giống chân không."
+                },
+                {
+                    question: "Khi đặt hai điện tích điểm trong môi trường có hằng số điện môi ε thì lực tương tác so với trong chân không sẽ:",
+                    options: ["Tăng ε lần", "Giảm ε lần", "Không đổi", "Tăng ε² lần"],
+                    correct: 1,
+                    explanation: "Trong môi trường có hằng số điện môi ε, lực tương tác F = k.|q1.q2|/(ε.r²), nhỏ hơn ε lần so với trong chân không."
+                },
+                {
+                    question: "Hai điện tích điểm cùng độ lớn 10^-6 C, đặt trong chân không cách nhau 1 m thì lực tương tác giữa chúng có độ lớn là (lấy k=9.10^9 Nm²/C²):",
+                    options: ["9.10^9 N", "9.10^3 N", "9.10^-3 N", "9.10^-9 N"],
+                    correct: 2,
+                    explanation: "F = k.|q1.q2|/r² = 9.10^9 × (10^-6)² / 1² = 9.10^9 × 10^-12 = 9.10^-3 N"
+                },
+                {
+                    question: "Hai điện tích điểm q1=2.10^-6 C, q2=-2.10^-6 C đặt cách nhau 0,1 m trong không khí. Lực tương tác giữa chúng là:",
+                    options: ["3,6 N, hút nhau", "3,6 N, đẩy nhau", "1,8 N, hút nhau", "1,8 N, đẩy nhau"],
+                    correct: 0,
+                    explanation: "F = 9.10^9 × |2.10^-6 × (-2.10^-6)| / (0,1)² = 3,6 N. Vì khác dấu nên hút nhau."
+                },
+                {
+                    question: "Trong nguyên tử hydrogen, electron và proton cách nhau 5.10^-11 m. Điện tích của chúng cùng độ lớn 1,6.10^-19 C. Lực tương tác điện giữa chúng là:",
+                    options: ["9,2.10^-8 N", "9,2.10^-10 N", "9,2.10^-12 N", "9,2.10^-14 N"],
+                    correct: 0,
+                    explanation: "F = k.|q1.q2|/r² = 9.10^9 × (1,6.10^-19)² / (5.10^-11)² ≈ 9,2.10^-8 N"
+                },
+                {
+                    question: "Sơn tĩnh điện là ứng dụng của:",
+                    options: ["Lực hấp dẫn", "Lực điện", "Lực từ", "Lực ma sát"],
+                    correct: 1,
+                    explanation: "Sơn tĩnh điện ứng dụng lực điện: các hạt sơn mang điện dương bị vật mang điện âm hút vào."
+                },
+                {
+                    question: "Khi hai quả cầu tích điện trái dấu, chúng sẽ:",
+                    options: ["Hút nhau", "Đẩy nhau", "Không tương tác", "Dao động"],
+                    correct: 0,
+                    explanation: "Các điện tích khác dấu hút nhau."
+                },
+                {
+                    question: "Nếu đặt hai điện tích trong dầu hỏa (hằng số điện môi ε=2) thì lực tương tác sẽ:",
+                    options: ["Giảm 2 lần", "Tăng 2 lần", "Giảm 4 lần", "Tăng 4 lần"],
+                    correct: 0,
+                    explanation: "Trong môi trường có hằng số điện môi ε, lực tương tác giảm ε lần so với trong chân không."
+                }
+            ],
+            5: [
+                {
+                    question: "Điện tích của thanh thủy tinh khi cọ xát với lụa là:",
+                    options: ["Điện tích dương", "Điện tích âm", "Không mang điện", "Có thể dương hoặc âm"],
+                    correct: 0,
+                    explanation: "Theo quy ước, thanh thủy tinh khi cọ xát với lụa mang điện tích dương."
+                },
+                {
+                    question: "Các điện tích cùng dấu thì:",
+                    options: ["Hút nhau", "Đẩy nhau", "Không tương tác", "Lúc hút, lúc đẩy"],
+                    correct: 1,
+                    explanation: "Các điện tích cùng dấu đẩy nhau, khác dấu hút nhau."
+                },
+                {
+                    question: "Đơn vị của điện tích trong hệ SI là:",
+                    options: ["Newton (N)", "Coulomb (C)", "Volt (V)", "Ampe (A)"],
+                    correct: 1,
+                    explanation: "Trong hệ SI, đơn vị đo điện tích là Coulomb (C), lấy theo tên nhà vật lí Charles Coulomb."
+                },
+                {
+                    question: "Theo định luật Coulomb, lực tương tác giữa hai điện tích điểm có:",
+                    options: [
+                        "Phương trùng với đường thẳng nối hai điện tích",
+                        "Độ lớn tỉ lệ thuận với tích độ lớn hai điện tích",
+                        "Độ lớn tỉ lệ nghịch với bình phương khoảng cách",
+                        "Cả ba đáp án trên đều đúng"
+                    ],
+                    correct: 3,
+                    explanation: "Định luật Coulomb: Lực tương tác giữa hai điện tích điểm có phương trùng với đường thẳng nối hai điện tích điểm, có độ lớn tỉ lệ thuận với tích giá trị của hai điện tích điểm và tỉ lệ nghịch với bình phương khoảng cách giữa chúng."
+                },
+                {
+                    question: "Biểu thức định luật Coulomb cho hai điện tích điểm trong chân không là:",
+                    options: [
+                        "F = |q1.q2|/r",
+                        "F = |q1.q2|/r²",
+                        "F = k.|q1.q2|/r²",
+                        "Cả B và C đều đúng (với k là hằng số)"
+                    ],
+                    correct: 3,
+                    explanation: "Định luật Coulomb: F = k.|q1.q2|/r² với k = 9.10^9 Nm²/C² trong chân không."
+                },
+                {
+                    question: "Hằng số k trong định luật Coulomb có giá trị trong chân không là:",
+                    options: ["9.10^9 Nm²/C²", "9.10^9 C²/Nm²", "8,85.10^-12 Nm²/C²", "8,85.10^-12 C²/Nm²"],
+                    correct: 0,
+                    explanation: "Hằng số Coulomb k = 9.10^9 Nm²/C² trong chân không và không khí khô."
+                },
+                {
+                    question: "Nếu khoảng cách giữa hai điện tích điểm tăng lên 2 lần thì lực tương tác giữa chúng:",
+                    options: ["Tăng 2 lần", "Giảm 2 lần", "Tăng 4 lần", "Giảm 4 lần"],
+                    correct: 3,
+                    explanation: "Lực tương tác tỉ lệ nghịch với bình phương khoảng cách: F ∝ 1/r². Khi r tăng 2 lần thì F giảm 4 lần."
+                },
+                {
+                    question: "Nếu tăng khoảng cách giữa hai điện tích lên 3 lần thì lực tương tác giữa chúng:",
+                    options: ["Giảm 9 lần", "Tăng 9 lần", "Giảm 3 lần", "Tăng 3 lần"],
+                    correct: 0,
+                    explanation: "F ∝ 1/r². Khi r tăng 3 lần thì F giảm 3² = 9 lần."
+                },
+                {
+                    question: "Trong máy lọc bụi không khí, lưới lọc tĩnh điện hoạt động dựa trên:",
+                    options: [
+                        "Lực hút giữa các điện tích cùng dấu",
+                        "Lực hút giữa các điện tích khác dấu",
+                        "Lực đẩy giữa các điện tích cùng dấu",
+                        "Lực ma sát"
+                    ],
+                    correct: 1,
+                    explanation: "Lưới lọc tĩnh điện tạo điện tích để hút các hạt bụi mang điện tích trái dấu."
+                },
+                {
+                    question: "Hai quả cầu kim loại nhỏ tích điện cùng dấu, độ lớn 9,45.10^-7 C, đặt cách nhau 10 cm trong không khí. Lực tương tác giữa chúng là (lấy k=9.10^9 Nm²/C²):",
+                    options: ["0,8 N", "0,08 N", "0,008 N", "8 N"],
+                    correct: 0,
+                    explanation: "Theo bài tập ví dụ trong tài liệu, F ≈ 0,8 N."
+                }
+            ]
+        };
+
+        // Biến toàn cục
+        let currentTest = 1;
+        let userAnswers = {};
+        
+        // Khởi tạo trang
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTest(currentTest);
+            
+            // Xử lý sự kiện chọn đề
+            document.querySelectorAll('.test-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const testId = parseInt(this.getAttribute('data-test'));
+                    if (testId !== currentTest) {
+                        // Cập nhật nút active
+                        document.querySelectorAll('.test-btn').forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Tải đề mới
+                        currentTest = testId;
+                        loadTest(currentTest);
+                        
+                        // Ẩn kết quả
+                        document.getElementById('result').style.display = 'none';
+                    }
+                });
+            });
+            
+            // Xử lý nút nộp bài
+            document.getElementById('submit-btn').addEventListener('click', submitTest);
+            
+            // Xử lý nút làm lại
+            document.getElementById('reset-btn').addEventListener('click', function() {
+                loadTest(currentTest);
+                document.getElementById('result').style.display = 'none';
+            });
+        });
+        
+        // Tải đề trắc nghiệm
+        function loadTest(testId) {
+            const testContainer = document.getElementById('test-container');
+            const test = tests[testId];
+            userAnswers = {};
+            
+            // Tạo HTML cho đề
+            let html = '';
+            test.forEach((q, index) => {
+                html += `
+                <div class="question">
+                    <div class="question-number">
+                        <span>${index + 1}</span> Câu ${index + 1}
+                    </div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+                `;
+                
+                q.options.forEach((option, optIndex) => {
+                    html += `
+                    <div class="option" data-question="${index}" data-option="${optIndex}">
+                        <input type="radio" id="q${index}_opt${optIndex}" name="q${index}" value="${optIndex}">
+                        <label for="q${index}_opt${optIndex}">${option}</label>
+                    </div>
+                    `;
+                });
+                
+                html += `</div></div>`;
+            });
+            
+            testContainer.innerHTML = html;
+            
+            // Thêm sự kiện cho các lựa chọn
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const questionIndex = this.getAttribute('data-question');
+                    const optionIndex = this.getAttribute('data-option');
+                    
+                    // Bỏ chọn tất cả các option trong câu hỏi này
+                    document.querySelectorAll(`.option[data-question="${questionIndex}"]`).forEach(opt => {
+                        opt.classList.remove('selected');
+                        opt.querySelector('input').checked = false;
+                    });
+                    
+                    // Chọn option này
+                    this.classList.add('selected');
+                    this.querySelector('input').checked = true;
+                    
+                    // Lưu câu trả lời
+                    userAnswers[questionIndex] = parseInt(optionIndex);
+                });
+            });
+        }
+        
+        // Xử lý nộp bài
+        function submitTest() {
+            const test = tests[currentTest];
+            let score = 0;
+            let resultDetails = '';
+            
+            // Kiểm tra từng câu
+            test.forEach((q, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === q.correct;
+                
+                if (isCorrect) {
+                    score++;
+                }
+                
+                // Tạo chi tiết kết quả
+                resultDetails += `
+                <div class="question-result" style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #ddd;">
+                    <p><strong>Câu ${index + 1}:</strong> ${q.question}</p>
+                    <p>Đáp án của bạn: <span class="${isCorrect ? 'correct-answer' : 'wrong-answer'}">${q.options[userAnswer] || "Không trả lời"}</span></p>
+                    <p>Đáp án đúng: <span class="correct-answer">${q.options[q.correct]}</span></p>
+                    <div class="explanation">${q.explanation}</div>
+                </div>
+                `;
+            });
+            
+            // Hiển thị kết quả
+            document.getElementById('score').textContent = `${score}/${test.length}`;
+            document.getElementById('score-detail').textContent = `Bạn đã trả lời đúng ${score} trên ${test.length} câu hỏi`;
+            document.getElementById('result-details').innerHTML = resultDetails;
+            document.getElementById('result').style.display = 'block';
+            
+            // Cuộn đến kết quả
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
