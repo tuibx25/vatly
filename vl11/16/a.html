@@ -156,6 +156,13 @@
             cursor: pointer;
         }
         
+        .option-label {
+            font-weight: bold;
+            margin-right: 10px;
+            color: #2c3e50;
+            min-width: 25px;
+        }
+        
         .actions {
             display: flex;
             justify-content: space-between;
@@ -304,66 +311,66 @@
             1: [
                 {
                     question: "Có mấy loại điện tích?",
-                    options: ["1", "2", "3", "4"],
+                    options: ["A. 1", "B. 2", "C. 3", "D. 4"],
                     correct: 1,
                     explanation: "Có hai loại điện tích: điện tích dương và điện tích âm."
                 },
                 {
                     question: "Các điện tích cùng dấu thì:",
-                    options: ["Hút nhau", "Đẩy nhau", "Không tương tác", "Lúc hút, lúc đẩy"],
+                    options: ["A. Hút nhau", "B. Đẩy nhau", "C. Không tương tác", "D. Lúc hút, lúc đẩy"],
                     correct: 1,
                     explanation: "Các điện tích cùng dấu đẩy nhau, khác dấu hút nhau."
                 },
                 {
                     question: "Đơn vị của điện tích trong hệ SI là:",
-                    options: ["Newton (N)", "Coulomb (C)", "Volt (V)", "Ampe (A)"],
+                    options: ["A. Newton (N)", "B. Coulomb (C)", "C. Volt (V)", "D. Ampe (A)"],
                     correct: 1,
                     explanation: "Trong hệ SI, đơn vị đo điện tích là Coulomb (C), lấy theo tên nhà vật lí Charles Coulomb."
                 },
                 {
                     question: "Theo định luật Coulomb, lực tương tác giữa hai điện tích điểm có:",
                     options: [
-                        "Phương trùng với đường thẳng nối hai điện tích",
-                        "Độ lớn tỉ lệ thuận với tích độ lớn hai điện tích",
-                        "Độ lớn tỉ lệ nghịch với bình phương khoảng cách",
-                        "Cả ba đáp án trên đều đúng"
+                        "A. Phương trùng với đường thẳng nối hai điện tích",
+                        "B. Độ lớn tỉ lệ thuận với tích độ lớn hai điện tích",
+                        "C. Độ lớn tỉ lệ nghịch với bình phương khoảng cách",
+                        "D. Cả ba đáp án trên đều đúng"
                     ],
                     correct: 3,
                     explanation: "Định luật Coulomb: Lực tương tác giữa hai điện tích điểm có phương trùng với đường thẳng nối hai điện tích điểm, có độ lớn tỉ lệ thuận với tích giá trị của hai điện tích điểm và tỉ lệ nghịch với bình phương khoảng cách giữa chúng."
                 },
                 {
                     question: "Hằng số k trong định luật Coulomb có giá trị trong chân không là:",
-                    options: ["9.10^9 Nm²/C²", "9.10^9 C²/Nm²", "8,85.10^-12 Nm²/C²", "8,85.10^-12 C²/Nm²"],
+                    options: ["A. 9.10^9 Nm²/C²", "B. 9.10^9 C²/Nm²", "C. 8,85.10^-12 Nm²/C²", "D. 8,85.10^-12 C²/Nm²"],
                     correct: 0,
                     explanation: "Hằng số Coulomb k = 9.10^9 Nm²/C² trong chân không và không khí khô."
                 },
                 {
                     question: "Nếu khoảng cách giữa hai điện tích điểm tăng lên 2 lần thì lực tương tác giữa chúng:",
-                    options: ["Tăng 2 lần", "Giảm 2 lần", "Tăng 4 lần", "Giảm 4 lần"],
+                    options: ["A. Tăng 2 lần", "B. Giảm 2 lần", "C. Tăng 4 lần", "D. Giảm 4 lần"],
                     correct: 3,
                     explanation: "Lực tương tác tỉ lệ nghịch với bình phương khoảng cách: F ∝ 1/r². Khi r tăng 2 lần thì F giảm 4 lần."
                 },
                 {
                     question: "Hai điện tích điểm cùng độ lớn 10^-6 C, đặt trong chân không cách nhau 1 m thì lực tương tác giữa chúng có độ lớn là (lấy k=9.10^9 Nm²/C²):",
-                    options: ["9.10^9 N", "9.10^3 N", "9.10^-3 N", "9.10^-9 N"],
+                    options: ["A. 9.10^9 N", "B. 9.10^3 N", "C. 9.10^-3 N", "D. 9.10^-9 N"],
                     correct: 2,
                     explanation: "F = k.|q1.q2|/r² = 9.10^9 × (10^-6)² / 1² = 9.10^9 × 10^-12 = 9.10^-3 N"
                 },
                 {
                     question: "Nếu tăng khoảng cách giữa hai điện tích lên 3 lần thì lực tương tác giữa chúng:",
-                    options: ["Giảm 9 lần", "Tăng 9 lần", "Giảm 3 lần", "Tăng 3 lần"],
+                    options: ["A. Giảm 9 lần", "B. Tăng 9 lần", "C. Giảm 3 lần", "D. Tăng 3 lần"],
                     correct: 0,
                     explanation: "F ∝ 1/r². Khi r tăng 3 lần thì F giảm 3² = 9 lần."
                 },
                 {
                     question: "Sơn tĩnh điện là ứng dụng của:",
-                    options: ["Lực hấp dẫn", "Lực điện", "Lực từ", "Lực ma sát"],
+                    options: ["A. Lực hấp dẫn", "B. Lực điện", "C. Lực từ", "D. Lực ma sát"],
                     correct: 1,
                     explanation: "Sơn tĩnh điện ứng dụng lực điện: các hạt sơn mang điện dương bị vật mang điện âm hút vào."
                 },
                 {
                     question: "Hai quả cầu kim loại nhỏ tích điện cùng dấu, độ lớn 9,45.10^-7 C, đặt cách nhau 10 cm trong không khí. Lực tương tác giữa chúng là (lấy k=9.10^9 Nm²/C²):",
-                    options: ["0,8 N", "0,08 N", "0,008 N", "8 N"],
+                    options: ["A. 0,8 N", "B. 0,08 N", "C. 0,008 N", "D. 8 N"],
                     correct: 0,
                     explanation: "Theo bài tập ví dụ trong tài liệu, F ≈ 0,8 N."
                 }
@@ -371,23 +378,23 @@
             2: [
                 {
                     question: "Điện tích của thanh thủy tinh khi cọ xát với lụa là:",
-                    options: ["Điện tích dương", "Điện tích âm", "Không mang điện", "Có thể dương hoặc âm"],
+                    options: ["A. Điện tích dương", "B. Điện tích âm", "C. Không mang điện", "D. Có thể dương hoặc âm"],
                     correct: 0,
                     explanation: "Theo quy ước, thanh thủy tinh khi cọ xát với lụa mang điện tích dương."
                 },
                 {
                     question: "Các điện tích khác dấu thì:",
-                    options: ["Hút nhau", "Đẩy nhau", "Không tương tác", "Lúc hút, lúc đẩy"],
+                    options: ["A. Hút nhau", "B. Đẩy nhau", "C. Không tương tác", "D. Lúc hút, lúc đẩy"],
                     correct: 0,
                     explanation: "Các điện tích cùng dấu đẩy nhau, khác dấu hút nhau."
                 },
                 {
                     question: "Điện tích điểm là:",
                     options: [
-                        "Điểm không có kích thước",
-                        "Vật tích điện có kích thước nhỏ so với khoảng cách tới điểm xét",
-                        "Điểm có điện tích rất nhỏ",
-                        "Điểm tại đó điện tích bằng 0"
+                        "A. Điểm không có kích thước",
+                        "B. Vật tích điện có kích thước nhỏ so với khoảng cách tới điểm xét",
+                        "C. Điểm có điện tích rất nhỏ",
+                        "D. Điểm tại đó điện tích bằng 0"
                     ],
                     correct: 1,
                     explanation: "Điện tích điểm là vật tích điện có kích thước nhỏ so với khoảng cách tới điểm mà ta xét."
@@ -395,52 +402,52 @@
                 {
                     question: "Biểu thức định luật Coulomb cho hai điện tích điểm trong chân không là:",
                     options: [
-                        "F = |q1.q2|/r",
-                        "F = |q1.q2|/r²",
-                        "F = k.|q1.q2|/r²",
-                        "Cả B và C đều đúng (với k là hằng số)"
+                        "A. F = |q1.q2|/r",
+                        "B. F = |q1.q2|/r²",
+                        "C. F = k.|q1.q2|/r²",
+                        "D. Cả B và C đều đúng (với k là hằng số)"
                     ],
                     correct: 3,
                     explanation: "Định luật Coulomb: F = k.|q1.q2|/r² với k = 9.10^9 Nm²/C² trong chân không."
                 },
                 {
                     question: "Hằng số điện môi ε0 có giá trị xấp xỉ:",
-                    options: ["8,85.10^-12 C²/Nm²", "9.10^9 Nm²/C²", "1,6.10^-19 C", "6,67.10^-11 Nm²/kg²"],
+                    options: ["A. 8,85.10^-12 C²/Nm²", "B. 9.10^9 Nm²/C²", "C. 1,6.10^-19 C", "D. 6,67.10^-11 Nm²/kg²"],
                     correct: 0,
                     explanation: "Hằng số điện ε0 = 8,85.10^-12 C²/Nm²."
                 },
                 {
                     question: "Nếu độ lớn của mỗi điện tích điểm tăng lên 2 lần và khoảng cách giữa chúng cũng tăng 2 lần thì lực tương tác giữa chúng:",
-                    options: ["Không đổi", "Tăng 2 lần", "Giảm 2 lần", "Giảm 4 lần"],
+                    options: ["A. Không đổi", "B. Tăng 2 lần", "C. Giảm 2 lần", "D. Giảm 4 lần"],
                     correct: 0,
                     explanation: "F ∝ |q1.q2|/r². Khi q1, q2 tăng 2 lần (tích tăng 4 lần) và r tăng 2 lần (r² tăng 4 lần) thì F không đổi."
                 },
                 {
                     question: "Hai điện tích điểm q1=2.10^-6 C, q2=-2.10^-6 C đặt cách nhau 0,1 m trong không khí. Lực tương tác giữa chúng là:",
-                    options: ["3,6 N, hút nhau", "3,6 N, đẩy nhau", "1,8 N, hút nhau", "1,8 N, đẩy nhau"],
+                    options: ["A. 3,6 N, hút nhau", "B. 3,6 N, đẩy nhau", "C. 1,8 N, hút nhau", "D. 1,8 N, đẩy nhau"],
                     correct: 0,
                     explanation: "F = k.|q1.q2|/r² = 9.10^9 × |2.10^-6 × (-2.10^-6)| / (0,1)² = 9.10^9 × 4.10^-12 / 0,01 = 3,6 N. Vì khác dấu nên hút nhau."
                 },
                 {
                     question: "Nếu giảm khoảng cách giữa hai điện tích xuống 2 lần thì lực tương tác giữa chúng:",
-                    options: ["Tăng 4 lần", "Giảm 4 lần", "Tăng 2 lần", "Giảm 2 lần"],
+                    options: ["A. Tăng 4 lần", "B. Giảm 4 lần", "C. Tăng 2 lần", "D. Giảm 2 lần"],
                     correct: 0,
                     explanation: "F ∝ 1/r². Khi r giảm 2 lần thì F tăng 2² = 4 lần."
                 },
                 {
                     question: "Trong máy lọc bụi không khí, lưới lọc tĩnh điện hoạt động dựa trên:",
                     options: [
-                        "Lực hút giữa các điện tích cùng dấu",
-                        "Lực hút giữa các điện tích khác dấu",
-                        "Lực đẩy giữa các điện tích cùng dấu",
-                        "Lực ma sát"
+                        "A. Lực hút giữa các điện tích cùng dấu",
+                        "B. Lực hút giữa các điện tích khác dấu",
+                        "C. Lực đẩy giữa các điện tích cùng dấu",
+                        "D. Lực ma sát"
                     ],
                     correct: 1,
                     explanation: "Lưới lọc tĩnh điện tạo điện tích để hút các hạt bụi mang điện tích trái dấu."
                 },
                 {
                     question: "Nếu khoảng cách giữa hai quả cầu tích điện tăng từ 10 cm lên 20 cm thì lực tương tác sẽ:",
-                    options: ["Giảm 4 lần", "Tăng 4 lần", "Giảm 2 lần", "Tăng 2 lần"],
+                    options: ["A. Giảm 4 lần", "B. Tăng 4 lần", "C. Giảm 2 lần", "D. Tăng 2 lần"],
                     correct: 0,
                     explanation: "Lực điện tỉ lệ nghịch với bình phương khoảng cách. Khoảng cách tăng 2 lần thì lực giảm 4 lần."
                 }
@@ -448,29 +455,29 @@
             3: [
                 {
                     question: "Điện tích của thanh nhựa khi cọ xát với len là:",
-                    options: ["Điện tích dương", "Điện tích âm", "Không mang điện", "Có thể dương hoặc âm"],
+                    options: ["A. Điện tích dương", "B. Điện tích âm", "C. Không mang điện", "D. Có thể dương hoặc âm"],
                     correct: 1,
                     explanation: "Theo quy ước, thanh nhựa khi cọ xát với len mang điện tích âm."
                 },
                 {
                     question: "Lực tương tác giữa hai điện tích còn được gọi là:",
-                    options: ["Lực hấp dẫn", "Lực điện từ", "Lực điện", "Lực ma sát"],
+                    options: ["A. Lực hấp dẫn", "B. Lực điện từ", "C. Lực điện", "D. Lực ma sát"],
                     correct: 2,
                     explanation: "Lực hút, đẩy giữa các điện tích được gọi chung là lực tương tác giữa các điện tích (thường gọi tắt là lực điện)."
                 },
                 {
                     question: "Nhà vật lí nào đã tìm ra định luật về lực tương tác giữa các điện tích?",
-                    options: ["Newton", "Coulomb", "Ohm", "Faraday"],
+                    options: ["A. Newton", "B. Coulomb", "C. Ohm", "D. Faraday"],
                     correct: 1,
                     explanation: "Charles Coulomb (1736-1806), nhà vật lí người Pháp, đã tìm ra định luật về lực tương tác giữa các điện tích."
                 },
                 {
                     question: "Trong công thức F = k.|q1.q2|/r², r là:",
                     options: [
-                        "Khoảng cách giữa hai điện tích",
-                        "Bán kính của điện tích",
-                        "Đường kính của điện tích",
-                        "Khoảng cách từ điện tích đến điểm quan sát"
+                        "A. Khoảng cách giữa hai điện tích",
+                        "B. Bán kính của điện tích",
+                        "C. Đường kính của điện tích",
+                        "D. Khoảng cách từ điện tích đến điểm quan sát"
                     ],
                     correct: 0,
                     explanation: "r là khoảng cách giữa hai điện tích điểm."
@@ -478,41 +485,41 @@
                 {
                     question: "Định luật Coulomb áp dụng được cho trường hợp nào?",
                     options: [
-                        "Hai điện tích điểm",
-                        "Hai quả cầu tích điện kích thước nhỏ so với khoảng cách giữa chúng",
-                        "Cả A và B",
-                        "Chỉ cho điện tích dương"
+                        "A. Hai điện tích điểm",
+                        "B. Hai quả cầu tích điện kích thước nhỏ so với khoảng cách giữa chúng",
+                        "C. Cả A và B",
+                        "D. Chỉ cho điện tích dương"
                     ],
                     correct: 2,
                     explanation: "Định luật Coulomb áp dụng cho hai điện tích điểm hoặc hai quả cầu tích điện có kích thước nhỏ so với khoảng cách giữa chúng."
                 },
                 {
                     question: "Trong nguyên tử hydrogen, electron và proton cách nhau 5.10^-11 m. Điện tích của chúng cùng độ lớn 1,6.10^-19 C. Lực tương tác điện giữa chúng là:",
-                    options: ["9,2.10^-8 N", "9,2.10^-10 N", "9,2.10^-12 N", "9,2.10^-14 N"],
+                    options: ["A. 9,2.10^-8 N", "B. 9,2.10^-10 N", "C. 9,2.10^-12 N", "D. 9,2.10^-14 N"],
                     correct: 0,
                     explanation: "F = k.|q1.q2|/r² = 9.10^9 × (1,6.10^-19)² / (5.10^-11)² ≈ 9,2.10^-8 N"
                 },
                 {
                     question: "Hai điện tích điểm q1 và q2 đặt cách nhau một khoảng r. Nếu giảm điện tích q1 đi 2 lần và tăng điện tích q2 lên 4 lần, đồng thời tăng khoảng cách lên 2 lần thì lực tương tác sẽ:",
-                    options: ["Không đổi", "Tăng 2 lần", "Giảm 2 lần", "Tăng 4 lần"],
+                    options: ["A. Không đổi", "B. Tăng 2 lần", "C. Giảm 2 lần", "D. Tăng 4 lần"],
                     correct: 2,
                     explanation: "F ∝ |q1.q2|/r². Sau khi thay đổi: F' ∝ (q1/2 × 4q2)/(2r)² = (2q1q2)/(4r²) = (1/2)(q1q2/r²) = F/2. Vậy lực giảm 2 lần."
                 },
                 {
                     question: "Trong thí nghiệm Coulomb, khi hai quả cầu tích điện cùng dấu, chúng sẽ:",
-                    options: ["Hút nhau", "Đẩy nhau", "Không tương tác", "Dao động"],
+                    options: ["A. Hút nhau", "B. Đẩy nhau", "C. Không tương tác", "D. Dao động"],
                     correct: 1,
                     explanation: "Các điện tích cùng dấu đẩy nhau."
                 },
                 {
                     question: "Nếu đưa hai quả cầu tích điện về khoảng cách 10 cm và giảm điện tích một quả cầu đi một nửa thì lực tương tác sẽ:",
-                    options: ["Giảm 2 lần", "Tăng 2 lần", "Giảm 4 lần", "Tăng 4 lần"],
+                    options: ["A. Giảm 2 lần", "B. Tăng 2 lần", "C. Giảm 4 lần", "D. Tăng 4 lần"],
                     correct: 0,
                     explanation: "Lực điện tỉ lệ thuận với tích của q1 và q2. Khi một điện tích giảm một nửa thì lực cũng giảm một nửa."
                 },
                 {
                     question: "Điện tích điểm q1=15 μC, q2=-6 μC đặt cách nhau 0,2 m trong không khí. Độ lớn lực tương tác giữa chúng là (1 μC=10^-6 C):",
-                    options: ["20,25 N", "2,025 N", "202,5 N", "0,2025 N"],
+                    options: ["A. 20,25 N", "B. 2,025 N", "C. 202,5 N", "D. 0,2025 N"],
                     correct: 0,
                     explanation: "F = k.|q1.q2|/r² = 9.10^9 × |15×10^-6 × (-6×10^-6)| / (0,2)² = 9.10^9 × 90×10^-12 / 0,04 = 20,25 N"
                 }
@@ -520,61 +527,61 @@
             4: [
                 {
                     question: "Có mấy loại điện tích theo quy ước hiện đại?",
-                    options: ["1", "2", "3", "4"],
+                    options: ["A. 1", "B. 2", "C. 3", "D. 4"],
                     correct: 1,
                     explanation: "Theo quy ước hiện đại, có hai loại điện tích: điện tích dương và điện tích âm."
                 },
                 {
                     question: "Dụng cụ Coulomb dùng để đo lực tương tác điện là:",
-                    options: ["Cân xoắn", "Lực kế", "Điện kế", "Vôn kế"],
+                    options: ["A. Cân xoắn", "B. Lực kế", "C. Điện kế", "D. Vôn kế"],
                     correct: 0,
                     explanation: "Coulomb dùng cân xoắn để xác định mối liên hệ giữa độ lớn lực tương tác giữa hai quả cầu tích điện với điện tích và khoảng cách giữa chúng."
                 },
                 {
                     question: "Trong môi trường nào sau đây, lực tương tác giữa hai điện tích là lớn nhất?",
-                    options: ["Chân không", "Không khí khô", "Nước tinh khiết", "Dầu hỏa"],
+                    options: ["A. Chân không", "B. Không khí khô", "C. Nước tinh khiết", "D. Dầu hỏa"],
                     correct: 0,
                     explanation: "Lực tương tác trong chân không là lớn nhất. Không khí khô có tính chất điện gần giống chân không."
                 },
                 {
                     question: "Khi đặt hai điện tích điểm trong môi trường có hằng số điện môi ε thì lực tương tác so với trong chân không sẽ:",
-                    options: ["Tăng ε lần", "Giảm ε lần", "Không đổi", "Tăng ε² lần"],
+                    options: ["A. Tăng ε lần", "B. Giảm ε lần", "C. Không đổi", "D. Tăng ε² lần"],
                     correct: 1,
                     explanation: "Trong môi trường có hằng số điện môi ε, lực tương tác F = k.|q1.q2|/(ε.r²), nhỏ hơn ε lần so với trong chân không."
                 },
                 {
                     question: "Hai điện tích điểm cùng độ lớn 2.10^-6 C, đặt trong chân không cách nhau 0,5 m thì lực tương tác giữa chúng có độ lớn là (lấy k=9.10^9 Nm²/C²):",
-                    options: ["0,144 N", "0,0144 N", "1,44 N", "14,4 N"],
+                    options: ["A. 0,144 N", "B. 0,0144 N", "C. 1,44 N", "D. 14,4 N"],
                     correct: 0,
                     explanation: "F = k.|q1.q2|/r² = 9.10^9 × (2.10^-6)² / (0,5)² = 9.10^9 × 4.10^-12 / 0,25 = 0,144 N"
                 },
                 {
                     question: "Hai điện tích điểm q1=3.10^-6 C, q2=-4.10^-6 C đặt cách nhau 0,2 m trong không khí. Lực tương tác giữa chúng là:",
-                    options: ["2,7 N, hút nhau", "2,7 N, đẩy nhau", "1,35 N, hút nhau", "1,35 N, đẩy nhau"],
+                    options: ["A. 2,7 N, hút nhau", "B. 2,7 N, đẩy nhau", "C. 1,35 N, hút nhau", "D. 1,35 N, đẩy nhau"],
                     correct: 0,
                     explanation: "F = 9.10^9 × |3.10^-6 × (-4.10^-6)| / (0,2)² = 9.10^9 × 12.10^-12 / 0,04 = 2,7 N. Vì khác dấu nên hút nhau."
                 },
                 {
                     question: "Trong nguyên tử Helium, hai proton cách nhau khoảng 3.10^-15 m. Điện tích của chúng cùng độ lớn 1,6.10^-19 C. Lực tương tác điện giữa chúng là:",
-                    options: ["25,6 N", "25,6.10^3 N", "25,6.10^6 N", "25,6.10^9 N"],
+                    options: ["A. 25,6 N", "B. 25,6.10^3 N", "C. 25,6.10^6 N", "D. 25,6.10^9 N"],
                     correct: 1,
                     explanation: "F = k.|q1.q2|/r² = 9.10^9 × (1,6.10^-19)² / (3.10^-15)² ≈ 25,6.10^3 N"
                 },
                 {
                     question: "Trong công nghệ in phun, các giọt mực được điều khiển bằng:",
-                    options: ["Lực hấp dẫn", "Lực điện", "Lực từ", "Lực ma sát"],
+                    options: ["A. Lực hấp dẫn", "B. Lực điện", "C. Lực từ", "D. Lực ma sát"],
                     correct: 1,
                     explanation: "Công nghệ in phun sử dụng lực điện để điều khiển hướng bay của các giọt mực."
                 },
                 {
                     question: "Khi hai vật tích điện trái dấu tiếp xúc nhau, có thể xảy ra hiện tượng:",
-                    options: ["Phóng điện", "Từ hóa", "Nhiễm từ", "Quang điện"],
+                    options: ["A. Phóng điện", "B. Từ hóa", "C. Nhiễm từ", "D. Quang điện"],
                     correct: 0,
                     explanation: "Khi hai vật tích điện trái dấu tiếp xúc nhau, có thể xảy ra hiện tượng phóng điện do sự trung hòa điện tích."
                 },
                 {
                     question: "Nếu đặt hai điện tích trong nước cất (hằng số điện môi ε=81) thì lực tương tác sẽ so với trong chân không:",
-                    options: ["Giảm 81 lần", "Tăng 81 lần", "Giảm 9 lần", "Tăng 9 lần"],
+                    options: ["A. Giảm 81 lần", "B. Tăng 81 lần", "C. Giảm 9 lần", "D. Tăng 9 lần"],
                     correct: 0,
                     explanation: "Trong môi trường có hằng số điện môi ε, lực tương tác giảm ε lần so với trong chân không."
                 }
@@ -582,66 +589,66 @@
             5: [
                 {
                     question: "Theo quy ước, điện tích của electron là:",
-                    options: ["Dương", "Âm", "Trung hòa", "Có thể dương hoặc âm"],
+                    options: ["A. Dương", "B. Âm", "C. Trung hòa", "D. Có thể dương hoặc âm"],
                     correct: 1,
                     explanation: "Theo quy ước, electron mang điện tích âm, proton mang điện tích dương."
                 },
                 {
                     question: "Hai vật nhiễm điện cùng loại (cùng dấu) thì:",
-                    options: ["Hút nhau", "Đẩy nhau", "Không tương tác", "Trao đổi điện tích"],
+                    options: ["A. Hút nhau", "B. Đẩy nhau", "C. Không tương tác", "D. Trao đổi điện tích"],
                     correct: 1,
                     explanation: "Các vật nhiễm điện cùng loại (cùng dấu) sẽ đẩy nhau."
                 },
                 {
                     question: "Giá trị điện tích nguyên tố (điện tích của electron) là:",
-                    options: ["1,6.10^-19 C", "9.10^9 C", "6,67.10^-11 C", "8,85.10^-12 C"],
+                    options: ["A. 1,6.10^-19 C", "B. 9.10^9 C", "C. 6,67.10^-11 C", "D. 8,85.10^-12 C"],
                     correct: 0,
                     explanation: "Điện tích nguyên tố e = 1,6.10^-19 C, là điện tích nhỏ nhất tồn tại độc lập."
                 },
                 {
                     question: "Công thức tính độ lớn lực Coulomb giữa hai điện tích điểm đứng yên trong chân không là:",
                     options: [
-                        "F = k.q1.q2/r",
-                        "F = k.|q1.q2|/r",
-                        "F = k.q1.q2/r²",
-                        "F = k.|q1.q2|/r²"
+                        "A. F = k.q1.q2/r",
+                        "B. F = k.|q1.q2|/r",
+                        "C. F = k.q1.q2/r²",
+                        "D. F = k.|q1.q2|/r²"
                     ],
                     correct: 3,
                     explanation: "Công thức tính độ lớn lực Coulomb: F = k.|q1.q2|/r² với k = 9.10^9 Nm²/C²."
                 },
                 {
                     question: "Trong công thức F = k.|q1.q2|/(ε.r²), ε được gọi là:",
-                    options: ["Hằng số điện", "Hằng số điện môi", "Hệ số ma sát", "Hệ số dẫn điện"],
+                    options: ["A. Hằng số điện", "B. Hằng số điện môi", "C. Hệ số ma sát", "D. Hệ số dẫn điện"],
                     correct: 1,
                     explanation: "ε là hằng số điện môi của môi trường, đặc trưng cho khả năng làm giảm lực tương tác điện so với chân không."
                 },
                 {
                     question: "Nếu giảm đồng thời khoảng cách giữa hai điện tích đi 3 lần và tăng một điện tích lên 3 lần thì lực tương tác sẽ:",
-                    options: ["Tăng 27 lần", "Giảm 27 lần", "Tăng 9 lần", "Không đổi"],
+                    options: ["A. Tăng 27 lần", "B. Giảm 27 lần", "C. Tăng 9 lần", "D. Không đổi"],
                     correct: 0,
                     explanation: "F ∝ |q1.q2|/r². Khi r giảm 3 lần (r² giảm 9 lần) và q1 tăng 3 lần thì F tăng 3×9=27 lần."
                 },
                 {
                     question: "Hai điện tích điểm q1=5.10^-9 C, q2=-5.10^-9 C đặt cách nhau 0,1 m trong không khí. Lực tương tác giữa chúng là:",
-                    options: ["2,25.10^-5 N, hút nhau", "2,25.10^-5 N, đẩy nhau", "4,5.10^-5 N, hút nhau", "4,5.10^-5 N, đẩy nhau"],
+                    options: ["A. 2,25.10^-5 N, hút nhau", "B. 2,25.10^-5 N, đẩy nhau", "C. 4,5.10^-5 N, hút nhau", "D. 4,5.10^-5 N, đẩy nhau"],
                     correct: 0,
                     explanation: "F = 9.10^9 × |5.10^-9 × (-5.10^-9)| / (0,1)² = 9.10^9 × 25.10^-18 / 0,01 = 2,25.10^-5 N. Vì khác dấu nên hút nhau."
                 },
                 {
                     question: "Trong hiện tượng sét, sự phóng điện giữa đám mây và mặt đất liên quan đến:",
-                    options: ["Lực hấp dẫn", "Lực điện", "Lực từ", "Lực hạt nhân"],
+                    options: ["A. Lực hấp dẫn", "B. Lực điện", "C. Lực từ", "D. Lực hạt nhân"],
                     correct: 1,
                     explanation: "Sét là hiện tượng phóng điện trong khí quyển do sự tích điện trái dấu giữa các đám mây và mặt đất."
                 },
                 {
                     question: "Điện tích của một vật là 6,4.10^-19 C. Số electron thừa hoặc thiếu trên vật đó là:",
-                    options: ["4 electron thừa", "4 electron thiếu", "10 electron thừa", "10 electron thiếu"],
+                    options: ["A. 4 electron thừa", "B. 4 electron thiếu", "C. 10 electron thừa", "D. 10 electron thiếu"],
                     correct: 0,
                     explanation: "Số electron = Q/e = 6,4.10^-19 / 1,6.10^-19 = 4. Vì điện tích dương nên vật thiếu 4 electron."
                 },
                 {
                     question: "Hai quả cầu kim loại nhỏ tích điện trái dấu, độ lớn 3,2.10^-7 C, đặt cách nhau 8 cm trong không khí. Lực tương tác giữa chúng là (lấy k=9.10^9 Nm²/C²):",
-                    options: ["0,144 N", "0,0144 N", "1,44 N", "14,4 N"],
+                    options: ["A. 0,144 N", "B. 0,0144 N", "C. 1,44 N", "D. 14,4 N"],
                     correct: 1,
                     explanation: "F = 9.10^9 × (3,2.10^-7)² / (0,08)² = 9.10^9 × 10,24.10^-14 / 0,0064 = 0,0144 N"
                 }
@@ -704,10 +711,12 @@
                 `;
                 
                 q.options.forEach((option, optIndex) => {
+                    const optionLetter = String.fromCharCode(65 + optIndex); // A, B, C, D
                     html += `
                     <div class="option" data-question="${index}" data-option="${optIndex}">
                         <input type="radio" id="q${index}_opt${optIndex}" name="q${index}" value="${optIndex}">
-                        <label for="q${index}_opt${optIndex}">${option}</label>
+                        <div class="option-label">${optionLetter}.</div>
+                        <label for="q${index}_opt${optIndex}">${option.substring(3)}</label>
                     </div>
                     `;
                 });
