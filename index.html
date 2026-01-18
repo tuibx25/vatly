@@ -3,554 +3,421 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Chủ Bài Tập Vật Lý</title>
-    <!-- Favicon -->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Bài Tập Vật Lý Online</title>
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/favicon.ico" type="image/x-icon">
     <style>
+        /* Reset và font chữ */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none;
         }
         
         body {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
             color: #333;
+            background-color: #f5f9fc;
             min-height: 100vh;
-            padding: 20px;
             display: flex;
             flex-direction: column;
-            align-items: center;
+        }
+        
+        /* Bảo mật - chống copy và chọn */
+        body::selection {
+            background-color: transparent;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         
         .container {
+            width: 90%;
             max-width: 1200px;
-            width: 100%;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
         }
         
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 20px;
-            border-radius: 15px;
-            background-color: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            width: 100%;
-        }
-        
-        h1 {
-            color: #2575fc;
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        .subtitle {
-            color: #555;
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-        
-        /* Sitemap Styles */
-        .sitemap {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            padding: 15px 25px;
-            margin-bottom: 30px;
-            width: 100%;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .sitemap-links {
+        .header-content {
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        .sitemap-link {
-            background: linear-gradient(to right, #6a11cb, #2575fc);
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #2980b9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        nav a {
             color: white;
-            padding: 10px 20px;
-            border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1rem;
+            padding: 8px 15px;
+            border-radius: 5px;
             transition: all 0.3s ease;
-            box-shadow: 0 3px 8px rgba(106, 17, 203, 0.3);
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            position: relative;
         }
         
-        .sitemap-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 12px rgba(106, 17, 203, 0.4);
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
         }
         
-        .sitemap-link.active {
-            background: linear-gradient(to right, #2575fc, #6a11cb);
-            box-shadow: 0 3px 8px rgba(37, 117, 252, 0.4);
+        nav a.active {
+            background-color: rgba(255, 255, 255, 0.2);
         }
         
-        .sitemap-separator {
-            color: #666;
-            display: flex;
-            align-items: center;
-            padding: 0 5px;
-            font-weight: bold;
+        /* Main content */
+        main {
+            flex: 1;
+            padding: 2rem 0;
         }
         
-        .links-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            margin-bottom: 40px;
-            width: 100%;
-        }
-        
-        .link-card {
-            background-color: white;
-            border-radius: 15px;
-            padding: 30px 25px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .page-title {
             text-align: center;
-            cursor: pointer;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+            font-size: 2.2rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #3498db, #2ecc71);
+            border-radius: 2px;
+        }
+        
+        /* Cards for chapters */
+        .chapters-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 2rem;
+        }
+        
+        .chapter-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-top: 5px solid #3498db;
             position: relative;
             overflow: hidden;
         }
         
-        .link-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+        .chapter-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
         }
         
-        .link-card:before {
+        .chapter-card.vl10 {
+            border-top-color: #3498db;
+        }
+        
+        .chapter-card.vl11 {
+            border-top-color: #2ecc71;
+        }
+        
+        .chapter-card.vl12 {
+            border-top-color: #f39c12;
+        }
+        
+        .chapter-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 5px;
-            background: linear-gradient(to right, #6a11cb, #2575fc);
+            background: linear-gradient(to right, #3498db, #2ecc71);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
         }
         
-        .link-icon {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            color: #2575fc;
-            height: 80px;
-            width: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background-color: rgba(37, 117, 252, 0.1);
+        .chapter-card:hover::before {
+            transform: scaleX(1);
         }
         
-        .link-title {
-            font-size: 1.8rem;
-            color: #333;
-            margin-bottom: 10px;
+        .chapter-number {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #7f8c8d;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .chapter-title {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
             font-weight: 700;
         }
         
-        .link-desc {
-            color: #666;
-            margin-bottom: 25px;
-            line-height: 1.5;
-            flex-grow: 1;
+        .chapter-list {
+            list-style-type: none;
+            margin-top: 15px;
         }
         
-        .btn {
-            display: inline-block;
-            background: linear-gradient(to right, #6a11cb, #2575fc);
-            color: white;
-            padding: 12px 28px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(106, 17, 203, 0.3);
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(106, 17, 203, 0.4);
-        }
-        
-        .btn i {
-            margin-left: 8px;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            color: white;
-            width: 100%;
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-        
-        .footer-text {
-            background-color: rgba(0, 0, 0, 0.2);
-            padding: 15px;
-            border-radius: 10px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .instructions {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 40px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            width: 100%;
-            max-width: 800px;
-        }
-        
-        .instructions h2 {
-            color: #2575fc;
-            margin-bottom: 15px;
-            font-size: 1.8rem;
-        }
-        
-        .instructions p {
-            margin-bottom: 10px;
-            line-height: 1.6;
-            color: #555;
-        }
-        
-        .instructions ul {
-            padding-left: 20px;
-            margin-bottom: 15px;
-        }
-        
-        .instructions li {
-            margin-bottom: 8px;
-            line-height: 1.5;
-        }
-        
-        /* Container cho thẻ Túi Tài Liệu */
-        .center-container {
+        .chapter-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f1f1;
             display: flex;
-            justify-content: center;
-            margin-top: 30px;
-            margin-bottom: 40px;
-            width: 100%;
+            align-items: center;
         }
         
-        /* Thẻ Túi Tài Liệu đặc biệt */
-        .special-card {
-            width: 100%;
-            max-width: 700px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            border: 3px solid #2575fc;
+        .chapter-list li:last-child {
+            border-bottom: none;
         }
         
-        .special-card .link-title {
-            color: #2575fc;
+        .chapter-list li::before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-right: 10px;
+            font-size: 1.2rem;
         }
         
-        .special-card .link-icon {
-            background-color: rgba(37, 117, 252, 0.2);
-            color: #6a11cb;
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            margin-top: auto;
+            text-align: center;
         }
         
-        /* Hiệu ứng đặc biệt cho thẻ Túi Tài Liệu */
-        .special-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(37, 117, 252, 0.3);
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
         }
         
-        @media (max-width: 992px) {
-            .links-container {
-                grid-template-columns: repeat(2, 1fr);
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
             }
             
-            .special-card {
-                max-width: 600px;
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
             }
-        }
-        
-        @media (max-width: 768px) {
-            .links-container {
+            
+            .chapters-container {
                 grid-template-columns: 1fr;
             }
             
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            .subtitle {
-                font-size: 1rem;
-            }
-            
-            .link-card {
-                padding: 25px 20px;
-            }
-            
-            .special-card {
-                max-width: 100%;
-            }
-            
-            .sitemap-links {
-                flex-direction: column;
-                gap: 8px;
-                align-items: center;
-            }
-            
-            .sitemap-separator {
-                display: none;
-            }
-            
-            .sitemap-link {
-                justify-content: center;
-                text-align: center;
-                width: 90%;
+            .page-title {
+                font-size: 1.8rem;
             }
         }
         
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.8rem;
+        /* Chống in trang */
+        @media print {
+            body * {
+                visibility: hidden;
             }
-            
-            .link-title {
-                font-size: 1.5rem;
-            }
-            
-            .container {
-                padding: 10px;
-            }
-            
-            .sitemap {
-                padding: 12px 15px;
-            }
+        }
+        
+        /* Bảo mật - chống xem mã nguồn */
+        .security-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1><i class="fas fa-book-open"></i> Bài Tập Vật Lý</h1>
-            <p class="subtitle">Trang web cung cấp các liên kết đến tài liệu và bài tập Vật Lý từ lớp 10 đến lớp 12, cùng với công cụ hỗ trợ học tập.</p>
-        </header>
-        
-        <!-- Sitemap Section -->
-        <div class="sitemap">
-            <div class="sitemap-links">
-                <a href="./" class="sitemap-link active">
-                    <i class="fas fa-home"></i> Trang chủ
-                </a>
-                <div class="sitemap-separator">|</div>
-                <a href="vl10" class="sitemap-link">
-                    <i class="fas fa-atom"></i> Vật Lý 10
-                </a>
-                <div class="sitemap-separator">|</div>
-                <a href="vl11" class="sitemap-link">
-                    <i class="fas fa-magnet"></i> Vật Lý 11
-                </a>
-                <div class="sitemap-separator">|</div>
-                <a href="vl12" class="sitemap-link">
-                    <i class="fas fa-lightbulb"></i> Vật Lý 12
-                </a>
-                <div class="sitemap-separator">|</div>
-                <a href="tui" class="sitemap-link">
-                    <i class="fas fa-toolbox"></i> Túi Tài Liệu
-                </a>
+    <!-- Bảo mật: Chống xem mã nguồn -->
+    <div class="security-overlay" oncontextmenu="return false;" onkeydown="if(event.keyCode==123){return false;}" onselectstart="return false"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">⚛</div>
+                    <h1>Bài Tập Vật Lý Online</h1>
+                </div>
+                
+                <nav>
+                    <ul>
+                        <li><a href="/" class="active">Trang chủ</a></li>
+                        <li><a href="/vl10">Vật Lý 10</a></li>
+                        <li><a href="/vl11">Vật Lý 11</a></li>
+                        <li><a href="/vl12">Vật Lý 12</a></li>
+                        <li><a href="/tui">Tài khoản</a></li>
+                        <li><a href="/info">Thông tin</a></li>
+                    </ul>
+                </nav>
             </div>
         </div>
-        
-        <div class="links-container">
-            <div class="link-card" onclick="window.location.href='vl10';">
-                <div class="link-icon">
-                    <i class="fas fa-atom"></i>
-                </div>
-                <h2 class="link-title">Vật Lý 10</h2>
-                <p class="link-desc">Chương I: Mở đầu<br>Chương II: Động học<br>Chương III: Động lực học<br>Chương IV: Năng lượng, công, công suất<br>Chương V: Động lượng<br>Chương VI: Chuyển động tròn<br>Chương VII: Biến dạng của vật rắn. Áp suất chất lỏng</p>
-                <a href="vl10" class="btn">Truy cập <i class="fas fa-arrow-right"></i></a>
-            </div>
+    </header>
+    
+    <!-- Main content -->
+    <main>
+        <div class="container">
+            <h1 class="page-title">Chào mừng đến với Bài Tập Vật Lý Online</h1>
             
-            <div class="link-card" onclick="window.location.href='vl11';">
-                <div class="link-icon">
-                    <i class="fas fa-magnet"></i>
-                </div>
-                <h2 class="link-title">Vật Lý 11</h2>
-                <p class="link-desc">Chương 1: Dao động<br>Chương 2: Sóng<br>Chương 3: Điện trường<br>Chương 4: Dòng điện. Mạch điện</p>
-                <a href="vl11" class="btn">Truy cập <i class="fas fa-arrow-right"></i></a>
-            </div>
+            <p style="text-align: center; margin-bottom: 2rem; font-size: 1.1rem; color: #555; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Hệ thống cung cấp bài tập vật lý từ lớp 10 đến lớp 12, giúp học sinh ôn luyện và nắm vững kiến thức vật lý phổ thông.
+            </p>
             
-            <div class="link-card" onclick="window.location.href='vl12';">
-                <div class="link-icon">
-                    <i class="fas fa-lightbulb"></i>
+            <div class="chapters-container">
+                <!-- Vật lý 10 -->
+                <div class="chapter-card vl10">
+                    <div class="chapter-number">Vật Lý Lớp 10</div>
+                    <h2 class="chapter-title">Chương trình học</h2>
+                    <ul class="chapter-list">
+                        <li>CHƯƠNG I. MỞ ĐẦU</li>
+                        <li>CHƯƠNG II. ĐỘNG HỌC</li>
+                        <li>CHƯƠNG III. ĐỘNG LỰC HỌC</li>
+                        <li>CHƯƠNG IV. NĂNG LƯỢNG, CÔNG, CÔNG SUẤT</li>
+                        <li>CHƯƠNG V. ĐỘNG LƯỢNG</li>
+                        <li>CHƯƠNG VI. CHUYỂN ĐỘNG TRÒN</li>
+                        <li>CHƯƠNG VII. BIẾN DẠNG CỦA VẬT RẮN. ÁP SUẤT CHẤT LỎNG</li>
+                    </ul>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <a href="/vl10" style="display: inline-block; padding: 10px 20px; background-color: #3498db; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">Xem chi tiết</a>
+                    </div>
                 </div>
-                <h2 class="link-title">Vật Lý 12</h2>
-                <p class="link-desc">Chương I: Vật lí nhiệt<br>Chương II: Khí lí tưởng<br>Chương III: Từ trường<br>Chương IV: Vật lí hạt nhân</p>
-                <a href="vl12" class="btn">Truy cập <i class="fas fa-arrow-right"></i></a>
+                
+                <!-- Vật lý 11 -->
+                <div class="chapter-card vl11">
+                    <div class="chapter-number">Vật Lý Lớp 11</div>
+                    <h2 class="chapter-title">Chương trình học</h2>
+                    <ul class="chapter-list">
+                        <li>Chương 1. DAO ĐỘNG</li>
+                        <li>Chương 2. SÓNG</li>
+                        <li>Chương 3. ĐIỆN TRƯỜNG</li>
+                        <li>Chương 4. DÒNG ĐIỆN. MẠCH ĐIỆN</li>
+                    </ul>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <a href="/vl11" style="display: inline-block; padding: 10px 20px; background-color: #2ecc71; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">Xem chi tiết</a>
+                    </div>
+                </div>
+                
+                <!-- Vật lý 12 -->
+                <div class="chapter-card vl12">
+                    <div class="chapter-number">Vật Lý Lớp 12</div>
+                    <h2 class="chapter-title">Chương trình học</h2>
+                    <ul class="chapter-list">
+                        <li>Chương I. VẬT LÍ NHIỆT</li>
+                        <li>Chương II. KHÍ LÍ TƯỞNG</li>
+                        <li>Chương III. TỪ TRƯỜNG</li>
+                        <li>Chương IV. VẬT LÍ HẠT NHÂN</li>
+                    </ul>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <a href="/vl12" style="display: inline-block; padding: 10px 20px; background-color: #f39c12; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">Xem chi tiết</a>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <!-- Container riêng cho thẻ Túi Tài Liệu ở giữa -->
-        <div class="center-container">
-            <div class="link-card special-card" onclick="window.location.href='tui';">
-                <div class="link-icon">
-                    <i class="fas fa-toolbox"></i>
-                </div>
-                <h2 class="link-title">Túi Tài Liệu</h2>
-                <p class="link-desc">Đây là công cụ tổng hợp hỗ trợ cho cả 3 lớp học.</p>
-                <a href="tui" class="btn">Truy cập <i class="fas fa-arrow-right"></i></a>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>Bài Tập Vật Lý Online - Hệ thống hỗ trợ học tập Vật Lý phổ thông</p>
+                <p class="copyright">© 2025 Bài Tập Vật Lý Online.</p>
             </div>
         </div>
-        
-        <footer>
-            <div class="footer-text">
-                <p><i class="fas fa-copyright"></i> 2025 Trang Bài Tập Vật Lý | Tất cả các liên kết được cung cấp bởi tuibx25.github.io</p>
-                <p>Trang web này hoạt động như một cổng thông tin đến các tài nguyên học tập Vật Lý trực tuyến.</p>
-            </div>
-        </footer>
-    </div>
+    </footer>
 
     <script>
-        // Thêm hiệu ứng cho các thẻ khi tải trang
+        // Bảo mật: Chống copy, chọn văn bản
         document.addEventListener('DOMContentLoaded', function() {
-            // Hiệu ứng cho sitemap
-            const sitemap = document.querySelector('.sitemap');
-            sitemap.style.opacity = '0';
-            sitemap.style.transform = 'translateY(-20px)';
-            
-            setTimeout(() => {
-                sitemap.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                sitemap.style.opacity = '1';
-                sitemap.style.transform = 'translateY(0)';
-            }, 300);
-            
-            // Hiệu ứng cho 3 thẻ đầu tiên
-            const cards = document.querySelectorAll('.links-container .link-card');
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                
-                setTimeout(() => {
-                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, index * 200 + 500);
+            // Chống copy
+            document.addEventListener('copy', function(e) {
+                e.preventDefault();
+                alert('Hành động sao chép đã bị vô hiệu hóa trên trang web này.');
             });
             
-            // Hiệu ứng đặc biệt cho thẻ Túi Tài Liệu
-            const specialCard = document.querySelector('.special-card');
-            setTimeout(() => {
-                specialCard.style.opacity = '0';
-                specialCard.style.transform = 'translateY(30px) scale(0.9)';
-                
-                setTimeout(() => {
-                    specialCard.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-                    specialCard.style.opacity = '1';
-                    specialCard.style.transform = 'translateY(0) scale(1)';
-                    
-                    // Hiệu ứng nhấp nháy cho thẻ đặc biệt
-                    let pulseCount = 0;
-                    const pulseInterval = setInterval(() => {
-                        if (pulseCount < 3) {
-                            specialCard.style.boxShadow = '0 0 40px rgba(37, 117, 252, 0.7)';
-                            setTimeout(() => {
-                                specialCard.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.25)';
-                            }, 400);
-                            pulseCount++;
-                        } else {
-                            clearInterval(pulseInterval);
-                        }
-                    }, 1000);
-                }, 800);
-            }, 600);
-            
-            // Thêm hiệu ứng cho tiêu đề
-            const title = document.querySelector('h1');
-            title.style.opacity = '0';
-            title.style.transform = 'translateY(-20px)';
-            
-            setTimeout(() => {
-                title.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-                title.style.opacity = '1';
-                title.style.transform = 'translateY(0)';
-            }, 100);
-            
-            // Thêm hiệu ứng khi di chuột qua các nút
-            const buttons = document.querySelectorAll('.btn');
-            buttons.forEach(button => {
-                button.addEventListener('mouseenter', function() {
-                    this.style.transform = 'scale(1.05)';
-                });
-                
-                button.addEventListener('mouseleave', function() {
-                    this.style.transform = 'scale(1)';
-                });
+            // Chống chuột phải (xem mã nguồn)
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                alert('Hành động này không được cho phép.');
             });
             
-            // Thêm hiệu ứng khi di chuột qua các thẻ
-            const allCards = document.querySelectorAll('.link-card');
-            allCards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    if (!this.classList.contains('special-card')) {
-                        this.style.transform = 'translateY(-10px)';
-                    }
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    if (!this.classList.contains('special-card')) {
-                        this.style.transform = 'translateY(0)';
-                    }
-                });
+            // Chống kéo thả hình ảnh
+            document.addEventListener('dragstart', function(e) {
+                if (e.target.tagName === 'IMG') {
+                    e.preventDefault();
+                }
             });
             
-            // Thêm hiệu ứng cho các liên kết sitemap
-            const sitemapLinks = document.querySelectorAll('.sitemap-link');
-            sitemapLinks.forEach(link => {
-                link.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-3px)';
-                });
-                
-                link.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0)';
-                });
+            // Chống phím tắt F12 và Ctrl+Shift+I
+            document.addEventListener('keydown', function(e) {
+                if (e.keyCode === 123 || // F12
+                    (e.ctrlKey && e.shiftKey && e.keyCode === 73) || // Ctrl+Shift+I
+                    (e.ctrlKey && e.keyCode === 85) // Ctrl+U
+                ) {
+                    e.preventDefault();
+                    alert('Hành động này không được cho phép.');
+                }
             });
             
-            // Ngăn chặn sự kiện click lan ra khi click vào nút bên trong thẻ
-            buttons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                });
+            // Chống in trang
+            window.addEventListener('beforeprint', function(e) {
+                alert('Chức năng in trang không được cho phép.');
+                e.preventDefault();
             });
-        });
-        
-        // Đánh dấu trang hiện tại trong sitemap
-        const currentPage = window.location.href;
-        const sitemapLinks = document.querySelectorAll('.sitemap-link');
-        
-        sitemapLinks.forEach(link => {
-            if (link.href === currentPage) {
-                link.classList.add('active');
-            } else {
-                link.classList.remove('active');
-            }
         });
     </script>
 </body>
