@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Điện trường đều - Tóm tắt bài học</title>
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/favicon.ico" type="image/x-icon">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --dark-brown: #5D4037;
+            --medium-brown: #795548;
+            --light-brown: #D7CCC8;
+            --beige: #EFEBE9;
+            --white: #FFFFFF;
+            --text-dark: #3E2723;
+            --accent: #8D6E63;
+            --shadow: rgba(93, 64, 55, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Inter', sans-serif;
+        }
+        
+        body {
+            background-color: var(--beige);
+            color: var(--text-dark);
+            line-height: 1.8;
+            padding: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: var(--white);
+            border-radius: 18px;
+            box-shadow: 0 12px 50px var(--shadow);
+            overflow: hidden;
+            border: 2px solid var(--light-brown);
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--dark-brown) 0%, var(--medium-brown) 100%);
+            color: var(--white);
+            padding: 40px 35px;
+            text-align: center;
+            border-bottom: 8px solid var(--accent);
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+        }
+        
+        .chapter {
+            font-size: 1.9rem;
+            color: var(--light-brown);
+            font-weight: 500;
+            margin-top: 15px;
+        }
+        
+        /* Main content */
+        .content {
+            padding: 40px;
+        }
+        
+        section {
+            margin-bottom: 50px;
+            padding-bottom: 40px;
+            border-bottom: 2px dashed var(--light-brown);
+        }
+        
+        h2 {
+            color: var(--medium-brown);
+            font-size: 2.5rem;
+            margin-bottom: 35px;
+            padding-bottom: 20px;
+            border-bottom: 4px solid var(--accent);
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 i {
+            margin-right: 20px;
+            font-size: 2.3rem;
+        }
+        
+        h3 {
+            color: var(--dark-brown);
+            font-size: 2.1rem;
+            margin: 35px 0 25px;
+            font-weight: 600;
+        }
+        
+        h4 {
+            font-size: 1.8rem;
+            margin: 25px 0 20px;
+            color: var(--medium-brown);
+            font-weight: 600;
+        }
+        
+        /* TĂNG FONT ĐOẠN VĂN LÊN 1.5rem */
+        p {
+            margin-bottom: 25px;
+            font-size: 1.5rem; /* Tăng lên 1.5rem */
+            line-height: 1.9;
+        }
+        
+        ul, ol {
+            margin-left: 40px;
+            margin-bottom: 35px;
+        }
+        
+        li {
+            margin-bottom: 18px;
+            font-size: 1.5rem; /* Cũng tăng cho danh sách */
+            line-height: 1.9;
+        }
+        
+        /* Special boxes */
+        .definition-box, .formula-box, .example-box, .application-box {
+            padding: 35px;
+            border-radius: 15px;
+            margin: 35px 0;
+        }
+        
+        .definition-box {
+            background-color: var(--light-brown);
+            border-left: 10px solid var(--medium-brown);
+        }
+        
+        .formula-box {
+            background-color: var(--beige);
+            border: 4px solid var(--accent);
+            text-align: center;
+            font-size: 1.7rem;
+        }
+        
+        .example-box {
+            background-color: var(--beige);
+            border: 4px solid var(--medium-brown);
+        }
+        
+        .application-box {
+            background-color: var(--light-brown);
+            border: 4px solid var(--dark-brown);
+        }
+        
+        .box-title {
+            color: var(--dark-brown);
+            font-size: 2rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+        
+        .box-title i {
+            margin-right: 15px;
+            font-size: 1.9rem;
+        }
+        
+        /* Key points grid */
+        .key-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .point-card {
+            background-color: var(--beige);
+            padding: 30px;
+            border-radius: 15px;
+            border-top: 8px solid var(--accent);
+            transition: transform 0.3s ease;
+        }
+        
+        .point-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .point-card h4 {
+            color: var(--medium-brown);
+            margin-bottom: 20px;
+            font-size: 1.9rem;
+            font-weight: 600;
+        }
+        
+        .point-card p, .point-card li {
+            font-size: 1.5rem; /* Tăng font trong thẻ */
+            line-height: 1.9;
+        }
+        
+        .point-card ul {
+            margin-left: 25px;
+        }
+        
+        /* Image placeholder */
+        .image-placeholder {
+            background-color: var(--beige);
+            border: 4px dashed var(--medium-brown);
+            border-radius: 15px;
+            padding: 60px 40px;
+            text-align: center;
+            margin: 35px 0;
+            color: var(--text-dark);
+            font-style: italic;
+            font-size: 1.6rem;
+        }
+        
+        .image-placeholder i {
+            font-size: 5rem;
+            color: var(--accent);
+            margin-bottom: 25px;
+        }
+        
+        /* Actual image styles */
+        .content-image {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 35px auto;
+            border-radius: 15px;
+            border: 4px solid var(--medium-brown);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+        
+        .image-caption {
+            text-align: center;
+            font-style: italic;
+            margin-top: 10px;
+            margin-bottom: 35px;
+            color: var(--text-dark);
+            font-size: 1.5rem;
+        }
+        
+        /* MathJax formulas */
+        .MathJax {
+            font-size: 1.6rem !important;
+        }
+        
+        mjx-container[jax="CHTML"] {
+            font-size: 1.6rem !important;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-brown);
+            color: var(--white);
+            text-align: center;
+            padding: 35px;
+            margin-top: 50px;
+            font-size: 1.4rem;
+        }
+        
+        footer p {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+        
+        footer strong {
+            font-size: 1.6rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 95%;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 2.1rem;
+            }
+            
+            h3 {
+                font-size: 1.8rem;
+            }
+            
+            p, li {
+                font-size: 1.4rem;
+            }
+            
+            .content {
+                padding: 30px;
+            }
+            
+            .key-points {
+                grid-template-columns: 1fr;
+            }
+            
+            .formula-box {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+                font-size: 1.2rem;
+            }
+            
+            h1 {
+                font-size: 2.4rem;
+            }
+            
+            h2 {
+                font-size: 1.9rem;
+            }
+            
+            h3 {
+                font-size: 1.6rem;
+            }
+            
+            h4 {
+                font-size: 1.5rem;
+            }
+            
+            .content {
+                padding: 25px;
+            }
+            
+            p, li {
+                font-size: 1.3rem;
+            }
+            
+            .box-title {
+                font-size: 1.7rem;
+            }
+            
+            .key-points {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            header {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 2.1rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            h3 {
+                font-size: 1.5rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .definition-box, .formula-box, .example-box, .application-box {
+                padding: 25px;
+            }
+            
+            p, li {
+                font-size: 1.2rem;
+            }
+        }
+        
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                font-size: 16pt;
+                line-height: 1.6;
+            }
+            
+            .container {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                max-width: 100%;
+            }
+            
+            .point-card {
+                break-inside: avoid;
+                border: 1px solid #ddd;
+            }
+            
+            .image-placeholder {
+                display: none;
+            }
+            
+            .content-image {
+                border: 1px solid #ddd;
+                max-width: 80%;
+            }
+            
+            h1, h2, h3, h4 {
+                color: black;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-bolt"></i>BÀI 18. ĐIỆN TRƯỜNG ĐỀU</h1>
+            <div class="chapter">CHƯƠNG III - ĐIỆN TRƯỜNG</div>
+        </header>
+        
+        <div class="content">
+            <!-- Section 1: Khái niệm -->
+            <section id="concept">
+                <h2><i class="fas fa-lightbulb"></i> I. KHÁI NIỆM ĐIỆN TRƯỜNG ĐỀU</h2>
+                
+                <div class="definition-box">
+                    <div class="box-title"><i class="fas fa-book"></i> Định nghĩa</div>
+                    <p>Điện trường đều là điện trường mà <strong>cường độ điện trường tại mỗi điểm có giá trị bằng nhau về độ lớn, giống nhau về phương và chiều</strong>.</p>
+                </div>
+                
+                <div class="key-points">
+                    <div class="point-card">
+                        <h4><i class="fas fa-ruler-combined"></i> Độ lớn bằng nhau</h4>
+                        <p>Giá trị cường độ điện trường không đổi tại mọi điểm trong vùng điện trường đều. Điều này có nghĩa là nếu bạn đo cường độ điện trường tại bất kỳ điểm nào trong vùng điện trường đều, bạn sẽ nhận được cùng một giá trị.</p>
+                    </div>
+                    <div class="point-card">
+                        <h4><i class="fas fa-arrows-alt-h"></i> Phương giống nhau</h4>
+                        <p>Các vectơ cường độ điện trường song song với nhau. Tất cả các vectơ đều có cùng hướng, không có vectơ nào nghiêng hay lệch so với phương chung.</p>
+                    </div>
+                    <div class="point-card">
+                        <h4><i class="fas fa-arrow-right"></i> Chiều giống nhau</h4>
+                        <p>Tất cả các vectơ cường độ điện trường đều cùng chiều. Điều này tạo nên tính đồng nhất của điện trường đều, giúp dễ dàng phân tích và tính toán.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Section 2: Điện trường giữa hai bản phẳng -->
+            <section id="parallel-plates">
+                <h2><i class="fas fa-square"></i> II. ĐIỆN TRƯỜNG ĐỀU GIỮA HAI BẢN PHẲNG SONG SONG</h2>
+                
+                <p>Có thể tạo ra điện trường đều bằng cách sử dụng <strong>hai bản kim loại đặt song song</strong>, cách nhau một khoảng <em>d</em>, có kích thước lớn so với khoảng cách giữa chúng và tích điện trái dấu. Khi hai bản kim loại được tích điện trái dấu, giữa chúng sẽ xuất hiện một điện trường đều.</p>
+                
+                <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/18/18.1.png" alt="Điện trường đều giữa hai bản phẳng song song" class="content-image">
+                <div class="image-caption"><strong>Hình 18.1.</strong> Thí nghiệm về điện trường đều giữa hai bản phẳng song song</div>
+                
+                <h3>Đặc điểm của điện trường đều giữa hai bản phẳng song song:</h3>
+                <ul>
+                    <li>Các đường sức điện song song với nhau và cách đều nhau, tạo thành các đường thẳng đều đặn.</li>
+                    <li>Đường sức điện vuông góc với các bản phẳng, đi từ bản này sang bản kia.</li>
+                    <li>Đường sức xuất phát từ bản dương (+) và kết thúc ở bản âm (-), thể hiện chiều của điện trường.</li>
+                    <li>Điện trường chỉ tồn tại trong khoảng không gian giữa hai bản, không có ở bên ngoài.</li>
+                </ul>
+                
+                <div class="formula-box">
+                    <h3><i class="fas fa-calculator"></i> Công thức tính cường độ điện trường</h3>
+                    \[E = \frac{U}{d}\]
+                    <p>Trong đó:<br>
+                    \(E\): Cường độ điện trường (V/m)<br>
+                    \(U\): Hiệu điện thế giữa hai bản (V)<br>
+                    \(d\): Khoảng cách giữa hai bản (m)</p>
+                </div>
+                
+                <div class="example-box">
+                    <div class="box-title"><i class="fas fa-calculator"></i> Bài tập ví dụ 1</div>
+                    <p><strong>Đề bài:</strong> Hai bản phẳng kim loại đặt song song, cách nhau \(d = 20 \, \text{cm}\). Hiệu điện thế giữa hai bản \(U = 1000 \, \text{V}\). Một hạt bụi có điện tích \(q = 16 \times 10^{-19} \, \text{C}\) bay vào điện trường giữa hai bản phẳng. Xác định phương, chiều và độ lớn của lực điện tác dụng lên hạt bụi.</p>
+                    
+                    <h4>Giải:</h4>
+                    <p>Trước tiên, ta tính cường độ điện trường giữa hai bản phẳng:</p>
+                    \[E = \frac{U}{d} = \frac{1000}{0,2} = 5000 \, (\text{V/m})\]
+                    
+                    <p>Tiếp theo, tính lực điện tác dụng lên hạt bụi:</p>
+                    \[F = qE = 16 \times 10^{-19} \times 5000 = 8 \times 10^{-15} \, \text{N}\]
+                    
+                    <p><strong>Phương, chiều:</strong> Lực điện cùng phương, cùng chiều với vectơ cường độ điện trường. Vì điện trường hướng từ bản dương sang bản âm và vuông góc với các bản phẳng, nên lực điện cũng có phương vuông góc với các bản phẳng và hướng từ bản dương sang bản âm.</p>
+                </div>
+                
+                <div class="example-box">
+                    <div class="box-title"><i class="fas fa-x-ray"></i> Bài tập về ống tia X</div>
+                    <p><strong>Đề bài:</strong> Vùng điện trường giữa hai cực của ống tia X là điện trường đều. Khoảng cách giữa hai cực bằng 2 cm, hiệu điện thế giữa hai cực là 120 kV. Tính lực điện trường tác dụng lên electron.</p>
+                    
+                    <h4>Giải:</h4>
+                    <p>Đầu tiên, ta đổi đơn vị: 2 cm = 0,02 m và 120 kV = 120.000 V.</p>
+                    
+                    <p>Tính cường độ điện trường giữa hai cực:</p>
+                    \[E = \frac{U}{d} = \frac{120000}{0,02} = 6 \times 10^6 \, (\text{V/m})\]
+                    
+                    <p>Lực điện tác dụng lên electron (điện tích của electron \(e = 1,6 \times 10^{-19} \, \text{C}\)):</p>
+                    \[F = eE = 1,6 \times 10^{-19} \times 6 \times 10^6 = 9,6 \times 10^{-13} \, \text{N}\]
+                    
+                    <p>Lực này có tác dụng gia tốc electron từ cực âm sang cực dương, giúp electron đạt được vận tốc lớn trước khi đập vào anôt và phát ra tia X.</p>
+                </div>
+            </section>
+            
+            <!-- Section 3: Chuyển động của điện tích -->
+            <section id="motion">
+                <h2><i class="fas fa-running"></i> III. CHUYỂN ĐỘNG CỦA ĐIỆN TÍCH TRONG ĐIỆN TRƯỜNG ĐỀU</h2>
+                
+                <h3>1. So sánh với chuyển động ném ngang</h3>
+                <p>Có sự tương tự rất thú vị giữa:</p>
+                <ul>
+                    <li><strong>Chuyển động của điện tích</strong> trong điện trường đều (lực điện tác dụng)</li>
+                    <li><strong>Chuyển động ném ngang</strong> trong trường trọng lực (trọng lực tác dụng)</li>
+                </ul>
+                
+                <p>Trong cả hai trường hợp, vật chịu tác dụng của một lực không đổi (lực điện hoặc trọng lực) theo phương vuông góc với phương chuyển động ban đầu. Điều này dẫn đến quỹ đạo parabol trong cả hai trường hợp.</p>
+                
+                <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/18/18.3%20%26%2018.4.png" alt="So sánh chuyển động của điện tích và vật ném ngang" class="content-image">
+                <div class="image-caption"><strong>Hình 18.3 & 18.4:</strong> So sánh chuyển động của điện tích và vật ném ngang</div>
+                
+                <h3>2. Ảnh hưởng của điện trường đều đến chuyển động</h3>
+                <p>Khi một điện tích bay vào điện trường đều theo phương vuông góc với đường sức điện:</p>
+                <ul>
+                    <li><strong>Vận tốc:</strong> Theo phương vuông góc với đường sức (phương ngang), vận tốc không đổi vì không có thành phần lực theo phương này. Theo phương đường sức (phương dọc), vận tốc thay đổi đều do lực điện tác dụng.</li>
+                    <li><strong>Quỹ đạo:</strong> Điện tích chuyển động theo quỹ đạo parabol, tương tự như chuyển động ném ngang trong trường trọng lực.</li>
+                </ul>
+                
+                <div class="example-box">
+                    <div class="box-title"><i class="fas fa-atom"></i> Bài tập ví dụ 2</div>
+                    <p><strong>Đề bài:</strong> Electron (\(q = -1,6 \times 10^{-19} \, \text{C}\), \(m = 9,1 \times 10^{-31} \, \text{kg}\)) bay vào giữa hai bản phẳng song song (\(d = 24 \, \text{cm}\), \(U = 48 \, \text{V}\)) với vận tốc \(v_0 = 200 \, \text{m/s}\) vuông góc với đường sức điện. Viết phương trình quỹ đạo.</p>
+                    
+                    <h4>Giải:</h4>
+                    <p>Trước tiên, tính cường độ điện trường giữa hai bản:</p>
+                    \[E = \frac{U}{d} = \frac{48}{0,24} = 200 \, (\text{V/m})\]
+                    
+                    <p>Đặt hệ trục tọa độ: gốc O tại điểm electron bắt đầu bay vào điện trường, trục Ox theo phương vận tốc ban đầu, trục Oy hướng lên trên.</p>
+                    
+                    <p>Phương trình quỹ đạo của electron:</p>
+                    \[y = -\frac{1}{2} \frac{qU}{md} \left( \frac{x}{v_0} \right)^2 = 4,395x^2 \, (\text{m})\]
+                    
+                    <p><strong>Kết luận:</strong> Electron chuyển động theo cung parabol có bề lõm hướng về bản dương. Điều này là do electron mang điện tích âm nên bị hút về phía bản dương.</p>
+                    
+                    <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/18/18.5.png" alt="Bài tập ví dụ 2 - Quỹ đạo electron" class="content-image">
+                    <div class="image-caption"><strong>Hình 18.5:</strong> Electron bay trong điện trường đều</div>
+                    
+                    <p><em>Lưu ý:</em> Với điện tích dương bay vào trong điện trường đều, quỹ đạo sẽ là parabol có bề lõm hướng xuống bản âm, vì điện tích dương bị hút về phía bản âm.</p>
+                </div>
+            </section>
+            
+            <!-- Section 4: Ứng dụng -->
+            <section id="applications">
+                <h2><i class="fas fa-cogs"></i> IV. ỨNG DỤNG</h2>
+                
+                <div class="application-box">
+                    <div class="box-title"><i class="fas fa-tv"></i> 1. Dao động kí (Ống phóng tia điện tử)</div>
+                    <p>Dao động kí là thiết bị quan trọng trong phòng thí nghiệm vật lý và điện tử, dùng để hiển thị dạng tín hiệu điện theo thời gian. Thiết bị này sử dụng điện trường đều giữa các bản lái tia để điều khiển chùm electron, tạo ra điểm sáng trên màn huỳnh quang.</p>
+                    
+                    <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/18/18.6.png" alt="Mô hình ống phóng tia điện tử" class="content-image">
+                    <div class="image-caption"><strong>Hình 18.6:</strong> Mô hình ống phóng tia điện tử</div>
+                    
+                    <p><strong>Nguyên tắc hoạt động chi tiết:</strong></p>
+                    <ul>
+                        <li>Electron được phát ra từ súng điện tử (cathode nung nóng).</li>
+                        <li>Các electron được gia tốc bởi hiệu điện thế cao (thường vài nghìn volt) giữa cathode và anode.</li>
+                        <li>Chùm electron đi qua hai cặp bản lái tia tạo điện trường đều: một cặp lái theo phương ngang (X), một cặp lái theo phương dọc (Y).</li>
+                        <li>Điện trường đều giữa các bản lái tia làm lệch chùm electron theo cả hai phương.</li>
+                        <li>Chùm electron đập vào màn huỳnh quang ở cuối ống, tạo thành điểm sáng có thể quan sát được.</li>
+                        <li>Bằng cách thay đổi điện áp trên các bản lái tia, ta có thể điều khiển vị trí điểm sáng trên màn hình, từ đó vẽ được dạng sóng của tín hiệu điện.</li>
+                    </ul>
+                </div>
+                
+                <div class="application-box">
+                    <div class="box-title"><i class="fas fa-wind"></i> 2. Công nghệ ion âm lọc không khí</div>
+                    <p>Máy lọc không khí sử dụng công nghệ ion âm ngày càng phổ biến trong đời sống, từ ô tô, gia đình đến nhà xưởng công nghiệp. Công nghệ này sử dụng điện trường đều để tác động lên các ion âm, giúp lọc bụi và làm sạch không khí hiệu quả.</p>
+                    
+                    <p><strong>Nguyên lý hoạt động chi tiết:</strong></p>
+                    <ul>
+                        <li>Máy phát ra các ion âm (electron dư) vào không khí. Các ion âm này thường là các phân tử oxy mang thêm electron (O₂⁻).</li>
+                        <li>Các ion âm kết hợp với các hạt bụi, vi khuẩn, virus và các chất gây ô nhiễm khác trong không khí (thường mang điện tích dương hoặc trung hòa).</li>
+                        <li>Khi các hạt bụi được tích điện âm, chúng bị hút về phía các bề mặt mang điện tích dương (như tường, sàn, hoặc các bản thu trong máy lọc).</li>
+                        <li>Điện trường đều trong máy lọc hoặc điện trường đều của Trái Đất làm lệch quỹ đạo của các hạt tích điện, giúp chúng bám vào bề mặt thu gom hoặc rơi xuống đất nhanh hơn.</li>
+                        <li>Các hạt bụi đã được lọc ra khỏi không khí, giúp không khí trở nên trong lành hơn.</li>
+                    </ul>
+                    
+                    <p><strong>Tác dụng của điện trường đều của Trái Đất:</strong> Điện trường đều của Trái Đất (khoảng 100-150 V/m) cũng góp phần làm lệch quỹ đạo của các ion âm và hạt bụi tích điện, giúp chúng di chuyển và bám vào các bề mặt, từ đó làm sạch không khí tự nhiên.</p>
+                </div>
+            </section>
+            
+            <!-- Section 5: Tóm tắt -->
+            <section id="summary">
+                <h2><i class="fas fa-clipboard-check"></i> TÓM TẮT TRỌNG TÂM</h2>
+                
+                <div class="key-points">
+                    <div class="point-card">
+                        <h4><i class="fas fa-bolt"></i> Điện trường đều</h4>
+                        <ul>
+                            <li>\(E\) = const (độ lớn, phương, chiều)</li>
+                            <li>Đường sức song song, cách đều</li>
+                            <li>Được tạo bởi hai bản phẳng song song tích điện trái dấu</li>
+                            <li>Vectơ cường độ điện trường không đổi tại mọi điểm</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="point-card">
+                        <h4><i class="fas fa-calculator"></i> Công thức cơ bản</h4>
+                        <ul>
+                            <li>\(E = \dfrac{U}{d}\) (công thức chính)</li>
+                            <li>\(\vec{F} = q\vec{E}\) (lực điện tác dụng)</li>
+                            <li>\(F = qE\) (độ lớn của lực điện)</li>
+                            <li>\(a = \dfrac{F}{m} = \dfrac{qE}{m}\) (gia tốc của điện tích)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="point-card">
+                        <h4><i class="fas fa-project-diagram"></i> Chuyển động của điện tích</h4>
+                        <ul>
+                            <li>Quỹ đạo parabol (khi bay vuông góc với E)</li>
+                            <li>Tương tự chuyển động ném ngang</li>
+                            <li>Vận tốc theo phương Ox không đổi</li>
+                            <li>Gia tốc theo phương Oy không đổi: \(a_y = \dfrac{qE}{m}\)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="point-card">
+                        <h4><i class="fas fa-microscope"></i> Ứng dụng thực tế</h4>
+                        <ul>
+                            <li>Ống tia X (chẩn đoán y tế)</li>
+                            <li>Dao động kí (hiển thị tín hiệu điện)</li>
+                            <li>Công nghệ lọc không khí ion âm</li>
+                            <li>Máy in laser, máy photocopy</li>
+                            <li>Bộ lọc bụi tĩnh điện trong công nghiệp</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="definition-box" style="margin-top: 40px;">
+                    <div class="box-title"><i class="fas fa-graduation-cap"></i> Kết luận</div>
+                    <p>Điện trường đều là một khái niệm quan trọng trong chương trình Vật lý 11, không chỉ có ý nghĩa lý thuyết mà còn có nhiều ứng dụng thực tế trong đời sống và công nghệ. Hiểu rõ về điện trường đều giúp chúng ta giải thích được nhiều hiện tượng vật lý và vận hành các thiết bị điện tử trong cuộc sống hàng ngày.</p>
+                </div>
+            </section>
+        </div>
+        
+        <footer>
+            <p><strong>BÀI 18: ĐIỆN TRƯỜNG ĐỀU</strong></p>
+            <p>Vật lý 11 - Chương III: Điện trường</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Cấu hình MathJax
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            chtml: {
+                scale: 1.2 // Tăng tỷ lệ hiển thị công thức toán
+            },
+            startup: {
+                typeset: true
+            }
+        };
+        
+        // Thêm chức năng in trang
+        document.addEventListener('keydown', function(e) {
+            if((e.ctrlKey || e.metaKey) && e.key === 'p') {
+                e.preventDefault();
+                window.print();
+            }
+        });
+        
+        // Hiệu ứng cho thẻ point-card
+        document.querySelectorAll('.point-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 20px 40px rgba(0,0,0,0.2)';
+                this.style.transition = 'all 0.4s ease';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.boxShadow = 'none';
+            });
+        });
+        
+        // Tự động cập nhật font size cho MathJax khi trang tải xong
+        document.addEventListener('DOMContentLoaded', function() {
+            // Chờ MathJax tải xong
+            if (window.MathJax) {
+                MathJax.typesetPromise().then(() => {
+                    console.log('MathJax đã tải xong với font lớn');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
