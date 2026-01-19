@@ -4,22 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vật Lý 12 KNTT</title>
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
     <style>
         :root {
-            --primary: #4361ee;
-            --secondary: #3a0ca3;
-            --accent: #7209b7;
-            --success: #4cc9f0;
-            --dark: #1a1a2e;
-            --light: #f8f9fa;
-            --gradient-1: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
-            --gradient-2: linear-gradient(135deg, #7209b7 0%, #f72585 100%);
-            --gradient-3: linear-gradient(135deg, #4cc9f0 0%, #4895ef 100%);
-            --gradient-4: linear-gradient(135deg, #f72585 0%, #b5179e 100%);
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            --shadow-hover: 0 20px 50px rgba(0, 0, 0, 0.15);
+            --primary: #8B4513; /* Nâu đất */
+            --primary-light: #A0522D;
+            --primary-dark: #654321;
+            --secondary: #D2B48C; /* Nâu tanin */
+            --secondary-light: #E6D3B9;
+            --secondary-dark: #B8860B;
+            --accent: #5D4037; /* Nâu sẫm */
+            --success: #8D6E63; /* Nâu xám */
+            --dark: #3E2723; /* Nâu đen */
+            --light: #FFF8E1; /* Vàng nhạt */
+            --neutral: #BCAAA4; /* Nâu xám nhạt */
+            
+            /* Màu nền */
+            --bg-light: #F5F5F5;
+            --bg-card: #FFFFFF;
+            
+            --shadow: 0 10px 30px rgba(139, 69, 19, 0.1);
+            --shadow-hover: 0 20px 50px rgba(139, 69, 19, 0.15);
         }
         
         * {
@@ -30,7 +36,7 @@
         }
         
         body {
-            background: linear-gradient(135deg, #f0f4ff 0%, #f9f7ff 100%);
+            background-color: var(--bg-light);
             color: var(--dark);
             line-height: 1.6;
             min-height: 100vh;
@@ -47,8 +53,8 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(67, 97, 238, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(114, 9, 183, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 20% 80%, rgba(139, 69, 19, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(93, 64, 55, 0.05) 0%, transparent 50%);
             z-index: -1;
         }
         
@@ -62,12 +68,13 @@
             text-align: center;
             margin-bottom: 60px;
             padding: 40px 30px;
-            background: var(--gradient-1);
+            background-color: var(--primary);
             border-radius: 24px;
             color: white;
             position: relative;
             box-shadow: var(--shadow);
             overflow: hidden;
+            border: 1px solid var(--primary-dark);
         }
         
         header::before {
@@ -77,12 +84,7 @@
             left: 0;
             right: 0;
             height: 5px;
-            background: linear-gradient(90deg, 
-                #4cc9f0 0%, 
-                #4361ee 25%, 
-                #7209b7 50%, 
-                #f72585 75%, 
-                #4cc9f0 100%);
+            background-color: var(--secondary);
             animation: shimmer 3s infinite linear;
         }
         
@@ -100,10 +102,8 @@
             font-size: 3rem;
             margin-bottom: 10px;
             font-weight: 700;
-            background: linear-gradient(45deg, #fff, #caf0f8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
             letter-spacing: -0.5px;
         }
         
@@ -117,6 +117,7 @@
             background: rgba(255, 255, 255, 0.1);
             border-radius: 50px;
             backdrop-filter: blur(10px);
+            color: var(--light);
         }
         
         .chapters {
@@ -127,11 +128,11 @@
         }
         
         .chapter-card {
-            background: rgba(255, 255, 255, 0.95);
+            background: var(--bg-card);
             border-radius: 20px;
             padding: 30px;
             box-shadow: var(--shadow);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--secondary-light);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
@@ -145,7 +146,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+            background: linear-gradient(45deg, transparent 30%, rgba(210, 180, 140, 0.1) 50%, transparent 70%);
             transform: translateX(-100%);
             transition: transform 0.6s;
         }
@@ -155,8 +156,9 @@
         }
         
         .chapter-card:hover {
-            transform: translateY(-8px) scale(1.02);
+            transform: translateY(-8px);
             box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
         }
         
         .chapter-header {
@@ -164,8 +166,7 @@
             align-items: center;
             margin-bottom: 25px;
             padding-bottom: 15px;
-            border-bottom: 2px solid;
-            border-image: linear-gradient(90deg, currentColor, transparent) 1;
+            border-bottom: 2px solid var(--secondary);
         }
         
         .chapter-icon {
@@ -179,12 +180,13 @@
             font-size: 1.5rem;
             color: white;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background-color: var(--primary);
         }
         
-        .chapter-card:nth-child(1) .chapter-icon { background: var(--gradient-1); }
-        .chapter-card:nth-child(2) .chapter-icon { background: var(--gradient-2); }
-        .chapter-card:nth-child(3) .chapter-icon { background: var(--gradient-3); }
-        .chapter-card:nth-child(4) .chapter-icon { background: var(--gradient-4); }
+        .chapter-card:nth-child(1) .chapter-icon { background-color: var(--primary); }
+        .chapter-card:nth-child(2) .chapter-icon { background-color: var(--accent); }
+        .chapter-card:nth-child(3) .chapter-icon { background-color: var(--success); }
+        .chapter-card:nth-child(4) .chapter-icon { background-color: var(--primary-dark); }
         
         .chapter-title {
             color: var(--dark);
@@ -211,8 +213,8 @@
             padding: 15px;
             border-radius: 12px;
             transition: all 0.3s;
-            background: rgba(255, 255, 255, 0.5);
-            border: 1px solid rgba(0,0,0,0.05);
+            background: var(--light);
+            border: 1px solid var(--secondary-light);
             position: relative;
             overflow: hidden;
         }
@@ -232,7 +234,8 @@
         .lesson-link:hover {
             background: white;
             transform: translateX(10px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.08);
+            border-color: var(--primary);
         }
         
         .lesson-link:hover::before {
@@ -242,6 +245,7 @@
         .lesson-link:hover .lesson-arrow {
             transform: translateX(5px);
             opacity: 1;
+            color: var(--primary);
         }
         
         .lesson-number {
@@ -250,13 +254,13 @@
             justify-content: center;
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background-color: var(--primary);
             color: white;
             border-radius: 10px;
             margin-right: 15px;
             font-weight: 600;
             font-size: 0.9rem;
-            box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+            box-shadow: 0 4px 10px rgba(139, 69, 19, 0.3);
             flex-shrink: 0;
         }
         
@@ -269,11 +273,13 @@
         .lesson-title {
             font-weight: 500;
             margin-bottom: 3px;
+            color: var(--dark);
         }
         
         .lesson-subtitle {
             font-size: 0.85rem;
             opacity: 0.7;
+            color: var(--accent);
         }
         
         .lesson-arrow {
@@ -307,9 +313,10 @@
         
         .home-button:hover {
             background: white;
-            color: var(--secondary);
+            color: var(--primary-dark);
             transform: translateY(-50%) translateX(-5px);
-            box-shadow: 0 8px 25px rgba(67, 97, 238, 0.2);
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.2);
+            border-color: var(--primary);
         }
         
         .home-button .button-icon {
@@ -330,29 +337,28 @@
             border-radius: 20px;
             backdrop-filter: blur(10px);
             box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid var(--secondary-light);
         }
         
         .footer-text {
             font-weight: 600;
             font-size: 1.1rem;
             margin-bottom: 10px;
-            background: linear-gradient(45deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--primary);
         }
         
         .footer-subtext {
             opacity: 0.7;
             font-size: 0.9rem;
+            color: var(--accent);
         }
         
         /* Floating particles */
         .particle {
             position: fixed;
             border-radius: 50%;
-            background: linear-gradient(45deg, var(--primary), var(--accent));
-            opacity: 0.1;
+            background-color: var(--primary);
+            opacity: 0.05;
             z-index: -1;
         }
         
@@ -363,7 +369,7 @@
             left: 0;
             width: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
+            background-color: var(--primary);
             z-index: 1000;
             transition: width 0.3s;
         }
@@ -419,8 +425,8 @@
         
         /* Animations */
         @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
         
         @keyframes fadeInUp {
@@ -530,12 +536,11 @@
 
         function generateLessonLink(lessonIndex) {
             const lessonNumber = (lessonIndex + 1).toString().padStart(2, '0');
-            // Thay đổi: Sử dụng link tương đối đến thư mục con
             return `./${lessonNumber}/`;
         }
 
         function createParticles() {
-            const colors = ['#4361ee', '#7209b7', '#4cc9f0', '#f72585'];
+            const colors = ['#8B4513', '#A0522D', '#5D4037', '#8D6E63'];
             for (let i = 0; i < 15; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
@@ -543,7 +548,7 @@
                 particle.style.height = particle.style.width;
                 particle.style.left = `${Math.random() * 100}vw`;
                 particle.style.top = `${Math.random() * 100}vh`;
-                particle.style.background = `linear-gradient(45deg, ${colors[Math.floor(Math.random() * colors.length)]}, ${colors[Math.floor(Math.random() * colors.length)]})`;
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                 particle.style.opacity = `${Math.random() * 0.1 + 0.05}`;
                 particle.style.animation = `float ${Math.random() * 20 + 10}s infinite ease-in-out`;
                 document.body.appendChild(particle);
