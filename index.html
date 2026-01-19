@@ -18,8 +18,8 @@
         }
         
         body {
-            background: #8B4513;
-            color: #333;
+            background: #D2B48C; /* Màu nâu đất nhạt hơn cho nền */
+            color: #5D4037; /* Màu nâu đậm cho chữ */
             min-height: 100vh;
             padding: 20px;
             display: flex;
@@ -39,21 +39,21 @@
             margin-bottom: 40px;
             padding: 20px;
             border-radius: 15px;
-            background-color: #ffffff;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background-color: #F5E6D3; /* Màu nâu be nhạt */
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.3); /* Màu nâu trong shadow */
             width: 100%;
-            border: 2px solid #3498db;
+            border: 2px solid #8B4513; /* Màu nâu sẫm */
         }
         
         h1 {
-            color: #1a2980;
+            color: #5D4037; /* Màu nâu đậm */
             font-size: 2.8rem;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            text-shadow: 2px 2px 4px rgba(139, 69, 19, 0.1);
         }
         
         .subtitle {
-            color: #2d3436;
+            color: #795548; /* Màu nâu trung tính */
             font-size: 1.2rem;
             max-width: 800px;
             margin: 0 auto;
@@ -62,13 +62,13 @@
         
         /* Sitemap Styles */
         .sitemap {
-            background-color: #ffffff;
+            background-color: #F5E6D3; /* Màu nâu be nhạt */
             border-radius: 10px;
             padding: 15px 25px;
             margin-bottom: 30px;
             width: 100%;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-            border: 1px solid #8B7355;
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.2);
+            border: 1px solid #A67C52; /* Màu nâu trung bình */
         }
         
         .sitemap-links {
@@ -79,15 +79,15 @@
         }
         
         .sitemap-link {
-            background: #1a2980;
-            color: white;
+            background: #8B4513; /* Màu nâu sẫm */
+            color: #F5E6D3; /* Màu nâu be nhạt */
             padding: 10px 20px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
             font-size: 1rem;
             transition: all 0.3s ease;
-            box-shadow: 0 3px 8px rgba(26, 41, 128, 0.4);
+            box-shadow: 0 3px 8px rgba(139, 69, 19, 0.4);
             display: flex;
             align-items: center;
             gap: 8px;
@@ -95,17 +95,17 @@
         
         .sitemap-link:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 12px rgba(139, 115, 85, 0.5);
-            background: #8B7355;
+            box-shadow: 0 5px 12px rgba(166, 124, 82, 0.5);
+            background: #A67C52; /* Màu nâu trung bình */
         }
         
         .sitemap-link.active {
-            background: #3498db;
-            box-shadow: 0 3px 8px rgba(166, 124, 82, 0.5);
+            background: #D2691E; /* Màu nâu cam đất */
+            box-shadow: 0 3px 8px rgba(210, 105, 30, 0.5);
         }
         
         .sitemap-separator {
-            color: #3498db;
+            color: #8B4513; /* Màu nâu sẫm */
             display: flex;
             align-items: center;
             padding: 0 5px;
@@ -121,10 +121,10 @@
         }
         
         .link-card {
-            background-color: white;
+            background-color: #F5E6D3; /* Màu nâu be nhạt */
             border-radius: 15px;
             padding: 30px 25px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.2);
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
@@ -138,8 +138,8 @@
         
         .link-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            border-color: #3498db;
+            box-shadow: 0 15px 30px rgba(139, 69, 19, 0.3);
+            border-color: #8B4513; /* Màu nâu sẫm */
         }
         
         .link-card:before {
@@ -149,47 +149,47 @@
             left: 0;
             width: 100%;
             height: 5px;
-            background: #1a2980;
+            background: #8B4513; /* Màu nâu sẫm */
         }
         
         .link-icon {
             font-size: 3.5rem;
             margin-bottom: 20px;
-            color: #1a2980;
+            color: #5D4037; /* Màu nâu đậm */
             height: 80px;
             width: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            background-color: rgba(52, 152, 219, 0.15);
+            background-color: rgba(139, 69, 19, 0.15);
         }
         
-        /* Màu khác nhau cho mỗi icon */
+        /* Màu khác nhau cho mỗi icon nhưng vẫn trong tông nâu */
         .link-card:nth-child(1) .link-icon {
-            color: #3498db;
-            background-color: rgba(52, 152, 219, 0.2);
+            color: #8B4513; /* Màu nâu sẫm */
+            background-color: rgba(139, 69, 19, 0.2);
         }
         
         .link-card:nth-child(2) .link-icon {
-            color: #8B7355;
-            background-color: rgba(139, 115, 85, 0.2);
+            color: #A67C52; /* Màu nâu trung bình */
+            background-color: rgba(166, 124, 82, 0.2);
         }
         
         .link-card:nth-child(3) .link-icon {
-            color: #f1c40f;
-            background-color: rgba(241, 196, 15, 0.2);
+            color: #D2691E; /* Màu nâu cam đất */
+            background-color: rgba(210, 105, 30, 0.2);
         }
         
         .link-title {
             font-size: 1.8rem;
-            color: #2d3436;
+            color: #5D4037; /* Màu nâu đậm */
             margin-bottom: 10px;
             font-weight: 700;
         }
         
         .link-desc {
-            color: #636e72;
+            color: #795548; /* Màu nâu trung tính */
             margin-bottom: 25px;
             line-height: 1.5;
             flex-grow: 1;
@@ -197,15 +197,15 @@
         
         .btn {
             display: inline-block;
-            background: #3498db;
-            color: white;
+            background: #8B4513; /* Màu nâu sẫm */
+            color: #F5E6D3; /* Màu nâu be nhạt */
             padding: 12px 28px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
             font-size: 1.1rem;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.4);
             border: none;
             cursor: pointer;
         }
@@ -213,7 +213,7 @@
         .btn:hover {
             transform: scale(1.05);
             box-shadow: 0 6px 20px rgba(166, 124, 82, 0.5);
-            background: #A67C52;
+            background: #A67C52; /* Màu nâu trung bình */
         }
         
         .btn i {
@@ -224,14 +224,14 @@
             text-align: center;
             margin-top: 40px;
             padding: 20px;
-            color: white;
+            color: #5D4037; /* Màu nâu đậm */
             width: 100%;
             font-size: 1rem;
             opacity: 0.95;
         }
         
         .footer-text {
-            background-color: rgba(0, 0, 0, 0.25);
+            background-color: rgba(139, 69, 19, 0.1); /* Màu nâu sẫm với độ trong suốt */
             padding: 15px;
             border-radius: 10px;
             max-width: 800px;
@@ -239,18 +239,18 @@
         }
         
         .instructions {
-            background-color: #ffffff;
+            background-color: #F5E6D3; /* Màu nâu be nhạt */
             border-radius: 15px;
             padding: 25px;
             margin-bottom: 40px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.2);
             width: 100%;
             max-width: 800px;
-            border: 1px solid #f1c40f;
+            border: 1px solid #D2691E; /* Màu nâu cam đất */
         }
         
         .instructions h2 {
-            color: #3498db;
+            color: #8B4513; /* Màu nâu sẫm */
             margin-bottom: 15px;
             font-size: 1.8rem;
         }
@@ -258,7 +258,7 @@
         .instructions p {
             margin-bottom: 10px;
             line-height: 1.6;
-            color: #2d3436;
+            color: #5D4037; /* Màu nâu đậm */
         }
         
         .instructions ul {
@@ -284,24 +284,24 @@
         .special-card {
             width: 100%;
             max-width: 700px;
-            background: #F5E6D3;
-            border: 3px solid #A67C52;
+            background: #E8D5B7; /* Màu nâu be sáng hơn */
+            border: 3px solid #8B4513; /* Màu nâu sẫm */
         }
         
         .special-card .link-title {
-            color: #1a2980;
+            color: #5D4037; /* Màu nâu đậm */
         }
         
         .special-card .link-icon {
-            background-color: rgba(166, 124, 82, 0.25);
-            color: #1a2980;
+            background-color: rgba(139, 69, 19, 0.25);
+            color: #8B4513; /* Màu nâu sẫm */
         }
         
         /* Hiệu ứng đặc biệt cho thẻ Túi Tài Liệu */
         .special-card:hover {
             transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(166, 124, 82, 0.3);
-            border-color: #3498db;
+            box-shadow: 0 20px 40px rgba(139, 69, 19, 0.3);
+            border-color: #D2691E; /* Màu nâu cam đất */
         }
         
         @media (max-width: 992px) {
@@ -494,9 +494,9 @@
                     let pulseCount = 0;
                     const pulseInterval = setInterval(() => {
                         if (pulseCount < 3) {
-                            specialCard.style.boxShadow = '0 0 40px rgba(166, 124, 82, 0.7)';
+                            specialCard.style.boxShadow = '0 0 40px rgba(139, 69, 19, 0.7)';
                             setTimeout(() => {
-                                specialCard.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.25)';
+                                specialCard.style.boxShadow = '0 15px 30px rgba(139, 69, 19, 0.25)';
                             }, 400);
                             pulseCount++;
                         } else {
