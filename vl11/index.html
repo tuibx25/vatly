@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vật Lý 11 KNTT</title>
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
     <style>
         :root {
-            --primary: #8B4513;
-            --secondary: #654321;
-            --accent: #A0522D;
-            --success: #D2691E;
-            --dark: #3E2723;
-            --light: #F5F5DC;
+            --primary: #8B4513;      /* Nâu đậm */
+            --secondary: #A0522D;    /* Nâu đất */
+            --accent: #D2691E;       /* Nâu cam nhạt */
+            --success: #8B7355;      /* Nâu xám */
+            --dark: #3E2723;         /* Nâu rất đậm */
+            --light: #F5F5DC;        /* Màu be nhạt */
+            --neutral: #BC8F8F;      /* Nâu hồng nhạt */
             --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             --shadow-hover: 0 20px 50px rgba(0, 0, 0, 0.15);
         }
@@ -26,7 +27,7 @@
         }
         
         body {
-            background: #D2B48C;
+            background: #FAF3E0; /* Nền be nhạt */
             color: var(--dark);
             line-height: 1.6;
             min-height: 100vh;
@@ -43,8 +44,8 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(101, 67, 33, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 20% 80%, rgba(139, 69, 19, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(160, 82, 45, 0.05) 0%, transparent 50%);
             z-index: -1;
         }
         
@@ -58,7 +59,7 @@
             text-align: center;
             margin-bottom: 60px;
             padding: 40px 30px;
-            background: var(--primary);
+            background: var(--primary); /* Nâu đậm */
             border-radius: 24px;
             color: white;
             position: relative;
@@ -73,7 +74,7 @@
             left: 0;
             right: 0;
             height: 5px;
-            background: var(--accent);
+            background: var(--accent); /* Nâu cam nhạt */
             animation: shimmer 3s infinite linear;
         }
         
@@ -91,7 +92,7 @@
             font-size: 3rem;
             margin-bottom: 10px;
             font-weight: 700;
-            color: #FFF8DC;
+            color: #FFF8DC; /* Màu trắng ngà */
             text-shadow: 0 2px 10px rgba(0,0,0,0.2);
             letter-spacing: -0.5px;
         }
@@ -120,7 +121,7 @@
             border-radius: 20px;
             padding: 30px;
             box-shadow: var(--shadow);
-            border: 1px solid rgba(210, 180, 140, 0.3);
+            border: 1px solid rgba(210, 105, 30, 0.1);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
@@ -168,14 +169,14 @@
             margin-right: 15px;
             font-size: 1.5rem;
             color: white;
-            background: var(--secondary);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: var(--secondary); /* Nâu đất */
         }
         
-        .chapter-card:nth-child(1) .chapter-icon { background: #8B4513; }
-        .chapter-card:nth-child(2) .chapter-icon { background: #A0522D; }
-        .chapter-card:nth-child(3) .chapter-icon { background: #654321; }
-        .chapter-card:nth-child(4) .chapter-icon { background: #D2691E; }
+        .chapter-card:nth-child(1) .chapter-icon { background: var(--primary); }
+        .chapter-card:nth-child(2) .chapter-icon { background: var(--secondary); }
+        .chapter-card:nth-child(3) .chapter-icon { background: var(--accent); }
+        .chapter-card:nth-child(4) .chapter-icon { background: var(--success); }
         
         .chapter-title {
             color: var(--dark);
@@ -202,7 +203,7 @@
             padding: 15px;
             border-radius: 12px;
             transition: all 0.3s;
-            background: rgba(255, 248, 220, 0.7);
+            background: rgba(245, 245, 220, 0.5); /* Màu be */
             border: 1px solid rgba(139, 69, 19, 0.1);
             position: relative;
             overflow: hidden;
@@ -221,10 +222,9 @@
         }
         
         .lesson-link:hover {
-            background: #FFF8DC;
+            background: #FFF8DC; /* Trắng ngà */
             transform: translateX(10px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            border-color: var(--accent);
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.1);
         }
         
         .lesson-link:hover::before {
@@ -242,13 +242,13 @@
             justify-content: center;
             width: 40px;
             height: 40px;
-            background: var(--primary);
+            background: var(--secondary); /* Nâu đất */
             color: white;
             border-radius: 10px;
             margin-right: 15px;
             font-weight: 600;
             font-size: 0.9rem;
-            box-shadow: 0 4px 10px rgba(139, 69, 19, 0.3);
+            box-shadow: 0 4px 10px rgba(139, 69, 19, 0.2);
             flex-shrink: 0;
         }
         
@@ -282,14 +282,14 @@
             left: 30px;
             transform: translateY(-50%);
             padding: 14px 28px;
-            background: rgba(255, 248, 220, 0.95);
-            color: var(--primary);
+            background: rgba(255, 248, 220, 0.95); /* Trắng ngà */
+            color: var(--primary); /* Nâu đậm */
             text-decoration: none;
             border-radius: 12px;
             font-weight: 600;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
-            border: 2px solid rgba(210, 180, 140, 0.5);
+            border: 2px solid rgba(139, 69, 19, 0.2);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -298,10 +298,10 @@
         }
         
         .home-button:hover {
-            background: #FFF8DC;
-            color: var(--secondary);
+            background: #FFF8DC; /* Trắng ngà đậm hơn */
+            color: var(--dark); /* Nâu rất đậm */
             transform: translateY(-50%) translateX(-5px);
-            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.2);
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.15);
             border-color: var(--accent);
         }
         
@@ -319,18 +319,18 @@
             padding: 30px;
             color: var(--dark);
             font-size: 0.95rem;
-            background: rgba(255, 248, 220, 0.9);
+            background: rgba(255, 248, 220, 0.9); /* Trắng ngà */
             border-radius: 20px;
             backdrop-filter: blur(10px);
             box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            border: 1px solid rgba(210, 180, 140, 0.5);
+            border: 1px solid rgba(139, 69, 19, 0.1);
         }
         
         .footer-text {
             font-weight: 600;
             font-size: 1.1rem;
             margin-bottom: 10px;
-            color: var(--primary);
+            color: var(--primary); /* Nâu đậm */
         }
         
         .footer-subtext {
@@ -342,7 +342,7 @@
         .particle {
             position: fixed;
             border-radius: 50%;
-            background: var(--accent);
+            background: var(--secondary); /* Nâu đất */
             opacity: 0.1;
             z-index: -1;
         }
@@ -354,7 +354,7 @@
             left: 0;
             width: 0;
             height: 3px;
-            background: var(--primary);
+            background: var(--primary); /* Nâu đậm */
             z-index: 1000;
             transition: width 0.3s;
         }
@@ -446,7 +446,7 @@
             <div class="header-content">
                 <h1>Vật Lý 11</h1>
                 <p class="subtitle">Kết Nối Tri Thức Với Cuộc Sống</p>
-                <a href="../" class="home-button">
+                <a href="../" class="home-button"> <!-- Đã sửa link tương đối -->
                     <span class="button-icon">←</span>
                     Trang chủ
                 </a>
@@ -526,7 +526,7 @@
         }
 
         function createParticles() {
-            const colors = ['#8B4513', '#654321', '#A0522D', '#D2691E'];
+            const colors = ['#8B4513', '#A0522D', '#D2691E', '#BC8F8F'];
             for (let i = 0; i < 15; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
