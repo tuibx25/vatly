@@ -522,7 +522,8 @@
 
         function generateLessonLink(lessonIndex) {
             const lessonNumber = (lessonIndex + 1).toString().padStart(2, '0');
-            return `https://tuibx25.github.io/bx/vl11/${lessonNumber}/`;
+            // Đã đổi từ link tuyệt đối sang link tương đối
+            return `./${lessonNumber}/`;
         }
 
         function createParticles() {
