@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chứng Minh Công của Lực Điện</title>
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/favicon.ico" type="image/x-icon">
+    <style>
+        :root {
+            --primary-color: #8B4513; /* Màu nâu đất chủ đạo */
+            --secondary-color: #D2B48C; /* Màu nâu nhạt */
+            --text-color: #333333; /* Màu chữ chính */
+            --background-color: #FAF0E6; /* Màu nền nhẹ */
+            --card-background: #FFFFFF; /* Màu nền card */
+            --border-color: #A0522D; /* Màu viền */
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            background-color: var(--card-background);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(139, 69, 19, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            margin: 25px 0 15px;
+        }
+        
+        h3 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin: 20px 0 10px;
+        }
+        
+        p {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .formula {
+            background-color: #F5F5DC; /* Màu be nhạt */
+            border-left: 5px solid var(--primary-color);
+            padding: 20px;
+            margin: 25px 0;
+            font-size: 1.6rem;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .diagram-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #F9F3EC;
+            border-radius: 10px;
+            border: 1px dashed var(--border-color);
+        }
+        
+        .diagram {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .diagram-caption {
+            font-size: 1.3rem;
+            margin-top: 15px;
+            color: var(--primary-color);
+            font-style: italic;
+        }
+        
+        .proof-section {
+            background-color: #F9F3EC;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border: 1px solid var(--secondary-color);
+        }
+        
+        .conclusion {
+            background-color: #F0E6D2;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border-left: 5px solid var(--primary-color);
+        }
+        
+        .step {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px dotted var(--secondary-color);
+        }
+        
+        .step:last-child {
+            border-bottom: none;
+        }
+        
+        .note {
+            font-style: italic;
+            background-color: #F5F5DC;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.3rem;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid var(--border-color);
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            h3 {
+                font-size: 1.6rem;
+            }
+            
+            p, .formula {
+                font-size: 1.3rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.9rem;
+            }
+            
+            h2 {
+                font-size: 1.6rem;
+            }
+            
+            p, .formula {
+                font-size: 1.2rem;
+            }
+        }
+        
+        /* Hiệu ứng cho công thức */
+        .formula-highlight {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .vector {
+            font-weight: bold;
+            text-decoration: overline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Chứng Minh Công của Lực Điện</h1>
+            <p style="font-size: 1.7rem; color: var(--primary-color);">Sử dụng công thức A = Fscosα để chứng minh công của lực điện F = qE không phụ thuộc vào hình dạng đường đi</p>
+        </header>
+        
+        <section>
+            <h2>1. Công thức tổng quát tính công</h2>
+            <p>Công của một lực được tính bằng công thức:</p>
+            <div class="formula">
+                A = <span class="formula-highlight">F</span> · <span class="formula-highlight">s</span> · cosα
+            </div>
+            <p>Trong đó:</p>
+            <ul style="font-size: 1.5rem; padding-left: 30px; margin-bottom: 20px;">
+                <li><span class="formula-highlight">A</span> là công của lực (J)</li>
+                <li><span class="formula-highlight">F</span> là độ lớn của lực (N)</li>
+                <li><span class="formula-highlight">s</span> là quãng đường dịch chuyển (m)</li>
+                <li><span class="formula-highlight">α</span> là góc giữa vectơ lực và vectơ dịch chuyển</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2>2. Bài toán đặt ra</h2>
+            <p>Xét điện tích dương <span class="formula-highlight">q</span> di chuyển trong điện trường đều có cường độ điện trường <span class="formula-highlight">E</span>.</p>
+            <p>Lực điện tác dụng lên điện tích: <span class="formula-highlight">F = qE</span></p>
+            <p>Ta cần chứng minh rằng công của lực điện khi điện tích di chuyển từ điểm M đến điểm N:</p>
+            <ul style="font-size: 1.5rem; padding-left: 30px; margin-bottom: 20px;">
+                <li>Theo đường thẳng MN</li>
+                <li>Theo đường gấp khúc MPN</li>
+            </ul>
+            <p>có giá trị như nhau, không phụ thuộc vào hình dạng đường đi.</p>
+            
+            <div class="diagram-container">
+                <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/19/19.01.png" alt="Hình minh họa điện tích di chuyển trong điện trường đều" class="diagram">
+                <p class="diagram-caption">Hình 1: Điện tích di chuyển từ M đến N theo đường thẳng MN và đường gấp khúc MPN</p>
+            </div>
+        </section>
+        
+        <section class="proof-section">
+            <h2>3. Chứng minh theo hình học</h2>
+            
+            <div class="step">
+                <h3>a) Trường hợp 1: Điện tích di chuyển theo đường thẳng MN</h3>
+                <p>Độ dịch chuyển: <span class="formula-highlight">s = MN</span></p>
+                <p>Góc giữa lực điện <span class="formula-highlight">F</span> (cùng phương với <span class="formula-highlight">E</span>) và độ dịch chuyển <span class="formula-highlight">MN</span> là <span class="formula-highlight">α</span>.</p>
+                <p>Công của lực điện:</p>
+                <div class="formula">
+                    A₁ = F · MN · cosα = qE · MN · cosα
+                </div>
+                <p>Nhận xét: <span class="formula-highlight">MN · cosα</span> chính là hình chiếu của MN lên phương của lực điện (phương của điện trường).</p>
+                <p>Đặt <span class="formula-highlight">d = MN · cosα</span> là độ dịch chuyển theo phương của điện trường.</p>
+                <div class="formula">
+                    A₁ = qE · d
+                </div>
+            </div>
+            
+            <div class="step">
+                <h3>b) Trường hợp 2: Điện tích di chuyển theo đường gấp khúc MPN</h3>
+                <p>Chia thành 2 giai đoạn:</p>
+                
+                <h4>Giai đoạn 1: Từ M đến P</h4>
+                <p>Độ dịch chuyển: <span class="formula-highlight">s₁ = MP</span></p>
+                <p>Góc giữa lực điện và độ dịch chuyển MP là <span class="formula-highlight">α₁</span>.</p>
+                <p>Công của lực điện trong giai đoạn này:</p>
+                <div class="formula">
+                    A<sub>MP</sub> = F · MP · cosα₁ = qE · MP · cosα₁
+                </div>
+                
+                <h4>Giai đoạn 2: Từ P đến N</h4>
+                <p>Độ dịch chuyển: <span class="formula-highlight">s₂ = PN</span></p>
+                <p>Góc giữa lực điện và độ dịch chuyển PN là <span class="formula-highlight">α₂</span>.</p>
+                <p>Công của lực điện trong giai đoạn này:</p>
+                <div class="formula">
+                    A<sub>PN</sub> = F · PN · cosα₂ = qE · PN · cosα₂
+                </div>
+                
+                <h4>Tổng công trên cả đường gấp khúc MPN:</h4>
+                <div class="formula">
+                    A₂ = A<sub>MP</sub> + A<sub>PN</sub> = qE · MP · cosα₁ + qE · PN · cosα₂
+                </div>
+                <div class="formula">
+                    A₂ = qE · (MP · cosα₁ + PN · cosα₂)
+                </div>
+                
+                <p>Nhận xét hình học: <span class="formula-highlight">MP · cosα₁</span> là hình chiếu của MP lên phương điện trường.</p>
+                <p><span class="formula-highlight">PN · cosα₂</span> là hình chiếu của PN lên phương điện trường.</p>
+                <p>Tổng hai hình chiếu này chính là hình chiếu của MN lên phương điện trường:</p>
+                <div class="formula">
+                    MP · cosα₁ + PN · cosα₂ = MN · cosα = d
+                </div>
+                <p>Vậy:</p>
+                <div class="formula">
+                    A₂ = qE · d
+                </div>
+            </div>
+        </section>
+        
+        <section class="conclusion">
+            <h2>4. Kết luận</h2>
+            <p>So sánh công trong hai trường hợp:</p>
+            <div class="formula">
+                A₁ = qE · d &nbsp;&nbsp; và &nbsp;&nbsp; A₂ = qE · d
+            </div>
+            <p style="font-size: 1.6rem; font-weight: bold; text-align: center; margin-top: 20px; color: var(--primary-color);">
+                ⇒ A₁ = A₂ = qE · d
+            </p>
+            <p>Kết quả này chứng tỏ:</p>
+            <ul style="font-size: 1.5rem; padding-left: 30px; margin-top: 15px;">
+                <li>Công của lực điện <span class="formula-highlight">F = qE</span> khi điện tích di chuyển trong điện trường đều <strong>không phụ thuộc vào hình dạng đường đi</strong>.</li>
+                <li>Công chỉ phụ thuộc vào vị trí điểm đầu M và điểm cuối N.</li>
+                <li>Giá trị công được tính bằng: <span class="formula-highlight">A = qE · d</span>, với <span class="formula-highlight">d</span> là độ dịch chuyển theo phương điện trường từ M đến N.</li>
+            </ul>
+            
+            <div class="note">
+                <p>Lưu ý: Kết quả này đúng cho điện trường đều. Trong điện trường không đều, công của lực điện cũng không phụ thuộc vào đường đi, nhưng cách tính phức tạp hơn.</p>
+            </div>
+        </section>
+        
+        <section>
+            <h2>5. Ý nghĩa vật lý</h2>
+            <p>Từ chứng minh trên, ta rút ra được những kết luận quan trọng:</p>
+            <ul style="font-size: 1.5rem; padding-left: 30px;">
+                <li>Lực điện là lực thế (lực bảo toàn).</li>
+                <li>Công của lực điện chỉ phụ thuộc vào vị trí điểm đầu và điểm cuối, không phụ thuộc vào đường đi.</li>
+                <li>Có thể định nghĩa thế năng của điện tích trong điện trường.</li>
+                <li>Trường tĩnh điện là trường thế.</li>
+            </ul>
+        </section>
+        
+        <footer>
+            <p>Lớp 11 - Chương trình Vật lý: Điện trường và Cường độ điện trường</p>
+            <p>© 2025 - Công của lực điện</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Công của Lực Điện - Vật Lý 11</title>
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/favicon.ico" type="image/x-icon">
+    <!-- MathJax để hiển thị công thức toán -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary-color: #8B4513;    /* nâu đất đậm */
+            --secondary-color: #D2691E;  /* nâu đất nhạt */
+            --light-color: #F5DEB3;      /* nâu đất rất nhạt */
+            --text-color: #3E2723;       /* nâu đậm cho chữ */
+            --background-color: #FFF8DC; /* nền sáng */
+            --card-background: #FAF0E6;  /* nền card */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: var(--secondary-color);
+            font-size: 1.8rem;
+            font-weight: normal;
+        }
+        
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .main-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .diagram-container {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .diagram {
+            width: 100%;
+            max-width: 500px;
+            background-color: var(--card-background);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .diagram-title {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+        }
+        
+        .diagram-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .section {
+            background-color: var(--card-background);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--secondary-color);
+            padding-bottom: 8px;
+        }
+        
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.7rem;
+            margin: 20px 0 10px 0;
+        }
+        
+        p, li {
+            font-size: 1.5rem; /* Kích thước font cho TV */
+            margin-bottom: 15px;
+        }
+        
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .formula {
+            background-color: white;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 1.5rem;
+            overflow-x: auto;
+        }
+        
+        .conclusion {
+            background-color: var(--light-color);
+            border: 2px solid var(--secondary-color);
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+            font-size: 1.6rem;
+        }
+        
+        .conclusion-title {
+            color: var(--primary-color);
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Responsive cho điện thoại */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            h3 {
+                font-size: 1.5rem;
+            }
+            
+            p, li {
+                font-size: 1.2rem;
+            }
+            
+            .formula {
+                font-size: 1.2rem;
+                padding: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .section {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        /* Hiệu ứng nhẹ cho công thức */
+        .formula:hover {
+            box-shadow: 0 4px 8px rgba(139, 69, 19, 0.2);
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .note {
+            font-style: italic;
+            color: var(--secondary-color);
+            font-size: 1.3rem;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CÔNG CỦA LỰC ĐIỆN</h1>
+            <p class="subtitle">Chứng minh công không phụ thuộc đường đi trong điện trường đều</p>
+        </header>
+        
+        <div class="content">
+            <div class="main-content">
+                <section class="section">
+                    <h2>1. Công thức cơ bản</h2>
+                    <p>Công thức tính công cơ học tổng quát:</p>
+                    <div class="formula">
+                        \[ A = F s \cos\alpha \]
+                    </div>
+                    <p>Trong đó:</p>
+                    <ul>
+                        <li>\( A \): công của lực</li>
+                        <li>\( F \): độ lớn lực tác dụng</li>
+                        <li>\( s \): quãng đường dịch chuyển</li>
+                        <li>\( \alpha \): góc giữa vectơ lực \( \vec{F} \) và vectơ dịch chuyển \( \vec{s} \)</li>
+                    </ul>
+                    
+                    <p>Trong trường hợp lực điện:</p>
+                    <div class="formula">
+                        \[ \vec{F} = q\vec{E} \]
+                    </div>
+                    <p>với:</p>
+                    <ul>
+                        <li>\( q \): điện tích (C)</li>
+                        <li>\( \vec{E} \): cường độ điện trường đều (V/m)</li>
+                    </ul>
+                </section>
+                
+                <section class="section">
+                    <h2>2. Trường hợp 1: Đi từ M đến N thẳng</h2>
+                    <p>Giả sử điện tích \( q \) di chuyển thẳng từ M đến N trong điện trường đều \( \vec{E} \).</p>
+                    
+                    <div class="formula">
+                        \[ A_{MN} = F \cdot MN \cdot \cos(\widehat{\vec{F}, \vec{MN}}) \]
+                    </div>
+                    
+                    <p>Thay \( F = qE \):</p>
+                    <div class="formula">
+                        \[ A_{MN} = qE \cdot MN \cdot \cos\theta \]
+                    </div>
+                    
+                    <p>Trong đó \( \theta \) là góc giữa \( \vec{MN} \) và \( \vec{E} \).</p>
+                    
+                    <p>Đặt \( d = MN \cdot \cos\theta \) là hình chiếu của đoạn MN lên phương của \( \vec{E} \) (độ dịch chuyển theo phương điện trường).</p>
+                    
+                    <div class="formula">
+                        \[ \Rightarrow A_{MN} = qE \cdot d \]
+                    </div>
+                    
+                    <p class="note">Chú ý: \( d \) có thể dương hoặc âm tùy vào chiều dịch chuyển so với chiều của \( \vec{E} \).</p>
+                </section>
+                
+                <section class="section">
+                    <h2>3. Trường hợp 2: Đi từ M đến N theo đường gấp khúc MPN</h2>
+                    
+                    <h3>Đoạn M → P:</h3>
+                    <p>Gọi \( d_1 \) là hình chiếu của MP lên phương \( \vec{E} \):</p>
+                    <div class="formula">
+                        \[ A_{MP} = qE \cdot d_1 \]
+                    </div>
+                    
+                    <h3>Đoạn P → N:</h3>
+                    <p>Gọi \( d_2 \) là hình chiếu của PN lên phương \( \vec{E} \):</p>
+                    <div class="formula">
+                        \[ A_{PN} = qE \cdot d_2 \]
+                    </div>
+                    
+                    <h3>Tổng công:</h3>
+                    <div class="formula">
+                        \[ A_{MPN} = A_{MP} + A_{PN} = qE \cdot d_1 + qE \cdot d_2 \]
+                        \[ A_{MPN} = qE \cdot (d_1 + d_2) \]
+                    </div>
+                    
+                    <p>Theo hình học, \( d_1 + d_2 \) chính là hình chiếu của MN lên phương \( \vec{E} \), tức bằng \( d \):</p>
+                    <div class="formula">
+                        \[ d_1 + d_2 = d \]
+                        \[ \Rightarrow A_{MPN} = qE \cdot d \]
+                    </div>
+                </section>
+            </div>
+            
+            <div class="diagram-container">
+                <div class="diagram">
+                    <h3 class="diagram-title">Hình minh họa</h3>
+                    <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/19/19.02.png" alt="Điện tích di chuyển trong điện trường đều" class="diagram-img">
+                    <p class="note" style="text-align: center; margin-top: 15px;">Điện tích q di chuyển từ M đến N theo hai đường khác nhau trong điện trường đều E.</p>
+                </div>
+                
+                <div class="conclusion">
+                    <h3 class="conclusion-title">KẾT LUẬN</h3>
+                    <p>Hai công bằng nhau:</p>
+                    <div class="formula" style="text-align: center; background-color: transparent; border: none;">
+                        \[ A_{MN} = A_{MPN} = qEd \]
+                    </div>
+                    <p>Trong đó \( d \) là độ dịch chuyển theo phương đường sức từ điểm đầu đến điểm cuối.</p>
+                    <p><strong>Công của lực điện trong điện trường đều chỉ phụ thuộc vào vị trí điểm đầu và điểm cuối, không phụ thuộc vào dạng đường đi.</strong> Đây là tính chất của lực thế.</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer style="text-align: center; padding: 20px; color: var(--secondary-color); border-top: 1px solid var(--secondary-color); margin-top: 30px;">
+            <p>Vật Lý 11 - Điện trường đều và công của lực điện</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Đảm bảo MathJax hiển thị lại khi chuyển kích thước màn hình
+        window.addEventListener('resize', function() {
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        });
+        
+        // Thêm hiệu ứng khi cuộn trang
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (sectionTop < windowHeight * 0.75) {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }
+            });
+        });
+        
+        // Khởi tạo hiệu ứng ban đầu
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section, .diagram, .conclusion');
+            sections.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+            
+            setTimeout(() => {
+                sections.forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>
