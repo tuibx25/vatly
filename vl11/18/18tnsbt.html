@@ -345,10 +345,18 @@
             transform: translateY(-2px);
         }
         
+        /* Màu sắc cho câu trả lời khi được chọn */
         .option.selected {
-            background-color: var(--selected-color);
-            color: white;
-            border-color: var(--dark-brown);
+            background-color: #C0C0C0; /* Màu bạc khi chọn */
+            color: #333333; /* Màu chữ tối cho dễ đọc */
+            border-color: #999999;
+        }
+        
+        /* Giữ nguyên màu khi hover cho đáp án đã chọn */
+        .option.selected:hover {
+            background-color: #C0C0C0; /* Giữ màu bạc khi hover */
+            border-color: #999999;
+            transform: translateY(-2px);
         }
         
         .option-label {
@@ -370,7 +378,7 @@
             line-height: 1.1;
         }
         
-        /* Màu sắc cho câu trả lời */
+        /* Màu sắc cho câu trả lời đúng/sai */
         .option.correct {
             background-color: rgba(46, 125, 50, 0.2);
             border-color: #2E7D32;
@@ -500,7 +508,6 @@
         --medium-brown: #A0522D;
         --card-bg: #FAF3E9;
         --border-color: #BCAAA4;
-        --selected-color: #8D6E63;
         
         /* Responsive cho điện thoại */
         @media (max-width: 768px) {
