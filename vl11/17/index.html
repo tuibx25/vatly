@@ -3,396 +3,731 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tóm tắt bài 17: Khái niệm điện trường</title>
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
-<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/favicon.ico" type="image/x-icon">
-    <!-- Thêm MathJax để hiển thị công thức toán -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <title>Bài 17: Khái niệm điện trường</title>
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary-dark: #8B4513;      /* Nâu đất đậm */
+            --primary-medium: #A0522D;    /* Nâu đất trung bình */
+            --primary-light: #D2B48C;     /* Nâu đất nhạt */
+            --secondary: #DEB887;         /* Nâu be */
+            --text-dark: #3E2723;         /* Nâu sô cô la đậm cho chữ */
+            --text-medium: #5D4037;       /* Nâu sô cô la trung bình */
+            --text-light: #795548;        /* Nâu sô cô la nhạt */
+            --background: #FAF3E6;        /* Nền màu kem nhẹ */
+            --card-bg: #FFF8E1;           /* Nền card màu kem đậm hơn */
+            --border-color: #BCAAA4;      /* Màu viền nâu nhạt */
+            --shadow: rgba(139, 69, 19, 0.15);
+            --header-bg: linear-gradient(135deg, var(--primary-dark), var(--primary-medium));
+            --formula-bg: #FFF8DC;        /* Màu nền công thức */
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background-color: #f5f7fa;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background);
             padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .container {
-            max-width: 1000px;
-            margin: 0 auto;
             background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--shadow);
             overflow: hidden;
+            border: 1px solid var(--border-color);
         }
         
-        header {
-            background: linear-gradient(135deg, #2c3e50, #4a6491);
+        /* Header */
+        .header {
+            background: var(--header-bg);
             color: white;
-            padding: 25px;
+            padding: 25px 30px;
             text-align: center;
+            position: relative;
+            border-bottom: 4px solid var(--primary-light);
         }
         
-        h1 {
-            font-size: 1.8rem;
+        .header h1 {
+            font-size: 2.8rem;
             margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
         }
         
-        .subtitle {
-            font-size: 1.1rem;
+        .header p {
+            font-size: 1.4rem;
             opacity: 0.9;
+            font-weight: 300;
         }
         
+        /* Content */
         .content {
-            padding: 25px;
+            padding: 30px;
         }
         
         .section {
-            margin-bottom: 35px;
-            border-left: 4px solid #4a6491;
-            padding-left: 15px;
+            margin-bottom: 40px;
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary-medium);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
         
-        .section-title {
-            color: #2c3e50;
+        .section h2 {
+            color: var(--primary-dark);
+            font-size: 2.2rem;
             margin-bottom: 20px;
-            font-size: 1.5rem;
-            background-color: #f0f5ff;
-            padding: 10px 15px;
-            border-radius: 8px;
-            display: inline-block;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed var(--primary-light);
+            display: flex;
+            align-items: center;
         }
         
-        h3 {
-            color: #4a6491;
-            margin: 15px 0 10px;
-            font-size: 1.2rem;
+        .section h2 i {
+            margin-right: 15px;
+            color: var(--primary-medium);
         }
         
-        ul, ol {
-            padding-left: 20px;
+        .section h3 {
+            color: var(--primary-medium);
+            font-size: 1.8rem;
+            margin: 25px 0 15px;
+            padding-left: 10px;
+            border-left: 4px solid var(--primary-light);
+        }
+        
+        .section p, .section li {
+            font-size: 1.5rem; /* Kích thước font cho TV */
+            color: var(--text-medium);
             margin-bottom: 15px;
         }
         
-        li {
-            margin-bottom: 8px;
-        }
-        
-        .important {
-            background-color: #e8f4fd;
-            border-left: 4px solid #3498db;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 0 8px 8px 0;
-        }
-        
         .formula {
-            background-color: #f9f9f9;
-            padding: 15px;
+            background-color: var(--formula-bg);
+            border: 2px solid var(--border-color);
             border-radius: 8px;
-            margin: 15px 0;
-            border: 1px solid #e0e0e0;
-            text-align: center;
-            overflow-x: auto;
-            font-size: 1.1rem;
-        }
-        
-        .note {
-            background-color: #fff8e1;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 0 8px 8px 0;
-        }
-        
-        .example {
-            background-color: #f0f8f0;
-            border-left: 4px solid #2ecc71;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 0 8px 8px 0;
-        }
-        
-        .exercise {
-            background-color: #f8f0f5;
-            border-left: 4px solid #9b59b6;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 0 8px 8px 0;
-        }
-        
-        .question {
-            background-color: #fff0f0;
-            padding: 12px;
-            border-radius: 8px;
-            margin: 10px 0;
-            border-left: 4px solid #e74c3c;
-        }
-        
-        .summary-box {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
             padding: 20px;
-            border-radius: 10px;
-            margin-top: 25px;
-            border: 1px solid #dee2e6;
+            margin: 20px 0;
+            font-size: 1.6rem;
+            text-align: center;
+            font-family: 'Cambria', 'Times New Roman', serif;
+            color: var(--text-dark);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
         }
         
-        .keywords {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
+        .formula-number {
+            display: block;
+            text-align: right;
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-top: 8px;
+            font-style: italic;
         }
         
-        .keyword {
-            background-color: #4a6491;
+        .note-box {
+            background-color: #F5F5DC; /* Màu be nhạt */
+            border-left: 5px solid var(--primary-medium);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .note-box h3 {
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            font-size: 1.7rem;
+        }
+        
+        .section ul, .section ol {
+            padding-left: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .section li {
+            margin-bottom: 10px;
+        }
+        
+        .key-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .point {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-top: 4px solid var(--primary-medium);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .point h3 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+        }
+        
+        .point p {
+            font-size: 1.4rem;
+        }
+        
+        .highlight {
+            background-color: var(--secondary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .definition {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        .question-box {
+            background-color: #FFF0E0;
+            border-left: 5px solid var(--primary-medium);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .question-box h3 {
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            font-size: 1.7rem;
+        }
+        
+        .example-box {
+            background-color: #E8F4F8;
+            border-left: 5px solid #4a6fa5;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .example-box h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.7rem;
+        }
+        
+        /* Image container */
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 6px;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .image-caption {
+            font-style: italic;
+            color: var(--text-light);
+            margin-top: 8px;
+            font-size: 1.3rem;
+        }
+        
+        /* Solution button and container */
+        .solution-btn {
+            background-color: var(--primary-medium);
             color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.4rem;
+            margin: 15px 0;
+            display: block;
+            transition: background-color 0.3s;
+            font-weight: 600;
         }
         
+        .solution-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .solution {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin: 10px 0 20px;
+            border-left: 4px solid var(--primary-medium);
+        }
+        
+        .solution.active {
+            max-height: 2000px; /* Đủ lớn để chứa nội dung giải */
+        }
+        
+        .solution-content {
+            padding: 20px;
+            font-size: 1.4rem;
+        }
+        
+        .solution-content h4 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+        }
+        
+        .solution-content p {
+            margin-bottom: 10px;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--primary-dark);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            border-top: 1px solid var(--primary-light);
+        }
+        
+        .footer p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Responsive */
         @media (max-width: 768px) {
-            .container {
-                border-radius: 10px;
+            .header h1 {
+                font-size: 2.2rem;
             }
             
-            header {
-                padding: 20px 15px;
+            .header p {
+                font-size: 1.2rem;
             }
             
-            h1 {
+            .section h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section h3 {
                 font-size: 1.5rem;
             }
             
-            .content {
-                padding: 20px 15px;
+            .section p, .section li {
+                font-size: 1.3rem; /* Giảm kích thước font trên mobile */
             }
             
             .formula {
-                font-size: 1rem;
-                padding: 10px;
+                font-size: 1.4rem;
+                padding: 15px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .key-points {
+                grid-template-columns: 1fr;
+            }
+            
+            .solution-btn {
+                font-size: 1.2rem;
+                padding: 10px 20px;
+            }
+            
+            .solution-content {
+                font-size: 1.2rem;
+                padding: 15px;
             }
         }
         
-        /* Tùy chỉnh MathJax */
-        .MathJax {
-            font-size: 1.1em !important;
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 20px 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section {
+                padding: 20px 15px;
+            }
+            
+            .section h2 {
+                font-size: 1.6rem;
+            }
+            
+            .section h3 {
+                font-size: 1.4rem;
+            }
+            
+            .section p, .section li {
+                font-size: 1.2rem;
+            }
         }
         
-        mjx-container[jax="CHTML"] {
-            text-align: center !important;
-        }
-        
-        mjx-container[jax="CHTML"][display="true"] {
-            margin: 1em 0 !important;
-        }
-        
-        .concept {
-            font-style: italic;
-            color: #2c3e50;
-            margin: 15px 0;
-            padding: 10px;
-            border-left: 3px solid #3498db;
-        }
-        
-        .formula-label {
-            text-align: right;
-            font-style: italic;
-            color: #666;
-            margin-top: 5px;
+        /* TV Optimizations */
+        @media (min-width: 1200px) {
+            .section p, .section li {
+                font-size: 1.6rem; /* Tăng kích thước font cho TV lớn */
+            }
+            
+            .section h3 {
+                font-size: 2rem;
+            }
+            
+            .header h1 {
+                font-size: 3.2rem;
+            }
+            
+            .formula {
+                font-size: 1.8rem;
+            }
+            
+            .solution-content {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Bài 17: KHÁI NIỆM ĐIỆN TRƯỜNG</h1>
-            <p class="subtitle">Tóm tắt nội dung chính</p>
+        <header class="header">
+            <h1><i class="fas fa-bolt"></i> Bài 17: Khái niệm điện trường</h1>
+            <p>Chương III - Điện trường</p>
         </header>
         
-        <div class="content">
-            <!-- I. KHÁI NIỆM ĐIỆN TRƯỜNG -->
-            <div class="section">
-                <div class="section-title">I. KHÁI NIỆM ĐIỆN TRƯỜNG</div>
+        <main class="content">
+            <section class="section">
+                <h2><i class="fas fa-magnet"></i> Khái niệm điện trường</h2>
+                <p><span class="definition">Điện trường</span> là một dạng vật chất tồn tại xung quanh các điện tích. Nó là môi trường truyền tương tác điện giữa các điện tích (tương tự như từ trường truyền tương tác giữa các nam châm).</p>
                 
-                <div class="question">
-                    <p><strong>Tình huống:</strong> Hai quả cầu tích điện cùng dấu được treo bằng hai sợi dây mảnh không dẫn điện. Tại sao chúng không tiếp xúc nhưng vẫn tương tác được với nhau?</p>
+                <div class="note-box">
+                    <h3><i class="fas fa-lightbulb"></i> Tính chất của điện trường</h3>
+                    <p>Điện trường tác dụng lực điện lên các điện tích đặt trong nó.</p>
                 </div>
                 
-                <div class="question">
-                    <p><strong>Câu hỏi 1:</strong> Có phải không khí đã truyền tương tác điện từ điện tích Q tới điện tích q?</p>
-                    <p><strong>Câu hỏi 2:</strong> Vùng không gian bao quanh một nam châm có từ trường. Tương tự như vậy, vùng không gian bao quanh một điện tích có điện trường. Ta có thể phát hiện sự tồn tại của điện trường bằng cách nào?</p>
+                <div class="image-container">
+                    <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/17/17.1.png" alt="Tương tác giữa hai điện tích">
+                    <p class="image-caption">Hình 17.1. Tương tác giữa hai điện tích</p>
                 </div>
                 
-                <div class="important">
-                    <h3>Khái niệm điện trường</h3>
-                    <ul>
-                        <li>Xung quanh nam châm có từ trường, từ trường sẽ truyền tương tác từ nam châm này tới nam châm khác.</li>
-                        <li>Tương tự như nam châm, xung quanh điện tích có một điện trường, điện trường sẽ truyền tương tác giữa các điện tích, đó là một trường lực.</li>
-                        <li>Điện trường được tạo ra bởi điện tích, là dạng vật chất tồn tại xung quanh điện tích và truyền tương tác giữa các điện tích.</li>
-                    </ul>
-                    <div class="concept">
-                        <p><strong>Định nghĩa:</strong> Điện trường là dạng vật chất tồn tại xung quanh điện tích và truyền tương tác điện.</p>
+                <div class="question-box">
+                    <h3><i class="fas fa-question-circle"></i> Câu hỏi thảo luận</h3>
+                    <ol>
+                        <li>Có phải không khí đã truyền tương tác điện từ điện tích Q tới điện tích q?</li>
+                        <li>Vùng không gian bao quanh một nam châm có từ trường. Tương tự như vậy, vùng không gian bao quanh một điện tích có điện trường. Ta có thể phát hiện sự tồn tại của điện trường bằng cách nào?</li>
+                    </ol>
+                    <button class="solution-btn">Xem hướng dẫn trả lời</button>
+                    <div class="solution">
+                        <div class="solution-content">
+                            <h4>Hướng dẫn trả lời:</h4>
+                            <p><strong>Câu 1:</strong> Không phải không khí truyền tương tác điện. Điện trường là môi trường truyền tương tác điện, tồn tại ngay cả trong chân không.</p>
+                            <p><strong>Câu 2:</strong> Ta có thể phát hiện sự tồn tại của điện trường bằng cách đặt một điện tích thử (điện tích dương nhỏ) vào vùng không gian đó. Nếu điện tích thử chịu tác dụng của lực điện, thì vùng không gian đó có điện trường.</p>
+                        </div>
                     </div>
-                    <p><strong>Lưu ý:</strong> Trong bài này ta chỉ xét điện trường của các điện tích đứng yên.</p>
                 </div>
-            </div>
+            </section>
             
-            <!-- II. CƯỜNG ĐỘ ĐIỆN TRƯỜNG -->
-            <div class="section">
-                <div class="section-title">II. CƯỜNG ĐỘ ĐIỆN TRƯỜNG</div>
+            <section class="section">
+                <h2><i class="fas fa-charging-station"></i> II. Cường độ điện trường</h2>
                 
-                <h3>1. Khái niệm cường độ điện trường</h3>
+                <p><span class="definition">Cường độ điện trường</span> tại một điểm đặc trưng cho độ mạnh/yếu của điện trường tại điểm đó.</p>
+                
+                <div class="formula">
+                    \[ \vec{E} = \dfrac{\vec{F}}{q} \]
+                    <span class="formula-number">(17.1)</span>
+                </div>
+                
+                <p>hoặc độ lớn:</p>
+                
+                <div class="formula">
+                    \[ E = \dfrac{F}{|q|} \]
+                </div>
+                
+                <p>Trong đó: \(\vec{F}\) là lực điện tác dụng lên điện tích thử \(q\) (C) đặt tại điểm cần xét.</p>
+                
+                <p><span class="highlight">Đơn vị:</span> Vôn trên mét (V/m).</p>
+                
+                <div class="note-box">
+                    <h3><i class="fas fa-exclamation-circle"></i> Đặc điểm của vectơ cường độ điện trường \(\vec{E}\)</h3>
+                    <ul>
+                        <li><span class="highlight">Phương:</span> Trùng với phương của lực điện tác dụng lên điện tích thử.</li>
+                        <li><span class="highlight">Chiều:</span> Cùng chiều với \(\vec{F}\) nếu \(q > 0\), ngược chiều với \(\vec{F}\) nếu \(q < 0\).</li>
+                        <li><span class="highlight">Độ lớn:</span> \(E = F / |q|\), cho biết lực tác dụng lên một đơn vị điện tích (1C) đặt tại điểm đó.</li>
+                    </ul>
+                </div>
+                
+                <h3>Cường độ điện trường do một điện tích điểm Q gây ra</h3>
+                
+                <div class="formula">
+                    \[ E = \dfrac{|Q|}{4\pi\varepsilon_0 r^2} \]
+                    <span class="formula-number">(17.3)</span>
+                </div>
+                
+                <p>Trong đó: \(r\) là khoảng cách từ điện tích \(Q\) đến điểm xét; \(\varepsilon_0\) là hằng số điện.</p>
+                
                 <ul>
-                    <li>Sử dụng điện tích thử (điện tích dương, điện tích nhỏ) để phát hiện điện trường.</li>
-                    <li>Cường độ điện trường đặc trưng cho độ mạnh yếu của điện trường tại một điểm.</li>
-                    <li>Độ lớn của lực điện F tỉ lệ với độ lớn của điện tích q.</li>
+                    <li><span class="highlight">Phương:</span> Đường thẳng nối điện tích \(Q\) với điểm xét.</li>
+                    <li><span class="highlight">Chiều:</span> Hướng ra xa \(Q\) nếu \(Q > 0\); hướng về phía \(Q\) nếu \(Q < 0\).</li>
                 </ul>
                 
+                <div class="image-container">
+                    <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/17/17.3.png" alt="Điện trường tại N mạnh hơn điện trường tại M">
+                    <p class="image-caption">Hình 17.3. Điện trường tại N mạnh hơn điện trường tại M</p>
+                </div>
+                
+                <div class="example-box">
+                    <h3><i class="fas fa-calculator"></i> Ví dụ</h3>
+                    <p>Xét điện trường của điện tích \(Q = 6 \times 10^{-14} C\), sử dụng đoạn thẳng dài 1cm để biểu diễn cho độ lớn vectơ cường độ điện trường \(E = \frac{10^{-10}}{6\pi\epsilon_0}\) (V/m). Hãy tính và vẽ vectơ cường độ điện trường tại một điểm cách Q một khoảng 2 cm và 3 cm.</p>
+                    <button class="solution-btn">Xem hướng dẫn giải</button>
+                    <div class="solution">
+                        <div class="solution-content">
+                            <h4>Hướng dẫn giải:</h4>
+                            <p><strong>Bước 1:</strong> Tính cường độ điện trường tại điểm cách Q 2 cm (0.02 m)</p>
+                            <p>Áp dụng công thức: \(E = \dfrac{|Q|}{4\pi\varepsilon_0 r^2}\)</p>
+                            <p>Với \(Q = 6 \times 10^{-14} C\), \(\varepsilon_0 = 8.85 \times 10^{-12} C^2/N.m^2\), \(r = 0.02 m\)</p>
+                            <p>\(E_1 = \dfrac{6 \times 10^{-14}}{4\pi \times 8.85 \times 10^{-12} \times (0.02)^2} \approx 1.35 \times 10^{-2} V/m\)</p>
+                            
+                            <p><strong>Bước 2:</strong> Tính cường độ điện trường tại điểm cách Q 3 cm (0.03 m)</p>
+                            <p>\(E_2 = \dfrac{6 \times 10^{-14}}{4\pi \times 8.85 \times 10^{-12} \times (0.03)^2} \approx 6.0 \times 10^{-3} V/m\)</p>
+                            
+                            <p><strong>Bước 3:</strong> So sánh với \(E = \frac{10^{-10}}{6\pi\epsilon_0} \approx 6.0 \times 10^{-3} V/m\)</p>
+                            <p>Nhận thấy: \(E_1 \approx 2.25 \times E\) và \(E_2 \approx 1.0 \times E\)</p>
+                            
+                            <p><strong>Bước 4:</strong> Vẽ vectơ</p>
+                            <p>- Tại điểm cách Q 2 cm: Vẽ vectơ dài 2.25 cm, hướng ra xa Q (vì Q dương)</p>
+                            <p>- Tại điểm cách Q 3 cm: Vẽ vectơ dài 1.0 cm, hướng ra xa Q</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Nguyên lý chồng chất điện trường</h3>
+                
                 <div class="formula">
-                    <p><strong>Công thức cường độ điện trường:</strong></p>
-                    <p>\[E = \frac{F}{q}\]</p>
-                    <p class="formula-label">(17.1)</p>
-                    <p>Trong đó: E - cường độ điện trường (V/m), F - lực điện (N), q - điện tích thử (C).</p>
+                    \[ \vec{E} = \vec{E}_1 + \vec{E}_2 + \vec{E}_3 + ... \]
                 </div>
                 
-                <div class="note">
-                    <p><strong>Đơn vị:</strong> Trong hệ SI, đơn vị của cường độ điện trường là vôn trên mét (V/m).</p>
+                <p>Vectơ cường độ điện trường tổng hợp tại một điểm do nhiều điện tích gây ra bằng tổng vectơ các cường độ điện trường thành phần.</p>
+                
+                <div class="question-box">
+                    <h3><i class="fas fa-tasks"></i> Bài tập vận dụng</h3>
+                    
+                    <h4>Bài 1:</h4>
+                    <p>Đặt điện tích điểm \( Q_1 = 6.10^{-8} \, \text{C} \) tại điểm A và điện tích điểm \( Q_2 = -2.10^{-8} \, \text{C} \) tại điểm B cách A một khoảng bằng 3 cm. Hãy xác định những điểm mà cường độ điện trường tại đó bằng 0.</p>
+                    <button class="solution-btn">Xem hướng dẫn giải Bài 1</button>
+                    <div class="solution">
+                        <div class="solution-content">
+                            <h4>Hướng dẫn giải Bài 1:</h4>
+                            <p><strong>Bước 1:</strong> Phân tích</p>
+                            <p>- Q₁ > 0 (dương) nên điện trường hướng ra xa Q₁</p>
+                            <p>- Q₂ < 0 (âm) nên điện trường hướng về phía Q₂</p>
+                            <p>- Điểm có E = 0 phải nằm trên đường thẳng AB</p>
+                            
+                            <p><strong>Bước 2:</strong> Xét vị trí điểm M trên đường thẳng AB</p>
+                            <p>Gọi M là điểm cần tìm, cách A khoảng x (m)</p>
+                            <p>Điều kiện: \( \vec{E}_1 + \vec{E}_2 = 0 \) ⇒ \( E_1 = E_2 \) và hai vectơ ngược chiều</p>
+                            
+                            <p><strong>Bước 3:</strong> Giải phương trình</p>
+                            <p>\( \dfrac{k|Q_1|}{x^2} = \dfrac{k|Q_2|}{(0.03 - x)^2} \) (với M nằm giữa A và B)</p>
+                            <p>\( \dfrac{6 \times 10^{-8}}{x^2} = \dfrac{2 \times 10^{-8}}{(0.03 - x)^2} \)</p>
+                            <p>\( \sqrt{3} = \dfrac{0.03 - x}{x} \)</p>
+                            <p>\( x \approx 0.011 \, \text{m} = 1.1 \, \text{cm} \) (tính từ A về phía B)</p>
+                            
+                            <p><strong>Kết luận:</strong> Điểm có E = 0 nằm trên đoạn AB, cách A khoảng 1.1 cm</p>
+                        </div>
+                    </div>
+                    
+                    <h4>Bài 2:</h4>
+                    <p>Cho tam giác ABC vuông tại A có \( AB = 3 \, \text{cm} \) và \( AC = 4 \, \text{cm} \). Tại điểm B ta đặt điện tích \( Q_1 = 4,5.10^{-8} \, \text{C} \), tại điểm C ta đặt điện tích \( Q_2 = 2.10^{-8} \, \text{C} \).</p>
+                    <p>a) Tính độ lớn của cường độ điện trường do mỗi điện tích trên gây ra tại A.</p>
+                    <p>b) Tính cường độ điện trường tổng cộng tại A.</p>
+                    <button class="solution-btn">Xem hướng dẫn giải Bài 2</button>
+                    <div class="solution">
+                        <div class="solution-content">
+                            <h4>Hướng dẫn giải Bài 2:</h4>
+                            <p><strong>a) Tính E₁ và E₂ tại A:</strong></p>
+                            <p>Áp dụng công thức: \( E = \dfrac{k|Q|}{r^2} \) với \( k = 9 \times 10^9 \, \text{N.m}^2/\text{C}^2 \)</p>
+                            
+                            <p><strong>E₁ do Q₁ gây ra tại A:</strong></p>
+                            <p>\( r_1 = AB = 0.03 \, \text{m} \)</p>
+                            <p>\( E_1 = \dfrac{9 \times 10^9 \times 4.5 \times 10^{-8}}{(0.03)^2} = \dfrac{405}{0.0009} = 450,000 \, \text{V/m} = 4.5 \times 10^5 \, \text{V/m} \)</p>
+                            <p>Hướng: từ B đến A (vì Q₁ > 0)</p>
+                            
+                            <p><strong>E₂ do Q₂ gây ra tại A:</strong></p>
+                            <p>\( r_2 = AC = 0.04 \, \text{m} \)</p>
+                            <p>\( E_2 = \dfrac{9 \times 10^9 \times 2 \times 10^{-8}}{(0.04)^2} = \dfrac{180}{0.0016} = 112,500 \, \text{V/m} = 1.125 \times 10^5 \, \text{V/m} \)</p>
+                            <p>Hướng: từ C đến A (vì Q₂ > 0)</p>
+                            
+                            <p><strong>b) Tính E tổng hợp tại A:</strong></p>
+                            <p>Vì tam giác ABC vuông tại A nên E₁ ⊥ E₂</p>
+                            <p>Độ lớn: \( E = \sqrt{E_1^2 + E_2^2} = \sqrt{(4.5 \times 10^5)^2 + (1.125 \times 10^5)^2} \)</p>
+                            <p>\( E = \sqrt{20.25 \times 10^{10} + 1.266 \times 10^{10}} = \sqrt{21.516 \times 10^{10}} \)</p>
+                            <p>\( E \approx 4.64 \times 10^5 \, \text{V/m} \)</p>
+                            
+                            <p><strong>Hướng của E:</strong> Hợp với E₁ một góc α</p>
+                            <p>\( \tan \alpha = \dfrac{E_2}{E_1} = \dfrac{1.125}{4.5} = 0.25 \) ⇒ \( \alpha \approx 14^\circ \)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-wave-square"></i> III. Điện phổ và đường sức điện</h2>
+                
+                <p><span class="definition">Điện phổ:</span> Là hình ảnh các đường nối dài của các hạt cách điện nhỏ (như mạt cưa) trong dầu, cho phép quan sát hình dạng của điện trường.</p>
+                
+                <div class="image-container">
+                    <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/17/17.6.png" alt="Điện phổ của một điện tích và hai điện tích">
+                    <p class="image-caption">Hình 17.6. Điện phổ của: a) một điện tích; b) hai điện tích cùng dấu; c) hai điện tích trái dấu</p>
                 </div>
                 
-                <h3>2. Vectơ cường độ điện trường</h3>
-                <p>Vì lực là đại lượng vectơ, q là đại lượng vô hướng nên cường độ điện trường E là đại lượng vectơ.</p>
+                <p><span class="definition">Đường sức điện:</span> Là đường được vẽ trong điện trường sao cho tiếp tuyến tại mỗi điểm của nó trùng với phương của vectơ cường độ điện trường tại điểm đó.</p>
                 
-                <div class="formula">
-                    <p>\[\vec{E} = \frac{\vec{F}}{q}\]</p>
-                    <p class="formula-label">(17.2)</p>
-                </div>
-                
-                <div class="important">
-                    <h3>Đặc điểm của vectơ cường độ điện trường \(\vec{E}\):</h3>
+                <div class="note-box">
+                    <h3><i class="fas fa-exclamation-circle"></i> Đặc điểm của đường sức điện</h3>
                     <ul>
-                        <li><strong>Phương:</strong> Trùng với phương của lực điện tác dụng lên điện tích.</li>
-                        <li><strong>Chiều:</strong> Cùng với chiều của lực điện khi q > 0, ngược chiều với chiều của lực điện khi q < 0.</li>
-                        <li><strong>Độ lớn:</strong> Bằng độ lớn của lực điện tác dụng lên điện tích 1C đặt tại điểm đó.</li>
+                        <li><span class="highlight">Chiều:</span> Là chiều của vectơ cường độ điện trường (đi ra từ điện tích dương, đi vào điện tích âm).</li>
+                        <li>Các đường sức không cắt nhau.</li>
+                        <li>Nơi nào điện trường mạnh thì các đường sức dày, nơi nào điện trường yếu thì các đường sức thưa.</li>
+                        <li>Đường sức của điện trường tĩnh là những đường không khép kín (bắt đầu từ điện tích dương, kết thúc ở điện tích âm hoặc ở vô cực).</li>
                     </ul>
                 </div>
                 
-                <h3>3. Cường độ điện trường do điện tích điểm gây ra</h3>
-                
-                <div class="formula">
-                    <p>\[E = \frac{|Q|}{4\pi\varepsilon_0 r^2}\]</p>
-                    <p class="formula-label">(17.3)</p>
-                    <p>Trong đó: Q - điện tích gây ra điện trường, r - khoảng cách từ Q đến điểm xét, ε₀ - hằng số điện môi của chân không.</p>
+                <div class="image-container">
+                    <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/17/17.7.png" alt="Các đường sức điện">
+                    <p class="image-caption">Hình 17.7. Các đường sức điện của: a) điện tích dương; b) hai điện tích dương; c) hai điện tích trái dấu</p>
                 </div>
                 
-                <h3>4. Nguyên lý chồng chất điện trường</h3>
-                
-                <div class="important">
-                    <p>Vectơ cường độ điện trường tại một điểm do nhiều điện tích gây ra bằng tổng các vectơ cường độ điện trường do từng điện tích gây ra tại điểm đó:</p>
-                    <div class="formula">
-                        <p>\[\vec{E} = \vec{E_1} + \vec{E_2} + \vec{E_3} + \cdots\]</p>
-                    </div>
-                    <p>Trong đó: \(\vec{E_i} = \frac{\vec{F_i}}{q}\) là cường độ điện trường do điện tích thứ i gây ra.</p>
-                </div>
-                
-                <h3>5. Bài tập vận dụng</h3>
-                
-                <div class="exercise">
-                    <p><strong>Bài 1:</strong> Hãy chứng tỏ rằng: Độ lớn cường độ điện trường tại một điểm trong công thức (17.1) bằng độ lớn của lực điện tác dụng lên một đơn vị điện tích đặt tại điểm đó.</p>
-                </div>
-                
-                <div class="exercise">
-                    <p><strong>Bài 2:</strong> Một điện tích điểm \(Q = 6 \times 10^{-13} \text{ C}\) đặt trong chân không.</p>
-                    <p>a) Xác định phương, chiều, độ lớn của cường độ điện trường do điện tích điểm Q gây ra tại một điểm cách nó một khoảng 1 cm, 2 cm, 3 cm.</p>
-                    <p>b) Nhận xét về cường độ điện trường ở những điểm gần điện tích Q và ở những điểm cách xa điện tích Q.</p>
-                </div>
-                
-                <div class="exercise">
-                    <p><strong>Bài 3:</strong> Đặt điện tích điểm \( Q_1 = 6 \times 10^{-8} \, \text{C} \) tại điểm A và điện tích điểm \( Q_2 = -2 \times 10^{-8} \, \text{C} \) tại điểm B cách A một khoảng bằng 3 cm. Hãy xác định những điểm mà cường độ điện trường tại đó bằng 0.</p>
-                </div>
-                
-                <div class="exercise">
-                    <p><strong>Bài 4:</strong> Cho tam giác ABC vuông tại A có AB = 3 cm và AC = 4 cm. Tại điểm B ta đặt điện tích \( Q_1 = 4.5 \times 10^{-8} \, \text{C} \), tại điểm C ta đặt điện tích \( Q_2 = 2 \times 10^{-8} \, \text{C} \).</p>
-                    <p>a) Tính độ lớn của cường độ điện trường do mỗi điện tích trên gây ra tại A.</p>
-                    <p>b) Tính cường độ điện trường tổng cộng tại A.</p>
-                </div>
-                
-                <h3>6. Ứng dụng thực tế</h3>
-                
-                <div class="example">
-                    <h3>Hiện tượng sét</h3>
-                    <p>Trong cơn dông, các đám mây tích điện tạo ra điện trường mạnh. Khi các đám mây tích điện trái dấu tới gần nhau, xảy ra hiện tượng phóng điện gọi là sét.</p>
-                </div>
-                
-                <div class="example">
-                    <h3>Điện trường Trái Đất</h3>
-                    <p>Ngay sát bề mặt Trái Đất có một điện trường có phương thẳng đứng, hướng từ trên xuống dưới, cường độ từ 100 V/m đến 200 V/m.</p>
-                </div>
-                
-                <div class="example">
-                    <h3>Hạt bụi mịn trong không khí</h3>
-                    <p>Các hạt bụi mịn (PM2.5, PM10) thường tích điện dương nên chịu tác dụng của điện trường Trái Đất, khiến chúng lơ lửng trong không khí và là nguyên nhân gây ô nhiễm.</p>
-                    <div class="exercise">
-                        <p><strong>Bài tập:</strong> Một hạt bụi mịn loại pm2,5 có điện tích bằng \(1.6 \times 10^{-19} \text{ C}\) lơ lửng trong không khí nơi có điện trường của Trái Đất bằng 120 V/m. Bỏ qua trọng lực, tính lực điện của Trái Đất tác dụng lên hạt bụi mịn.</p>
+                <div class="question-box">
+                    <h3><i class="fas fa-question-circle"></i> Câu hỏi quan sát</h3>
+                    <p>Em hãy quan sát Hình 17.6 và đưa ra nhận xét về đặc điểm của điện phổ:</p>
+                    <ol>
+                        <li>Ở những vùng có điện trường mạnh hơn (gần điện tích) so với vùng có điện trường yếu hơn (xa điện tích).</li>
+                        <li>Ở điện trường có một điện tích và điện trường có nhiều điện tích.</li>
+                        <li>Ở vùng gần điện tích dương và ở vùng gần điện tích âm.</li>
+                    </ol>
+                    <button class="solution-btn">Xem hướng dẫn trả lời</button>
+                    <div class="solution">
+                        <div class="solution-content">
+                            <h4>Hướng dẫn trả lời:</h4>
+                            <p><strong>1. Vùng điện trường mạnh/yếu:</strong></p>
+                            <p>- Ở gần điện tích: Các đường điện phổ dày đặc hơn, cho thấy điện trường mạnh</p>
+                            <p>- Ở xa điện tích: Các đường điện phổ thưa dần, cho thấy điện trường yếu đi</p>
+                            
+                            <p><strong>2. Điện trường một và nhiều điện tích:</strong></p>
+                            <p>- Một điện tích: Điện phổ có dạng các tia thẳng tỏa ra đều (điện tích dương) hoặc hội tụ đều (điện tích âm)</p>
+                            <p>- Hai điện tích cùng dấu: Điện phổ cho thấy sự đẩy nhau giữa các đường, có vùng trung gian nơi điện trường yếu</p>
+                            <p>- Hai điện tích trái dấu: Các đường điện phổ nối từ điện tích dương sang âm, dày đặc ở vùng giữa hai điện tích</p>
+                            
+                            <p><strong>3. Vùng gần điện tích dương và âm:</strong></p>
+                            <p>- Điện tích dương: Các đường điện phổ tỏa ra</p>
+                            <p>- Điện tích âm: Các đường điện phổ hội tụ vào</p>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="note">
-                    <h3>Điện trường của vật dẫn tích điện</h3>
-                    <p>Một quả cầu có điện tích phân bố đều thì điện trường bên ngoài quả cầu tương đương với điện trường của một điện tích điểm đặt tại tâm cầu. Công thức \( E = \frac{|Q|}{4\pi \varepsilon_0 r^2} \) vẫn được áp dụng.</p>
-                </div>
-            </div>
+            </section>
             
-            <div class="summary-box">
-                <h3>TÓM TẮT KIẾN THỨC TRỌNG TÂM</h3>
-                <ol>
-                    <li><strong>Điện trường:</strong> Là dạng vật chất tồn tại xung quanh điện tích, truyền tương tác điện.</li>
-                    <li><strong>Cường độ điện trường E:</strong> Đặc trưng cho độ mạnh yếu của điện trường.
-                        <ul>
-                            <li>Công thức: \(E = \frac{F}{q}\)</li>
-                            <li>Vectơ: \(\vec{E} = \frac{\vec{F}}{q}\)</li>
-                            <li>Đơn vị: V/m</li>
-                        </ul>
-                    </li>
-                    <li><strong>Đặc điểm vectơ \(\vec{E}\):</strong>
-                        <ul>
-                            <li>Phương: Trùng với phương của lực điện</li>
-                            <li>Chiều: Cùng chiều lực điện khi q > 0, ngược chiều khi q < 0</li>
-                        </ul>
-                    </li>
-                    <li><strong>Công thức điện tích điểm:</strong> \(E = \frac{|Q|}{4\pi\varepsilon_0 r^2}\)</li>
-                    <li><strong>Nguyên lý chồng chất:</strong> \(\vec{E} = \vec{E_1} + \vec{E_2} + \cdots\)</li>
-                    <li><strong>Ứng dụng:</strong> Sét, điện trường Trái Đất, hạt bụi mịn.</li>
-                </ol>
+            <section class="section">
+                <h2><i class="fas fa-info-circle"></i> Em có biết</h2>
                 
-                <div class="keywords">
-                    <span class="keyword">Điện trường</span>
-                    <span class="keyword">Cường độ điện trường</span>
-                    <span class="keyword">Điện tích thử</span>
-                    <span class="keyword">Vectơ E</span>
-                    <span class="keyword">Nguyên lý chồng chất</span>
-                    <span class="keyword">Điện tích điểm</span>
-                    <span class="keyword">Sét</span>
-                    <span class="keyword">Điện trường Trái Đất</span>
+                <div class="note-box">
+                    <h3><i class="fas fa-bolt"></i> Hiện tượng sét</h3>
+                    <p>Trong cơn dông, thường xuất hiện những đám mây tích điện do các hạt nước trong đó nhiễm điện, chúng tạo ra những vùng điện trường mạnh quanh các đám mây này. Khi các đám mây tích điện trái dấu tới gần nhau có thể xảy ra hiện tượng phóng điện mà ta gọi là sét.</p>
                 </div>
-            </div>
-        </div>
+                
+                <div class="note-box">
+                    <h3><i class="fas fa-globe-americas"></i> Điện trường của Trái Đất</h3>
+                    <p>Thực nghiệm cho thấy, ngay sát bề mặt của Trái Đất luôn có một điện trường có phương thẳng đứng, hướng từ trên xuống dưới và cường độ vào khoảng từ 100 V/m đến 200 V/m. Điện trường này ảnh hưởng đến sự lơ lửng của các hạt bụi mịn trong không khí.</p>
+                </div>
+                
+                <div class="example-box">
+                    <h3><i class="fas fa-tasks"></i> Bài tập ứng dụng</h3>
+                    <p>Một hạt bụi mịn loại pm2,5 có điện tích bằng \( 1,6.10^{-19} \, \text{C} \) lơ lửng trong không khí nơi có điện trường của Trái Đất bằng 120 V/m. Bỏ qua trọng lực, tính lực điện của Trái Đất tác dụng lên hạt bụi mịn và từ đó giải thích lí do hạt bụi loại này thường lơ lửng trong không khí.</p>
+                    <button class="solution-btn">Xem hướng dẫn giải</button>
+                    <div class="solution">
+                        <div class="solution-content">
+                            <h4>Hướng dẫn giải:</h4>
+                            <p><strong>Bước 1:</strong> Tính lực điện tác dụng lên hạt bụi</p>
+                            <p>Công thức: \( F = |q| \cdot E \)</p>
+                            <p>Với: \( q = 1.6 \times 10^{-19} \, \text{C} \), \( E = 120 \, \text{V/m} \)</p>
+                            <p>\( F = 1.6 \times 10^{-19} \times 120 = 1.92 \times 10^{-17} \, \text{N} \)</p>
+                            
+                            <p><strong>Bước 2:</strong> Giải thích hiện tượng lơ lửng</p>
+                            <p>- Hạt bụi pm2.5 thường tích điện dương do ma sát với không khí</p>
+                            <p>- Điện trường Trái Đất có phương thẳng đứng, hướng từ trên xuống dưới (từ không khí xuống mặt đất)</p>
+                            <p>- Lực điện tác dụng lên hạt bụi tích điện dương: \( \vec{F} = q\vec{E} \) cùng chiều với \( \vec{E} \), tức hướng từ trên xuống</p>
+                            <p>- Tuy nhiên, trong thực tế còn có các lực khác: trọng lực, lực đẩy Archimedes, lực cản không khí</p>
+                            <p>- Các lực này có thể cân bằng với lực điện, làm hạt bụi lơ lửng</p>
+                            <p>- Ngoài ra, sự chuyển động nhiệt của các phân tử không khí cũng góp phần giữ hạt bụi lơ lửng</p>
+                            
+                            <p><strong>Kết luận:</strong> Lực điện tác dụng lên hạt bụi rất nhỏ (\(1.92 \times 10^{-17} \, \text{N}\)), và sự lơ lửng của hạt bụi là kết quả của sự cân bằng giữa nhiều lực khác nhau trong khí quyển.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-key"></i> Tóm tắt trọng tâm</h2>
+                
+                <div class="key-points">
+                    <div class="point">
+                        <h3><i class="fas fa-atom"></i> Bản chất điện trường</h3>
+                        <p>Hiểu được bản chất của điện trường là dạng vật chất đặc biệt truyền tương tác điện.</p>
+                    </div>
+                    
+                    <div class="point">
+                        <h3><i class="fas fa-vector-square"></i> Cường độ điện trường</h3>
+                        <p>Nắm vững định nghĩa, công thức, đơn vị và đặc điểm vectơ của cường độ điện trường.</p>
+                    </div>
+                    
+                    <div class="point">
+                        <h3><i class="fas fa-calculator"></i> Tính toán điện trường</h3>
+                        <p>Vận dụng thành thạo công thức tính cường độ điện trường \(E\) do một điện tích điểm gây ra và nguyên lý chồng chất để tính điện trường tổng hợp.</p>
+                    </div>
+                    
+                    <div class="point">
+                        <h3><i class="fas fa-wave-square"></i> Đường sức điện</h3>
+                        <p>Hiểu được ý nghĩa của đường sức điện và điện phổ trong việc mô tả điện trường một cách trực quan.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="footer">
+            <p>Bài 17: Khái niệm điện trường | Chương III - Điện trường</p>
+        </footer>
     </div>
+
+    <!-- MathJax cho hiển thị công thức toán -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <script>
         // Cấu hình MathJax
-        window.MathJax = {
+        MathJax = {
             tex: {
-                inlineMath: [['\\(', '\\)']],
-                displayMath: [['\\[', '\\]']],
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
                 processEscapes: true,
                 processEnvironments: true
             },
@@ -401,24 +736,53 @@
             }
         };
         
-        // Thêm hiệu ứng cho các phần
+        // Thêm hiệu ứng scroll mượt mà
         document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('.section');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
+            // Thêm hiệu ứng khi cuộn trang
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('.section');
+                
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (sectionTop < windowHeight * 0.75) {
+                        section.style.opacity = '1';
+                        section.style.transform = 'translateY(0)';
                     }
                 });
-            }, { threshold: 0.1 });
+            });
             
+            // Khởi tạo trạng thái ban đầu cho các section
+            const sections = document.querySelectorAll('.section');
             sections.forEach(section => {
-                section.style.opacity = '0.8';
-                section.style.transform = 'translateY(10px)';
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
                 section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                observer.observe(section);
+            });
+            
+            // Kích hoạt hiệu ứng sau khi trang load xong
+            setTimeout(() => {
+                window.dispatchEvent(new Event('scroll'));
+            }, 100);
+            
+            // Xử lý nút giải bài tập
+            const solutionButtons = document.querySelectorAll('.solution-btn');
+            solutionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const solution = this.nextElementSibling;
+                    solution.classList.toggle('active');
+                    
+                    if (solution.classList.contains('active')) {
+                        this.textContent = 'Ẩn hướng dẫn giải';
+                        // Cuộn đến phần giải nếu cần
+                        solution.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+                    } else {
+                        this.textContent = this.textContent.includes('Bài') 
+                            ? this.textContent.replace('Ẩn', 'Xem') 
+                            : 'Xem hướng dẫn giải';
+                    }
+                });
             });
         });
     </script>
