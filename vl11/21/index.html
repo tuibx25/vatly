@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 21: Tụ Điện</title>
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #8B4513;
+            --primary-medium: #A0522D;
+            --primary-light: #D2B48C;
+            --secondary: #DEB887;
+            --text-dark: #3E2723;
+            --text-medium: #5D4037;
+            --text-light: #795548;
+            --background: #FAF3E6;
+            --card-bg: #FFF8E1;
+            --border-color: #BCAAA4;
+            --shadow: rgba(139, 69, 19, 0.15);
+            --header-bg: linear-gradient(135deg, var(--primary-dark), var(--primary-medium));
+            --formula-bg: #FFF8DC;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.4;
+            color: var(--text-dark);
+            background-color: var(--background);
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--shadow);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        
+        .header {
+            background: var(--header-bg);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+            position: relative;
+            border-bottom: 4px solid var(--primary-light);
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header p {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            font-weight: 300;
+            margin-bottom: 0;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary-medium);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .section h2 {
+            color: var(--primary-dark);
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px dashed var(--primary-light);
+            display: flex;
+            align-items: center;
+        }
+        
+        .section h2 i {
+            margin-right: 15px;
+            color: var(--primary-medium);
+        }
+        
+        .section h3 {
+            color: var(--primary-medium);
+            font-size: 1.8rem;
+            margin: 20px 0 10px;
+            padding-left: 10px;
+            border-left: 4px solid var(--primary-light);
+        }
+        
+        .section p, .section li {
+            font-size: 1.5rem;
+            color: var(--text-medium);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        
+        .section ul, .section ol {
+            padding-left: 25px;
+            margin-bottom: 15px;
+        }
+        
+        .section li {
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+        
+        .formula {
+            background-color: var(--formula-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 18px;
+            margin: 15px 0;
+            font-size: 1.6rem;
+            text-align: center;
+            font-family: 'Cambria', 'Times New Roman', serif;
+            color: var(--text-dark);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            line-height: 1.2;
+        }
+        
+        .formula-number {
+            display: block;
+            text-align: right;
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        .note-box {
+            background-color: #F5F5DC;
+            border-left: 5px solid var(--primary-medium);
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .note-box h3 {
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+            font-size: 1.7rem;
+        }
+        
+        .note-box ul, .note-box ol {
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .note-box li {
+            margin-bottom: 4px;
+            font-size: 1.4rem;
+            line-height: 1.3;
+        }
+        
+        .key-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+        
+        .point {
+            background-color: white;
+            padding: 18px;
+            border-radius: 8px;
+            border-top: 4px solid var(--primary-medium);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .point h3 {
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            font-size: 1.6rem;
+        }
+        
+        .point p {
+            font-size: 1.4rem;
+            line-height: 1.3;
+            margin-bottom: 0;
+        }
+        
+        .highlight {
+            background-color: var(--secondary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .definition {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        .question-box {
+            background-color: #FFF0E0;
+            border-left: 5px solid var(--primary-medium);
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .question-box h3 {
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+            font-size: 1.7rem;
+        }
+        
+        .example-box {
+            background-color: #E8F4F8;
+            border-left: 5px solid #4a6fa5;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .example-box h3 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1.7rem;
+        }
+        
+        .image-container {
+            text-align: center;
+            margin: 15px 0;
+            padding: 8px;
+            background-color: #f9f9f9;
+            border-radius: 6px;
+            max-width: 500px; /* Giới hạn chiều rộng tối đa */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .image-caption {
+            font-style: italic;
+            color: var(--text-light);
+            margin-top: 5px;
+            font-size: 1.3rem;
+            line-height: 1.2;
+            text-align: center;
+        }
+        
+        .small-image {
+            max-width: 350px !important; /* Giới hạn kích thước cho hình vẽ nhỏ */
+        }
+        
+        .medium-image {
+            max-width: 450px !important; /* Kích thước trung bình */
+        }
+        
+        .solution-btn {
+            background-color: var(--primary-medium);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.4rem;
+            margin: 12px 0;
+            display: block;
+            transition: background-color 0.3s;
+            font-weight: 600;
+        }
+        
+        .solution-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .solution {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin: 8px 0 15px;
+            border-left: 4px solid var(--primary-medium);
+        }
+        
+        .solution.active {
+            max-height: 2000px;
+        }
+        
+        .solution-content {
+            padding: 18px;
+            font-size: 1.4rem;
+        }
+        
+        .solution-content h4 {
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            font-size: 1.6rem;
+        }
+        
+        .solution-content p {
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        
+        .footer {
+            background-color: var(--primary-dark);
+            color: white;
+            text-align: center;
+            padding: 18px;
+            margin-top: 25px;
+            border-top: 1px solid var(--primary-light);
+        }
+        
+        .footer p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 0;
+        }
+        
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1.4rem;
+        }
+        
+        .report-table th, .report-table td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .report-table th {
+            background-color: var(--primary-light);
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        
+        .report-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .report-table tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                line-height: 1.3;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .header p {
+                font-size: 1.2rem;
+            }
+            
+            .section h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section h3 {
+                font-size: 1.5rem;
+                margin: 15px 0 8px;
+            }
+            
+            .section p, .section li {
+                font-size: 1.3rem;
+                margin-bottom: 6px;
+                line-height: 1.2;
+            }
+            
+            .section li {
+                margin-bottom: 4px;
+            }
+            
+            .formula {
+                font-size: 1.4rem;
+                padding: 15px;
+                margin: 12px 0;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .key-points {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .solution-btn {
+                font-size: 1.2rem;
+                padding: 10px 20px;
+                margin: 10px 0;
+            }
+            
+            .solution-content {
+                font-size: 1.2rem;
+                padding: 15px;
+            }
+            
+            .solution-content p {
+                margin-bottom: 6px;
+            }
+            
+            .note-box, .question-box, .example-box {
+                padding: 15px;
+                margin: 15px 0;
+            }
+            
+            .report-table {
+                font-size: 1.2rem;
+            }
+            
+            .report-table th, .report-table td {
+                padding: 8px 5px;
+            }
+            
+            .image-container {
+                max-width: 90%; /* Chiếm 90% chiều rộng trên mobile */
+                margin: 10px auto;
+            }
+            
+            .small-image {
+                max-width: 280px !important;
+            }
+            
+            .medium-image {
+                max-width: 350px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 18px 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section {
+                padding: 18px 12px;
+                margin-bottom: 30px;
+            }
+            
+            .section h2 {
+                font-size: 1.6rem;
+                margin-bottom: 12px;
+            }
+            
+            .section h3 {
+                font-size: 1.4rem;
+                margin: 12px 0 6px;
+            }
+            
+            .section p, .section li {
+                font-size: 1.2rem;
+                margin-bottom: 5px;
+            }
+            
+            .image-container {
+                max-width: 95%;
+                padding: 5px;
+            }
+            
+            .small-image {
+                max-width: 250px !important;
+            }
+            
+            .medium-image {
+                max-width: 300px !important;
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .section p, .section li {
+                font-size: 1.6rem;
+                margin-bottom: 10px;
+                line-height: 1.4;
+            }
+            
+            .section h3 {
+                font-size: 2rem;
+                margin: 25px 0 15px;
+            }
+            
+            .header h1 {
+                font-size: 3.2rem;
+            }
+            
+            .formula {
+                font-size: 1.8rem;
+            }
+            
+            .solution-content {
+                font-size: 1.5rem;
+            }
+            
+            .solution-content p {
+                margin-bottom: 10px;
+                line-height: 1.4;
+            }
+            
+            .image-container {
+                max-width: 550px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-bolt"></i> Bài 21: Tụ Điện</h1>
+            <p>Chương III - Điện trường</p>
+        </header>
+        
+        <main class="content">
+            <section class="section">
+                <h2><i class="fas fa-charging-station"></i> Giới thiệu</h2>
+                
+                <div class="image-container medium-image">
+                    <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/21/21.0.png" alt="Tụ điện trong quạt điện">
+                    <p class="image-caption">Tụ điện trong một chiếc quạt điện dân dụng</p>
+                </div>
+                
+                <p><span class="definition">Tụ điện</span> được sử dụng trong các thiết bị điện như quạt điện, tủ lạnh, ti vi, động cơ,... với các hình dạng khác nhau.</p>
+                
+                <div class="question-box">
+                    <h3><i class="fas fa-question-circle"></i> Câu hỏi khởi động</h3>
+                    <p>Tụ điện là gì? Tại sao tụ điện lại được sử dụng rộng rãi trong các thiết bị điện tử?</p>
+                    <button class="solution-btn">Xem gợi ý trả lời</button>
+                    <div class="solution">
+                        <div class="solution-content">
+                            <h4>Gợi ý trả lời:</h4>
+                            <p>Tụ điện là một loại linh kiện điện tử gồm hai vật dẫn đặt gần nhau và ngăn cách nhau bởi môi trường cách điện (điện môi). Mỗi vật dẫn được gọi là một bản tụ điện.</p>
+                            <p>Tụ điện được sử dụng rộng rãi vì nó có khả năng tích trữ điện tích và năng lượng, lọc dòng điện, cho phép dòng điện xoay chiều đi qua nhưng ngăn dòng điện một chiều, và nhiều ứng dụng khác trong mạch điện tử.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-atom"></i> I. Tụ điện</h2>
+                
+                <div class="note-box">
+                    <h3><i class="fas fa-lightbulb"></i> Khái niệm tụ điện</h3>
+                    <p><span class="definition">Tụ điện</span> là một loại linh kiện điện từ gồm hai vật dẫn đặt gần nhau và ngăn cách nhau bởi môi trường cách điện (điện môi). Mỗi vật dẫn được gọi là một bản tụ điện.</p>
+                </div>
+                
+                <h3>1. Cấu tạo và nguyên lý hoạt động</h3>
+                <p>Mật độ điện tích tự do trong điện môi là rất nhỏ do đó điện môi là những chất không dẫn điện. Khi điện trường ngoài đặt vào điện môi lớn hơn một giới hạn nhất định thì các liên kết giữa các điện tích trái dấu trong nguyên tử của chất điện môi sẽ bị phá vỡ, điện tích tự do xuất hiện. Lúc này điện môi trở thành dẫn điện (điện môi bị đánh thủng).</p>
+                
+                <h3>2. Ký hiệu tụ điện trong sơ đồ mạch điện</h3>
+                
+                <div class="image-container small-image">
+                    <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/21/21.2.png" alt="Ký hiệu tụ điện trong sơ đồ mạch điện">
+                    <p class="image-caption">Hình 21.2. Kí hiệu tụ điện trong sơ đồ mạch điện</p>
+                </div>
+                
+                <h3>3. Quá trình tích điện và phóng điện</h3>
+                <p>Trong mạch điện, tụ điện có nhiệm vụ tích điện và phóng điện:</p>
+                
+                <div class="note-box">
+                    <h3><i class="fas fa-exclamation-circle"></i> Quá trình tích điện</h3>
+                    <div class="image-container small-image">
+                        <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/21/21.3.png" alt="Quá trình tích điện">
+                        <p class="image-caption">Quá trình tích điện</p>
+                    </div>
+                    <p>Để tích điện cho tụ điện, người ta nối hai bản cực của tụ điện với hai cực của nguồn điện một chiều. Bản nối với cực dương sẽ tích điện dương, bản nối với cực âm sẽ tích điện âm. Điện tích trên hai bản tụ điện có độ lớn bằng nhau nhưng trái dấu.</p>
+                </div>
+                
+                <div class="note-box">
+                    <h3><i class="fas fa-exclamation-circle"></i> Quá trình phóng điện</h3>
+                    <p>Sau khi tích điện cho tụ điện, ta bỏ nguồn điện ra và nối hai bản tụ điện với một điện trở (hoặc bóng đèn), sẽ có dòng điện chạy qua điện trở và điện tích trên tụ điện giảm nhanh. Ta gọi đó là sự phóng điện của tụ điện.</p>
+                </div>
+                
+                <div class="note-box">
+                    <h3><i class="fas fa-info-circle"></i> EM CÓ BIẾT</h3>
+                    <p>Tụ điện gồm hai bản phẳng bằng kim loại, đặt song song, giữa hai bản là chất điện môi, có thể là không khí như chúng ta đã biết được gọi là tụ điện phẳng.</p>
+                    <p>Trong thực tế, người ta thường chế tạo tụ điện với hai bản là hai tấm giấy thiếc, kẽm, hoặc nhôm; Lớp điện môi làm bằng giấy tẩm chất cách điện (paraffin); Để giảm kích thước của linh kiện, người ta cuộn tụ điện lại và đặt trong một vỏ bằng kim loại. Tụ điện lúc này có dạng hình trụ.</p>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-link"></i> II. Điện dung của tụ điện</h2>
+                
+                <h3>1. Điện dung</h3>
+                <p>Dùng một nguồn có hiệu điện thế U để tích điện cho một số tụ điện khác nhau. Kết quả cho thấy độ lớn điện tích mà các tụ điện này tích được là không giống nhau, nghĩa là khả năng tích điện của chúng là khác nhau.</p>
+                <p>Với mỗi tụ điện nhất định người ta đã chứng minh được: độ lớn điện tích Q tụ điện tích được tỉ lệ thuận với hiệu điện thế đặt vào hai bản của nó.</p>
+                
+                <div class="formula">
+                    \[ Q = CU \]
+                    <span class="formula-number">(21.1)</span>
+                </div>
+                
+                <p>Đại lượng C là một hằng số đặc trưng cho khả năng tích điện của tụ điện ở một hiệu điện thế xác định và được gọi là điện dung của tụ điện.</p>
+                
+                <div class="formula">
+                    \[ C = \frac{Q}{U} \]
+                    <span class="formula-number">(21.2)</span>
+                </div>
+                
+                <p>Trong công thức (21.2), khi Q được tính bằng đơn vị Coulomb (C), U được tính bằng đơn vị Vôn (V) thì đơn vị của điện dung C là fara (kí hiệu là F).</p>
+                
+                <div class="note-box">
+                    <h3><i class="fas fa-info-circle"></i> Đơn vị điện dung</h3>
+                    <p>Fara là điện dung của một tụ điện mà nếu đặt hiệu điện thế 1 V vào hai bản tụ điện thì điện tích của tụ điện là 1 C.</p>
+                    <p>Chú ý rằng, tụ điện được sử dụng trong thực tế thường có điện dung cỡ khoảng từ \(10^{-12}\) F đến \(10^{-6}\) F nên người ta cũng thường dùng các đơn vị:</p>
+                    <ul>
+                        <li>1 micrôfara (kí hiệu là µF) = \(10^{-6}\) F</li>
+                        <li>1 nanôfara (kí hiệu là nF) = \(10^{-9}\) F</li>
+                        <li>1 picôfara (kí hiệu là pF) = \(10^{-12}\) F</li>
+                    </ul>
+                </div>
+                
+                <div class="question-box">
+                    <h3><i class="fas fa-question-circle"></i> Bài tập áp dụng</h3>
+                    <p><strong>Bài 1:</strong> Cho một tụ điện trên vỏ có ghi là 2 µF – 200 V.</p>
+                    <p>a) Đặt vào hai bản tụ điện một hiệu điện thế 36 V. Hãy tính điện tích mà tụ điện tích được.</p>
+                    <p>b) Hãy tính điện tích mà tụ tích được ở hiệu điện thế tối đa cho phép.</p>
+                    
+                    <button class="solution-btn">Xem hướng dẫn giải Bài 1</button>
+                    <div class="solution">
+                        <div class="solution-content">
+                            <h4>Hướng dẫn giải Bài 1:</h4>
+                            <p><strong>a) Tính điện tích ở hiệu điện thế 36 V:</strong></p>
+                            <p>Sử dụng công thức: \( Q = C \cdot U \)</p>
+                            <p>\( C = 2 \, \mu F = 2 \times 10^{-6} \, F \)</p>
+                            <p>\( U = 36 \, V \)</p>
+                            <p>\( Q = (2 \times 10^{-6}) \times 36 = 72 \times 10^{-6} = 7.2 \times 10^{-5} \, C \)</p>
+                            
+                            <p><strong>b) Tính điện tích ở hiệu điện thế tối đa:</strong></p>
+                            <p>Hiệu điện thế tối đa: \( U_{max} = 200 \, V \)</p>
+                            <p>\( Q_{max} = C \cdot U_{max} = (2 \times 10^{-6}) \times 200 = 400 \times 10^{-6} = 4 \times 10^{-4} \, C \)</p>
+                            
+                            <p><strong>Đáp số:</strong></p>
+                            <p>a) \( Q = 7.2 \times 10^{-5} \, C \)</p>
+                            <p>b) \( Q_{max} = 4 \times 10^{-4} \, C \)</p>
+                        </div>
+                    </div>
+                    
+                    <p><strong>Bài 2:</strong> Có hai chiếc tụ điện, trên vỏ tụ điện (A) có ghi 2 µF – 350 V, tụ điện (B) có ghi 2,3 µF – 300 V.</p>
+                    <p>a) Trong hai tụ điện trên khi tích điện ở cùng một hiệu điện thế, tụ điện nào có khả năng tích điện tốt hơn?</p>
+                    <p>b) Khi tích điện lên mức tối đa cho phép thì tụ điện nào sẽ có điện tích lớn hơn?</p>
+                    
+                    <button class="solution-btn">Xem hướng dẫn giải Bài 2</button>
+                    <div class="solution">
+                        <div class="solution-content">
+                            <h4>Hướng dẫn giải Bài 2:</h4>
+                            <p><strong>a) So sánh khả năng tích điện ở cùng hiệu điện thế:</strong></p>
+                            <p>Khả năng tích điện của tụ điện được đặc trưng bởi điện dung C. Tụ điện có điện dung lớn hơn sẽ tích được nhiều điện tích hơn ở cùng một hiệu điện thế.</p>
+                            <p>Tụ A: \( C_A = 2 \, \mu F \)</p>
+                            <p>Tụ B: \( C_B = 2.3 \, \mu F \)</p>
+                            <p>Vì \( C_B > C_A \) nên tụ B có khả năng tích điện tốt hơn.</p>
+                            
+                            <p><strong>b) So sánh điện tích tối đa:</strong></p>
+                            <p>Điện tích tối đa: \( Q_{max} = C \cdot U_{max} \)</p>
+                            <p>Tụ A: \( Q_{A,max} = 2 \times 10^{-6} \times 350 = 7 \times 10^{-4} \, C \)</p>
+                            <p>Tụ B: \( Q_{B,max} = 2.3 \times 10^{-6} \times 300 = 6.9 \times 10^{-4} \, C \)</p>
+                            <p>Vì \( Q_{A,max} > Q_{B,max} \) nên tụ A có điện tích tối đa lớn hơn.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>2. Điện dung của bộ tụ điện</h3>
+                <p>Trong thực tế muốn có tụ điện với điện dung thích hợp hay hiệu điện thế cần thiết người ta phải ghép các tụ điện thành bộ tụ điện.</p>
+                
+                <h4>a) Ghép nối tiếp</h4>
+                <div class="image-container small-image">
+                    <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/21/21.7.png" alt="a) Ghép nối tiếp">
+                    <p class="image-caption">a) Ghép nối tiếp</p>
+                </div>
+                <p>Ghép nối tiếp n tụ điện chưa tích điện có điện dung \( C_1, C_2, \ldots, C_n \) với nhau rồi mắc vào nguồn điện có hiệu điện thế \( U \). Hiệu điện thế, điện tích và điện dung của bộ tụ sẽ có mối liên hệ với các đại lượng tương ứng của mỗi tụ theo các công thức sau:</p>
+                
+                <div class="formula">
+                    \[ U = U_1 + U_2 + \ldots + U_n \]
+                    <span class="formula-number">(21.3)</span>
+                </div>
+                
+                <div class="formula">
+                    \[ Q = Q_1 = Q_2 = \ldots = Q_n \]
+                    <span class="formula-number">(21.4)</span>
+                </div>
+                
+                <div class="formula">
+                    \[ \frac{1}{C} = \frac{1}{C_1} + \frac{1}{C_2} + \ldots + \frac{1}{C_n} \]
+                    <span class="formula-number">(21.5)</span>
+                </div>
+                
+                <h4>b) Ghép song song</h4>
+                <div class="image-container small-image">
+                    <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/21/21.8.png" alt="b) Ghép song song">
+                    <p class="image-caption">b) Ghép song song</p>
+                </div>
+                <p>Ghép n tụ điện chưa tích điện có điện dung \( C_1, C_2, \ldots, C_n \) song song với nhau rồi mắc vào nguồn điện có hiệu điện thế \( U \). Hiệu điện thế, điện tích và điện dung của bộ tụ sẽ có mối liên hệ với các đại lượng tương ứng của mỗi tụ theo các công thức sau:</p>
+                
+                <div class="formula">
+                    \[ U = U_1 = U_2 = \ldots = U_n \]
+                    <span class="formula-number">(21.6)</span>
+                </div>
+                
+                <div class="formula">
+                    \[ Q = Q_1 + Q_2 + \ldots + Q_n \]
+                    <span class="formula-number">(21.7)</span>
+                </div>
+                
+                <div class="formula">
+                    \[ C = C_1 + C_2 + \ldots + C_n \]
+                    <span class="formula-number">(21.8)</span>
+                </div>
+                
+                <div class="example-box">
+                    <h3><i class="fas fa-calculator"></i> Ví dụ áp dụng</h3>
+                    <p>Có 3 tụ điện với điện dung lần lượt là \( C_1 = 2 \, \mu F, \, C_2 = 3 \, \mu F, \, C_3 = 4 \, \mu F \).</p>
+                    <p>a) Tính điện dung của bộ tụ điện khi ba tụ ghép nối tiếp?</p>
+                    <p>b) Tính điện dung của bộ tụ điện khi ba tụ ghép song song? Hãy so sánh để thấy cách ghép nào cho khả năng tích điện tốt hơn?</p>
+                    
+                    <button class="solution-btn">Xem hướng dẫn giải</button>
+                    <div class="solution">
+                        <div class="solution-content">
+                            <h4>Hướng dẫn giải:</h4>
+                            <p><strong>a) Ghép nối tiếp:</strong></p>
+                            <p>Sử dụng công thức (21.5) cho bộ tụ điện ghép nối tiếp:</p>
+                            <p>\[ \frac{1}{C_{nt}} = \frac{1}{C_1} + \frac{1}{C_2} + \frac{1}{C_3} \]</p>
+                            <p>\[ \frac{1}{C_{nt}} = \frac{1}{2} + \frac{1}{3} + \frac{1}{4} = \frac{6}{12} + \frac{4}{12} + \frac{3}{12} = \frac{13}{12} \]</p>
+                            <p>\[ C_{nt} = \frac{12}{13} \, \mu F \approx 0.923 \, \mu F \]</p>
+                            
+                            <p><strong>b) Ghép song song:</strong></p>
+                            <p>Sử dụng công thức (21.8) cho bộ tụ điện ghép song song:</p>
+                            <p>\[ C_{ss} = C_1 + C_2 + C_3 \]</p>
+                            <p>\[ C_{ss} = 2 + 3 + 4 = 9 \, \mu F \]</p>
+                            
+                            <p><strong>So sánh:</strong></p>
+                            <p>Kết quả \( C_{ss} > C_{nt} \) cho thấy bộ tụ điện ghép song song có khả năng tích điện tốt hơn (có điện dung lớn hơn).</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-battery-full"></i> III. Năng lượng của tụ điện</h2>
+                
+                <p>Khi sử dụng nguồn điện để tích điện cho tụ, nguồn điện đã thực hiện công A để dịch chuyển các electron từ bản cực nối với cực dương sang bản cực nối với cực âm của tụ điện. Công A này đã chuyển thành thế năng điện của các electron trên bản nhiễm điện âm hay nói cách khác, tụ điện đã tích một năng lượng \( W = A \). Khi cho tụ điện phóng điện qua điện trở (hay bóng đèn) thì tụ điện giải phóng năng lượng đã tích lũy được. Do đó ứng dụng quan trọng nhất trong thực tế của tụ điện là tích trữ năng lượng và cung cấp năng lượng.</p>
+                
+                <div class="formula">
+                    \[ W = \frac{QU}{2} = \frac{Q^2}{2C} = \frac{CU^2}{2} \]
+                    <span class="formula-number">(21.9)</span>
+                </div>
+                
+                <p>Ở đây điện tích Q đơn vị là Coulomb; Hiệu điện thế U đơn vị là Vôn; Điện dung C đơn vị là fara; năng lượng W có đơn vị là J.</p>
+                <p>Năng lượng của tụ điện cũng chính là năng lượng điện trường trong tụ điện.</p>
+                
+                <div class="question-box">
+                    <h3><i class="fas fa-question-circle"></i> Bài tập áp dụng</h3>
+                    <p>Có hai chiếc tụ điện, tụ điện D có thông số cơ bản được ghi là 2 mF – 450 V; tụ điện E có thông số cơ bản được ghi là 2,5 µF – 350 V. Khi các tụ điện trên được tích điện tới mức tối đa cho phép, hãy tính năng lượng của mỗi tụ điện.</p>
+                    
+                    <button class="solution-btn">Xem hướng dẫn giải</button>
+                    <div class="solution">
+                        <div class="solution-content">
+                            <h4>Hướng dẫn giải:</h4>
+                            <p><strong>Tụ điện D:</strong></p>
+                            <p>\( C_D = 2 \, mF = 2 \times 10^{-3} \, F \), \( U_{D,max} = 450 \, V \)</p>
+                            <p>Năng lượng tối đa: \( W_D = \frac{1}{2} C_D U_{D,max}^2 = \frac{1}{2} \times (2 \times 10^{-3}) \times (450)^2 \)</p>
+                            <p>\( W_D = \frac{1}{2} \times 2 \times 10^{-3} \times 202500 = 202.5 \, J \)</p>
+                            
+                            <p><strong>Tụ điện E:</strong></p>
+                            <p>\( C_E = 2.5 \, \mu F = 2.5 \times 10^{-6} \, F \), \( U_{E,max} = 350 \, V \)</p>
+                            <p>Năng lượng tối đa: \( W_E = \frac{1}{2} C_E U_{E,max}^2 = \frac{1}{2} \times (2.5 \times 10^{-6}) \times (350)^2 \)</p>
+                            <p>\( W_E = \frac{1}{2} \times 2.5 \times 10^{-6} \times 122500 = 0.153125 \, J \)</p>
+                            
+                            <p><strong>Đáp số:</strong></p>
+                            <p>Năng lượng tối đa của tụ D: \( W_D = 202.5 \, J \)</p>
+                            <p>Năng lượng tối đa của tụ E: \( W_E = 0.153125 \, J \)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-cogs"></i> IV. Ứng dụng của tụ điện trong cuộc sống</h2>
+                
+                <p>Tích trữ năng lượng là chức năng quan trọng nhất của tụ điện và được sử dụng trong rất nhiều thiết bị điện như động cơ xe máy, máy hàn (sử dụng quy trình phóng điện của tụ), mạch khuếch đại,... Ngoài ra, tụ điện còn có một số chức năng khác nữa lưu trữ điện tích, lọc dòng điện một chiều không cho đi qua mà chỉ cho dòng điện xoay chiều đi qua,...</p>
+                
+                <div class="note-box">
+                    <h3><i class="fas fa-info-circle"></i> EM CÓ BIẾT</h3>
+                    <p>Trong kĩ thuật hàn bu-lông bằng quy trình phóng điện của tụ, người ta sử dụng máy hàn với bộ phận chính gồm bộ tụ điện cùng với bộ phận súng hàn để ép chất bu-lông vào bề mặt vật liệu cần hàn.</p>
+                    <p>Dòng điện phóng ra từ bộ tụ điện công suất lớn để tạo nhiệt làm nóng chảy đế của bu lông và bề mặt vật liệu, cùng với lực ép bu-lông tạo ra từ súng hàn sẽ tạo thành mối hàn vững chắc.</p>
+                </div>
+                
+                <h3>Báo cáo: Một số ứng dụng của tụ điện trong cuộc sống</h3>
+                <p>Các em hãy sử dụng sách, báo, Internet hoặc các mạng thông tin khác để tìm hiểu, sưu tập một số tụ điện thông dụng. Tiếp theo, các em lựa chọn và sử dụng các thông tin này để xây dựng một báo cáo một số ứng dụng của tụ điện trong cuộc sống.</p>
+                
+                <table class="report-table">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Điện dung – điện áp</th>
+                            <th>Hình dạng</th>
+                            <th>Thiết bị sử dụng</th>
+                            <th>Mục đích sử dụng</th>
+                            <th>Ghi chú</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>470 µF - 25V</td>
+                            <td>Hình trụ</td>
+                            <td>Nguồn máy tính</td>
+                            <td>Lọc nhiễu, ổn định điện áp</td>
+                            <td>Tụ hóa</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>0.1 µF - 50V</td>
+                            <td>Dạng đĩa</td>
+                            <td>Mạch điện tử</td>
+                            <td>Lọc tần số cao</td>
+                            <td>Tụ gốm</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>10 µF - 450V</td>
+                            <td>Hình trụ</td>
+                            <td>Quạt điện</td>
+                            <td>Tạo lệch pha cho động cơ</td>
+                            <td>Tụ hóa</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>1000 µF - 16V</td>
+                            <td>Hình trụ</td>
+                            <td>Amply</td>
+                            <td>Lưu trữ năng lượng</td>
+                            <td>Tụ hóa</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="note-box">
+                    <h3><i class="fas fa-conclusion"></i> Kết luận về ứng dụng của tụ điện trong cuộc sống</h3>
+                    <p>Tụ điện là linh kiện không thể thiếu trong hầu hết các thiết bị điện tử ngày nay. Chúng có vai trò quan trọng trong việc lưu trữ năng lượng, lọc nhiễu, tạo dao động, tạo sự lệch pha trong động cơ, và nhiều ứng dụng khác. Hiểu biết về tụ điện giúp chúng ta sử dụng và bảo trì các thiết bị điện tử một cách hiệu quả hơn.</p>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-check-circle"></i> Tóm tắt kiến thức</h2>
+                
+                <div class="note-box">
+                    <h3><i class="fas fa-graduation-cap"></i> EM ĐÃ HỌC</h3>
+                    <ul>
+                        <li>Điện dung của tụ điện là đại lượng đặc trưng cho khả năng tích điện của tụ điện khi đặt một hiệu điện thế \( U \) vào hai bản tụ. Nó được tính bằng tỉ số giữa điện tích \( Q \) của tụ và hiệu điện thế \( U \) đặt vào hai bản tụ:
+                            <div class="formula">
+                                \[ C = \frac{Q}{U} \]
+                            </div>
+                        </li>
+                        <li>Fara là điện dung của một tụ điện mà nếu đặt hiệu điện thế 1V vào hai bản tụ thì điện tích của tụ là 1C.</li>
+                        <li>Công thức của bộ tụ điện ghép nối tiếp:
+                            <div class="formula">
+                                \[ U = U_1 + U_2 + ... + U_n \]
+                                \[ Q = Q_1 = Q_2 = ... = Q_n \]
+                                \[ \frac{1}{C} = \frac{1}{C_1} + \frac{1}{C_2} + ... + \frac{1}{C_n} \]
+                            </div>
+                        </li>
+                        <li>Công thức của bộ tụ điện ghép song song:
+                            <div class="formula">
+                                \[ U = U_1 = U_2 = ... = U_n \]
+                                \[ Q = Q_1 + Q_2 + ... + Q_n \]
+                                \[ C = C_1 + C_2 + ... + C_n \]
+                            </div>
+                        </li>
+                        <li>Năng lượng tụ điện:
+                            <div class="formula">
+                                \[ W = \frac{Q^2}{2C} = \frac{C \cdot U^2}{2} \]
+                            </div>
+                        </li>
+                        <li>Tụ điện có ứng dụng quan trọng là tích trữ năng lượng và cung cấp năng lượng.</li>
+                    </ul>
+                </div>
+                
+                <div class="note-box">
+                    <h3><i class="fas fa-bullseye"></i> EM CÓ THỂ</h3>
+                    <ul>
+                        <li>Đọc hiểu các thông số kĩ thuật cơ bản của tụ điện và xác định được điện dung của tụ điện, hiệu điện thế tối đa cho phép đặt vào tụ điện.</li>
+                        <li>Hiểu và thực hành được các cách ghép nối tiếp và ghép song song của các tụ điện trong mạch điện.</li>
+                        <li>Vận dụng được kiến thức về năng lượng của tụ điện để giải thích được nguyên lí hoạt động phóng điện của máy hàn điện, tia sét giữa các đám mây tích điện trái dấu.</li>
+                        <li>Tìm hiểu về các ứng dụng của tụ điện trong cuộc sống trên cơ sở thu thập và lựa chọn thông tin, xây dựng báo cáo.</li>
+                    </ul>
+                </div>
+                
+                <div class="key-points">
+                    <div class="point">
+                        <h3><i class="fas fa-bolt"></i> Tụ điện</h3>
+                        <p>Hiểu được cấu tạo, nguyên lý hoạt động và ký hiệu của tụ điện trong mạch điện.</p>
+                    </div>
+                    
+                    <div class="point">
+                        <h3><i class="fas fa-exchange-alt"></i> Điện dung</h3>
+                        <p>Nắm vững khái niệm điện dung, công thức tính và các đơn vị đo của điện dung.</p>
+                    </div>
+                    
+                    <div class="point">
+                        <h3><i class="fas fa-calculator"></i> Ghép tụ điện</h3>
+                        <p>Phân biệt và vận dụng thành thạo các công thức ghép nối tiếp và ghép song song tụ điện.</p>
+                    </div>
+                    
+                    <div class="point">
+                        <h3><i class="fas fa-battery-full"></i> Năng lượng</h3>
+                        <p>Tính được năng lượng tích trữ trong tụ điện và hiểu các ứng dụng thực tế của tụ điện.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="footer">
+            <p>Bài 21: Tụ Điện | Chương III - Điện trường</p>
+        </footer>
+    </div>
+
+    <!-- MathJax cho hiển thị công thức toán -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('.section');
+                
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (sectionTop < windowHeight * 0.75) {
+                        section.style.opacity = '1';
+                        section.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+            
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+            
+            setTimeout(() => {
+                window.dispatchEvent(new Event('scroll'));
+            }, 100);
+            
+            const solutionButtons = document.querySelectorAll('.solution-btn');
+            solutionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const solution = this.nextElementSibling;
+                    solution.classList.toggle('active');
+                    
+                    if (solution.classList.contains('active')) {
+                        this.textContent = this.textContent.includes('Bài') 
+                            ? 'Ẩn hướng dẫn giải' 
+                            : 'Ẩn hướng dẫn';
+                        solution.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+                    } else {
+                        this.textContent = this.textContent.includes('Bài') 
+                            ? this.textContent.replace('Ẩn', 'Xem') 
+                            : 'Xem hướng dẫn';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
