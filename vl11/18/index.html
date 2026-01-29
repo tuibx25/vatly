@@ -5,8 +5,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Điện trường đều - Tóm tắt bài học</title>
     <link rel="icon" href="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/favicon.ico" type="image/x-icon">
+    
+    <!-- BẢO MẬT: Ngăn chặn các hành vi không mong muốn -->
+    <script>
+        // Ngăn chặn menu chuột phải
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+        
+        // Ngăn chặn phím tắt (Ctrl+U, Ctrl+S, Ctrl+P, F12, etc.)
+        document.addEventListener('keydown', function(e) {
+            // Ctrl+U (View Source)
+            if (e.ctrlKey && e.keyCode === 85) e.preventDefault();
+            // Ctrl+S (Save)
+            if (e.ctrlKey && e.keyCode === 83) e.preventDefault();
+            // Ctrl+P (Print)
+            if (e.ctrlKey && e.keyCode === 80) e.preventDefault();
+            // F12 (Developer Tools)
+            if (e.keyCode === 123) e.preventDefault();
+            // Ctrl+Shift+I (Developer Tools)
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 73) e.preventDefault();
+            // Ctrl+Shift+J (Console)
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 74) e.preventDefault();
+            // Ctrl+Shift+C (Inspector)
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 67) e.preventDefault();
+        });
+        
+        // Ngăn chặn kéo thả hình ảnh
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG') e.preventDefault();
+        });
+        
+        // Ngăn chặn sao chép văn bản
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+            alert('Không cho phép sao chép nội dung!');
+        });
+        
+        // Ngăn chặn cắt
+        document.addEventListener('cut', function(e) {
+            e.preventDefault();
+        });
+        
+        // Ngăn chặn dán
+        document.addEventListener('paste', function(e) {
+            e.preventDefault();
+        });
+        
+        // Ngăn chặn chọn văn bản
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+        });
+        
+        // Ngăn chặn bôi đen văn bản
+        document.addEventListener('mousedown', function(e) {
+            if (e.detail > 1) e.preventDefault(); // Ngăn double-click chọn
+        });
+    </script>
+    
+    <!-- BẢO MẬT: CSS để chống in ấn -->
+    <style>
+        @media print {
+            * {
+                display: none !important;
+            }
+            body:before {
+                content: "Không cho phép in trang này!";
+                display: block !important;
+                font-size: 24px;
+                text-align: center;
+                margin-top: 100px;
+            }
+        }
+    </style>
+    
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Thêm watermark overlay -->
+    <style>
+        .watermark-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9998;
+        }
+        
+        .watermark-overlay::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: repeat;
+            background-position: center;
+            background-size: 400px 400px;
+            opacity: 0.03;
+        }
+        
+        /* Đảm bảo nội dung hiển thị trên watermark */
+        .container, header, .content, footer {
+            position: relative;
+            z-index: 9999;
+        }
+    </style>
+    
     <style>
         :root {
             --dark-brown: #5D4037;
@@ -24,6 +132,10 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', 'Inter', sans-serif;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
         }
         
         body {
@@ -32,6 +144,8 @@
             line-height: 1.8;
             padding: 20px;
             font-size: 1.3rem;
+            position: relative;
+            min-height: 100vh;
         }
         
         .container {
@@ -42,6 +156,8 @@
             box-shadow: 0 12px 50px var(--shadow);
             overflow: hidden;
             border: 2px solid var(--light-brown);
+            position: relative;
+            z-index: 9999;
         }
         
         /* Header */
@@ -51,6 +167,8 @@
             padding: 40px 35px;
             text-align: center;
             border-bottom: 8px solid var(--accent);
+            position: relative;
+            z-index: 9999;
         }
         
         h1 {
@@ -70,6 +188,8 @@
         /* Main content */
         .content {
             padding: 40px;
+            position: relative;
+            z-index: 9999;
         }
         
         section {
@@ -260,6 +380,8 @@
             padding: 35px;
             margin-top: 50px;
             font-size: 1.4rem;
+            position: relative;
+            z-index: 9999;
         }
         
         footer p {
@@ -377,42 +499,14 @@
             }
         }
         
-        /* Print styles */
-        @media print {
-            body {
-                background: white;
-                font-size: 16pt;
-                line-height: 1.6;
-            }
-            
-            .container {
-                box-shadow: none;
-                border: 1px solid #ccc;
-                max-width: 100%;
-            }
-            
-            .point-card {
-                break-inside: avoid;
-                border: 1px solid #ddd;
-            }
-            
-            .image-placeholder {
-                display: none;
-            }
-            
-            .content-image {
-                border: 1px solid #ddd;
-                max-width: 80%;
-            }
-            
-            h1, h2, h3, h4 {
-                color: black;
-            }
-        }
+        /* Print styles - ĐÃ THAY THẾ BẰNG PHẦN CHỐNG IN Ở TRÊN */
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Watermark phủ toàn màn hình -->
+    <div class="watermark-overlay"></div>
+    
     <div class="container">
         <header>
             <h1><i class="fas fa-bolt"></i>BÀI 18. ĐIỆN TRƯỜNG ĐỀU</h1>
@@ -662,11 +756,11 @@
             }
         };
         
-        // Thêm chức năng in trang
+        // Thêm chức năng in trang (đã bị vô hiệu hóa bởi bảo mật)
         document.addEventListener('keydown', function(e) {
             if((e.ctrlKey || e.metaKey) && e.key === 'p') {
                 e.preventDefault();
-                window.print();
+                alert('Không cho phép in trang này!');
             }
         });
         
