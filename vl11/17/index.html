@@ -6,6 +6,80 @@
     <title>Bài 17: Khái niệm điện trường</title>
     <link rel="icon" href="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- BẢO MẬT: Ngăn chặn các hành vi không mong muốn -->
+    <script>
+        // Ngăn chặn menu chuột phải
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+        
+        // Ngăn chặn phím tắt (Ctrl+U, Ctrl+S, Ctrl+P, F12, etc.)
+        document.addEventListener('keydown', function(e) {
+            // Ctrl+U (View Source)
+            if (e.ctrlKey && e.keyCode === 85) e.preventDefault();
+            // Ctrl+S (Save)
+            if (e.ctrlKey && e.keyCode === 83) e.preventDefault();
+            // Ctrl+P (Print)
+            if (e.ctrlKey && e.keyCode === 80) e.preventDefault();
+            // F12 (Developer Tools)
+            if (e.keyCode === 123) e.preventDefault();
+            // Ctrl+Shift+I (Developer Tools)
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 73) e.preventDefault();
+            // Ctrl+Shift+J (Console)
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 74) e.preventDefault();
+            // Ctrl+Shift+C (Inspector)
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 67) e.preventDefault();
+        });
+        
+        // Ngăn chặn kéo thả hình ảnh
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG') e.preventDefault();
+        });
+        
+        // Ngăn chặn sao chép văn bản
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+            alert('Không cho phép sao chép nội dung!');
+        });
+        
+        // Ngăn chặn cắt
+        document.addEventListener('cut', function(e) {
+            e.preventDefault();
+        });
+        
+        // Ngăn chặn dán
+        document.addEventListener('paste', function(e) {
+            e.preventDefault();
+        });
+        
+        // Ngăn chặn chọn văn bản
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+        });
+        
+        // Ngăn chặn bôi đen văn bản
+        document.addEventListener('mousedown', function(e) {
+            if (e.detail > 1) e.preventDefault(); // Ngăn double-click chọn
+        });
+    </script>
+    
+    <!-- BẢO MẬT: CSS để chống in ấn -->
+    <style>
+        @media print {
+            * {
+                display: none !important;
+            }
+            body:before {
+                content: "Không cho phép in trang này!";
+                display: block !important;
+                font-size: 24px;
+                text-align: center;
+                margin-top: 100px;
+            }
+        }
+    </style>
+    
     <style>
         :root {
             --primary-dark: #8B4513;      /* Nâu đất đậm */
@@ -27,6 +101,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
         }
         
         body {
@@ -37,6 +115,25 @@
             padding: 20px;
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Watermark nền */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: repeat;
+            background-position: center;
+            background-size: 400px 400px;
+            opacity: 0.05;
+            z-index: -1;
+            pointer-events: none;
         }
         
         .container {
@@ -45,6 +142,8 @@
             box-shadow: 0 10px 30px var(--shadow);
             overflow: hidden;
             border: 1px solid var(--border-color);
+            position: relative;
+            z-index: 1;
         }
         
         /* Header */
@@ -72,6 +171,8 @@
         /* Content */
         .content {
             padding: 30px;
+            position: relative;
+            z-index: 1;
         }
         
         .section {
@@ -81,6 +182,27 @@
             border-radius: 10px;
             border-left: 5px solid var(--primary-medium);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        /* Watermark nhẹ trên từng section */
+        .section::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.02;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
         }
         
         .section h2 {
@@ -91,6 +213,8 @@
             border-bottom: 2px dashed var(--primary-light);
             display: flex;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
         
         .section h2 i {
@@ -104,12 +228,16 @@
             margin: 25px 0 15px;
             padding-left: 10px;
             border-left: 4px solid var(--primary-light);
+            position: relative;
+            z-index: 1;
         }
         
         .section p, .section li {
             font-size: 1.5rem; /* Kích thước font cho TV */
             color: var(--text-medium);
             margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
         }
         
         .formula {
@@ -123,6 +251,8 @@
             font-family: 'Cambria', 'Times New Roman', serif;
             color: var(--text-dark);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 1;
         }
         
         .formula-number {
@@ -140,17 +270,42 @@
             padding: 20px;
             margin: 25px 0;
             border-radius: 0 8px 8px 0;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        /* Watermark nhẹ trên phần note */
+        .note-box::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.01;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
         }
         
         .note-box h3 {
             color: var(--primary-dark);
             margin-bottom: 10px;
             font-size: 1.7rem;
+            position: relative;
+            z-index: 1;
         }
         
         .section ul, .section ol {
             padding-left: 30px;
             margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
         }
         
         .section li {
@@ -162,6 +317,8 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
             margin-top: 30px;
+            position: relative;
+            z-index: 1;
         }
         
         .point {
@@ -170,6 +327,8 @@
             border-radius: 8px;
             border-top: 4px solid var(--primary-medium);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 1;
         }
         
         .point h3 {
@@ -201,12 +360,35 @@
             padding: 20px;
             margin: 25px 0;
             border-radius: 0 8px 8px 0;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        /* Watermark nhẹ trên phần câu hỏi */
+        .question-box::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.01;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
         }
         
         .question-box h3 {
             color: var(--primary-dark);
             margin-bottom: 10px;
             font-size: 1.7rem;
+            position: relative;
+            z-index: 1;
         }
         
         .example-box {
@@ -215,12 +397,35 @@
             padding: 20px;
             margin: 25px 0;
             border-radius: 0 8px 8px 0;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        /* Watermark nhẹ trên phần ví dụ */
+        .example-box::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.01;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
         }
         
         .example-box h3 {
             color: #2c3e50;
             margin-bottom: 10px;
             font-size: 1.7rem;
+            position: relative;
+            z-index: 1;
         }
         
         /* Image container */
@@ -230,6 +435,8 @@
             padding: 10px;
             background-color: #f9f9f9;
             border-radius: 6px;
+            position: relative;
+            z-index: 1;
         }
         
         .image-container img {
@@ -259,6 +466,8 @@
             display: block;
             transition: background-color 0.3s;
             font-weight: 600;
+            position: relative;
+            z-index: 1;
         }
         
         .solution-btn:hover {
@@ -273,6 +482,27 @@
             border-radius: 8px;
             margin: 10px 0 20px;
             border-left: 4px solid var(--primary-medium);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        /* Watermark nhẹ trên phần giải */
+        .solution::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.01;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
         }
         
         .solution.active {
@@ -282,6 +512,8 @@
         .solution-content {
             padding: 20px;
             font-size: 1.4rem;
+            position: relative;
+            z-index: 1;
         }
         
         .solution-content h4 {
@@ -302,11 +534,53 @@
             padding: 20px;
             margin-top: 30px;
             border-top: 1px solid var(--primary-light);
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Watermark footer */
+        .footer::before {
+            content: "tuibx";
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.3);
+            font-weight: bold;
+            font-style: italic;
+            z-index: 0;
         }
         
         .footer p {
             font-size: 1.2rem;
             opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Watermark phủ toàn màn hình */
+        .watermark-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9998;
+        }
+        
+        .watermark-overlay::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: repeat;
+            background-position: center;
+            background-size: 200px 200px;
+            opacity: 0.03;
         }
         
         /* Responsive */
@@ -353,6 +627,16 @@
                 font-size: 1.2rem;
                 padding: 15px;
             }
+            
+            body::before {
+                background-size: 300px 300px;
+                opacity: 0.03;
+            }
+            
+            .section::before {
+                width: 200px;
+                height: 200px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -383,6 +667,10 @@
             .section p, .section li {
                 font-size: 1.2rem;
             }
+            
+            body::before {
+                background-size: 200px 200px;
+            }
         }
         
         /* TV Optimizations */
@@ -406,10 +694,18 @@
             .solution-content {
                 font-size: 1.5rem;
             }
+            
+            body::before {
+                background-size: 500px 500px;
+                opacity: 0.08;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Watermark phủ toàn màn hình -->
+    <div class="watermark-overlay"></div>
+    
     <div class="container">
         <header class="header">
             <h1><i class="fas fa-bolt"></i> Bài 17: Khái niệm điện trường</h1>
