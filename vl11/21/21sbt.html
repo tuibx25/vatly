@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập - Bài 21 (SBT) - Tụ Điện</title>
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/favicon.ico" type="image/x-icon">
+    
+    <!-- Ngăn chặn các hành vi không mong muốn -->
+    <script>
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.keyCode === 85) e.preventDefault();
+            if (e.ctrlKey && e.keyCode === 83) e.preventDefault();
+            if (e.ctrlKey && e.keyCode === 80) e.preventDefault();
+            if (e.keyCode === 123) e.preventDefault();
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 73) e.preventDefault();
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 74) e.preventDefault();
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 67) e.preventDefault();
+        });
+        document.addEventListener('dragstart', function(e) { if (e.target.tagName === 'IMG') e.preventDefault(); });
+        document.addEventListener('copy', function(e) { e.preventDefault(); alert('Không cho phép sao chép nội dung!'); });
+        document.addEventListener('cut', function(e) { e.preventDefault(); });
+        document.addEventListener('paste', function(e) { e.preventDefault(); });
+        document.addEventListener('selectstart', function(e) { e.preventDefault(); });
+    </script>
+    
+    <!-- Load MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']],
+                processEscapes: true,
+                packages: {'[+]': ['ams']}
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            }
+        };
+    </script>
+    
+    <style>
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #D2691E;
+            --light-color: #FAF3E6;
+            --dark-color: #333;
+            --white: #fff;
+            --font-size-normal: 1.5rem;
+            --font-size-large: 2rem;
+            --padding: 2rem;
+            --margin: 1.5rem;
+            --border-radius: 10px;
+            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.4;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+            padding: var(--padding);
+            font-size: var(--font-size-normal);
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* WATERMARK GIỐNG 20tn.html */
+        /* Watermark phủ toàn màn hình */
+        .watermark-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9998;
+        }
+        
+        .watermark-overlay::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: repeat;
+            background-position: center;
+            background-size: 200px 200px;
+            opacity: 0.04;
+        }
+        
+        /* Watermark nền */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: repeat;
+            background-position: center;
+            background-size: 400px 400px;
+            opacity: 0.08;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: var(--margin);
+            padding: var(--padding);
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        h1 { font-size: var(--font-size-large); margin-bottom: 1rem; }
+        h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+        .section {
+            background-color: rgba(255, 255, 255, 0.92);
+            padding: var(--padding);
+            margin-bottom: var(--margin);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Watermark nhẹ trên từng section */
+        .section::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.03;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .question {
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        /* Watermark nhẹ trên từng câu hỏi */
+        .question::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 250px;
+            height: 250px;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.02;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .question-title {
+            font-weight: bold;
+            margin-bottom: 0.8rem;
+            color: #000;
+            line-height: 1.3;
+            position: relative;
+            z-index: 1;
+        }
+        .options {
+            list-style-type: none;
+            padding-left: 1.5rem;
+        }
+        .options li { 
+            margin-bottom: 0.3rem; 
+            padding-left: 1rem; 
+            line-height: 1.3;
+            position: relative;
+            z-index: 1;
+        }
+        .answer {
+            position: relative;
+            background-color: rgba(245, 245, 245, 0.95);
+            padding: 1rem;
+            margin-top: 0.8rem;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            display: none;
+            animation: fadeIn 0.5s ease;
+            overflow: hidden;
+            line-height: 1.4;
+        }
+        
+        /* Watermark nhẹ trên phần đáp án */
+        .answer::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.01;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .answer.show { display: block; }
+        .answer strong { color: var(--primary-color); }
+        .formula {
+            font-family: 'Courier New', monospace;
+            background-color: rgba(249, 249, 249, 0.9);
+            padding: 0.5rem 1rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            overflow-x: auto;
+            position: relative;
+            z-index: 1;
+        }
+        .toggle-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            transition: background-color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .toggle-btn:hover { background-color: var(--secondary-color); }
+        .toggle-btn.hide { background-color: #666; }
+        .toggle-btn::before {
+            content: "🔍";
+            font-size: 0.9rem;
+        }
+        .toggle-btn.hide::before {
+            content: "👁️";
+        }
+        .controls {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+            z-index: 1;
+        }
+        .action-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin: 0 0.5rem;
+            transition: background-color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .action-btn:hover { background-color: var(--secondary-color); }
+        .action-btn::before {
+            content: "📘";
+            font-size: 1rem;
+        }
+        #hideAllBtn::before {
+            content: "📖";
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 1;
+        }
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 0.5rem;
+            text-align: center;
+        }
+        .data-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .data-table tr:nth-child(even) { background-color: #f2f2f2; }
+        .calc-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .calc-table th, .calc-table td {
+            border: 1px solid #ccc;
+            padding: 0.3rem;
+            text-align: center;
+        }
+        .calc-table th { background-color: #e9e9e9; }
+        .image-container {
+            text-align: center;
+            margin: 1rem 0;
+            position: relative;
+            z-index: 1;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .image-caption {
+            font-style: italic;
+            margin-top: 0.5rem;
+            color: #666;
+            font-size: 1.2rem;
+        }
+        .circuit-diagram {
+            background-color: #f9f9f9;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--secondary-color);
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+        }
+        footer::before {
+            content: "tuibx";
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            font-size: 1rem;
+            color: rgba(139, 69, 19, 0.3);
+            font-weight: bold;
+            font-style: italic;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @media print {
+            * { display: none !important; }
+            body:before {
+                content: "Không cho phép in trang này!";
+                display: block !important;
+                font-size: 24px;
+                text-align: center;
+                margin-top: 100px;
+            }
+        }
+        @media (max-width: 768px) {
+            body { padding: 1rem; font-size: 1.4rem; }
+            header { padding: 1.5rem; }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.6rem; }
+            .section { padding: 1.5rem; }
+            .action-btn { display: block; width: 90%; margin: 0.5rem auto; }
+            .data-table, .calc-table { font-size: 0.9rem; }
+            .data-table th, .data-table td { padding: 0.3rem; }
+            /* Điều chỉnh watermark cho mobile */
+            .section::before {
+                width: 200px;
+                height: 200px;
+            }
+            .question::before {
+                width: 150px;
+                height: 150px;
+            }
+            .answer::before {
+                width: 120px;
+                height: 120px;
+            }
+            .watermark-overlay::before {
+                background-size: 150px 150px;
+            }
+        }
+        /* Cải thiện cho công thức toán */
+        .MathJax_Display { margin: 0.8rem 0 !important; }
+        mjx-container[jax="CHTML"][display="true"] { margin: 0.8rem 0 !important; }
+        /* Đảm bảo MathJax hiển thị đúng */
+        .MathJax_SVG { display: inline !important; }
+        mjx-container[jax="SVG"] { display: inline-block !important; }
+    </style>
+</head>
+<body>
+    <!-- Watermark phủ toàn màn hình GIỐNG 20tn.html -->
+    <div class="watermark-overlay"></div>
+    
+    <header>
+        <h1>BÀI 21. TỤ ĐIỆN</h1>
+        <p>Bài tập sách bài tập Vật Lý - Trắc nghiệm và Tự luận</p>
+    </header>
+
+    <div class="controls">
+        <button class="action-btn" id="showAllBtn">Hiện tất cả đáp án</button>
+        <button class="action-btn" id="hideAllBtn">Ẩn tất cả đáp án</button>
+    </div>
+
+    <main>
+        <!-- Phần TRẮC NGHIỆM -->
+        <section class="section">
+            <h2>TRẮC NGHIỆM</h2>
+            
+            <div class="question">
+                <div class="question-title">Câu 1. Đại lượng đặc trưng cho khả năng tích điện của tụ điện là:</div>
+                <ul class="options">
+                    <li>A. điện dung C</li>
+                    <li>B. điện tích Q</li>
+                    <li>C. khoảng cách d giữa hai bản tụ.</li>
+                    <li>D. cường độ điện trường.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer1')">Hiện đáp án</button>
+                <div class="answer" id="answer1"><strong>Đáp án: A</strong><br>Giải thích: Điện dung C là đại lượng đặc trưng cho khả năng tích điện của tụ điện, được xác định bằng tỉ số giữa điện tích Q trên hiệu điện thế U: \(C = \frac{Q}{U}\).</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 2. Khi trong phòng thí nghiệm chỉ có một số tụ điện giống nhau với cùng điện dung C, muốn thiết kế một bộ tụ điện có điện dung nhỏ hơn C thì:</div>
+                <ul class="options">
+                    <li>A. chắc chắn phải ghép song song các tự điện.</li>
+                    <li>B. chắc chắn phải ghép nối tiếp các tụ điện.</li>
+                    <li>C. chắc chắn phải kết hợp cả ghép song song và nối tiếp.</li>
+                    <li>D. không thể thiết kế được bộ tự điện như vậy.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer2')">Hiện đáp án</button>
+                <div class="answer" id="answer2"><strong>Đáp án: B</strong><br>Giải thích: Khi ghép nối tiếp các tụ điện giống nhau, điện dung của bộ tụ sẽ nhỏ hơn điện dung của mỗi tụ thành phần. Ví dụ, nếu ghép nối tiếp n tụ điện giống nhau có điện dung C, điện dung của bộ tụ là \(C_b = \frac{C}{n}\).</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 3. Hai tụ điện có điện dung lần lượt \( C_1 = 1\mu F \), \( C_2 = 3\mu F \) ghép nối tiếp. Mắc bộ tụ điện đó vào hai cực của nguồn điện có hiệu điện thế \( U = 40 \, V \). Điện tích của các tụ điện là:</div>
+                <ul class="options">
+                    <li>A. \( Q_1 = 40 \cdot 10^{-6} \, C \) và \( Q_2 = 120 \cdot 10^{-6} \, C \).</li>
+                    <li>B. \( Q_1 = Q_2 = 30.10^{-6} \, C \).</li>
+                    <li>C. \( Q_1 = 7,5 \cdot 10^{-6} \, C \) và \( Q_2 = 22,5 \cdot 10^{-6} \, C \).</li>
+                    <li>D. \( Q_1 = Q_2 = 160 \cdot 10^{-6} \, C \).</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer3')">Hiện đáp án</button>
+                <div class="answer" id="answer3"><strong>Đáp án: B</strong><br>Giải thích: Khi ghép nối tiếp, điện tích trên các tụ bằng nhau và bằng điện tích của bộ tụ. Điện dung của bộ tụ nối tiếp: 
+                \[ \frac{1}{C_b} = \frac{1}{C_1} + \frac{1}{C_2} = \frac{1}{1} + \frac{1}{3} = \frac{4}{3} \Rightarrow C_b = 0,75 \mu F \]
+                Điện tích của bộ tụ: \( Q = C_b \cdot U = 0,75 \times 10^{-6} \times 40 = 30 \times 10^{-6} \, C \).
+                Vậy \( Q_1 = Q_2 = 30 \times 10^{-6} \, C \).</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 4. Một tụ điện khởi động cho động cơ có các thông số như Hình 21.1. Đơn vị VAC (hoặc V.ac) là điện áp ứng với dòng điện xoay chiều, còn VDC (hay V.dc) là điện áp ứng với dòng điện một chiều cùng được đo là vôn. Thông số điện áp 370 VAC được hiểu là:</div>
+                <div class="image-container">
+                    <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/21/sbt/21.1sbt.png" alt="Hình 21.1. Tụ điện của một động cơ">
+                    <div class="image-caption">Hình 21.1. Tụ điện của một động cơ</div>
+                </div>
+                <ul class="options">
+                    <li>A. điện áp tối thiểu khi mắc tụ điện vào.</li>
+                    <li>B. điện áp mà tụ điện hoạt động tốt nhất.</li>
+                    <li>C. điện áp xoay chiều hiệu dụng cao nhất để đảm bảo cho tụ hoạt động tốt. Đây không phải là thông số điện áp một chiều.</li>
+                    <li>D. điện áp mà khi mắc tụ điện vào thì điện dung bằng \( 15\mu F \).</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer4')">Hiện đáp án</button>
+                <div class="answer" id="answer4"><strong>Đáp án: C</strong><br>Giải thích: VAC (Volts Alternating Current) là điện áp xoay chiều hiệu dụng tối đa mà tụ điện có thể chịu được trong điều kiện hoạt động bình thường. Đây là thông số quan trọng để đảm bảo tụ không bị đánh thủng khi sử dụng trong mạch điện xoay chiều.</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 5. Quạt treo tường nhà bạn Nam bị hỏng chiếc tụ điện như Hình 21.2 và cần được thay thế. Hãy cho biết bạn Nam có thể chọn được tụ điện loại nào trong các loại dưới đây mà cửa hàng đồ điện có bán.</div>
+                <div class="image-container">
+                    <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/21/sbt/21.2sbt.png" alt="Hình 21.2. Tụ điện của quạt treo tường">
+                    <div class="image-caption">Hình 21.2. Tụ điện của quạt treo tường</div>
+                </div>
+                <div class="image-container">
+                    <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/21/sbt/21.2_sbt.png" alt="Các loại tụ điện có bán tại cửa hàng">
+                    <div class="image-caption">Các loại tụ điện có bán tại cửa hàng</div>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('answer5')">Hiện đáp án</button>
+                <div class="answer" id="answer5"><strong>Đáp án: Dựa vào thông số trên tụ điện quạt</strong><br>Giải thích: Tụ điện quạt treo tường thường có thông số 250VAC và điện dung từ 1.5μF đến 3μF. Cần chọn tụ điện có điện áp làm việc bằng hoặc cao hơn (250VAC trở lên) và điện dung tương đương. Trong các lựa chọn, tụ điện phù hợp nhất là loại có thông số 250VAC, 2.5μF hoặc tương đương.</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 6. Năng lượng của điện trường trong một tụ điện đã tích được điện tích q không phụ thuộc vào</div>
+                <ul class="options">
+                    <li>A. điện tích mà tụ điện tích được.</li>
+                    <li>B. hiệu điện thế giữa hai bản tụ điện.</li>
+                    <li>C. thời gian đã thực hiện để tích điện cho tụ điện.</li>
+                    <li>D. điện dung của tụ điện.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer6')">Hiện đáp án</button>
+                <div class="answer" id="answer6"><strong>Đáp án: C</strong><br>Giải thích: Năng lượng của tụ điện được tính bằng \( W = \frac{1}{2}QU = \frac{1}{2}CU^2 = \frac{Q^2}{2C} \). Công thức này chỉ phụ thuộc vào điện tích Q, hiệu điện thế U và điện dung C, không phụ thuộc vào thời gian tích điện.</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 7. Năng lượng của tụ điện bằng</div>
+                <ul class="options">
+                    <li>A. công để tích điện cho tụ điện.</li>
+                    <li>B. điện thế của các điện tích trên các bản tụ điện.</li>
+                    <li>C. tổng điện thế của các bản tụ điện.</li>
+                    <li>D. khả năng tích điện của tụ điện.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer7')">Hiện đáp án</button>
+                <div class="answer" id="answer7"><strong>Đáp án: A</strong><br>Giải thích: Năng lượng của tụ điện chính bằng công thực hiện để tích điện cho tụ, được dự trữ dưới dạng năng lượng điện trường giữa hai bản tụ.</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 8. Một tụ điện có điện tích bằng \( Q \) và ngắt khỏi nguồn, nếu tăng khoảng cách giữa hai bản tụ điện thì</div>
+                <ul class="options">
+                    <li>A. năng lượng của tụ điện giảm.</li>
+                    <li>B. năng lượng của tụ điện tăng lên do ta đã cung cấp một công làm tăng thế năng của các điện tích.</li>
+                    <li>C. năng lượng của tụ điện không thay đổi.</li>
+                    <li>D. năng lượng của tụ điện tăng lên rồi mới giảm.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer8')">Hiện đáp án</button>
+                <div class="answer" id="answer8"><strong>Đáp án: B</strong><br>Giải thích: Khi tụ điện đã tích điện Q và ngắt khỏi nguồn, điện tích Q không đổi. Khi tăng khoảng cách d giữa hai bản tụ, điện dung C giảm (vì \( C \propto \frac{1}{d} \)). Năng lượng \( W = \frac{Q^2}{2C} \) sẽ tăng lên do C giảm. Sự tăng năng lượng này là do công thực hiện để kéo hai bản tụ ra xa nhau.</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 9. Có bốn chiếc tụ điện như Hình 21.6, hãy sắp xếp theo thứ tự tăng dần về năng lượng khi chúng được tích điện tới mức tối đa cho phép.</div>
+                <div class="image-container">
+                    <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/21/sbt/21.6sbt.png" alt="Hình 21.6. Một số tụ điện dùng cho quạt điện">
+                    <div class="image-caption">Hình 21.6. Một số tụ điện dùng cho quạt điện</div>
+                </div>
+                <ul class="options">
+                    <li>A. b, d, a,c.</li>
+                    <li>B. b, c, d,a.</li>
+                    <li>C. c, a, b,d.</li>
+                    <li>D. c, b, a,d.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer9')">Hiện đáp án</button>
+                <div class="answer" id="answer9"><strong>Đáp án: Cần xem xét thông số trên hình 21.6</strong><br>Giải thích: Năng lượng tối đa của tụ điện được tính bằng \( W_{max} = \frac{1}{2}C U_{max}^2 \), với \( U_{max} \) là điện áp tối đa ghi trên tụ. Cần tính năng lượng tối đa cho từng tụ a, b, c, d dựa trên thông số điện dung và điện áp ghi trên mỗi tụ, sau đó sắp xếp theo thứ tự tăng dần.</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 10. Công dụng nào sau đây của một thiết bị không liên quan tới tụ điện?</div>
+                <ul class="options">
+                    <li>A. Tích trữ năng lượng và cung cấp năng lượng.</li>
+                    <li>B. Lưu trữ điện tích.</li>
+                    <li>C. Lọc dòng điện một chiều.</li>
+                    <li>D. Cung cấp nhiệt năng ở bàn là, máy sấy,...</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer10')">Hiện đáp án</button>
+                <div class="answer" id="answer10"><strong>Đáp án: D</strong><br>Giải thích: Tụ điện có các công dụng chính: tích trữ năng lượng, lưu trữ điện tích, lọc dòng điện (trong các mạch chỉnh lưu), tạo dao động, khởi động động cơ,... Tuy nhiên, cung cấp nhiệt năng ở bàn là, máy sấy là chức năng của điện trở nhiệt, không phải của tụ điện.</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 11. Khi sử dụng một tụ điện loại b và một tụ điện loại c trong Hình 21.6 để ghép thành bộ tụ điện. Hãy so sánh năng lượng bộ tụ điện ghép song song và bộ tụ điện ghép nối tiếp khi chúng được tích điện đến mức tối đa cho phép.</div>
+                <ul class="options">
+                    <li>A. Năng lượng của bộ tụ điện ghép song song lớn hơn của bộ tụ điện ghép nối tiếp.</li>
+                    <li>B. Hai cách ghép đều cho kết quả như nhau.</li>
+                    <li>C. Năng lượng của bộ tụ điện ghép song song nhỏ hơn của bộ tụ điện ghép nối tiếp.</li>
+                    <li>D. Cả ba phương án A, B, C đều có thể xảy ra.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer11')">Hiện đáp án</button>
+                <div class="answer" id="answer11"><strong>Đáp án: A</strong><br>Giải thích: Khi ghép song song, điện dung của bộ tụ lớn hơn so với ghép nối tiếp. Với cùng điện áp nguồn tối đa (xác định bởi tụ có điện áp thấp hơn), năng lượng tích được \( W = \frac{1}{2}C U^2 \) sẽ lớn hơn khi điện dung C lớn hơn. Do đó, năng lượng của bộ tụ ghép song song thường lớn hơn.</div>
+            </div>
+        </section>
+
+        <!-- Phần TỰ LUẬN -->
+        <section class="section">
+            <h2>TỰ LUẬN</h2>
+            
+            <div class="question">
+                <div class="question-title">Câu 12. Ở câu 5, khi bạn Nam ra tới cửa hàng đồ điện để mua tụ điện thay thế cho tụ điện quạt trong Hình 21.2 thì cửa hàng đã bán hết loại tụ điện mà Nam dự định mua. Biết rằng giá bán các tụ loại \( A, B, C, D \) là bằng nhau, hãy giúp bạn Nam lựa chọn phương án thay thế với chi phí hợp lí nhất.</div>
+                <button class="toggle-btn" onclick="toggleAnswer('answer12')">Hiện lời giải</button>
+                <div class="answer" id="answer12">
+                    <strong>Lời giải:</strong><br>
+                    Để thay thế tụ điện quạt bị hỏng, cần chọn tụ điện có:<br>
+                    1. Điện áp làm việc bằng hoặc cao hơn tụ gốc (250VAC)<br>
+                    2. Điện dung gần bằng nhất với tụ gốc<br>
+                    3. Nếu không có tụ có điện dung chính xác, có thể ghép các tụ để đạt được điện dung tương đương<br><br>
+                    
+                    <strong>Phân tích các lựa chọn:</strong><br>
+                    - Tụ A: 250VAC, 2μF (gần đúng với 2.5μF)<br>
+                    - Tụ B: 400VAC, 4μF (điện áp cao hơn, điện dung lớn hơn)<br>
+                    - Tụ C: 250VAC, 3μF (điện dung lớn hơn)<br>
+                    - Tụ D: 250VAC, 1.5μF (điện dung nhỏ hơn)<br><br>
+                    
+                    <strong>Phương án tốt nhất:</strong> Mua tụ A (250VAC, 2μF) vì có điện áp phù hợp và điện dung gần nhất với tụ gốc 2.5μF. Sai số 0.5μF thường chấp nhận được cho quạt treo tường.
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 13. Chọn mua hai chiếc tụ điện loại \( A \) và một chiếc tụ điện loại \( B \) trong Câu 5 về ghép thành bộ như Hình 21.3.<br>
+                a) Tính điện dung của bộ tụ điện.<br>
+                b) Sử dụng bộ tụ điện trong Hình 21.3 có thể thay thế cho tụ điện quạt bị hỏng trong Hình 21.2 không? Giải thích lí do.</div>
+                <div class="image-container">
+                    <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/21/sbt/21.3sbt.png" alt="Hình 21.3. Bộ tụ điện">
+                    <div class="image-caption">Hình 21.3. Bộ tụ điện</div>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('answer13')">Hiện lời giải</button>
+                <div class="answer" id="answer13">
+                    <strong>Lời giải:</strong><br>
+                    <strong>a) Tính điện dung của bộ tụ:</strong><br>
+                    Giả sử tụ A có điện dung \( C_A = 2\mu F \), tụ B có điện dung \( C_B = 4\mu F \).<br>
+                    Hai tụ A mắc song song: \( C_{A//A} = C_A + C_A = 2 + 2 = 4\mu F \)<br>
+                    Sau đó, bộ tụ A//A mắc nối tiếp với tụ B:<br>
+                    \[ \frac{1}{C_b} = \frac{1}{C_{A//A}} + \frac{1}{C_B} = \frac{1}{4} + \frac{1}{4} = \frac{2}{4} = \frac{1}{2} \]
+                    \[ C_b = 2\mu F \]<br><br>
+                    
+                    <strong>b) Khả năng thay thế:</strong><br>
+                    Bộ tụ có điện dung \( 2\mu F \), gần với điện dung tụ quạt (2.5μF).<br>
+                    Về điện áp: Cần xem xét điện áp tối đa của bộ tụ. Khi mắc nối tiếp, điện áp phân chia tỉ lệ nghịch với điện dung. Cần đảm bảo mỗi tụ không vượt quá điện áp định mức của nó.<br>
+                    Nếu điện áp định mức của tụ A và B đều ≥ 250VAC, bộ tụ có thể thay thế được cho tụ quạt.
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 14. Tính điện tích tối đa mà bộ tụ điện Hình 21.3 có thể tích được trong ngưỡng điện áp theo thông số điện áp ghi trên tụ điện.</div>
+                <button class="toggle-btn" onclick="toggleAnswer('answer14')">Hiện lời giải</button>
+                <div class="answer" id="answer14">
+                    <strong>Lời giải:</strong><br>
+                    Giả sử tụ A (2μF) có điện áp tối đa \( U_{A,max} = 250V \), tụ B (4μF) có \( U_{B,max} = 400V \).<br><br>
+                    
+                    <strong>Phân tích điện áp trong mạch:</strong><br>
+                    Bộ tụ gồm: Hai tụ A song song (tạo thành tụ 4μF) nối tiếp với tụ B (4μF).<br>
+                    Khi mắc nối tiếp hai tụ có cùng điện dung (4μF), điện áp phân chia đều: mỗi tụ chịu một nửa tổng điện áp.<br><br>
+                    
+                    <strong>Xác định điện áp tối đa cho bộ tụ:</strong><br>
+                    - Tụ B chịu được 400V → nửa điện áp tối đa của nó là 200V<br>
+                    - Tụ A chịu được 250V → nửa điện áp tối đa của nó là 125V<br>
+                    Điện áp tối đa của bộ tụ bị giới hạn bởi tụ có điện áp thấp hơn: \( U_{max} = 2 \times 125 = 250V \) (vì mỗi tụ chịu 125V)<br><br>
+                    
+                    <strong>Điện tích tối đa:</strong><br>
+                    Điện dung của bộ tụ \( C_b = 2\mu F \) (tính từ câu 13)<br>
+                    \[ Q_{max} = C_b \times U_{max} = 2 \times 10^{-6} \times 250 = 5 \times 10^{-4} \, C = 500\mu C \]
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 15. Có hai chiếc tụ điện giống nhau như Hình 21.4. Tụ điện thứ nhất được tích điện với hiệu điện thế \( U = 48 \, \text{V} \) rồi bỏ ra khỏi nguồn. Sau đó ghép song song tụ điện thứ nhất với tụ thứ hai chưa được tích điện.<br>
+                a) Khi bỏ qua các sai số, hãy xác định hiệu điện thế đo được giữa hai cực của bộ tụ điện.<br>
+                b) Thay hai tụ điện trong Hình 21.4 bằng hai tụ điện khác nhưng thông số kĩ thuật vẫn giống nhau. Sử dụng nguồn tích điện có hiệu điện thế phù hợp để tích điện cho một tụ rồi lặp lại thí nghiệm như trên. Hiệu điện thế đo được của bộ tụ điện ghép song song sẽ phụ thuộc vào thông số nào?<br>
+                c) Có thể làm thí nghiệm kiểm tra được không?</div>
+                <div class="image-container">
+                    <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/21/sbt/21.4sbt.png" alt="Hình 21.4. Tụ điện dùng cho động cơ xe máy">
+                    <div class="image-caption">Hình 21.4. Tụ điện dùng cho động cơ xe máy</div>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('answer15')">Hiện lời giải</button>
+                <div class="answer" id="answer15">
+                    <strong>Lời giải:</strong><br>
+                    <strong>a) Hiệu điện thế sau khi ghép song song:</strong><br>
+                    Gọi điện dung mỗi tụ là C.<br>
+                    Tụ 1 tích điện: \( Q_1 = C \times 48 \)<br>
+                    Tụ 2 chưa tích điện: \( Q_2 = 0 \)<br>
+                    Khi ghép song song, điện tích tổng bảo toàn: \( Q_{total} = Q_1 + Q_2 = 48C \)<br>
+                    Điện dung của bộ tụ song song: \( C_b = C + C = 2C \)<br>
+                    Hiệu điện thế của bộ tụ: \( U_b = \frac{Q_{total}}{C_b} = \frac{48C}{2C} = 24V \)<br><br>
+                    
+                    <strong>b) Sự phụ thuộc:</strong><br>
+                    Hiệu điện thế sau khi ghép phụ thuộc vào:<br>
+                    1. Điện áp ban đầu khi tích điện cho tụ thứ nhất<br>
+                    2. Tỉ số điện dung giữa hai tụ (nếu không giống nhau)<br>
+                    Trong trường hợp hai tụ giống nhau, hiệu điện thế sau ghép luôn bằng một nửa điện áp ban đầu.<br><br>
+                    
+                    <strong>c) Thí nghiệm kiểm tra:</strong><br>
+                    Có thể làm thí nghiệm kiểm tra bằng cách:<br>
+                    1. Dùng nguồn điện một chiều để tích điện cho một tụ<br>
+                    2. Dùng vôn kế đo điện áp trên tụ<br>
+                    3. Ngắt nguồn, ghép song song với tụ thứ hai chưa tích điện<br>
+                    4. Đo lại điện áp trên bộ tụ<br>
+                    Kết quả thí nghiệm sẽ xác nhận lý thuyết: điện áp giảm còn một nửa.
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 16. Tích điện cho tụ như trong hình 21.5 nguồn điện một chiều để có hiệu điện thế \( U = 100 \, \text{V} \). Giả sử sai số là 5% là chính xác.<br>
+                a) Thực tế, điện tích mà tụ này tích được sẽ có giá trị trong khoảng nào?<br>
+                b) Xác định sai số tương đối của điện tích mà tụ tích được.</div>
+                <div class="image-container">
+                    <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/21/sbt/21.5sbt.png" alt="Hình 21.5. Tụ điện dùng cho quạt điện">
+                    <div class="image-caption">Hình 21.5. Tụ điện dùng cho quạt điện</div>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('answer16')">Hiện lời giải</button>
+                <div class="answer" id="answer16">
+                    <strong>Lời giải:</strong><br>
+                    Từ hình 21.5, giả sử tụ có điện dung danh định \( C = 2.5\mu F \) với sai số 5%.<br><br>
+                    
+                    <strong>a) Khoảng giá trị điện tích:</strong><br>
+                    Điện dung thực tế nằm trong khoảng: 
+                    \[ C_{min} = 2.5 - 5\% \times 2.5 = 2.5 - 0.125 = 2.375\mu F \]
+                    \[ C_{max} = 2.5 + 5\% \times 2.5 = 2.5 + 0.125 = 2.625\mu F \]
+                    
+                    Điện áp tích điện: \( U = 100V \)<br>
+                    Điện tích: \( Q = C \times U \)<br>
+                    \[ Q_{min} = C_{min} \times U = 2.375 \times 10^{-6} \times 100 = 2.375 \times 10^{-4} \, C \]
+                    \[ Q_{max} = C_{max} \times U = 2.625 \times 10^{-6} \times 100 = 2.625 \times 10^{-4} \, C \]
+                    
+                    Vậy điện tích nằm trong khoảng: \( (2.375 \times 10^{-4} \, C \,\, \text{đến} \,\, 2.625 \times 10^{-4} \, C) \)<br><br>
+                    
+                    <strong>b) Sai số tương đối của điện tích:</strong><br>
+                    Vì \( Q = C \times U \) và U được coi là chính xác (100V), sai số tương đối của Q bằng sai số tương đối của C:<br>
+                    \[ \delta_Q = \delta_C = 5\% \]
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 17. Hai tụ điện \( a \) và \( b \) (Hình 21.7) đã được tích điện lần lượt tới hiệu điện thế \( U_a = 100 \, \text{V} \) và \( U_b = 120 \, \text{V} \). Sau đó đem ghép nối hai tụ điện bằng cách nối hai dây dương (màu đỏ) với nhau và nối hai dây âm (màu trắng) với nhau.<br>
+                a) Hãy vẽ sơ đồ mạch điện ghép nối.<br>
+                b) Xác định năng lượng của mỗi tụ điện trước và sau khi ghép nối.</div>
+                <div class="image-container">
+                    <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/21/sbt/21.7sbt.png" alt="Hình 21.7. Hai tụ điện a và b">
+                    <div class="image-caption">Hình 21.7. Hai tụ điện a và b</div>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('answer17')">Hiện lời giải</button>
+                <div class="answer" id="answer17">
+                    <strong>Lời giải:</strong><br>
+                    <strong>a) Sơ đồ mạch điện ghép nối:</strong><br>
+                    <div class="circuit-diagram">
+                        Hai tụ được ghép song song: cực dương nối với cực dương, cực âm nối với cực âm.<br>
+                        [Sơ đồ: Hai tụ C_a và C_b mắc song song]
+                    </div><br>
+                    
+                    <strong>b) Năng lượng trước và sau ghép nối:</strong><br>
+                    Cần biết điện dung của tụ a và b từ hình 21.7. Giả sử:<br>
+                    - Tụ a: \( C_a = 10\mu F \)<br>
+                    - Tụ b: \( C_b = 20\mu F \)<br><br>
+                    
+                    <strong>Trước khi ghép:</strong><br>
+                    \[ W_a = \frac{1}{2} C_a U_a^2 = \frac{1}{2} \times 10 \times 10^{-6} \times 100^2 = 0.05 \, J \]
+                    \[ W_b = \frac{1}{2} C_b U_b^2 = \frac{1}{2} \times 20 \times 10^{-6} \times 120^2 = 0.144 \, J \]
+                    Tổng năng lượng ban đầu: \( W_{total,initial} = 0.05 + 0.144 = 0.194 \, J \)<br><br>
+                    
+                    <strong>Sau khi ghép song song (cùng cực):</strong><br>
+                    Điện tích ban đầu:<br>
+                    \[ Q_a = C_a \times U_a = 10 \times 10^{-6} \times 100 = 1 \times 10^{-3} \, C \]
+                    \[ Q_b = C_b \times U_b = 20 \times 10^{-6} \times 120 = 2.4 \times 10^{-3} \, C \]
+                    
+                    Tổng điện tích: \( Q_{total} = Q_a + Q_b = 3.4 \times 10^{-3} \, C \)<br>
+                    Điện dung bộ tụ song song: \( C_{total} = C_a + C_b = 30\mu F \)<br>
+                    Hiệu điện thế sau ghép: \( U_{final} = \frac{Q_{total}}{C_{total}} = \frac{3.4 \times 10^{-3}}{30 \times 10^{-6}} = 113.33 \, V \)<br>
+                    
+                    Năng lượng sau ghép:<br>
+                    \[ W_{final} = \frac{1}{2} C_{total} U_{final}^2 = \frac{1}{2} \times 30 \times 10^{-6} \times (113.33)^2 = 0.1927 \, J \]
+                    
+                    <strong>Nhận xét:</strong> Năng lượng giảm một chút (0.194J → 0.1927J) do có sự tỏa nhiệt trong dây dẫn khi ghép.
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 18. Tính năng lượng được giải phóng (hay công phóng điện) khi ta ghép nối hai tụ điện trong Câu 17 theo cách nối dây dương của tụ điện này với dây âm của tụ điện kia.</div>
+                <button class="toggle-btn" onclick="toggleAnswer('answer18')">Hiện lời giải</button>
+                <div class="answer" id="answer18">
+                    <strong>Lời giải:</strong><br>
+                    Khi nối cực dương của tụ này với cực âm của tụ kia (ghép ngược cực), điện tích sẽ trung hòa một phần.<br><br>
+                    
+                    <strong>Trường hợp ghép ngược cực:</strong><br>
+                    Giả sử nối cực dương của tụ a với cực âm của tụ b:<br>
+                    Điện tích ban đầu: \( Q_a = 1 \times 10^{-3} C \) (dương), \( Q_b = 2.4 \times 10^{-3} C \) (dương, nhưng khi ghép ngược sẽ coi là -2.4×10⁻³ C ở cực được nối)<br>
+                    
+                    Điện tích tổng sau khi ghép: \( Q_{total} = Q_a + (-Q_b) = 1 \times 10^{-3} - 2.4 \times 10^{-3} = -1.4 \times 10^{-3} C \)<br>
+                    (Dấu âm chỉ chiều của điện tích)<br>
+                    
+                    Điện dung bộ tụ song song: \( C_{total} = C_a + C_b = 30\mu F \)<br>
+                    Hiệu điện thế sau ghép: \( U_{final} = \frac{|Q_{total}|}{C_{total}} = \frac{1.4 \times 10^{-3}}{30 \times 10^{-6}} = 46.67 \, V \)<br>
+                    
+                    Năng lượng sau ghép:<br>
+                    \[ W_{final} = \frac{1}{2} C_{total} U_{final}^2 = \frac{1}{2} \times 30 \times 10^{-6} \times (46.67)^2 = 0.0327 \, J \]
+                    
+                    Năng lượng ban đầu: \( W_{initial} = 0.194 \, J \) (từ câu 17)<br>
+                    Năng lượng giải phóng (tỏa nhiệt, tia lửa điện):<br>
+                    \[ \Delta W = W_{initial} - W_{final} = 0.194 - 0.0327 = 0.1613 \, J \]
+                    
+                    <strong>Kết luận:</strong> Khi ghép ngược cực, một lượng năng lượng lớn (0.1613 J) được giải phóng dưới dạng nhiệt và tia lửa điện.
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 19. Sử dụng bốn tụ \( a, b, c, d \) trong Hình 21.6 để ghép nối thành mạch như Hình 21.8. Nếu hiểu thông số điện áp ghi trên tụ điện là điện áp tối đa được mắc vào tụ điện để hoạt động tốt.<br>
+                a) Hãy xác định hiệu điện thế tối đa có thể mắc vào mạch trên mà không làm hỏng các tụ điện trong mạch.<br>
+                b) Tính năng lượng tối đa cho phép mà bộ tụ điện trên có thể tích trữ được.</div>
+                <div class="image-container">
+                    <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/21/sbt/21.8sbt.png" alt="Hình 21.8. Mạch tụ điện">
+                    <div class="image-caption">Hình 21.8. Mạch tụ điện</div>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('answer19')">Hiện lời giải</button>
+                <div class="answer" id="answer19">
+                    <strong>Lời giải:</strong><br>
+                    Cần xem thông số tụ a, b, c, d từ hình 21.6. Giả sử:<br>
+                    - Tụ a: \( C_a = 2\mu F, U_{a,max} = 250V \)<br>
+                    - Tụ b: \( C_b = 3\mu F, U_{b,max} = 400V \)<br>
+                    - Tụ c: \( C_c = 4\mu F, U_{c,max} = 250V \)<br>
+                    - Tụ d: \( C_d = 1\mu F, U_{d,max} = 400V \)<br><br>
+                    
+                    <strong>Phân tích mạch từ hình 21.8:</strong><br>
+                    Giả sử mạch có dạng: (a song song b) nối tiếp với (c song song d)<br><br>
+                    
+                    <strong>a) Điện áp tối đa của bộ tụ:</strong><br>
+                    Bước 1: Tính điện dung từng nhánh<br>
+                    Nhánh 1 (a//b): \( C_1 = C_a + C_b = 2 + 3 = 5\mu F \)<br>
+                    Nhánh 2 (c//d): \( C_2 = C_c + C_d = 4 + 1 = 5\mu F \)<br><br>
+                    
+                    Bước 2: Xác định điện áp tối đa cho từng nhánh<br>
+                    Nhánh 1: Tụ a (250V) và tụ b (400V) mắc song song → điện áp chung bằng điện áp thấp hơn = 250V<br>
+                    Nhánh 2: Tụ c (250V) và tụ d (400V) mắc song song → điện áp chung = 250V<br><br>
+                    
+                    Bước 3: Hai nhánh mắc nối tiếp, điện áp phân chia tỉ lệ nghịch với điện dung<br>
+                    Vì \( C_1 = C_2 = 5\mu F \) → điện áp phân chia đều: mỗi nhánh chịu một nửa tổng điện áp<br>
+                    Điện áp tối đa cho mỗi nhánh là 250V → điện áp tối đa của bộ: \( U_{max} = 250 \times 2 = 500V \)<br><br>
+                    
+                    <strong>b) Năng lượng tối đa:</strong><br>
+                    Điện dung của bộ tụ (2 nhánh 5μF nối tiếp):<br>
+                    \[ \frac{1}{C_b} = \frac{1}{C_1} + \frac{1}{C_2} = \frac{1}{5} + \frac{1}{5} = \frac{2}{5} \Rightarrow C_b = 2.5\mu F \]
+                    Năng lượng tối đa:<br>
+                    \[ W_{max} = \frac{1}{2} C_b U_{max}^2 = \frac{1}{2} \times 2.5 \times 10^{-6} \times (500)^2 = 0.3125 \, J \]
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 20. Hình 21.9 bị xoá tên đại lượng trên trục tung. Ba đồ thị mô tả sự biến thiên của ba đại lượng: năng lượng, điện dung, điện tích, khi hiệu điện thế \( U \) thay đổi từ 0 đến 40 V. Hãy xác định tên trên trục tung của các đồ thị đó và giải thích.</div>
+                <div class="image-container">
+                    <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/21/sbt/21.9sbt.png" alt="Hình 21.9. Đồ thị biến thiên của các đại lượng theo hiệu điện thế">
+                    <div class="image-caption">Hình 21.9. Đồ thị biến thiên của các đại lượng theo hiệu điện thế</div>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('answer20')">Hiện lời giải</button>
+                <div class="answer" id="answer20">
+                    <strong>Lời giải:</strong><br>
+                    Xét các đại lượng với tụ điện có điện dung C không đổi:<br><br>
+                    
+                    <strong>1. Điện tích Q:</strong> \( Q = C \cdot U \) → Q tỉ lệ thuận với U → đồ thị là đường thẳng đi qua gốc tọa độ.<br>
+                    
+                    <strong>2. Năng lượng W:</strong> \( W = \frac{1}{2} C U^2 \) → W tỉ lệ với U² → đồ thị là đường parabol (đi qua gốc).<br>
+                    
+                    <strong>3. Điện dung C:</strong> Không đổi với U (với tụ điện thông thường) → đồ thị là đường thẳng song song với trục hoành.<br><br>
+                    
+                    <strong>Xác định từng đồ thị trong hình 21.9:</strong><br>
+                    - Đồ thị a: Đường thẳng song song trục hoành → Điện dung C<br>
+                    - Đồ thị b: Đường thẳng đi qua gốc → Điện tích Q<br>
+                    - Đồ thị c: Đường cong parabol đi qua gốc → Năng lượng W<br><br>
+                    
+                    <strong>Kết luận:</strong><br>
+                    a) Điện dung C<br>
+                    b) Điện tích Q<br>
+                    c) Năng lượng W
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 21. Hãy tìm hiểu, sưu tầm thông tin, hình ảnh một số tụ điện rồi lựa chọn và sử dụng thông tin để hoàn thành báo cáo tìm hiểu một số ứng dụng của tụ điện trong cuộc sống.</div>
+                <button class="toggle-btn" onclick="toggleAnswer('answer21')">Hiện gợi ý</button>
+                <div class="answer" id="answer21">
+                    <strong>Gợi ý báo cáo:</strong><br>
+                    <strong>1. Các loại tụ điện thông dụng:</strong><br>
+                    - Tụ gốm (ceramic): Dùng trong mạch cao tần, lọc nhiễu<br>
+                    - Tụ hóa (electrolytic): Dung lượng lớn, dùng trong nguồn điện, mạch âm thanh<br>
+                    - Tụ mica: Độ ổn định cao, dùng trong mạch cộng hưởng<br>
+                    - Tụ tantali: Kích thước nhỏ, dung lượng lớn<br><br>
+                    
+                    <strong>2. Ứng dụng của tụ điện:</strong><br>
+                    a) <strong>Lưu trữ năng lượng:</strong> Trong các mạch nguồn, đèn flash, hệ thống backup<br>
+                    b) <strong>Lọc nhiễu:</strong> Trong các mạch nguồn, mạch âm thanh<br>
+                    c) <strong>Khởi động động cơ:</strong> Tụ đề, tụ ngậm trong quạt điện, máy bơm nước<br>
+                    d) <strong>Mạch cộng hưởng:</strong> Trong radio, máy thu phát sóng<br>
+                    e) <strong>Mạch định thời:</strong> Kết hợp với điện trở tạo mạch RC<br>
+                    f) <strong>Mạch dao động:</strong> Tạo sóng sin, vuông, tam giác<br>
+                    g) <strong>Mạch chỉnh lưu:</strong> Làm phẳng điện áp sau chỉnh lưu<br><br>
+                    
+                    <strong>3. Ví dụ cụ thể:</strong><br>
+                    - Quạt điện: Tụ điện tạo lệch pha để khởi động động cơ<br>
+                    - Đèn flash máy ảnh: Tụ điện tích trữ năng lượng rồi phóng nhanh tạo ánh sáng<br>
+                    - Tivi, radio: Tụ điện trong mạch cộng hưởng để chọn kênh<br>
+                    - Máy tính: Tụ điện lọc nhiễu trên các đường nguồn<br><br>
+                    
+                    <strong>4. Hình ảnh minh họa:</strong> Sưu tầm hình ảnh các loại tụ điện và ứng dụng trong thiết bị thực tế.
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>Bài tập Vật Lý 11 - Bài 21: Tụ điện</p>
+    </footer>
+
+    <script>
+        function toggleAnswer(answerId) {
+            const answer = document.getElementById(answerId);
+            const button = answer.previousElementSibling;
+            if (answer.classList.contains('show')) {
+                answer.classList.remove('show');
+                button.textContent = answerId.includes('answer') ? 'Hiện đáp án' : 'Hiện lời giải';
+                button.classList.remove('hide');
+            } else {
+                answer.classList.add('show');
+                button.textContent = answerId.includes('answer') ? 'Ẩn đáp án' : 'Ẩn lời giải';
+                button.classList.add('hide');
+            }
+            if (window.MathJax) { 
+                MathJax.typesetPromise([answer]).catch(err => console.log('MathJax error:', err));
+            }
+        }
+        
+        document.getElementById('showAllBtn').addEventListener('click', function() {
+            document.querySelectorAll('.answer').forEach(ans => {
+                ans.classList.add('show');
+                const button = ans.previousElementSibling;
+                const answerId = button.getAttribute('onclick').match(/'([^']+)'/)[1];
+                button.textContent = answerId.includes('answer') ? 'Ẩn đáp án' : 'Ẩn lời giải';
+                button.classList.add('hide');
+            });
+            if (window.MathJax) { 
+                MathJax.typesetPromise().catch(err => console.log('MathJax error:', err));
+            }
+        });
+        
+        document.getElementById('hideAllBtn').addEventListener('click', function() {
+            document.querySelectorAll('.answer').forEach(ans => {
+                ans.classList.remove('show');
+                const button = ans.previousElementSibling;
+                const answerId = button.getAttribute('onclick').match(/'([^']+)'/)[1];
+                button.textContent = answerId.includes('answer') ? 'Hiện đáp án' : 'Hiện lời giải';
+                button.classList.remove('hide');
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.MathJax) { 
+                MathJax.typesetPromise().catch(err => console.log('MathJax error:', err));
+            }
+        });
+    </script>
+</body>
+</html>
