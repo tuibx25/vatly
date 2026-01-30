@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập - Bài 20 (SBT) - Điện Thế - Phiên bản 2</title>
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/favicon.ico" type="image/x-icon">
+    
+    <!-- Ngăn chặn các hành vi không mong muốn -->
+    <script>
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.keyCode === 85) e.preventDefault();
+            if (e.ctrlKey && e.keyCode === 83) e.preventDefault();
+            if (e.ctrlKey && e.keyCode === 80) e.preventDefault();
+            if (e.keyCode === 123) e.preventDefault();
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 73) e.preventDefault();
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 74) e.preventDefault();
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 67) e.preventDefault();
+        });
+        document.addEventListener('dragstart', function(e) { if (e.target.tagName === 'IMG') e.preventDefault(); });
+        document.addEventListener('copy', function(e) { e.preventDefault(); alert('Không cho phép sao chép nội dung!'); });
+        document.addEventListener('cut', function(e) { e.preventDefault(); });
+        document.addEventListener('paste', function(e) { e.preventDefault(); });
+        document.addEventListener('selectstart', function(e) { e.preventDefault(); });
+    </script>
+    
+    <!-- Load MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']],
+                processEscapes: true,
+                packages: {'[+]': ['ams']}
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            }
+        };
+    </script>
+    
+    <style>
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #D2691E;
+            --light-color: #FAF3E6;
+            --dark-color: #333;
+            --white: #fff;
+            --font-size-normal: 1.5rem;
+            --font-size-large: 2rem;
+            --padding: 2rem;
+            --margin: 1.5rem;
+            --border-radius: 10px;
+            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.4;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+            padding: var(--padding);
+            font-size: var(--font-size-normal);
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* WATERMARK GIỐNG 20sbt.html */
+        /* Watermark phủ toàn màn hình */
+        .watermark-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9998;
+        }
+        
+        .watermark-overlay::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: repeat;
+            background-position: center;
+            background-size: 200px 200px;
+            opacity: 0.04;
+        }
+        
+        /* Watermark nền */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: repeat;
+            background-position: center;
+            background-size: 400px 400px;
+            opacity: 0.08;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: var(--margin);
+            padding: var(--padding);
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        h1 { font-size: var(--font-size-large); margin-bottom: 1rem; }
+        h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+        .section {
+            background-color: rgba(255, 255, 255, 0.92);
+            padding: var(--padding);
+            margin-bottom: var(--margin);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Watermark nhẹ trên từng section */
+        .section::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.03;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .question {
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        /* Watermark nhẹ trên từng câu hỏi */
+        .question::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 250px;
+            height: 250px;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.02;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .question-title {
+            font-weight: bold;
+            margin-bottom: 0.8rem;
+            color: #000;
+            line-height: 1.3;
+            position: relative;
+            z-index: 1;
+        }
+        .options {
+            list-style-type: none;
+            padding-left: 1.5rem;
+        }
+        .options li { 
+            margin-bottom: 0.3rem; 
+            padding-left: 1rem; 
+            line-height: 1.3;
+            position: relative;
+            z-index: 1;
+        }
+        .answer {
+            position: relative;
+            background-color: rgba(245, 245, 245, 0.95);
+            padding: 1rem;
+            margin-top: 0.8rem;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            display: none;
+            animation: fadeIn 0.5s ease;
+            overflow: hidden;
+            line-height: 1.4;
+        }
+        
+        /* Watermark nhẹ trên phần đáp án */
+        .answer::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.01;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .answer.show { display: block; }
+        .answer strong { color: var(--primary-color); }
+        .formula {
+            font-family: 'Courier New', monospace;
+            background-color: rgba(249, 249, 249, 0.9);
+            padding: 0.5rem 1rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            overflow-x: auto;
+            position: relative;
+            z-index: 1;
+        }
+        .toggle-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            transition: background-color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .toggle-btn:hover { background-color: var(--secondary-color); }
+        .toggle-btn.hide { background-color: #666; }
+        .toggle-btn::before {
+            content: "🔍";
+            font-size: 0.9rem;
+        }
+        .toggle-btn.hide::before {
+            content: "👁️";
+        }
+        .controls {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+            z-index: 1;
+        }
+        .action-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin: 0 0.5rem;
+            transition: background-color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .action-btn:hover { background-color: var(--secondary-color); }
+        .action-btn::before {
+            content: "📘";
+            font-size: 1rem;
+        }
+        #hideAllBtn::before {
+            content: "📖";
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 1;
+        }
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 0.5rem;
+            text-align: center;
+        }
+        .data-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .data-table tr:nth-child(even) { background-color: #f2f2f2; }
+        .calc-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .calc-table th, .calc-table td {
+            border: 1px solid #ccc;
+            padding: 0.3rem;
+            text-align: center;
+        }
+        .calc-table th { background-color: #e9e9e9; }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--secondary-color);
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+        }
+        footer::before {
+            content: "tuibx";
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            font-size: 1rem;
+            color: rgba(139, 69, 19, 0.3);
+            font-weight: bold;
+            font-style: italic;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @media print {
+            * { display: none !important; }
+            body:before {
+                content: "Không cho phép in trang này!";
+                display: block !important;
+                font-size: 24px;
+                text-align: center;
+                margin-top: 100px;
+            }
+        }
+        @media (max-width: 768px) {
+            body { padding: 1rem; font-size: 1.4rem; }
+            header { padding: 1.5rem; }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.6rem; }
+            .section { padding: 1.5rem; }
+            .action-btn { display: block; width: 90%; margin: 0.5rem auto; }
+            .data-table, .calc-table { font-size: 0.9rem; }
+            .data-table th, .data-table td { padding: 0.3rem; }
+            /* Điều chỉnh watermark cho mobile */
+            .section::before {
+                width: 200px;
+                height: 200px;
+            }
+            .question::before {
+                width: 150px;
+                height: 150px;
+            }
+            .answer::before {
+                width: 120px;
+                height: 120px;
+            }
+            .watermark-overlay::before {
+                background-size: 150px 150px;
+            }
+        }
+        /* Cải thiện cho công thức toán */
+        .MathJax_Display { margin: 0.8rem 0 !important; }
+        mjx-container[jax="CHTML"][display="true"] { margin: 0.8rem 0 !important; }
+        /* Đảm bảo MathJax hiển thị đúng */
+        .MathJax_SVG { display: inline !important; }
+        mjx-container[jax="SVG"] { display: inline-block !important; }
+    </style>
+</head>
+<body>
+    <!-- Watermark phủ toàn màn hình GIỐNG 20sbt.html -->
+    <div class="watermark-overlay"></div>
+    
+    <header>
+        <h1>BÀI 20. ĐIỆN THẾ - BÀI TẬP</h1>
+    </header>
+
+    <div class="controls">
+        <button class="action-btn" id="showAllBtn">Hiện tất cả đáp án</button>
+        <button class="action-btn" id="hideAllBtn">Ẩn tất cả đáp án</button>
+    </div>
+
+    <main>
+        <!-- Phần TRẮC NGHIỆM - 20 câu -->
+        <section class="section">
+            <h2>TRẮC NGHIỆM (20 câu)</h2>
+            
+            <div class="question">
+                <div class="question-title">Câu 1. Khi một điện tích q di chuyển trong điện trường từ điểm A đến điểm B thì công của lực điện trường:</div>
+                <ul class="options">
+                    <li>A. Tỉ lệ với độ lớn điện tích q.</li>
+                    <li>B. Không phụ thuộc vào hình dạng đường đi từ A đến B.</li>
+                    <li>C. Phụ thuộc vào vị trí điểm A và B.</li>
+                    <li>D. Cả A, B và C đều đúng.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer1')">Hiện đáp án</button>
+                <div class="answer" id="answer1"><strong>Đáp án: D</strong><br>Giải thích: Công của lực điện trường \(A_{AB} = q(V_A - V_B)\) chỉ phụ thuộc vào vị trí điểm đầu A và điểm cuối B, không phụ thuộc vào hình dạng đường đi và tỉ lệ với độ lớn điện tích q.</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 2. Điện thế tại một điểm trong điện trường đặc trưng cho:</div>
+                <ul class="options">
+                    <li>A. Khả năng thực hiện công của điện trường tại điểm đó.</li>
+                    <li>B. Khả năng tác dụng lực của điện trường tại điểm đó.</li>
+                    <li>C. Năng lượng điện trường tại điểm đó.</li>
+                    <li>D. Cường độ điện trường tại điểm đó.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer2')">Hiện đáp án</button>
+                <div class="answer" id="answer2"><strong>Đáp án: A</strong><br>Giải thích: Điện thế tại một điểm đặc trưng cho khả năng thực hiện công của điện trường khi đặt một điện tích tại điểm đó.</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 3. Một electron di chuyển từ điểm M đến điểm N trong điện trường. Biết hiệu điện thế \(U_{MN} = 50V\). Công của lực điện trường thực hiện là:</div>
+                <ul class="options">
+                    <li>A. \(8 \times 10^{-18} J\).</li>
+                    <li>B. \(-8 \times 10^{-18} J\).</li>
+                    <li>C. \(50 J\).</li>
+                    <li>D. \(-50 J\).</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer3')">Hiện đáp án</button>
+                <div class="answer" id="answer3"><strong>Đáp án: B</strong><br>Giải thích: \(A = qU = (-1.6 \times 10^{-19}) \times 50 = -8 \times 10^{-18} J\). Dấu âm vì electron mang điện âm.</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 4. Trong điện trường đều, hai điểm A và B trên cùng một đường sức cách nhau 10cm. Hiệu điện thế giữa A và B là 100V. Cường độ điện trường có độ lớn:</div>
+                <ul class="options">
+                    <li>A. 10 V/m.</li>
+                    <li>B. 100 V/m.</li>
+                    <li>C. 1000 V/m.</li>
+                    <li>D. 10000 V/m.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer4')">Hiện đáp án</button>
+                <div class="answer" id="answer4"><strong>Đáp án: C</strong><br>Giải thích: \(E = \frac{U}{d} = \frac{100}{0.1} = 1000 V/m\).</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 5. Điện thế tại điểm M là \(V_M = 20V\), tại điểm N là \(V_N = 10V\). Khi một điện tích \(q = 2\mu C\) di chuyển từ M đến N thì công của lực điện trường là:</div>
+                <ul class="options">
+                    <li>A. \(20 \mu J\).</li>
+                    <li>B. \(-20 \mu J\).</li>
+                    <li>C. \(2 \times 10^{-5} J\).</li>
+                    <li>D. \(-2 \times 10^{-5} J\).</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer5')">Hiện đáp án</button>
+                <div class="answer" id="answer5"><strong>Đáp án: A</strong><br>Giải thích: \(A_{MN} = q(V_M - V_N) = 2 \times 10^{-6} \times (20-10) = 2 \times 10^{-5} J = 20 \mu J\).</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 6. Một electron được thả không vận tốc đầu tại điểm có điện thế 100V. Tốc độ của electron khi đến điểm có điện thế 0V là (bỏ qua tác dụng của trọng lực):</div>
+                <ul class="options">
+                    <li>A. \(5.93 \times 10^6 m/s\).</li>
+                    <li>B. \(1.87 \times 10^6 m/s\).</li>
+                    <li>C. \(3.52 \times 10^6 m/s\).</li>
+                    <li>D. \(2.65 \times 10^6 m/s\).</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer6')">Hiện đáp án</button>
+                <div class="answer" id="answer6"><strong>Đáp án: A</strong><br>Giải thích: Độ biến thiên động năng bằng công của lực điện: \(\frac{1}{2}mv^2 = eU\) ⇒ \(v = \sqrt{\frac{2eU}{m}} = \sqrt{\frac{2 \times 1.6 \times 10^{-19} \times 100}{9.1 \times 10^{-31}}} \approx 5.93 \times 10^6 m/s\).</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 7. Hai điểm M và N nằm trên cùng một đường sức điện trường đều. Khoảng cách giữa M và N là 5cm, hiệu điện thế giữa chúng là 10V. Cường độ điện trường có độ lớn:</div>
+                <ul class="options">
+                    <li>A. 0.5 V/m.</li>
+                    <li>B. 2 V/m.</li>
+                    <li>C. 50 V/m.</li>
+                    <li>D. 200 V/m.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer7')">Hiện đáp án</button>
+                <div class="answer" id="answer7"><strong>Đáp án: D</strong><br>Giải thích: \(E = \frac{U}{d} = \frac{10}{0.05} = 200 V/m\).</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 8. Một điện tích điểm \(Q = 3 \times 10^{-8} C\) đặt trong chân không. Điện thế tại điểm cách Q 30cm là:</div>
+                <ul class="options">
+                    <li>A. 90 V.</li>
+                    <li>B. 900 V.</li>
+                    <li>C. 300 V.</li>
+                    <li>D. 30 V.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer8')">Hiện đáp án</button>
+                <div class="answer" id="answer8"><strong>Đáp án: B</strong><br>Giải thích: \(V = \frac{kQ}{r} = \frac{9 \times 10^9 \times 3 \times 10^{-8}}{0.3} = 900 V\).</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 9. Một điện tích \(q = -2 \mu C\) di chuyển từ điểm M đến điểm N trong điện trường. Biết \(U_{MN} = 5V\). Thế năng của điện tích tại M là \(W_M = 4 \times 10^{-5} J\). Thế năng của điện tích tại N là:</div>
+                <ul class="options">
+                    <li>A. \(5 \times 10^{-5} J\).</li>
+                    <li>B. \(3 \times 10^{-5} J\).</li>
+                    <li>C. \(-4 \times 10^{-5} J\).</li>
+                    <li>D. \(6 \times 10^{-5} J\).</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer9')">Hiện đáp án</button>
+                <div class="answer" id="answer9"><strong>Đáp án: A</strong><br>Giải thích: \(W_M - W_N = qU_{MN} \Rightarrow W_N = W_M - qU_{MN} = 4 \times 10^{-5} - (-2 \times 10^{-6} \times 5) = 4 \times 10^{-5} + 1 \times 10^{-5} = 5 \times 10^{-5} J\).</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 10. Điện thế tại điểm M trong điện trường là 50V. Khi đặt tại M một điện tích \(q = 4 \mu C\) thì thế năng của điện tích là:</div>
+                <ul class="options">
+                    <li>A. \(12.5 \times 10^{-5} J\).</li>
+                    <li>B. \(2 \times 10^{-4} J\).</li>
+                    <li>C. \(50 J\).</li>
+                    <li>D. \(200 \mu J\).</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer10')">Hiện đáp án</button>
+                <div class="answer" id="answer10"><strong>Đáp án: B</strong><br>Giải thích: \(W = qV = 4 \times 10^{-6} \times 50 = 2 \times 10^{-4} J\).</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 11. Hai điểm M, N nằm trên cùng một đường sức của điện trường đều. Khoảng cách MN = 4cm, hiệu điện thế \(U_{MN} = 12V\). Công của lực điện trường khi dịch chuyển điện tích \(q = 0.5 \mu C\) từ M đến N là:</div>
+                <ul class="options">
+                    <li>A. \(6 \mu J\).</li>
+                    <li>B. \(-6 \mu J\).</li>
+                    <li>C. \(24 \mu J\).</li>
+                    <li>D. \(-24 \mu J\).</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer11')">Hiện đáp án</button>
+                <div class="answer" id="answer11"><strong>Đáp án: A</strong><br>Giải thích: \(A_{MN} = qU_{MN} = 0.5 \times 10^{-6} \times 12 = 6 \times 10^{-6} J = 6 \mu J\).</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 12. Điện thế tại mặt đất được chọn bằng 0. Một đám mây tích điện dương ở độ cao 2km có điện thế \(3 \times 10^6 V\) so với mặt đất. Cường độ điện trường trung bình giữa đám mây và mặt đất là:</div>
+                <ul class="options">
+                    <li>A. 150 V/m.</li>
+                    <li>B. 1500 V/m.</li>
+                    <li>C. 6000 V/m.</li>
+                    <li>D. 3000 V/m.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer12')">Hiện đáp án</button>
+                <div class="answer" id="answer12"><strong>Đáp án: B</strong><br>Giải thích: \(E = \frac{V}{d} = \frac{3 \times 10^6}{2000} = 1500 V/m\).</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 13. Một electron di chuyển được 2cm dọc theo một đường sức điện dưới tác dụng của lực điện trong điện trường đều có cường độ 1000V/m. Công của lực điện là:</div>
+                <ul class="options">
+                    <li>A. \(3.2 \times 10^{-18} J\).</li>
+                    <li>B. \(-3.2 \times 10^{-18} J\).</li>
+                    <li>C. \(1.6 \times 10^{-18} J\).</li>
+                    <li>D. \(-1.6 \times 10^{-18} J\).</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer13')">Hiện đáp án</button>
+                <div class="answer" id="answer13"><strong>Đáp án: A</strong><br>Giải thích: \(U = E \cdot d = 1000 \times 0.02 = 20V\), \(A = qU = (-1.6 \times 10^{-19}) \times 20 = -3.2 \times 10^{-18} J\). Dấu âm vì electron di chuyển ngược chiều điện trường.</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 14. Hai bản kim loại phẳng song song cách nhau 2cm, tích điện trái dấu. Hiệu điện thế giữa hai bản là 200V. Điện trường giữa hai bản là:</div>
+                <ul class="options">
+                    <li>A. 100 V/m.</li>
+                    <li>B. 10000 V/m.</li>
+                    <li>C. 400 V/m.</li>
+                    <li>D. 20000 V/m.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer14')">Hiện đáp án</button>
+                <div class="answer" id="answer14"><strong>Đáp án: B</strong><br>Giải thích: \(E = \frac{U}{d} = \frac{200}{0.02} = 10000 V/m\).</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 15. Điện thế tại điểm A là 10V, tại điểm B là 20V. Khi một điện tích dương di chuyển từ A đến B thì:</div>
+                <ul class="options">
+                    <li>A. Thế năng tăng, lực điện thực hiện công âm.</li>
+                    <li>B. Thế năng giảm, lực điện thực hiện công dương.</li>
+                    <li>C. Thế năng tăng, lực điện thực hiện công dương.</li>
+                    <li>D. Thế năng giảm, lực điện thực hiện công âm.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer15')">Hiện đáp án</button>
+                <div class="answer" id="answer15"><strong>Đáp án: A</strong><br>Giải thích: Điện tích dương di chuyển từ nơi có điện thế thấp (10V) đến nơi có điện thế cao (20V) làm thế năng tăng, lực điện thực hiện công âm.</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 16. Một điện tích điểm \(Q = 5 \times 10^{-9} C\) đặt tại O. Điện thế tại điểm M cách O 10cm là:</div>
+                <ul class="options">
+                    <li>A. 45 V.</li>
+                    <li>B. 450 V.</li>
+                    <li>C. 4500 V.</li>
+                    <li>D. 4.5 V.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer16')">Hiện đáp án</button>
+                <div class="answer" id="answer16"><strong>Đáp án: B</strong><br>Giải thích: \(V = \frac{kQ}{r} = \frac{9 \times 10^9 \times 5 \times 10^{-9}}{0.1} = 450 V\).</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 17. Một proton được tăng tốc từ trạng thái đứng yên bởi hiệu điện thế 500V. Tốc độ của proton sau khi tăng tốc là (khối lượng proton \(m_p = 1.67 \times 10^{-27} kg\)):</div>
+                <ul class="options">
+                    <li>A. \(3.1 \times 10^5 m/s\).</li>
+                    <li>B. \(9.8 \times 10^5 m/s\).</li>
+                    <li>C. \(2.2 \times 10^5 m/s\).</li>
+                    <li>D. \(4.4 \times 10^5 m/s\).</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer17')">Hiện đáp án</button>
+                <div class="answer" id="answer17"><strong>Đáp án: B</strong><br>Giải thích: \(\frac{1}{2}mv^2 = eU \Rightarrow v = \sqrt{\frac{2eU}{m}} = \sqrt{\frac{2 \times 1.6 \times 10^{-19} \times 500}{1.67 \times 10^{-27}}} \approx 9.8 \times 10^5 m/s\).</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 18. Trong điện trường đều, đường đẳng thế là những đường:</div>
+                <ul class="options">
+                    <li>A. Thẳng vuông góc với đường sức điện.</li>
+                    <li>B. Thẳng song song với đường sức điện.</li>
+                    <li>C. Cong vuông góc với đường sức điện.</li>
+                    <li>D. Cong song song với đường sức điện.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer18')">Hiện đáp án</button>
+                <div class="answer" id="answer18"><strong>Đáp án: A</strong><br>Giải thích: Trong điện trường đều, các mặt đẳng thế là các mặt phẳng vuông góc với đường sức điện.</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 19. Hiệu điện thế giữa hai điểm M và N trong điện trường là \(U_{MN} = 12V\). Công của lực điện trường khi dịch chuyển điện tích \(q = 0.1 C\) từ M đến N là:</div>
+                <ul class="options">
+                    <li>A. 1.2 J.</li>
+                    <li>B. 12 J.</li>
+                    <li>C. 120 J.</li>
+                    <li>D. 0.12 J.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer19')">Hiện đáp án</button>
+                <div class="answer" id="answer19"><strong>Đáp án: A</strong><br>Giải thích: \(A = qU = 0.1 \times 12 = 1.2 J\).</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 20. Một điện tích điểm Q gây ra điện thế 180V tại điểm M cách nó 30cm. Điện thế tại điểm N cách Q 60cm là:</div>
+                <ul class="options">
+                    <li>A. 90 V.</li>
+                    <li>B. 45 V.</li>
+                    <li>C. 360 V.</li>
+                    <li>D. 720 V.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer20')">Hiện đáp án</button>
+                <div class="answer" id="answer20"><strong>Đáp án: A</strong><br>Giải thích: Điện thế tỉ lệ nghịch với khoảng cách: \(V \propto \frac{1}{r}\). Khoảng cách tăng gấp đôi thì điện thế giảm một nửa: \(V_N = \frac{180}{2} = 90 V\).</div>
+            </div>
+        </section>
+
+        <!-- Phần TỰ LUẬN - 5 câu -->
+        <section class="section">
+            <h2>TỰ LUẬN (5 câu)</h2>
+            
+            <div class="question">
+                <div class="question-title">Câu 21. Hai điện tích điểm \(q_1 = 3 \times 10^{-8} C\) và \(q_2 = -4 \times 10^{-8} C\) đặt tại hai điểm A và B cách nhau 10cm trong chân không.<br>
+                a) Tính điện thế tại điểm M là trung điểm của AB.<br>
+                b) Tính công cần thực hiện để đưa điện tích \(q = 2 \times 10^{-9} C\) từ vô cực đến điểm M.</div>
+                <button class="toggle-btn" onclick="toggleAnswer('answer21')">Hiện lời giải</button>
+                <div class="answer" id="answer21">
+                    <strong>Lời giải:</strong><br>
+                    <strong>a) Điện thế tại M:</strong><br>
+                    M là trung điểm AB nên \(MA = MB = 5cm = 0.05m\).<br>
+                    Điện thế do \(q_1\) gây ra tại M: 
+                    \[ V_{1M} = \frac{kq_1}{r_{1M}} = \frac{9 \times 10^9 \times 3 \times 10^{-8}}{0.05} = 5400 V \]
+                    Điện thế do \(q_2\) gây ra tại M:
+                    \[ V_{2M} = \frac{kq_2}{r_{2M}} = \frac{9 \times 10^9 \times (-4 \times 10^{-8})}{0.05} = -7200 V \]
+                    Điện thế tổng tại M:
+                    \[ V_M = V_{1M} + V_{2M} = 5400 + (-7200) = -1800 V \]
+                    <strong>Vậy \(V_M = -1800 V\).</strong><br><br>
+                    
+                    <strong>b) Công đưa điện tích q từ vô cực đến M:</strong><br>
+                    Công của lực điện: \(A_{\infty M} = q(V_\infty - V_M) = q(0 - V_M) = -qV_M\)<br>
+                    Công cần thực hiện để đưa điện tích q từ vô cực đến M (chống lại lực điện) là:
+                    \[ A' = -A_{\infty M} = qV_M = 2 \times 10^{-9} \times (-1800) = -3.6 \times 10^{-6} J \]
+                    Dấu âm cho thấy cần cung cấp công để đưa điện tích dương đến điểm có điện thế âm.
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 22. Giữa hai bản kim loại phẳng song song cách nhau 4cm có hiệu điện thế 400V. Một electron được bắn vào điện trường giữa hai bản với vận tốc ban đầu \(v_0 = 10^7 m/s\) theo phương song song với hai bản và cách bản âm 1cm. Bỏ qua tác dụng của trọng lực.<br>
+                a) Tính thời gian electron chuyển động trong điện trường trước khi đập vào bản dương.<br>
+                b) Tính vận tốc của electron khi đập vào bản dương.</div>
+                <button class="toggle-btn" onclick="toggleAnswer('answer22')">Hiện lời giải</button>
+                <div class="answer" id="answer22">
+                    <strong>Lời giải:</strong><br>
+                    <strong>a) Thời gian chuyển động:</strong><br>
+                    Điện trường giữa hai bản: \(E = \frac{U}{d} = \frac{400}{0.04} = 10^4 V/m\)<br>
+                    Lực điện tác dụng lên electron: \(F = eE = 1.6 \times 10^{-19} \times 10^4 = 1.6 \times 10^{-15} N\)<br>
+                    Gia tốc: \(a = \frac{F}{m} = \frac{1.6 \times 10^{-15}}{9.1 \times 10^{-31}} \approx 1.76 \times 10^{15} m/s^2\)<br>
+                    Phương chuyển động theo phương vuông góc với bản: \(y = \frac{1}{2}at^2\)<br>
+                    Electron cách bản âm 1cm và sẽ đập vào bản dương khi đi được quãng đường 3cm = 0.03m:<br>
+                    \[ 0.03 = \frac{1}{2} \times 1.76 \times 10^{15} \times t^2 \]
+                    \[ t^2 = \frac{0.06}{1.76 \times 10^{15}} \approx 3.41 \times 10^{-17} \]
+                    \[ t \approx 5.84 \times 10^{-9} s \]
+                    <strong>Vậy thời gian electron chuyển động là \(5.84 \times 10^{-9} s\).</strong><br><br>
+                    
+                    <strong>b) Vận tốc khi đập vào bản dương:</strong><br>
+                    Vận tốc theo phương x (song song với bản): \(v_x = v_0 = 10^7 m/s\)<br>
+                    Vận tốc theo phương y (vuông góc với bản): \(v_y = at = 1.76 \times 10^{15} \times 5.84 \times 10^{-9} \approx 1.03 \times 10^7 m/s\)<br>
+                    Vận tốc tổng hợp: 
+                    \[ v = \sqrt{v_x^2 + v_y^2} = \sqrt{(10^7)^2 + (1.03 \times 10^7)^2} \approx 1.44 \times 10^7 m/s \]
+                    <strong>Vậy vận tốc khi đập vào bản dương là \(1.44 \times 10^7 m/s\).</strong>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 23. Một tụ điện phẳng có điện dung \(C = 500 pF\) được tích điện đến hiệu điện thế \(U = 200V\).<br>
+                a) Tính điện tích của tụ điện.<br>
+                b) Tính năng lượng của tụ điện đã tích.<br>
+                c) Nếu sau khi tích điện, ngắt tụ khỏi nguồn rồi nhúng vào chất điện môi lỏng có hằng số điện môi \(\varepsilon = 2\), tính hiệu điện thế giữa hai bản tụ sau khi nhúng.</div>
+                <button class="toggle-btn" onclick="toggleAnswer('answer23')">Hiện lời giải</button>
+                <div class="answer" id="answer23">
+                    <strong>Lời giải:</strong><br>
+                    <strong>a) Điện tích của tụ:</strong><br>
+                    \[ Q = CU = 500 \times 10^{-12} \times 200 = 10^{-7} C = 0.1 \mu C \]
+                    <strong>Vậy \(Q = 0.1 \mu C\).</strong><br><br>
+                    
+                    <strong>b) Năng lượng tụ điện:</strong><br>
+                    \[ W = \frac{1}{2}CU^2 = \frac{1}{2} \times 500 \times 10^{-12} \times (200)^2 = 10^{-5} J = 10 \mu J \]
+                    <strong>Vậy \(W = 10 \mu J\).</strong><br><br>
+                    
+                    <strong>c) Hiệu điện thế sau khi nhúng vào điện môi:</strong><br>
+                    Khi ngắt tụ khỏi nguồn, điện tích Q không đổi.<br>
+                    Điện dung mới: \(C' = \varepsilon C = 2 \times 500 \times 10^{-12} = 10^{-9} F = 1000 pF\)<br>
+                    Hiệu điện thế mới: 
+                    \[ U' = \frac{Q}{C'} = \frac{10^{-7}}{10^{-9}} = 100 V \]
+                    <strong>Vậy \(U' = 100 V\).</strong>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 24. Hai quả cầu kim loại nhỏ giống nhau, mỗi quả có khối lượng \(m = 0.1 g\) được treo vào cùng một điểm bằng hai sợi dây cách điện có chiều dài \(l = 20cm\). Truyền cho hai quả cầu điện tích bằng nhau thì chúng đẩy nhau và đứng cân bằng khi mỗi dây treo hợp với phương thẳng đứng một góc \(15^\circ\).<br>
+                a) Tính điện tích của mỗi quả cầu.<br>
+                b) Tính điện thế tại điểm treo do hệ hai điện tích gây ra.</div>
+                <button class="toggle-btn" onclick="toggleAnswer('answer24')">Hiện lời giải</button>
+                <div class="answer" id="answer24">
+                    <strong>Lời giải:</strong><br>
+                    <strong>a) Điện tích mỗi quả cầu:</strong><br>
+                    Khoảng cách giữa hai quả cầu: \(r = 2l\sin\theta = 2 \times 0.2 \times \sin 15^\circ \approx 0.1035 m\)<br>
+                    Xét cân bằng lực cho một quả cầu:<br>
+                    - Trọng lực: \(P = mg = 10^{-4} \times 9.8 = 9.8 \times 10^{-4} N\)<br>
+                    - Lực điện: \(F = \frac{kq^2}{r^2}\)<br>
+                    - Lực căng dây T<br>
+                    Từ hình vẽ: \(\tan\theta = \frac{F}{P} \Rightarrow F = P\tan\theta = 9.8 \times 10^{-4} \times \tan 15^\circ \approx 2.63 \times 10^{-4} N\)<br>
+                    Từ \(F = \frac{kq^2}{r^2}\) ta có:
+                    \[ q^2 = \frac{Fr^2}{k} = \frac{2.63 \times 10^{-4} \times (0.1035)^2}{9 \times 10^9} \approx 3.12 \times 10^{-16} \]
+                    \[ q \approx 1.77 \times 10^{-8} C \]
+                    <strong>Vậy điện tích mỗi quả cầu là \(1.77 \times 10^{-8} C\).</strong><br><br>
+                    
+                    <strong>b) Điện thế tại điểm treo:</strong><br>
+                    Điểm treo cách mỗi quả cầu một khoảng bằng chiều dài dây \(l = 0.2m\).<br>
+                    Điện thế do mỗi quả cầu gây ra tại điểm treo:
+                    \[ V_1 = V_2 = \frac{kq}{l} = \frac{9 \times 10^9 \times 1.77 \times 10^{-8}}{0.2} = 796.5 V \]
+                    Điện thế tổng tại điểm treo:
+                    \[ V = V_1 + V_2 = 2 \times 796.5 = 1593 V \]
+                    <strong>Vậy điện thế tại điểm treo là 1593 V.</strong>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Câu 25. Một điện tích điểm \(Q = 5 \times 10^{-8} C\) đặt tại điểm O trong không khí.<br>
+                a) Tính công của lực điện trường khi dịch chuyển điện tích \(q = 2 \times 10^{-9} C\) từ điểm A cách O 10cm đến điểm B cách O 40cm.<br>
+                b) Xác định vị trí điểm C trên đường thẳng AB sao cho khi dịch chuyển q từ A đến C thì công của lực điện trường bằng 0.</div>
+                <button class="toggle-btn" onclick="toggleAnswer('answer25')">Hiện lời giải</button>
+                <div class="answer" id="answer25">
+                    <strong>Lời giải:</strong><br>
+                    <strong>a) Công của lực điện trường:</strong><br>
+                    Điện thế tại A: \(V_A = \frac{kQ}{r_A} = \frac{9 \times 10^9 \times 5 \times 10^{-8}}{0.1} = 4500 V\)<br>
+                    Điện thế tại B: \(V_B = \frac{kQ}{r_B} = \frac{9 \times 10^9 \times 5 \times 10^{-8}}{0.4} = 1125 V\)<br>
+                    Công của lực điện trường:
+                    \[ A_{AB} = q(V_A - V_B) = 2 \times 10^{-9} \times (4500 - 1125) = 6.75 \times 10^{-6} J \]
+                    <strong>Vậy \(A_{AB} = 6.75 \times 10^{-6} J\).</strong><br><br>
+                    
+                    <strong>b) Vị trí điểm C:</strong><br>
+                    Để công của lực điện trường khi dịch chuyển q từ A đến C bằng 0 thì \(V_A = V_C\).<br>
+                    Điều này xảy ra khi C nằm trên mặt cầu đồng tâm với O, có bán kính bằng OA = 10cm.<br>
+                    Trên đường thẳng AB, điểm C phải đối xứng với A qua O (vì A và C cùng nằm trên một mặt cầu tâm O).<br>
+                    Vậy C nằm trên tia đối của tia OA, cách O 10cm.
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>Bài tập Vật Lý 11 - Bài 20: Điện thế</p>
+    </footer>
+
+    <script>
+        function toggleAnswer(answerId) {
+            const answer = document.getElementById(answerId);
+            const button = answer.previousElementSibling;
+            if (answer.classList.contains('show')) {
+                answer.classList.remove('show');
+                button.textContent = answerId.includes('answer') ? 'Hiện đáp án' : 'Hiện lời giải';
+                button.classList.remove('hide');
+            } else {
+                answer.classList.add('show');
+                button.textContent = answerId.includes('answer') ? 'Ẩn đáp án' : 'Ẩn lời giải';
+                button.classList.add('hide');
+            }
+            if (window.MathJax) { 
+                MathJax.typesetPromise([answer]).catch(err => console.log('MathJax error:', err));
+            }
+        }
+        
+        document.getElementById('showAllBtn').addEventListener('click', function() {
+            document.querySelectorAll('.answer').forEach(ans => {
+                ans.classList.add('show');
+                const button = ans.previousElementSibling;
+                const answerId = button.getAttribute('onclick').match(/'([^']+)'/)[1];
+                button.textContent = answerId.includes('answer') ? 'Ẩn đáp án' : 'Ẩn lời giải';
+                button.classList.add('hide');
+            });
+            if (window.MathJax) { 
+                MathJax.typesetPromise().catch(err => console.log('MathJax error:', err));
+            }
+        });
+        
+        document.getElementById('hideAllBtn').addEventListener('click', function() {
+            document.querySelectorAll('.answer').forEach(ans => {
+                ans.classList.remove('show');
+                const button = ans.previousElementSibling;
+                const answerId = button.getAttribute('onclick').match(/'([^']+)'/)[1];
+                button.textContent = answerId.includes('answer') ? 'Hiện đáp án' : 'Hiện lời giải';
+                button.classList.remove('hide');
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.MathJax) { 
+                MathJax.typesetPromise().catch(err => console.log('MathJax error:', err));
+            }
+        });
+    </script>
+</body>
+</html>
