@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập - Bài 21 - Tụ Điện</title>
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/favicon.ico" type="image/x-icon">
+    
+    <!-- Ngăn chặn các hành vi không mong muốn -->
+    <script>
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.keyCode === 85) e.preventDefault();
+            if (e.ctrlKey && e.keyCode === 83) e.preventDefault();
+            if (e.ctrlKey && e.keyCode === 80) e.preventDefault();
+            if (e.keyCode === 123) e.preventDefault();
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 73) e.preventDefault();
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 74) e.preventDefault();
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 67) e.preventDefault();
+        });
+        document.addEventListener('dragstart', function(e) { if (e.target.tagName === 'IMG') e.preventDefault(); });
+        document.addEventListener('copy', function(e) { e.preventDefault(); alert('Không cho phép sao chép nội dung!'); });
+        document.addEventListener('cut', function(e) { e.preventDefault(); });
+        document.addEventListener('paste', function(e) { e.preventDefault(); });
+        document.addEventListener('selectstart', function(e) { e.preventDefault(); });
+    </script>
+    
+    <!-- Load MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']],
+                processEscapes: true,
+                packages: {'[+]': ['ams']}
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            }
+        };
+    </script>
+    
+    <style>
+        :root {
+            --primary-color: #1a5f7a;
+            --secondary-color: #57c5b6;
+            --light-color: #f0f8ff;
+            --dark-color: #333;
+            --white: #fff;
+            --font-size-normal: 1.5rem;
+            --font-size-large: 2rem;
+            --padding: 2rem;
+            --margin: 1.5rem;
+            --border-radius: 10px;
+            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.4;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+            padding: var(--padding);
+            font-size: var(--font-size-normal);
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Watermark phủ toàn màn hình */
+        .watermark-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9998;
+        }
+        
+        .watermark-overlay::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: repeat;
+            background-position: center;
+            background-size: 200px 200px;
+            opacity: 0.04;
+        }
+        
+        /* Watermark nền */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: repeat;
+            background-position: center;
+            background-size: 400px 400px;
+            opacity: 0.08;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: var(--margin);
+            padding: var(--padding);
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        h1 { font-size: var(--font-size-large); margin-bottom: 1rem; }
+        h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+        .section {
+            background-color: rgba(255, 255, 255, 0.92);
+            padding: var(--padding);
+            margin-bottom: var(--margin);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Watermark nhẹ trên từng section */
+        .section::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.03;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .question {
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        /* Watermark nhẹ trên từng câu hỏi */
+        .question::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 250px;
+            height: 250px;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.02;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .question-title {
+            font-weight: bold;
+            margin-bottom: 0.8rem;
+            color: #000;
+            line-height: 1.3;
+            position: relative;
+            z-index: 1;
+        }
+        .options {
+            list-style-type: none;
+            padding-left: 1.5rem;
+        }
+        .options li { 
+            margin-bottom: 0.3rem; 
+            padding-left: 1rem; 
+            line-height: 1.3;
+            position: relative;
+            z-index: 1;
+        }
+        .answer {
+            position: relative;
+            background-color: rgba(245, 245, 245, 0.95);
+            padding: 1rem;
+            margin-top: 0.8rem;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            display: none;
+            animation: fadeIn 0.5s ease;
+            overflow: hidden;
+            line-height: 1.4;
+        }
+        
+        /* Watermark nhẹ trên phần đáp án */
+        .answer::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.01;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .answer.show { display: block; }
+        .answer strong { color: var(--primary-color); }
+        .formula {
+            font-family: 'Courier New', monospace;
+            background-color: rgba(249, 249, 249, 0.9);
+            padding: 0.5rem 1rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            overflow-x: auto;
+            position: relative;
+            z-index: 1;
+        }
+        .toggle-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            transition: background-color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .toggle-btn:hover { background-color: var(--secondary-color); }
+        .toggle-btn.hide { background-color: #666; }
+        .toggle-btn::before {
+            content: "🔍";
+            font-size: 0.9rem;
+        }
+        .toggle-btn.hide::before {
+            content: "👁️";
+        }
+        .controls {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+            z-index: 1;
+        }
+        .action-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin: 0 0.5rem;
+            transition: background-color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .action-btn:hover { background-color: var(--secondary-color); }
+        .action-btn::before {
+            content: "📘";
+            font-size: 1rem;
+        }
+        #hideAllBtn::before {
+            content: "📖";
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 1;
+        }
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 0.5rem;
+            text-align: center;
+        }
+        .data-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .data-table tr:nth-child(even) { background-color: #f2f2f2; }
+        .calc-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .calc-table th, .calc-table td {
+            border: 1px solid #ccc;
+            padding: 0.3rem;
+            text-align: center;
+        }
+        .calc-table th { background-color: #e9e9e9; }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--secondary-color);
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+        }
+        footer::before {
+            content: "tuibx";
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            font-size: 1rem;
+            color: rgba(26, 95, 122, 0.3);
+            font-weight: bold;
+            font-style: italic;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @media print {
+            * { display: none !important; }
+            body:before {
+                content: "Không cho phép in trang này!";
+                display: block !important;
+                font-size: 24px;
+                text-align: center;
+                margin-top: 100px;
+            }
+        }
+        @media (max-width: 768px) {
+            body { padding: 1rem; font-size: 1.4rem; }
+            header { padding: 1.5rem; }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.6rem; }
+            .section { padding: 1.5rem; }
+            .action-btn { display: block; width: 90%; margin: 0.5rem auto; }
+            .data-table, .calc-table { font-size: 0.9rem; }
+            .data-table th, .data-table td { padding: 0.3rem; }
+            /* Điều chỉnh watermark cho mobile */
+            .section::before {
+                width: 200px;
+                height: 200px;
+            }
+            .question::before {
+                width: 150px;
+                height: 150px;
+            }
+            .answer::before {
+                width: 120px;
+                height: 120px;
+            }
+            .watermark-overlay::before {
+                background-size: 150px 150px;
+            }
+        }
+        /* Cải thiện cho công thức toán */
+        .MathJax_Display { margin: 0.8rem 0 !important; }
+        mjx-container[jax="CHTML"][display="true"] { margin: 0.8rem 0 !important; }
+        /* Đảm bảo MathJax hiển thị đúng */
+        .MathJax_SVG { display: inline !important; }
+        mjx-container[jax="SVG"] { display: inline-block !important; }
+    </style>
+</head>
+<body>
+    <!-- Watermark phủ toàn màn hình -->
+    <div class="watermark-overlay"></div>
+    
+    <header>
+        <h1>BÀI 21. TỤ ĐIỆN</h1>
+        <p>Bài tập Vật Lý - Trắc nghiệm và Tự luận</p>
+    </header>
+
+    <div class="controls">
+        <button class="action-btn" id="showAllBtn">Hiện tất cả đáp án</button>
+        <button class="action-btn" id="hideAllBtn">Ẩn tất cả đáp án</button>
+    </div>
+
+    <main>
+        <!-- Phần TRẮC NGHIỆM -->
+        <section class="section">
+            <h2>TRẮC NGHIỆM</h2>
+            
+            <!-- Câu 1 -->
+            <div class="question">
+                <div class="question-title">Câu 1. Tụ điện là linh kiện điện tử có cấu tạo gồm:</div>
+                <ul class="options">
+                    <li>A. Hai vật dẫn đặt gần nhau, ngăn cách bởi điện môi.</li>
+                    <li>B. Một vật dẫn và một vật cách điện.</li>
+                    <li>C. Hai vật cách điện đặt gần nhau.</li>
+                    <li>D. Một vật dẫn duy nhất.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer1')">Hiện đáp án</button>
+                <div class="answer" id="answer1"><strong>Đáp án: A</strong><br>Giải thích: Tụ điện gồm hai vật dẫn đặt gần nhau và ngăn cách nhau bởi môi trường cách điện (điện môi).</div>
+            </div>
+            
+            <!-- Câu 2 -->
+            <div class="question">
+                <div class="question-title">Câu 2. Điện dung của tụ điện được xác định bởi công thức:</div>
+                <ul class="options">
+                    <li>A. \( C = \frac{Q}{U} \)</li>
+                    <li>B. \( C = Q \cdot U \)</li>
+                    <li>C. \( C = \frac{U}{Q} \)</li>
+                    <li>D. \( C = \frac{1}{QU} \)</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer2')">Hiện đáp án</button>
+                <div class="answer" id="answer2"><strong>Đáp án: A</strong><br>Giải thích: Điện dung của tụ điện được tính bằng tỉ số giữa điện tích Q của tụ điện và hiệu điện thế U đặt vào hai bản tụ: \( C = \frac{Q}{U} \).</div>
+            </div>
+            
+            <!-- Câu 3 -->
+            <div class="question">
+                <div class="question-title">Câu 3. Đơn vị của điện dung là:</div>
+                <ul class="options">
+                    <li>A. Vôn (V)</li>
+                    <li>B. Culông (C)</li>
+                    <li>C. Fara (F)</li>
+                    <li>D. Jun (J)</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer3')">Hiện đáp án</button>
+                <div class="answer" id="answer3"><strong>Đáp án: C</strong><br>Giải thích: Đơn vị của điện dung là fara (F). 1 Fara là điện dung của một tụ điện mà nếu đặt hiệu điện thế 1V vào hai bản tụ thì điện tích của tụ là 1C.</div>
+            </div>
+            
+            <!-- Câu 4 -->
+            <div class="question">
+                <div class="question-title">Câu 4. Trên vỏ một tụ điện có ghi "10 µF - 250 V". Thông số này cho biết:</div>
+                <ul class="options">
+                    <li>A. Điện dung 10 µF và hiệu điện thế tối đa 250 V.</li>
+                    <li>B. Điện tích tối đa 10 µC và hiệu điện thế 250 V.</li>
+                    <li>C. Điện dung 10 F và hiệu điện thế tối đa 250 mV.</li>
+                    <li>D. Năng lượng tối đa 10 J và hiệu điện thế 250 V.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer4')">Hiện đáp án</button>
+                <div class="answer" id="answer4"><strong>Đáp án: A</strong><br>Giải thích: Trên vỏ tụ điện thường ghi hai thông số: điện dung của tụ điện và hiệu điện thế tối đa được sử dụng.</div>
+            </div>
+            
+            <!-- Câu 5 -->
+            <div class="question">
+                <div class="question-title">Câu 5. Khi ghép n tụ điện nối tiếp, điện dung của bộ tụ được tính bằng công thức:</div>
+                <ul class="options">
+                    <li>A. \( C = C_1 + C_2 + ... + C_n \)</li>
+                    <li>B. \( \frac{1}{C} = \frac{1}{C_1} + \frac{1}{C_2} + ... + \frac{1}{C_n} \)</li>
+                    <li>C. \( C = \frac{C_1 + C_2 + ... + C_n}{n} \)</li>
+                    <li>D. \( C = \sqrt{C_1 \cdot C_2 \cdot ... \cdot C_n} \)</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer5')">Hiện đáp án</button>
+                <div class="answer" id="answer5"><strong>Đáp án: B</strong><br>Giải thích: Khi ghép nối tiếp các tụ điện, nghịch đảo điện dung của bộ tụ bằng tổng nghịch đảo điện dung của từng tụ.</div>
+            </div>
+            
+            <!-- Câu 6 -->
+            <div class="question">
+                <div class="question-title">Câu 6. Khi ghép n tụ điện song song, điện dung của bộ tụ được tính bằng công thức:</div>
+                <ul class="options">
+                    <li>A. \( \frac{1}{C} = \frac{1}{C_1} + \frac{1}{C_2} + ... + \frac{1}{C_n} \)</li>
+                    <li>B. \( C = C_1 + C_2 + ... + C_n \)</li>
+                    <li>C. \( C = \frac{C_1 \cdot C_2 \cdot ... \cdot C_n}{C_1 + C_2 + ... + C_n} \)</li>
+                    <li>D. \( C = \sqrt{C_1 \cdot C_2 \cdot ... \cdot C_n} \)</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer6')">Hiện đáp án</button>
+                <div class="answer" id="answer6"><strong>Đáp án: B</strong><br>Giải thích: Khi ghép song song các tụ điện, điện dung của bộ tụ bằng tổng điện dung của từng tụ.</div>
+            </div>
+            
+            <!-- Câu 7 -->
+            <div class="question">
+                <div class="question-title">Câu 7. Năng lượng của tụ điện được tích điện với điện tích Q và hiệu điện thế U được tính bằng công thức:</div>
+                <ul class="options">
+                    <li>A. \( W = QU \)</li>
+                    <li>B. \( W = \frac{1}{2}QU \)</li>
+                    <li>C. \( W = \frac{Q}{U} \)</li>
+                    <li>D. \( W = \frac{U}{Q} \)</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer7')">Hiện đáp án</button>
+                <div class="answer" id="answer7"><strong>Đáp án: B</strong><br>Giải thích: Năng lượng của tụ điện được tính bằng: \( W = \frac{1}{2}QU = \frac{Q^2}{2C} = \frac{1}{2}CU^2 \).</div>
+            </div>
+            
+            <!-- Câu 8 -->
+            <div class="question">
+                <div class="question-title">Câu 8. Hiện tượng điện môi bị đánh thủng xảy ra khi:</div>
+                <ul class="options">
+                    <li>A. Điện trường ngoài đặt vào điện môi quá nhỏ.</li>
+                    <li>B. Điện trường ngoài đặt vào điện môi vượt quá một giới hạn nhất định.</li>
+                    <li>C. Nhiệt độ môi trường quá thấp.</li>
+                    <li>D. Tụ điện được ghép song song với tụ khác.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer8')">Hiện đáp án</button>
+                <div class="answer" id="answer8"><strong>Đáp án: B</strong><br>Giải thích: Khi điện trường ngoài đặt vào điện môi lớn hơn một giới hạn nhất định, các liên kết trong điện môi bị phá vỡ, điện tích tự do xuất hiện và điện môi trở thành dẫn điện (bị đánh thủng).</div>
+            </div>
+            
+            <!-- Câu 9 -->
+            <div class="question">
+                <div class="question-title">Câu 9. 1 µF (micrôfara) bằng:</div>
+                <ul class="options">
+                    <li>A. \( 10^{-3} \, F \)</li>
+                    <li>B. \( 10^{-6} \, F \)</li>
+                    <li>C. \( 10^{-9} \, F \)</li>
+                    <li>D. \( 10^{-12} \, F \)</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer9')">Hiện đáp án</button>
+                <div class="answer" id="answer9"><strong>Đáp án: B</strong><br>Giải thích: 1 micrôfara (µF) = \( 10^{-6} \) Fara.</div>
+            </div>
+            
+            <!-- Câu 10 -->
+            <div class="question">
+                <div class="question-title">Câu 10. Điện dung của tụ điện phẳng phụ thuộc vào:</div>
+                <ul class="options">
+                    <li>A. Điện tích trên các bản tụ.</li>
+                    <li>B. Hiệu điện thế giữa hai bản tụ.</li>
+                    <li>C. Khoảng cách giữa hai bản tụ và diện tích đối diện của chúng.</li>
+                    <li>D. Vật liệu làm vỏ tụ điện.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer10')">Hiện đáp án</button>
+                <div class="answer" id="answer10"><strong>Đáp án: C</strong><br>Giải thích: Điện dung của tụ điện phẳng tỉ lệ thuận với diện tích đối diện của các bản và tỉ lệ nghịch với khoảng cách giữa chúng: \( C = \frac{\varepsilon S}{4\pi k d} \).</div>
+            </div>
+            
+            <!-- Câu 11 -->
+            <div class="question">
+                <div class="question-title">Câu 11. Khi tăng khoảng cách giữa hai bản của tụ điện phẳng đã được tích điện và ngắt khỏi nguồn thì:</div>
+                <ul class="options">
+                    <li>A. Điện dung của tụ tăng.</li>
+                    <li>B. Điện tích của tụ tăng.</li>
+                    <li>C. Hiệu điện thế giữa hai bản tụ tăng.</li>
+                    <li>D. Năng lượng của tụ giảm.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer11')">Hiện đáp án</button>
+                <div class="answer" id="answer11"><strong>Đáp án: C</strong><br>Giải thích: Khi ngắt khỏi nguồn, điện tích Q không đổi. Khi tăng khoảng cách d, điện dung C giảm (\( C \sim 1/d \)). Theo công thức \( U = Q/C \), hiệu điện thế U tăng.</div>
+            </div>
+            
+            <!-- Câu 12 -->
+            <div class="question">
+                <div class="question-title">Câu 12. Trong quá trình tích điện cho tụ điện, nguồn điện thực hiện một công A. Năng lượng của tụ điện khi đó là:</div>
+                <ul class="options">
+                    <li>A. \( W = A \)</li>
+                    <li>B. \( W = 2A \)</li>
+                    <li>C. \( W = A/2 \)</li>
+                    <li>D. \( W = \sqrt{A} \)</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer12')">Hiện đáp án</button>
+                <div class="answer" id="answer12"><strong>Đáp án: A</strong><br>Giải thích: Khi sử dụng nguồn điện để tích điện cho tụ, nguồn điện đã thực hiện công A. Công này chuyển thành năng lượng của tụ điện: \( W = A \).</div>
+            </div>
+            
+            <!-- Câu 13 -->
+            <div class="question">
+                <div class="question-title">Câu 13. Một tụ điện có điện dung 2 µF được tích điện đến hiệu điện thế 10 V. Điện tích của tụ là:</div>
+                <ul class="options">
+                    <li>A. 0,2 µC</li>
+                    <li>B. 2 µC</li>
+                    <li>C. 20 µC</li>
+                    <li>D. 5 µC</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer13')">Hiện đáp án</button>
+                <div class="answer" id="answer13"><strong>Đáp án: C</strong><br>Giải thích: \( Q = C \cdot U = 2 \times 10^{-6} \times 10 = 20 \times 10^{-6} \, C = 20 \, \mu C \).</div>
+            </div>
+            
+            <!-- Câu 14 -->
+            <div class="question">
+                <div class="question-title">Câu 14. Ba tụ điện có điện dung lần lượt là 1 µF, 2 µF, 3 µF được ghép song song. Điện dung của bộ tụ là:</div>
+                <ul class="options">
+                    <li>A. 6 µF</li>
+                    <li>B. 11/6 µF</li>
+                    <li>C. 6/11 µF</li>
+                    <li>D. 1 µF</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer14')">Hiện đáp án</button>
+                <div class="answer" id="answer14"><strong>Đáp án: A</strong><br>Giải thích: Khi ghép song song: \( C = C_1 + C_2 + C_3 = 1 + 2 + 3 = 6 \, \mu F \).</div>
+            </div>
+            
+            <!-- Câu 15 -->
+            <div class="question">
+                <div class="question-title">Câu 15. Ba tụ điện có điện dung lần lượt là 1 µF, 2 µF, 3 µF được ghép nối tiếp. Điện dung của bộ tụ là:</div>
+                <ul class="options">
+                    <li>A. 6 µF</li>
+                    <li>B. 11/6 µF</li>
+                    <li>C. 6/11 µF</li>
+                    <li>D. 1 µF</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer15')">Hiện đáp án</button>
+                <div class="answer" id="answer15"><strong>Đáp án: C</strong><br>Giải thích: Khi ghép nối tiếp: \( \frac{1}{C} = \frac{1}{1} + \frac{1}{2} + \frac{1}{3} = \frac{6+3+2}{6} = \frac{11}{6} \) → \( C = \frac{6}{11} \, \mu F \).</div>
+            </div>
+            
+            <!-- Câu 16 -->
+            <div class="question">
+                <div class="question-title">Câu 16. Tụ điện không có ứng dụng nào sau đây?</div>
+                <ul class="options">
+                    <li>A. Tích trữ năng lượng điện.</li>
+                    <li>B. Lọc nhiễu trong mạch điện.</li>
+                    <li>C. Chuyển đổi dòng điện xoay chiều thành một chiều.</li>
+                    <li>D. Phát ra ánh sáng.</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer16')">Hiện đáp án</button>
+                <div class="answer" id="answer16"><strong>Đáp án: D</strong><br>Giải thích: Tụ điện có nhiều ứng dụng như tích trữ năng lượng, lọc nhiễu, cho dòng xoay chiều đi qua nhưng ngăn dòng một chiều,... nhưng không phát ra ánh sáng.</div>
+            </div>
+            
+            <!-- Câu 17 -->
+            <div class="question">
+                <div class="question-title">Câu 17. Một tụ điện phẳng có điện dung C. Nếu tăng diện tích đối diện của hai bản tụ lên gấp đôi và giảm khoảng cách giữa chúng đi một nửa thì điện dung mới là:</div>
+                <ul class="options">
+                    <li>A. C/4</li>
+                    <li>B. C/2</li>
+                    <li>C. 2C</li>
+                    <li>D. 4C</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer17')">Hiện đáp án</button>
+                <div class="answer" id="answer17"><strong>Đáp án: D</strong><br>Giải thích: Điện dung tụ phẳng \( C \sim \frac{S}{d} \). Khi S tăng 2 lần và d giảm 2 lần thì C tăng 4 lần.</div>
+            </div>
+            
+            <!-- Câu 18 -->
+            <div class="question">
+                <div class="question-title">Câu 18. Một tụ điện có ghi "100 µF - 25 V". Nếu đặt vào hai đầu tụ một hiệu điện thế 15 V thì điện tích mà tụ tích được là:</div>
+                <ul class="options">
+                    <li>A. 1,5 mC</li>
+                    <li>B. 2,5 mC</li>
+                    <li>C. 3,75 mC</li>
+                    <li>D. 6,25 mC</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer18')">Hiện đáp án</button>
+                <div class="answer" id="answer18"><strong>Đáp án: A</strong><br>Giải thích: \( Q = C \cdot U = 100 \times 10^{-6} \times 15 = 1,5 \times 10^{-3} \, C = 1,5 \, mC \).</div>
+            </div>
+            
+            <!-- Câu 19 -->
+            <div class="question">
+                <div class="question-title">Câu 19. Khi một tụ điện phóng điện qua một bóng đèn, năng lượng được giải phóng chủ yếu dưới dạng:</div>
+                <ul class="options">
+                    <li>A. Nhiệt năng</li>
+                    <li>B. Quang năng</li>
+                    <li>C. Cơ năng</li>
+                    <li>D. Cả nhiệt năng và quang năng</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer19')">Hiện đáp án</button>
+                <div class="answer" id="answer19"><strong>Đáp án: D</strong><br>Giải thích: Khi tụ phóng điện qua bóng đèn, năng lượng được chuyển hóa thành nhiệt năng làm nóng dây tóc và quang năng (ánh sáng).</div>
+            </div>
+            
+            <!-- Câu 20 -->
+            <div class="question">
+                <div class="question-title">Câu 20. Một tụ điện có điện dung 5 µF được tích điện đến hiệu điện thế 20 V. Năng lượng của tụ điện là:</div>
+                <ul class="options">
+                    <li>A. 0,1 mJ</li>
+                    <li>B. 0,5 mJ</li>
+                    <li>C. 1 mJ</li>
+                    <li>D. 2 mJ</li>
+                </ul>
+                <button class="toggle-btn" onclick="toggleAnswer('answer20')">Hiện đáp án</button>
+                <div class="answer" id="answer20"><strong>Đáp án: C</strong><br>Giải thích: \( W = \frac{1}{2} C U^2 = \frac{1}{2} \times 5 \times 10^{-6} \times (20)^2 = 10^{-3} \, J = 1 \, mJ \).</div>
+            </div>
+        </section>
+
+        <!-- Phần TỰ LUẬN -->
+        <section class="section">
+            <h2>TỰ LUẬN</h2>
+            
+            <!-- Câu 1 -->
+            <div class="question">
+                <div class="question-title">Câu 1. Cho một tụ điện trên vỏ có ghi là 2 µF – 200 V.<br>
+                a) Đặt vào hai bản tụ điện một hiệu điện thế 36 V. Hãy tính điện tích mà tụ điện tích được.<br>
+                b) Hãy tính điện tích mà tụ tích được ở hiệu điện thế tối đa cho phép.</div>
+                <button class="toggle-btn" onclick="toggleAnswer('tl1')">Hiện lời giải</button>
+                <div class="answer" id="tl1">
+                    <strong>Lời giải:</strong><br>
+                    <strong>a) Khi đặt hiệu điện thế U = 36 V:</strong><br>
+                    Điện tích tụ tích được: \( Q = C \cdot U = 2 \times 10^{-6} \times 36 = 72 \times 10^{-6} \, C = 72 \, \mu C \).<br><br>
+                    <strong>b) Ở hiệu điện thế tối đa U<sub>max</sub> = 200 V:</strong><br>
+                    Điện tích tối đa: \( Q_{max} = C \cdot U_{max} = 2 \times 10^{-6} \times 200 = 400 \times 10^{-6} \, C = 400 \, \mu C \).
+                </div>
+            </div>
+            
+            <!-- Câu 2 -->
+            <div class="question">
+                <div class="question-title">Câu 2. Có hai chiếc tụ điện, trên vỏ tụ điện (A) có ghi 2 µF – 350 V, tụ điện (B) có ghi 2,3 µF – 300 V.<br>
+                a) Trong hai tụ điện trên khi tích điện ở cùng một hiệu điện thế, tụ điện nào có khả năng tích điện tốt hơn?<br>
+                b) Khi tích điện lên mức tối đa cho phép thì tụ điện nào sẽ có điện tích lớn hơn?</div>
+                <button class="toggle-btn" onclick="toggleAnswer('tl2')">Hiện lời giải</button>
+                <div class="answer" id="tl2">
+                    <strong>Lời giải:</strong><br>
+                    <strong>a) So sánh khả năng tích điện ở cùng hiệu điện thế:</strong><br>
+                    Ở cùng hiệu điện thế U, điện tích tụ tích được: \( Q = C \cdot U \).<br>
+                    Tụ có điện dung lớn hơn sẽ tích được nhiều điện tích hơn.<br>
+                    Tụ A: \( C_A = 2 \, \mu F \), tụ B: \( C_B = 2,3 \, \mu F \).<br>
+                    Vì \( C_B > C_A \) nên tụ B có khả năng tích điện tốt hơn ở cùng hiệu điện thế.<br><br>
+                    <strong>b) So sánh điện tích tối đa:</strong><br>
+                    Tụ A: \( Q_{A,max} = C_A \cdot U_{A,max} = 2 \times 10^{-6} \times 350 = 700 \times 10^{-6} \, C = 700 \, \mu C \).<br>
+                    Tụ B: \( Q_{B,max} = C_B \cdot U_{B,max} = 2,3 \times 10^{-6} \times 300 = 690 \times 10^{-6} \, C = 690 \, \mu C \).<br>
+                    Vậy \( Q_{A,max} > Q_{B,max} \), tụ A có điện tích tối đa lớn hơn.
+                </div>
+            </div>
+            
+            <!-- Câu 3 -->
+            <div class="question">
+                <div class="question-title">Câu 3. Có 3 tụ điện với điện dung lần lượt là \( C_1 = 2 \, \mu F, \, C_2 = 3 \, \mu F, \, C_3 = 4 \, \mu F \).<br>
+                a) Tính điện dung của bộ tụ điện khi ba tụ ghép nối tiếp?<br>
+                b) Tính điện dung của bộ tụ điện khi ba tụ ghép song song?<br>
+                c) Hãy so sánh để thấy cách ghép nào cho khả năng tích điện tốt hơn?</div>
+                <button class="toggle-btn" onclick="toggleAnswer('tl3')">Hiện lời giải</button>
+                <div class="answer" id="tl3">
+                    <strong>Lời giải:</strong><br>
+                    <strong>a) Ghép nối tiếp:</strong><br>
+                    \( \frac{1}{C_{nt}} = \frac{1}{C_1} + \frac{1}{C_2} + \frac{1}{C_3} = \frac{1}{2} + \frac{1}{3} + \frac{1}{4} = \frac{6 + 4 + 3}{12} = \frac{13}{12} \)<br>
+                    \( \Rightarrow C_{nt} = \frac{12}{13} \, \mu F \approx 0,923 \, \mu F \).<br><br>
+                    <strong>b) Ghép song song:</strong><br>
+                    \( C_{ss} = C_1 + C_2 + C_3 = 2 + 3 + 4 = 9 \, \mu F \).<br><br>
+                    <strong>c) So sánh:</strong><br>
+                    Ta thấy \( C_{ss} = 9 \, \mu F > C_{nt} \approx 0,923 \, \mu F \).<br>
+                    Với cùng một hiệu điện thế đặt vào bộ tụ, bộ ghép song song sẽ tích được nhiều điện tích hơn (\( Q = C \cdot U \)).<br>
+                    Vậy ghép song song cho khả năng tích điện tốt hơn.
+                </div>
+            </div>
+            
+            <!-- Câu 4 -->
+            <div class="question">
+                <div class="question-title">Câu 4. Có hai chiếc tụ điện, tụ D có thông số cơ bản được ghi là 2 mF – 450 V; tụ E có thông số cơ bản được ghi là 2,5 µF – 350 V.<br>
+                a) Hãy đổi đơn vị điện dung của hai tụ về cùng đơn vị Fara.<br>
+                b) Khi các tụ điện trên được tích điện tới mức tối đa cho phép, hãy tính năng lượng của mỗi tụ điện.</div>
+                <button class="toggle-btn" onclick="toggleAnswer('tl4')">Hiện lời giải</button>
+                <div class="answer" id="tl4">
+                    <strong>Lời giải:</strong><br>
+                    <strong>a) Đổi đơn vị:</strong><br>
+                    Tụ D: 2 mF = \( 2 \times 10^{-3} \, F = 0,002 \, F \).<br>
+                    Tụ E: 2,5 µF = \( 2,5 \times 10^{-6} \, F \).<br><br>
+                    <strong>b) Năng lượng tối đa của mỗi tụ:</strong><br>
+                    Tụ D: \( W_D = \frac{1}{2} C_D U_{D,max}^2 = \frac{1}{2} \times 2 \times 10^{-3} \times (450)^2 = \frac{1}{2} \times 0,002 \times 202500 = 202,5 \, J \).<br>
+                    Tụ E: \( W_E = \frac{1}{2} C_E U_{E,max}^2 = \frac{1}{2} \times 2,5 \times 10^{-6} \times (350)^2 = \frac{1}{2} \times 2,5 \times 10^{-6} \times 122500 \approx 0,153 \, J \).<br>
+                    Vậy tụ D có năng lượng tích trữ lớn hơn rất nhiều so với tụ E.
+                </div>
+            </div>
+            
+            <!-- Câu 5 -->
+            <div class="question">
+                <div class="question-title">Câu 5. Một tụ điện phẳng có điện dung 5 nF, được tích điện đến hiệu điện thế 100 V, sau đó ngắt khỏi nguồn.<br>
+                a) Tính điện tích của tụ điện.<br>
+                b) Nếu sau khi ngắt khỏi nguồn, ta tăng khoảng cách giữa hai bản tụ lên gấp đôi thì điện dung, hiệu điện thế và năng lượng của tụ thay đổi như thế nào?<br>
+                c) Tính các giá trị mới của điện dung, hiệu điện thế và năng lượng sau khi tăng khoảng cách.</div>
+                <button class="toggle-btn" onclick="toggleAnswer('tl5')">Hiện lời giải</button>
+                <div class="answer" id="tl5">
+                    <strong>Lời giải:</strong><br>
+                    <strong>a) Điện tích của tụ:</strong><br>
+                    \( Q = C \cdot U = 5 \times 10^{-9} \times 100 = 5 \times 10^{-7} \, C = 0,5 \, \mu C \).<br><br>
+                    <strong>b) Khi ngắt khỏi nguồn và tăng khoảng cách:</strong><br>
+                    - Điện tích Q không đổi (vì đã ngắt khỏi nguồn).<br>
+                    - Điện dung C tỉ lệ nghịch với khoảng cách d: \( C \sim \frac{1}{d} \). Khi d tăng 2 lần thì C giảm 2 lần.<br>
+                    - Hiệu điện thế: \( U = Q/C \), vì Q không đổi, C giảm 2 lần nên U tăng 2 lần.<br>
+                    - Năng lượng: \( W = \frac{Q^2}{2C} \), vì Q không đổi, C giảm 2 lần nên W tăng 2 lần.<br><br>
+                    <strong>c) Tính giá trị mới:</strong><br>
+                    - Điện dung mới: \( C' = \frac{C}{2} = \frac{5}{2} = 2,5 \, nF \).<br>
+                    - Hiệu điện thế mới: \( U' = \frac{Q}{C'} = \frac{5 \times 10^{-7}}{2,5 \times 10^{-9}} = 200 \, V \).<br>
+                    - Năng lượng mới: \( W' = \frac{Q^2}{2C'} = \frac{(5 \times 10^{-7})^2}{2 \times 2,5 \times 10^{-9}} = \frac{25 \times 10^{-14}}{5 \times 10^{-9}} = 5 \times 10^{-5} \, J \).<br>
+                    Năng lượng ban đầu: \( W = \frac{1}{2} C U^2 = \frac{1}{2} \times 5 \times 10^{-9} \times (100)^2 = 2,5 \times 10^{-5} \, J \).<br>
+                    Thấy rằng \( W' = 2W \), phù hợp với nhận xét ở trên.
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>Bài tập Vật Lý 11 - Bài 21: Tụ điện</p>
+    </footer>
+
+    <script>
+        function toggleAnswer(answerId) {
+            const answer = document.getElementById(answerId);
+            const button = answer.previousElementSibling;
+            if (answer.classList.contains('show')) {
+                answer.classList.remove('show');
+                button.textContent = answerId.includes('answer') ? 'Hiện đáp án' : 'Hiện lời giải';
+                button.classList.remove('hide');
+            } else {
+                answer.classList.add('show');
+                button.textContent = answerId.includes('answer') ? 'Ẩn đáp án' : 'Ẩn lời giải';
+                button.classList.add('hide');
+            }
+            if (window.MathJax) { 
+                MathJax.typesetPromise([answer]).catch(err => console.log('MathJax error:', err));
+            }
+        }
+        
+        document.getElementById('showAllBtn').addEventListener('click', function() {
+            document.querySelectorAll('.answer').forEach(ans => {
+                ans.classList.add('show');
+                const button = ans.previousElementSibling;
+                const answerId = button.getAttribute('onclick').match(/'([^']+)'/)[1];
+                button.textContent = answerId.includes('answer') ? 'Ẩn đáp án' : 'Ẩn lời giải';
+                button.classList.add('hide');
+            });
+            if (window.MathJax) { 
+                MathJax.typesetPromise().catch(err => console.log('MathJax error:', err));
+            }
+        });
+        
+        document.getElementById('hideAllBtn').addEventListener('click', function() {
+            document.querySelectorAll('.answer').forEach(ans => {
+                ans.classList.remove('show');
+                const button = ans.previousElementSibling;
+                const answerId = button.getAttribute('onclick').match(/'([^']+)'/)[1];
+                button.textContent = answerId.includes('answer') ? 'Hiện đáp án' : 'Hiện lời giải';
+                button.classList.remove('hide');
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.MathJax) { 
+                MathJax.typesetPromise().catch(err => console.log('MathJax error:', err));
+            }
+        });
+    </script>
+</body>
+</html>
