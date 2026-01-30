@@ -75,6 +75,7 @@
                 font-size: 24px;
                 text-align: center;
                 margin-top: 100px;
+                color: #000000;
             }
         }
     </style>
@@ -111,7 +112,7 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.4;
-            color: #5D4037;
+            color: #000000; /* Màu chữ đen */
             background-color: #FDF6E3;
             padding: 20px;
             min-height: 100vh;
@@ -179,7 +180,7 @@
         /* Tiêu đề chính */
         .main-title {
             text-align: center;
-            color: #4E342E;
+            color: #000000; /* Màu chữ đen */
             margin-bottom: 30px;
             padding-bottom: 15px;
             border-bottom: 2px solid #8D6E63;
@@ -236,10 +237,11 @@
             border-radius: 8px;
             font-size: 1.4rem;
             line-height: 1.2;
+            color: #000000; /* Màu chữ đen */
         }
         
         .instructions h3 {
-            color: #5D4037;
+            color: #000000; /* Màu chữ đen */
             margin-bottom: 8px;
             font-size: 1.6rem;
             line-height: 1.1;
@@ -247,6 +249,7 @@
         
         .instructions p {
             margin-bottom: 3px;
+            color: #000000; /* Màu chữ đen */
         }
         
         /* Câu hỏi trắc nghiệm */
@@ -303,7 +306,7 @@
         .question-text {
             font-weight: 600;
             font-size: 1.6rem;
-            color: #4E342E;
+            color: #000000; /* Màu chữ đen */
             margin-bottom: 10px;
             position: relative;
             z-index: 1;
@@ -330,18 +333,20 @@
             font-size: 1.5rem;
             min-height: 40px;
             line-height: 1.1;
+            color: #000000; /* Màu chữ đen */
         }
         
         .option:hover {
             background-color: #D7CCC8;
             border-color: #8D6E63;
             transform: translateY(-2px);
+            color: #000000; /* Màu chữ đen */
         }
         
         /* Màu sắc cho câu trả lời khi được chọn */
         .option.selected {
             background-color: #C0C0C0;
-            color: #333333;
+            color: #000000; /* Màu chữ đen */
             border-color: #999999;
         }
         
@@ -349,17 +354,20 @@
             background-color: #C0C0C0;
             border-color: #999999;
             transform: translateY(-2px);
+            color: #000000; /* Màu chữ đen */
         }
         
         /* Màu sắc cho câu trả lời đúng/sai */
         .option.correct {
             background-color: rgba(46, 125, 50, 0.2);
             border-color: #2E7D32;
+            color: #000000; /* Màu chữ đen */
         }
         
         .option.incorrect {
             background-color: rgba(198, 40, 40, 0.2);
             border-color: #C62828;
+            color: #000000; /* Màu chữ đen */
         }
         
         .option-label {
@@ -397,11 +405,11 @@
             transition: all 0.3s ease;
             font-weight: bold;
             min-width: 180px;
+            color: white; /* Chữ trên nút vẫn giữ màu trắng */
         }
         
         #submitQuizBtn {
             background-color: #5D4037;
-            color: white;
         }
         
         #submitQuizBtn:hover {
@@ -412,7 +420,6 @@
         
         #resetQuizBtn {
             background-color: #8D6E63;
-            color: white;
         }
         
         #resetQuizBtn:hover {
@@ -431,6 +438,7 @@
             border: 2px solid #5D4037;
             position: relative;
             z-index: 1;
+            color: #000000; /* Màu chữ đen */
         }
         
         .result-container::before {
@@ -452,7 +460,7 @@
         
         .score {
             font-size: 2.5rem;
-            color: #5D4037;
+            color: #000000; /* Màu chữ đen */
             margin: 10px 0;
             font-weight: bold;
             position: relative;
@@ -466,6 +474,7 @@
             position: relative;
             z-index: 1;
             line-height: 1.2;
+            color: #000000; /* Màu chữ đen */
         }
         
         /* PHẦN TỰ LUẬN */
@@ -562,7 +571,7 @@
         }
         
         .question-title {
-            color: #4E342E;
+            color: #000000; /* Màu chữ đen */
             font-size: 1.8rem;
             font-weight: 600;
             margin-right: 20px;
@@ -598,6 +607,7 @@
             position: relative;
             z-index: 1;
             line-height: 1.3;
+            color: #000000; /* Màu chữ đen */
         }
         
         .summary {
@@ -610,10 +620,11 @@
             position: relative;
             z-index: 1;
             line-height: 1.3;
+            color: #000000; /* Màu chữ đen */
         }
         
         .summary h3, .solution h3 {
-            color: #5D4037;
+            color: #000000; /* Màu chữ đen */
             margin-bottom: 8px;
             font-size: 1.6rem;
             position: relative;
@@ -633,6 +644,7 @@
             position: relative;
             z-index: 1;
             line-height: 1.3;
+            color: #000000; /* Màu chữ đen */
         }
         
         /* Watermark trên phần giải */
@@ -660,10 +672,12 @@
         .solution p {
             margin-bottom: 4px;
             line-height: 1.2;
+            color: #000000; /* Màu chữ đen */
         }
         
         .solution p:last-child {
             margin-bottom: 0;
+            color: #000000; /* Màu chữ đen */
         }
         
         .formula {
@@ -677,12 +691,14 @@
             position: relative;
             z-index: 1;
             line-height: 1.1;
+            color: #000000; /* Màu chữ đen */
         }
         
         /* Giảm khoảng cách cho các phần tử đặc biệt trong solution */
         .solution strong {
             display: inline-block;
             margin-bottom: 2px;
+            color: #000000; /* Màu chữ đen */
         }
         
         /* Footer */
@@ -691,7 +707,7 @@
             margin-top: 30px;
             padding-top: 20px;
             border-top: 1px solid #8D6E63;
-            color: #5D4037;
+            color: #000000; /* Màu chữ đen */
             font-size: 1.1rem;
             position: relative;
             z-index: 1;
@@ -704,7 +720,7 @@
             bottom: 10px;
             right: 20px;
             font-size: 1rem;
-            color: rgba(139, 69, 19, 0.3);
+            color: rgba(0, 0, 0, 0.3); /* Màu chữ đen nhạt */
             font-weight: bold;
             font-style: italic;
             z-index: 0;
@@ -716,11 +732,13 @@
                 padding: 10px;
                 font-size: 90%;
                 line-height: 1.3;
+                color: #000000; /* Màu chữ đen */
             }
             
             .main-title {
                 font-size: 1.8rem;
                 line-height: 1.1;
+                color: #000000; /* Màu chữ đen */
             }
             
             .tab-btn {
@@ -733,11 +751,13 @@
                 margin-left: 20px;
                 font-size: 1.2rem;
                 line-height: 1.2;
+                color: #000000; /* Màu chữ đen */
             }
             
             .question-title {
                 font-size: 1.4rem;
                 line-height: 1.1;
+                color: #000000; /* Màu chữ đen */
             }
             
             .question-number, .question-number-essay {
@@ -785,12 +805,14 @@
             .summary h3, .solution h3 {
                 font-size: 1.4rem;
                 line-height: 1.1;
+                color: #000000; /* Màu chữ đen */
             }
             
             .question-text {
                 font-size: 1.3rem;
                 margin-bottom: 8px;
                 line-height: 1.1;
+                color: #000000; /* Màu chữ đen */
             }
             
             .option {
@@ -798,6 +820,7 @@
                 font-size: 1.2rem;
                 min-height: 35px;
                 line-height: 1;
+                color: #000000; /* Màu chữ đen */
             }
             
             .option-label {
@@ -807,6 +830,30 @@
                 margin-right: 8px;
                 font-size: 1rem;
             }
+            
+            .instructions {
+                color: #000000; /* Màu chữ đen */
+            }
+            
+            .instructions h3 {
+                color: #000000; /* Màu chữ đen */
+            }
+            
+            .instructions p {
+                color: #000000; /* Màu chữ đen */
+            }
+            
+            .result-container {
+                color: #000000; /* Màu chữ đen */
+            }
+            
+            .score {
+                color: #000000; /* Màu chữ đen */
+            }
+            
+            .feedback {
+                color: #000000; /* Màu chữ đen */
+            }
         }
         
         /* Responsive cho TV/màn hình lớn */
@@ -814,21 +861,25 @@
             body {
                 font-size: 110%;
                 line-height: 1.5;
+                color: #000000; /* Màu chữ đen */
             }
             
             .question-content, .summary, .solution {
                 font-size: 1.6rem;
                 line-height: 1.4;
+                color: #000000; /* Màu chữ đen */
             }
             
             .question-title {
                 font-size: 2rem;
                 line-height: 1.3;
+                color: #000000; /* Màu chữ đen */
             }
             
             .main-title {
                 font-size: 3rem;
                 line-height: 1.3;
+                color: #000000; /* Màu chữ đen */
             }
             
             .container {
@@ -844,6 +895,7 @@
             .formula {
                 font-size: 1.6rem;
                 line-height: 1.2;
+                color: #000000; /* Màu chữ đen */
             }
             
             body::before {
@@ -859,6 +911,7 @@
             z-index: 1;
             line-height: 1.1 !important;
             margin: 0 !important;
+            color: #000000 !important; /* Màu chữ đen cho công thức toán */
         }
         
         mjx-container[jax="CHTML"] {
@@ -871,7 +924,7 @@
         .color-note {
             text-align: center;
             font-style: italic;
-            color: #795548;
+            color: #000000; /* Màu chữ đen */
             margin-top: 20px;
             padding: 10px;
             background-color: #FFE0B2;
@@ -880,6 +933,19 @@
             position: relative;
             z-index: 1;
             line-height: 1.3;
+        }
+        
+        /* Đảm bảo tất cả văn bản trong phần giải thích trắc nghiệm đều màu đen */
+        #quizFeedback ul li {
+            color: #000000 !important;
+        }
+        
+        #quizFeedback ul li span {
+            color: #000000 !important;
+        }
+        
+        #quizResultText p {
+            color: #000000 !important;
         }
     </style>
 </head>
@@ -1488,11 +1554,11 @@
                 feedbackHTML += `<li><strong>Câu ${index + 1}:</strong> `;
                 
                 if (userAnswer === -1) {
-                    feedbackHTML += `<span style="color: #5D4037;">Bạn chưa trả lời</span>`;
+                    feedbackHTML += `<span style="color: #000000;">Bạn chưa trả lời</span>`;
                 } else if (isCorrect) {
-                    feedbackHTML += `<span style="color: #2E7D32;">Đúng</span>`;
+                    feedbackHTML += `<span style="color: #000000; font-weight: bold;">Đúng</span>`;
                 } else {
-                    feedbackHTML += `<span style="color: #C62828;">Sai</span>`;
+                    feedbackHTML += `<span style="color: #000000;">Sai</span>`;
                 }
                 
                 feedbackHTML += `<br>Đáp án của bạn: ${userAnswerText}`;
