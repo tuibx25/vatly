@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 22: Cường Độ Dòng Điện - Chương IV Dòng Điện Mạch Điện</title>
+    <!-- Favicon -->
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/favicon.ico" type="image/x-icon">
+    <!-- Nhúng MathJax để hiển thị công thức toán -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            background-size: 30%;
+            opacity: 0.95;
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cdn.jsdelivr.net/gh/tuibx25/images/bx/tuibx.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 30%;
+            opacity: 0.03;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            color: #1a5fb4;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+            border-bottom: 3px solid #1a5fb4;
+            padding-bottom: 15px;
+        }
+        
+        h2 {
+            color: #1a5fb4;
+            margin: 25px 0 15px;
+            font-size: 1.8rem;
+            border-left: 5px solid #1a5fb4;
+            padding-left: 15px;
+        }
+        
+        h3 {
+            color: #2d7dd2;
+            margin: 20px 0 10px;
+            font-size: 1.4rem;
+        }
+        
+        h4 {
+            color: #2d7dd2;
+            margin: 15px 0 8px;
+            font-size: 1.2rem;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .intro {
+            background-color: #e8f4fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid #1a5fb4;
+        }
+        
+        .question {
+            background-color: #f0f7ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #2d7dd2;
+        }
+        
+        .experiment {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+        
+        .formula-box {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .formula {
+            font-size: 1.3rem;
+            margin: 10px 0;
+            color: #1a5fb4;
+            font-weight: bold;
+        }
+        
+        .content-list {
+            background-color: #f0f7ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .content-list ul {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .content-list li {
+            margin-bottom: 8px;
+        }
+        
+        .summary {
+            background-color: #e8f4fd;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+        
+        .image-placeholder {
+            background-color: #f0f0f0;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px dashed #ccc;
+            color: #666;
+        }
+        
+        .exercise {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .exercise h4 {
+            color: #4caf50;
+        }
+        
+        .highlight {
+            background-color: #fffacd;
+            padding: 3px 6px;
+            border-radius: 3px;
+        }
+        
+        .note {
+            background-color: #fff8e1;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .page-break {
+            border-top: 2px dashed #ccc;
+            margin: 30px 0;
+            padding-top: 20px;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 15px auto;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+        }
+        
+        /* Chống in */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .container, .container * {
+                visibility: visible;
+            }
+            .container {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+            body::after {
+                display: none !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Giảm kích thước hình ảnh xuống 50% */
+        .container img {
+            max-width: 50% !important;
+            height: auto !important;
+        }
+
+        /* Trên màn hình nhỏ, giữ nguyên kích thước */
+        @media (max-width: 768px) {
+            .container img {
+                max-width: 80% !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CHƯƠNG IV: DÒNG ĐIỆN MẠCH ĐIỆN</h1>
+        
+        <div class="intro">
+            <p>Xe điện là xu hướng phát triển trong tương lai. Pin là một trong những yếu tố quan trọng của tất cả các dòng xe điện. Khi pin được nạp đầy, xe có thể di chuyển được quãng đường hàng trăm kilômét, giúp bảo vệ môi trường, chi phí vận hành xe thấp và khả năng vận hành ổn định, không phát ra tiếng ồn.</p>
+            
+            <div class="question">
+                <p><strong>Tại sao pin trong xe điện sau khi sạc lại có thể tạo ra dòng điện chạy khá lâu trong mạch kín?</strong></p>
+            </div>
+        </div>
+        
+        <div class="content-list">
+            <h3>Nội dung chương</h3>
+            <ul>
+                <li>Cường độ dòng điện</li>
+                <li>Điện trở. Định luật Ohm</li>
+                <li>Nguồn điện</li>
+                <li>Năng lượng điện và công suất điện</li>
+            </ul>
+        </div>
+        
+        <div class="page-break"></div>
+        
+        <h2>Bài 22: CƯỜNG ĐỘ DÒNG ĐIỆN</h2>
+        
+        <div class="question">
+            <p><strong>Cường độ dòng điện là gì và đặc trưng cho tính chất nào của dòng điện?</strong></p>
+        </div>
+        
+        <h3>I. CƯỜNG ĐỘ DÒNG ĐIỆN</h3>
+        
+        <h4>1. Thí nghiệm</h4>
+        
+        <div class="experiment">
+            <p><strong>Thí nghiệm 1.</strong></p>
+            <p><em>Chuẩn bị:</em></p>
+            <ul>
+                <li>1 ampe kế</li>
+                <li>1 biến trở</li>
+                <li>1 bóng đèn</li>
+                <li>Nguồn điện</li>
+                <li>Dây nối</li>
+                <li>Khoá K</li>
+                <li>Nam châm điện</li>
+            </ul>
+            
+            <p><em>Tiến hành:</em></p>
+            <p>- Bố trí thí nghiệm như Hình 22.1a.</p>
+            <p>- Đóng khoá K, dịch chuyển con chạy của biến trở \( R_{bt} \) để số chỉ của ampe kế tăng dần.</p>
+            
+            <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/22/22.1.png" alt="Hình 22.1. Sơ đồ thí nghiệm khảo sát độ mạnh yếu của dòng điện">
+            <p style="text-align: center; font-style: italic; margin-top: -10px;"><strong>Hình 22.1.</strong> Sơ đồ thí nghiệm khảo sát độ mạnh yếu của dòng điện</p>
+            
+            <div class="question">
+                <p><strong>?</strong></p>
+                <p>1. Hãy nhận xét về độ sáng của bóng đèn Đ khi số chỉ của ampe kế tăng dần.</p>
+                <p>2. Theo em, thí nghiệm trên cho thấy cường độ dòng điện đặc trưng cho tính chất nào của dòng điện?</p>
+            </div>
+        </div>
+        
+        <div class="experiment">
+            <p><strong>Thí nghiệm 2.</strong></p>
+            <p><strong>Thay đèn Đ bằng một nam châm điện N (Hình 22.1b).</strong></p>
+            
+            <p>- Đóng khoá K, quan sát số lượng ghim giấy bằng sắt mà nam châm hút được.</p>
+            <p>- Đóng khoá K, điều chỉnh biến trở để số chỉ ampe kế chỉ giá trị lớn hơn giá trị ban đầu, quan sát số lượng ghim giấy bằng sắt mà nam châm hút được. So sánh với số lượng ghim giấy bằng sắt mà nam châm điện hút được trong hai trường hợp.</p>
+            
+            <div class="question">
+                <p><strong>?</strong></p>
+                <p>1. Hãy nhận xét về số ghim giấy mà nam châm hút được khi chỉ số của ampe kế tăng.</p>
+                <p>2. Từ kết quả thí nghiệm cho thấy cường độ dòng điện đặc trưng cho tính chất nào của dòng điện.</p>
+            </div>
+        </div>
+        
+        <div class="page-break"></div>
+        
+        <h4>2. Công thức tính cường độ dòng điện</h4>
+        
+        <p>Lượng điện tích chuyển qua tiết diện thẳng của dây dẫn trong một đơn vị thời gian càng lớn thì dòng điện chạy qua dây dẫn càng mạnh (Hình 22.2).</p>
+        
+        <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/22/22.2.png" alt="Hình 22.2. Các điện tích dịch chuyển qua tiết diện thẳng của vật dẫn theo phương vuông góc với tiết diện của vật dẫn">
+        <p style="text-align: center; font-style: italic; margin-top: -10px;"><strong>Hình 22.2.</strong> Các điện tích dịch chuyển qua tiết diện thẳng của vật dẫn theo phương vuông góc với tiết diện của vật dẫn</p>
+        
+        <p>Trong vật lí, người ta gọi độ lớn của điện lượng chuyển qua tiết diện thẳng của một dây dẫn trong một đơn vị thời gian là cường độ dòng điện chạy qua dây dẫn, được xác định bằng công thức:</p>
+        
+        <div class="formula-box">
+            <div class="formula">\[I = \frac{\Delta q}{\Delta t} \tag{22.1}\]</div>
+        </div>
+        
+        <p>Trong công thức trên, đơn vị của cường độ dòng điện là ampere (kí hiệu là A), của điện lượng là Coulomb (kí hiệu là C), của thời gian là giây (kí hiệu là s).</p>
+        <p>Từ công thức (22.1), ta rút ra:</p>
+        
+        <div class="formula-box">
+            <div class="formula">\[\Delta q = I \cdot \Delta t \tag{22.2}\]</div>
+        </div>
+        
+        <p>Công thức (22.2) cho thấy ý nghĩa của đơn vị điện lượng Coulomb: 1 Coulomb là tổng điện lượng của các hạt mang điện chạy qua tiết diện thẳng của dây dẫn trong 1 s bởi dòng điện có cường độ 1 A.</p>
+        <p>Đơn vị của điện lượng: <span class="highlight">1 C = 1 A·s</span>.</p>
+        
+        <div class="note">
+            <p><strong>Trên một thiết bị dùng để nạp điện cho điện thoại di động có ghi thông số 10 000 mA·h. Thông số 10 000 mA·h cho biết điều gì?</strong></p>
+        </div>
+        
+        <div class="page-break"></div>
+        
+        <h3>II. LIÊN HỆ GIỮA CƯỜNG ĐỘ DÒNG ĐIỆN VỚI MẬT ĐỘ VÀ TỐC ĐỘ CỦA CÁC HẠT MANG ĐIỆN</h3>
+        
+        <h4>1. Dòng điện chạy trong dây dẫn kim loại</h4>
+        
+        <p>Trong kim loại tồn tại các electron không liên kết với nguyên tử, được gọi là electron tự do vì chúng có thể chuyển động tự do về mọi hướng. Khi dây dẫn được nối với nguồn điện thì trong dây dẫn xuất hiện điện trường. Dưới tác dụng của lực điện trường, các electron mang điện tích âm dịch chuyển có hướng ngược với hướng của điện trường, tạo ra dòng điện (Hình 22.3).</p>
+        
+        <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/22/22.3.png" alt="Hình 22.3. Sự tạo thành dòng điện trong kim loại">
+        <p style="text-align: center; font-style: italic; margin-top: -10px;"><strong>Hình 22.3.</strong> Sự tạo thành dòng điện trong kim loại</p>
+        
+        <p>Người ta quy ước chiều dòng điện trong mạch là chiều từ cực dương sang cực âm của nguồn điện.</p>
+        <p>Trong kim loại các electron tạo ra dòng điện dịch chuyển ngược chiều với chiều quy ước của dòng điện.</p>
+        
+        <div class="page-break"></div>
+        
+        <h4>2. Biểu thức liên hệ giữa cường độ dòng điện với mật độ và tốc độ của các hạt mang điện</h4>
+        
+        <p><strong>Nếu gọi:</strong></p>
+        <ul>
+            <li>S là điện tích tiết diện thẳng của dây dẫn</li>
+            <li>n là mật độ hạt mang điện (ở đây là số electron tự do trong một đơn vị thể tích của dây dẫn)</li>
+            <li>v là tốc độ dịch chuyển có hướng của electron</li>
+            <li>e là độ lớn điện tích của electron</li>
+        </ul>
+        
+        <p>Trong khoảng thời gian \(\Delta t\) số electron N chạy qua tiết diện thẳng của dây dẫn là: \(N = n S h\), trong đó \(h = v \cdot \Delta t\)</p>
+        
+        <p>\[N = nSv \cdot \Delta t\]</p>
+        
+        <p>Do vậy, điện lượng chuyển qua tiết diện thẳng của dây dẫn trong khoảng thời gian \(\Delta t\) là:</p>
+        
+        <p>\[\Delta q = N e = Snve \cdot \Delta t.\]</p>
+        
+        <p>Theo định nghĩa cường độ dòng điện ở công thức (22.1), ta xác định được cường độ dòng điện chạy qua mật dây dẫn kim loại như sau:</p>
+        
+        <div class="formula-box">
+            <div class="formula">\[I = Snve \tag{22.3}\]</div>
+        </div>
+        
+        <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/22/22.4.png" alt="Hình 22.4. Electron chạy qua tiết diện thẳng của dây dẫn">
+        <p style="text-align: center; font-style: italic; margin-top: -10px;"><strong>Hình 22.4.</strong> Electron chạy qua tiết diện thẳng của dây dẫn</p>
+        
+        <div class="page-break"></div>
+        
+        <h4>3. Bài tập vận dụng</h4>
+        
+        <div class="exercise">
+            <p><strong>Bài toán:</strong> Một dây dẫn bằng kim loại, tiết diện tròn, có đường kính tiết diện là \(d = 2 \, mm\), có dòng điện \(I = 5 \, A\) chạy qua. Cho biết mật độ electron tự do là \(n = 8,45 \cdot 10^{28} \, electrons/m^3\). Hãy tính tốc độ dịch chuyển có hướng của các electron trong dây dẫn.</p>
+            
+            <p><strong>Giải:</strong></p>
+            <p>Áp dụng công thức (22.3) ta có:</p>
+            <p>\[I = Snve\]</p>
+            <p>\[\Rightarrow v = \frac{I}{nSe} = \frac{I}{\pi d^2 \cdot n} = \frac{4I}{\pi d^2 \cdot n}.\]</p>
+            <p>\[= \frac{I}{\pi d^2 \cdot n} = \frac{4I}{\text{nπd}^2 \cdot e}.\]</p>
+            <p>Thay số ta được: \(v \approx 1,2 \cdot 10^{-4} \, m/s = 0,12 \, mm/s.\)</p>
+        </div>
+        
+        <div class="page-break"></div>
+        
+        <div class="summary">
+            <h3>EM ĐÃ HỌC</h3>
+            <ul>
+                <li>Cường độ dòng điện là đại lượng đặc trưng cho tác dụng mạnh, yếu của dòng điện và được xác định bằng công thức:  
+                \[ I = \frac{\Delta q}{\Delta t} \]</li>
+                <li>Biểu thức liên hệ giữa cường độ dòng điện trong dây dẫn kim loại với mật độ hạt mang điện tốc độ dịch chuyển có hướng của các hạt mang điện là:  
+                \[ I = S \cdot n \cdot v \]</li>
+                <li>Với tính được cường độ dòng điện của tia sét trong các con dòng.</li>
+                <li>Hiểu được ý nghĩa của thông số mA·h ghi trên pin, ac quy và sạc dự phòng.</li>
+                <li>Giải thích được nguyên tắc đo điện tâm đồ.</li>
+            </ul>
+            
+            <h3>EM CÓ THỂ</h3>
+            <p>- Trong dung dịch điện phân tồn tại các ion dương và ion âm. Khi đóng mạch điện trong bình điện phân, các ion trong dung dịch chính là các hạt mang điện (Hình 22.5).</p>
+            
+            <img src="https://cdn.jsdelivr.net/gh/tuibx25/images/bx/vl11/22/22.5.png" alt="Hình 22.5. Ion dương và ion âm dịch chuyển trong dung dịch tạo ra dòng điện">
+            <p style="text-align: center; font-style: italic; margin-top: -10px;"><strong>Hình 22.5.</strong> Ion dương và ion âm dịch chuyển trong dung dịch tạo ra dòng điện</p>
+            
+            <p><strong>VỚI CUỘC SỐNG</strong></p>
+            <p>Hiểu về cường độ dòng điện giúp chúng ta ứng dụng trong nhiều lĩnh vực: từ việc sử dụng pin xe điện hiệu quả, thiết kế mạch điện an toàn, đến việc giải thích các hiện tượng tự nhiên như sét và ứng dụng trong y học như đo điện tâm đồ.</p>
+        </div>
+    </div>
+    
+    <script>
+        // Đảm bảo MathJax xử lý các công thức toán học
+        window.addEventListener('DOMContentLoaded', (event) => {
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        });
+
+        // Bảo mật: Chống xem mã nguồn, chống copy, chống download ảnh
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            // Chặn Ctrl+U (View Source)
+            if (e.ctrlKey && e.key === 'u') {
+                e.preventDefault();
+                return false;
+            }
+            // Chặn Ctrl+Shift+I (DevTools)
+            if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+                e.preventDefault();
+                return false;
+            }
+            // Chặn Ctrl+S (Save Page)
+            if (e.ctrlKey && e.key === 's') {
+                e.preventDefault();
+                return false;
+            }
+            // Chặn Ctrl+P (Print)
+            if (e.ctrlKey && e.key === 'p') {
+                e.preventDefault();
+                return false;
+            }
+            // Chặn F12 (DevTools)
+            if (e.key === 'F12') {
+                e.preventDefault();
+                return false;
+            }
+        });
+        
+        // Chặn kéo thả ảnh
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+                return false;
+            }
+        });
+        
+        // Chặn sao chép văn bản
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        document.addEventListener('cut', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        // Chặn in trang (thêm lớp CSS)
+        window.addEventListener('beforeprint', function() {
+            document.body.style.display = 'none';
+        });
+        
+        window.addEventListener('afterprint', function() {
+            document.body.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
